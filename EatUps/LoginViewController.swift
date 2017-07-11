@@ -37,9 +37,8 @@ class LoginViewController: UIViewController {
         view.addSubview(loginButton)
         
         // Persisting user
-        //if let accessToken = AccessToken.current {
+        //if let accessToken = AccessToken.current 
             // User is logged in, use 'accessToken' here.
-        }
 
         // Do any additional setup after loading the view.
     }
