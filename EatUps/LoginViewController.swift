@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FacebookLogin
 
 class LoginViewController: UIViewController {
     
@@ -29,6 +30,16 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Added Facebook login button
+        let loginButton = LoginButton(readPermissions: [ .publicProfile ])
+        loginButton.center = view.center
+        view.addSubview(loginButton)
+        
+        // Persisting user
+        //if let accessToken = AccessToken.current {
+            // User is logged in, use 'accessToken' here.
+        }
 
         // Do any additional setup after loading the view.
     }
