@@ -9,7 +9,19 @@
 import UIKit
 
 class SendInviteViewController: UIViewController {
-
+    
+    @IBOutlet weak var profileImage: UIImageView!
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    @IBAction func didTapRequest(_ sender: Any) {
+    
+    }
+    
+    @IBAction func didTapKeepLooking(_ sender: Any) {
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

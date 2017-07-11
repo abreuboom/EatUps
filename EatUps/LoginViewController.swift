@@ -9,7 +9,24 @@
 import UIKit
 
 class LoginViewController: UIViewController {
+    
+    @IBOutlet weak var logoImage: UIImageView!
+    
+    @IBOutlet weak var usernameTextField: UITextField!
 
+    @IBOutlet weak var passwordTextField: UITextField!
+    
+   
+    
+    @IBAction func didTapLogin(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func didTapSignup(_ sender: Any) {
+        
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
