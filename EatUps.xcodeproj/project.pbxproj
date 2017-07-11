@@ -14,6 +14,12 @@
 		2032ACC91F1548FA00A4015C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2032ACC71F1548FA00A4015C /* LaunchScreen.storyboard */; };
 		2032ACD41F1548FA00A4015C /* EatUpsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2032ACD31F1548FA00A4015C /* EatUpsTests.swift */; };
 		2032ACDF1F1548FA00A4015C /* EatUpsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2032ACDE1F1548FA00A4015C /* EatUpsUITests.swift */; };
+		D8A82FE71F154FC80053C1A1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FE61F154FC80053C1A1 /* LoginViewController.swift */; };
+		D8A82FE91F1550730053C1A1 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FE81F1550730053C1A1 /* SignUpViewController.swift */; };
+		D8A82FEC1F1552A40053C1A1 /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FEB1F1552A40053C1A1 /* SelectLocationViewController.swift */; };
+		D8A82FEE1F1553550053C1A1 /* UserFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FED1F1553550053C1A1 /* UserFeedViewController.swift */; };
+		D8A82FF01F1554AF0053C1A1 /* SendInviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FEF1F1554AF0053C1A1 /* SendInviteViewController.swift */; };
+		D8A82FF21F1555DE0053C1A1 /* ResponseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FF11F1555DE0053C1A1 /* ResponseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +53,12 @@
 		2032ACDA1F1548FA00A4015C /* EatUpsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EatUpsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2032ACDE1F1548FA00A4015C /* EatUpsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EatUpsUITests.swift; sourceTree = "<group>"; };
 		2032ACE01F1548FA00A4015C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D8A82FE61F154FC80053C1A1 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		D8A82FE81F1550730053C1A1 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		D8A82FEB1F1552A40053C1A1 /* SelectLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectLocationViewController.swift; sourceTree = "<group>"; };
+		D8A82FED1F1553550053C1A1 /* UserFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserFeedViewController.swift; sourceTree = "<group>"; };
+		D8A82FEF1F1554AF0053C1A1 /* SendInviteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendInviteViewController.swift; sourceTree = "<group>"; };
+		D8A82FF11F1555DE0053C1A1 /* ResponseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +109,7 @@
 		2032ACBD1F1548FA00A4015C /* EatUps */ = {
 			isa = PBXGroup;
 			children = (
+				D8A82FEA1F15507E0053C1A1 /* View Controllers */,
 				2032ACBE1F1548FA00A4015C /* AppDelegate.swift */,
 				2032ACC01F1548FA00A4015C /* ViewController.swift */,
 				2032ACC21F1548FA00A4015C /* Main.storyboard */,
@@ -123,6 +136,19 @@
 				2032ACE01F1548FA00A4015C /* Info.plist */,
 			);
 			path = EatUpsUITests;
+			sourceTree = "<group>";
+		};
+		D8A82FEA1F15507E0053C1A1 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D8A82FE61F154FC80053C1A1 /* LoginViewController.swift */,
+				D8A82FE81F1550730053C1A1 /* SignUpViewController.swift */,
+				D8A82FEB1F1552A40053C1A1 /* SelectLocationViewController.swift */,
+				D8A82FED1F1553550053C1A1 /* UserFeedViewController.swift */,
+				D8A82FEF1F1554AF0053C1A1 /* SendInviteViewController.swift */,
+				D8A82FF11F1555DE0053C1A1 /* ResponseViewController.swift */,
+			);
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,7 +288,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8A82FE71F154FC80053C1A1 /* LoginViewController.swift in Sources */,
+				D8A82FEE1F1553550053C1A1 /* UserFeedViewController.swift in Sources */,
+				D8A82FF01F1554AF0053C1A1 /* SendInviteViewController.swift in Sources */,
 				2032ACC11F1548FA00A4015C /* ViewController.swift in Sources */,
+				D8A82FE91F1550730053C1A1 /* SignUpViewController.swift in Sources */,
+				D8A82FF21F1555DE0053C1A1 /* ResponseViewController.swift in Sources */,
+				D8A82FEC1F1552A40053C1A1 /* SelectLocationViewController.swift in Sources */,
 				2032ACBF1F1548FA00A4015C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -514,6 +546,7 @@
 				2032ACE51F1548FA00A4015C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2032ACE61F1548FA00A4015C /* Build configuration list for PBXNativeTarget "EatUpsTests" */ = {
 			isa = XCConfigurationList;
@@ -522,6 +555,7 @@
 				2032ACE81F1548FA00A4015C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2032ACE91F1548FA00A4015C /* Build configuration list for PBXNativeTarget "EatUpsUITests" */ = {
 			isa = XCConfigurationList;
@@ -530,6 +564,7 @@
 				2032ACEB1F1548FA00A4015C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
