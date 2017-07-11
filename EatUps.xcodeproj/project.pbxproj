@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F94C76E144E1E4FD25B1F25 /* Pods_EatUps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73F38D920ADFD5A052C30A17 /* Pods_EatUps.framework */; };
 		2032ACBF1F1548FA00A4015C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2032ACBE1F1548FA00A4015C /* AppDelegate.swift */; };
 		2032ACC11F1548FA00A4015C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2032ACC01F1548FA00A4015C /* ViewController.swift */; };
 		2032ACC41F1548FA00A4015C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2032ACC21F1548FA00A4015C /* Main.storyboard */; };
@@ -14,6 +15,8 @@
 		2032ACC91F1548FA00A4015C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2032ACC71F1548FA00A4015C /* LaunchScreen.storyboard */; };
 		2032ACD41F1548FA00A4015C /* EatUpsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2032ACD31F1548FA00A4015C /* EatUpsTests.swift */; };
 		2032ACDF1F1548FA00A4015C /* EatUpsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2032ACDE1F1548FA00A4015C /* EatUpsUITests.swift */; };
+		75A55747BDE7F64C8E34B403 /* Pods_EatUpsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3949A7A3F71F1417454C007A /* Pods_EatUpsTests.framework */; };
+		888AB7688257CE444F2A3225 /* Pods_EatUpsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A88B9A60B7A635EB5F03418 /* Pods_EatUpsUITests.framework */; };
 		D8A82FE71F154FC80053C1A1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FE61F154FC80053C1A1 /* LoginViewController.swift */; };
 		D8A82FE91F1550730053C1A1 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FE81F1550730053C1A1 /* SignUpViewController.swift */; };
 		D8A82FEC1F1552A40053C1A1 /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FEB1F1552A40053C1A1 /* SelectLocationViewController.swift */; };
@@ -42,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1312C3651A0BED44631D9496 /* Pods-EatUpsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EatUpsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EatUpsUITests/Pods-EatUpsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2032ACBB1F1548FA00A4015C /* EatUps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EatUps.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2032ACBE1F1548FA00A4015C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2032ACC01F1548FA00A4015C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -55,6 +59,13 @@
 		2032ACDA1F1548FA00A4015C /* EatUpsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EatUpsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2032ACDE1F1548FA00A4015C /* EatUpsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EatUpsUITests.swift; sourceTree = "<group>"; };
 		2032ACE01F1548FA00A4015C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2A88B9A60B7A635EB5F03418 /* Pods_EatUpsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EatUpsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		331F0F4EB1393E79451631DF /* Pods-EatUpsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EatUpsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EatUpsTests/Pods-EatUpsTests.release.xcconfig"; sourceTree = "<group>"; };
+		3949A7A3F71F1417454C007A /* Pods_EatUpsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EatUpsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		73F38D920ADFD5A052C30A17 /* Pods_EatUps.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EatUps.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A955751D6AE92A169F4EEEB7 /* Pods-EatUpsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EatUpsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EatUpsTests/Pods-EatUpsTests.debug.xcconfig"; sourceTree = "<group>"; };
+		BC478D15D68514DC49ED3C59 /* Pods-EatUps.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EatUps.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EatUps/Pods-EatUps.debug.xcconfig"; sourceTree = "<group>"; };
+		D58244FF12EA8391989E4695 /* Pods-EatUpsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EatUpsUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EatUpsUITests/Pods-EatUpsUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D8A82FE61F154FC80053C1A1 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D8A82FE81F1550730053C1A1 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		D8A82FEB1F1552A40053C1A1 /* SelectLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectLocationViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +74,7 @@
 		D8A82FF11F1555DE0053C1A1 /* ResponseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseViewController.swift; sourceTree = "<group>"; };
 		D8A82FF31F1573680053C1A1 /* ReceivedInviteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceivedInviteViewController.swift; sourceTree = "<group>"; };
 		D8A82FF51F1575800053C1A1 /* RatingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
+		E7D12FEC4E9F01F0EE5FEC0F /* Pods-EatUps.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EatUps.release.xcconfig"; path = "Pods/Target Support Files/Pods-EatUps/Pods-EatUps.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F94C76E144E1E4FD25B1F25 /* Pods_EatUps.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75A55747BDE7F64C8E34B403 /* Pods_EatUpsTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				888AB7688257CE444F2A3225 /* Pods_EatUpsUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +112,8 @@
 				2032ACD21F1548FA00A4015C /* EatUpsTests */,
 				2032ACDD1F1548FA00A4015C /* EatUpsUITests */,
 				2032ACBC1F1548FA00A4015C /* Products */,
+				82057D0228C96807EBB7511E /* Pods */,
+				BEC8669FB1BE6704A30C3DC8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -142,6 +159,29 @@
 			path = EatUpsUITests;
 			sourceTree = "<group>";
 		};
+		82057D0228C96807EBB7511E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BC478D15D68514DC49ED3C59 /* Pods-EatUps.debug.xcconfig */,
+				E7D12FEC4E9F01F0EE5FEC0F /* Pods-EatUps.release.xcconfig */,
+				A955751D6AE92A169F4EEEB7 /* Pods-EatUpsTests.debug.xcconfig */,
+				331F0F4EB1393E79451631DF /* Pods-EatUpsTests.release.xcconfig */,
+				1312C3651A0BED44631D9496 /* Pods-EatUpsUITests.debug.xcconfig */,
+				D58244FF12EA8391989E4695 /* Pods-EatUpsUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		BEC8669FB1BE6704A30C3DC8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				73F38D920ADFD5A052C30A17 /* Pods_EatUps.framework */,
+				3949A7A3F71F1417454C007A /* Pods_EatUpsTests.framework */,
+				2A88B9A60B7A635EB5F03418 /* Pods_EatUpsUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D8A82FEA1F15507E0053C1A1 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,9 +204,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2032ACE31F1548FA00A4015C /* Build configuration list for PBXNativeTarget "EatUps" */;
 			buildPhases = (
+				6699AFD82DAE95EC28556F07 /* [CP] Check Pods Manifest.lock */,
 				2032ACB71F1548FA00A4015C /* Sources */,
 				2032ACB81F1548FA00A4015C /* Frameworks */,
 				2032ACB91F1548FA00A4015C /* Resources */,
+				B451B0F0AFD7AA8CE418C0E1 /* [CP] Embed Pods Frameworks */,
+				6BC60108AD3C1B759AE2E55D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -181,9 +224,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2032ACE61F1548FA00A4015C /* Build configuration list for PBXNativeTarget "EatUpsTests" */;
 			buildPhases = (
+				61A8367EA1F941040D8A00F5 /* [CP] Check Pods Manifest.lock */,
 				2032ACCB1F1548FA00A4015C /* Sources */,
 				2032ACCC1F1548FA00A4015C /* Frameworks */,
 				2032ACCD1F1548FA00A4015C /* Resources */,
+				1AF3EF73D5E376F2172E4C6A /* [CP] Embed Pods Frameworks */,
+				7E7B2048D76C30B13A4CF3FD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -199,9 +245,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2032ACE91F1548FA00A4015C /* Build configuration list for PBXNativeTarget "EatUpsUITests" */;
 			buildPhases = (
+				2AFEBC94193E7028446AE826 /* [CP] Check Pods Manifest.lock */,
 				2032ACD61F1548FA00A4015C /* Sources */,
 				2032ACD71F1548FA00A4015C /* Frameworks */,
 				2032ACD81F1548FA00A4015C /* Resources */,
+				4C234611A42AC64EEE6C2DE9 /* [CP] Embed Pods Frameworks */,
+				19EBFF564F1121E04D8CCB76 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -288,6 +337,144 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		19EBFF564F1121E04D8CCB76 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EatUpsUITests/Pods-EatUpsUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1AF3EF73D5E376F2172E4C6A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EatUpsTests/Pods-EatUpsTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2AFEBC94193E7028446AE826 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		4C234611A42AC64EEE6C2DE9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EatUpsUITests/Pods-EatUpsUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		61A8367EA1F941040D8A00F5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6699AFD82DAE95EC28556F07 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6BC60108AD3C1B759AE2E55D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EatUps/Pods-EatUps-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7E7B2048D76C30B13A4CF3FD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EatUpsTests/Pods-EatUpsTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B451B0F0AFD7AA8CE418C0E1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EatUps/Pods-EatUps-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2032ACB71F1548FA00A4015C /* Sources */ = {
@@ -453,6 +640,7 @@
 		};
 		2032ACE41F1548FA00A4015C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BC478D15D68514DC49ED3C59 /* Pods-EatUps.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 3CJT76PC4B;
@@ -466,6 +654,7 @@
 		};
 		2032ACE51F1548FA00A4015C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E7D12FEC4E9F01F0EE5FEC0F /* Pods-EatUps.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 3CJT76PC4B;
@@ -479,6 +668,7 @@
 		};
 		2032ACE71F1548FA00A4015C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A955751D6AE92A169F4EEEB7 /* Pods-EatUpsTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -494,6 +684,7 @@
 		};
 		2032ACE81F1548FA00A4015C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 331F0F4EB1393E79451631DF /* Pods-EatUpsTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -509,6 +700,7 @@
 		};
 		2032ACEA1F1548FA00A4015C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1312C3651A0BED44631D9496 /* Pods-EatUpsUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 3CJT76PC4B;
@@ -523,6 +715,7 @@
 		};
 		2032ACEB1F1548FA00A4015C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D58244FF12EA8391989E4695 /* Pods-EatUpsUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 3CJT76PC4B;
