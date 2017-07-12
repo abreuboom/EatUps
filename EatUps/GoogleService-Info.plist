@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>637685918692-3qu44i1vnc8gfdr26bihfkp1089sus0d.apps.googleusercontent.com</string>
+	<string>946782490956-822o8vg74qn71626j75s6fosklive5jj.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.637685918692-3qu44i1vnc8gfdr26bihfkp1089sus0d</string>
+	<string>com.googleusercontent.apps.946782490956-822o8vg74qn71626j75s6fosklive5jj</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDAtj-2wqIpsMI-dbl6fnXwGZmenZCMKT8</string>
+	<string>AIzaSyBRDRxyhS2ytKX5TDYp9pqPnx3louOVxrU</string>
 	<key>GCM_SENDER_ID</key>
-	<string>637685918692</string>
+	<string>946782490956</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.abreuboom.EatUps</string>
 	<key>PROJECT_ID</key>
-	<string>eatups-33935</string>
+	<string>eatups-f1d7f</string>
 	<key>STORAGE_BUCKET</key>
-	<string>eatups-33935.appspot.com</string>
+	<string>eatups-f1d7f.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:637685918692:ios:9dd17f28c7b9f430</string>
+	<string>1:946782490956:ios:9dd17f28c7b9f430</string>
 	<key>DATABASE_URL</key>
-	<string>https://eatups-33935.firebaseio.com</string>
+	<string>https://eatups-f1d7f.firebaseio.com</string>
 </dict>
 </plist>
