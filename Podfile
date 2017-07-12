@@ -6,7 +6,6 @@ target 'EatUps' do
   use_frameworks!
 
   # Pods for EatUps
-
   pod 'FacebookCore', '~> 0.2'
   pod 'FacebookLogin', '~> 0.2'
   pod 'FacebookShare', '~> 0.2'
@@ -14,6 +13,9 @@ target 'EatUps' do
   pod 'FBSDKLoginKit', '~> 4.22.1'
   pod 'FBSDKShareKit', '~> 4.22.1'
   pod 'Firebase/Core'
+  pod 'KeychainAccess'
+  pod 'Alamofire', '~> 4.4'
+  pod 'AlamofireImage', '~> 3.1'
 
   target 'EatUpsTests' do
     inherit! :search_paths

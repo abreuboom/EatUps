@@ -15,9 +15,15 @@
 		2032ACC91F1548FA00A4015C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2032ACC71F1548FA00A4015C /* LaunchScreen.storyboard */; };
 		2032ACD41F1548FA00A4015C /* EatUpsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2032ACD31F1548FA00A4015C /* EatUpsTests.swift */; };
 		2032ACDF1F1548FA00A4015C /* EatUpsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2032ACDE1F1548FA00A4015C /* EatUpsUITests.swift */; };
-		20E931891F168EC100C4A4A1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20E931881F168EC100C4A4A1 /* GoogleService-Info.plist */; };
-		20E9318A1F168EC100C4A4A1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20E931881F168EC100C4A4A1 /* GoogleService-Info.plist */; };
-		20E9318B1F168EC100C4A4A1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20E931881F168EC100C4A4A1 /* GoogleService-Info.plist */; };
+		20E9318D1F16A3F100C4A4A1 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E9318C1F16A3F100C4A4A1 /* APIManager.swift */; };
+		20E931911F16A4F900C4A4A1 /* Org.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E931901F16A4F900C4A4A1 /* Org.swift */; };
+		20E931931F16A56600C4A4A1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E931921F16A56600C4A4A1 /* User.swift */; };
+		20E931951F16A65500C4A4A1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20E931941F16A65500C4A4A1 /* GoogleService-Info.plist */; };
+		20E931961F16A65500C4A4A1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20E931941F16A65500C4A4A1 /* GoogleService-Info.plist */; };
+		20E931971F16A65500C4A4A1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20E931941F16A65500C4A4A1 /* GoogleService-Info.plist */; };
+		20E931991F16A66800C4A4A1 /* EatUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E931981F16A66800C4A4A1 /* EatUp.swift */; };
+		20E9319A1F16A66800C4A4A1 /* EatUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E931981F16A66800C4A4A1 /* EatUp.swift */; };
+		20E9319B1F16A66800C4A4A1 /* EatUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E931981F16A66800C4A4A1 /* EatUp.swift */; };
 		75A55747BDE7F64C8E34B403 /* Pods_EatUpsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3949A7A3F71F1417454C007A /* Pods_EatUpsTests.framework */; };
 		888AB7688257CE444F2A3225 /* Pods_EatUpsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A88B9A60B7A635EB5F03418 /* Pods_EatUpsUITests.framework */; };
 		D8A82FE71F154FC80053C1A1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FE61F154FC80053C1A1 /* LoginViewController.swift */; };
@@ -63,7 +69,11 @@
 		2032ACDA1F1548FA00A4015C /* EatUpsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EatUpsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2032ACDE1F1548FA00A4015C /* EatUpsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EatUpsUITests.swift; sourceTree = "<group>"; };
 		2032ACE01F1548FA00A4015C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		20E931881F168EC100C4A4A1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		20E9318C1F16A3F100C4A4A1 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		20E931901F16A4F900C4A4A1 /* Org.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Org.swift; sourceTree = "<group>"; };
+		20E931921F16A56600C4A4A1 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		20E931941F16A65500C4A4A1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		20E931981F16A66800C4A4A1 /* EatUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EatUp.swift; path = ../EatUp.swift; sourceTree = "<group>"; };
 		2A88B9A60B7A635EB5F03418 /* Pods_EatUpsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EatUpsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		331F0F4EB1393E79451631DF /* Pods-EatUpsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EatUpsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EatUpsTests/Pods-EatUpsTests.release.xcconfig"; sourceTree = "<group>"; };
 		3949A7A3F71F1417454C007A /* Pods_EatUpsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EatUpsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -136,6 +146,8 @@
 		2032ACBD1F1548FA00A4015C /* EatUps */ = {
 			isa = PBXGroup;
 			children = (
+				20E9318E1F16A3F700C4A4A1 /* API */,
+				20E9318F1F16A4D800C4A4A1 /* Models */,
 				D8A82FEA1F15507E0053C1A1 /* View Controllers */,
 				2032ACBE1F1548FA00A4015C /* AppDelegate.swift */,
 				2032ACC01F1548FA00A4015C /* ViewController.swift */,
@@ -143,7 +155,7 @@
 				2032ACC51F1548FA00A4015C /* Assets.xcassets */,
 				2032ACC71F1548FA00A4015C /* LaunchScreen.storyboard */,
 				2032ACCA1F1548FA00A4015C /* Info.plist */,
-				20E931881F168EC100C4A4A1 /* GoogleService-Info.plist */,
+				20E931941F16A65500C4A4A1 /* GoogleService-Info.plist */,
 				D8A82FF71F1584010053C1A1 /* UsersCollectionViewCell.swift */,
 			);
 			path = EatUps;
@@ -165,6 +177,24 @@
 				2032ACE01F1548FA00A4015C /* Info.plist */,
 			);
 			path = EatUpsUITests;
+			sourceTree = "<group>";
+		};
+		20E9318E1F16A3F700C4A4A1 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				20E9318C1F16A3F100C4A4A1 /* APIManager.swift */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
+		20E9318F1F16A4D800C4A4A1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				20E931981F16A66800C4A4A1 /* EatUp.swift */,
+				20E931921F16A56600C4A4A1 /* User.swift */,
+				20E931901F16A4F900C4A4A1 /* Org.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		82057D0228C96807EBB7511E /* Pods */ = {
@@ -325,7 +355,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2032ACC91F1548FA00A4015C /* LaunchScreen.storyboard in Resources */,
-				20E931891F168EC100C4A4A1 /* GoogleService-Info.plist in Resources */,
+				20E931951F16A65500C4A4A1 /* GoogleService-Info.plist in Resources */,
 				2032ACC61F1548FA00A4015C /* Assets.xcassets in Resources */,
 				2032ACC41F1548FA00A4015C /* Main.storyboard in Resources */,
 			);
@@ -335,7 +365,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20E9318A1F168EC100C4A4A1 /* GoogleService-Info.plist in Resources */,
+				20E931961F16A65500C4A4A1 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,7 +373,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20E9318B1F168EC100C4A4A1 /* GoogleService-Info.plist in Resources */,
+				20E931971F16A65500C4A4A1 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,10 +522,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20E931911F16A4F900C4A4A1 /* Org.swift in Sources */,
+				20E9318D1F16A3F100C4A4A1 /* APIManager.swift in Sources */,
 				D8A82FE71F154FC80053C1A1 /* LoginViewController.swift in Sources */,
+				20E931991F16A66800C4A4A1 /* EatUp.swift in Sources */,
 				D8A82FF61F1575800053C1A1 /* RatingViewController.swift in Sources */,
 				D8A82FEE1F1553550053C1A1 /* UserFeedViewController.swift in Sources */,
 				D8A82FF01F1554AF0053C1A1 /* SendInviteViewController.swift in Sources */,
+				20E931931F16A56600C4A4A1 /* User.swift in Sources */,
 				2032ACC11F1548FA00A4015C /* ViewController.swift in Sources */,
 				D8A82FF41F1573680053C1A1 /* ReceivedInviteViewController.swift in Sources */,
 				D8A82FE91F1550730053C1A1 /* SignUpViewController.swift in Sources */,
@@ -511,6 +545,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2032ACD41F1548FA00A4015C /* EatUpsTests.swift in Sources */,
+				20E9319A1F16A66800C4A4A1 /* EatUp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,6 +554,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2032ACDF1F1548FA00A4015C /* EatUpsUITests.swift in Sources */,
+				20E9319B1F16A66800C4A4A1 /* EatUp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

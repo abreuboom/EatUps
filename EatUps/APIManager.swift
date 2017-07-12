@@ -7,3 +7,10 @@
 //
 
 import Foundation
+import KeychainAccess
+
+
+class APIManager: SessionManager {
+
+
+}
