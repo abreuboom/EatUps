@@ -21,7 +21,6 @@
 		75A55747BDE7F64C8E34B403 /* Pods_EatUpsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3949A7A3F71F1417454C007A /* Pods_EatUpsTests.framework */; };
 		888AB7688257CE444F2A3225 /* Pods_EatUpsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A88B9A60B7A635EB5F03418 /* Pods_EatUpsUITests.framework */; };
 		D8A82FE71F154FC80053C1A1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FE61F154FC80053C1A1 /* LoginViewController.swift */; };
-		D8A82FE91F1550730053C1A1 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FE81F1550730053C1A1 /* SignUpViewController.swift */; };
 		D8A82FEC1F1552A40053C1A1 /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FEB1F1552A40053C1A1 /* SelectLocationViewController.swift */; };
 		D8A82FEE1F1553550053C1A1 /* UserFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FED1F1553550053C1A1 /* UserFeedViewController.swift */; };
 		D8A82FF01F1554AF0053C1A1 /* SendInviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FEF1F1554AF0053C1A1 /* SendInviteViewController.swift */; };
@@ -72,7 +71,6 @@
 		BC478D15D68514DC49ED3C59 /* Pods-EatUps.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EatUps.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EatUps/Pods-EatUps.debug.xcconfig"; sourceTree = "<group>"; };
 		D58244FF12EA8391989E4695 /* Pods-EatUpsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EatUpsUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EatUpsUITests/Pods-EatUpsUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D8A82FE61F154FC80053C1A1 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		D8A82FE81F1550730053C1A1 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		D8A82FEB1F1552A40053C1A1 /* SelectLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectLocationViewController.swift; sourceTree = "<group>"; };
 		D8A82FED1F1553550053C1A1 /* UserFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserFeedViewController.swift; sourceTree = "<group>"; };
 		D8A82FEF1F1554AF0053C1A1 /* SendInviteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendInviteViewController.swift; sourceTree = "<group>"; };
@@ -194,7 +192,6 @@
 			isa = PBXGroup;
 			children = (
 				D8A82FE61F154FC80053C1A1 /* LoginViewController.swift */,
-				D8A82FE81F1550730053C1A1 /* SignUpViewController.swift */,
 				D8A82FEB1F1552A40053C1A1 /* SelectLocationViewController.swift */,
 				D8A82FED1F1553550053C1A1 /* UserFeedViewController.swift */,
 				D8A82FEF1F1554AF0053C1A1 /* SendInviteViewController.swift */,
@@ -498,7 +495,6 @@
 				D8A82FF01F1554AF0053C1A1 /* SendInviteViewController.swift in Sources */,
 				2032ACC11F1548FA00A4015C /* ViewController.swift in Sources */,
 				D8A82FF41F1573680053C1A1 /* ReceivedInviteViewController.swift in Sources */,
-				D8A82FE91F1550730053C1A1 /* SignUpViewController.swift in Sources */,
 				D8A82FF21F1555DE0053C1A1 /* ResponseViewController.swift in Sources */,
 				D8A82FEC1F1552A40053C1A1 /* SelectLocationViewController.swift in Sources */,
 				D8A82FF81F1584010053C1A1 /* UsersCollectionViewCell.swift in Sources */,
