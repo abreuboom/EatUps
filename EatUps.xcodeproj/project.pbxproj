@@ -15,6 +15,9 @@
 		2032ACC91F1548FA00A4015C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2032ACC71F1548FA00A4015C /* LaunchScreen.storyboard */; };
 		2032ACD41F1548FA00A4015C /* EatUpsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2032ACD31F1548FA00A4015C /* EatUpsTests.swift */; };
 		2032ACDF1F1548FA00A4015C /* EatUpsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2032ACDE1F1548FA00A4015C /* EatUpsUITests.swift */; };
+		20E931891F168EC100C4A4A1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20E931881F168EC100C4A4A1 /* GoogleService-Info.plist */; };
+		20E9318A1F168EC100C4A4A1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20E931881F168EC100C4A4A1 /* GoogleService-Info.plist */; };
+		20E9318B1F168EC100C4A4A1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20E931881F168EC100C4A4A1 /* GoogleService-Info.plist */; };
 		75A55747BDE7F64C8E34B403 /* Pods_EatUpsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3949A7A3F71F1417454C007A /* Pods_EatUpsTests.framework */; };
 		888AB7688257CE444F2A3225 /* Pods_EatUpsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A88B9A60B7A635EB5F03418 /* Pods_EatUpsUITests.framework */; };
 		D8A82FE71F154FC80053C1A1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FE61F154FC80053C1A1 /* LoginViewController.swift */; };
@@ -60,6 +63,7 @@
 		2032ACDA1F1548FA00A4015C /* EatUpsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EatUpsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2032ACDE1F1548FA00A4015C /* EatUpsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EatUpsUITests.swift; sourceTree = "<group>"; };
 		2032ACE01F1548FA00A4015C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		20E931881F168EC100C4A4A1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2A88B9A60B7A635EB5F03418 /* Pods_EatUpsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EatUpsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		331F0F4EB1393E79451631DF /* Pods-EatUpsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EatUpsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EatUpsTests/Pods-EatUpsTests.release.xcconfig"; sourceTree = "<group>"; };
 		3949A7A3F71F1417454C007A /* Pods_EatUpsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EatUpsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,6 +143,7 @@
 				2032ACC51F1548FA00A4015C /* Assets.xcassets */,
 				2032ACC71F1548FA00A4015C /* LaunchScreen.storyboard */,
 				2032ACCA1F1548FA00A4015C /* Info.plist */,
+				20E931881F168EC100C4A4A1 /* GoogleService-Info.plist */,
 				D8A82FF71F1584010053C1A1 /* UsersCollectionViewCell.swift */,
 			);
 			path = EatUps;
@@ -320,6 +325,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2032ACC91F1548FA00A4015C /* LaunchScreen.storyboard in Resources */,
+				20E931891F168EC100C4A4A1 /* GoogleService-Info.plist in Resources */,
 				2032ACC61F1548FA00A4015C /* Assets.xcassets in Resources */,
 				2032ACC41F1548FA00A4015C /* Main.storyboard in Resources */,
 			);
@@ -329,6 +335,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20E9318A1F168EC100C4A4A1 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,6 +343,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20E9318B1F168EC100C4A4A1 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

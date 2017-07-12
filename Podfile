@@ -13,6 +13,7 @@ target 'EatUps' do
   pod 'FBSDKCoreKit', '~> 4.22.1'
   pod 'FBSDKLoginKit', '~> 4.22.1'
   pod 'FBSDKShareKit', '~> 4.22.1'
+  pod 'Firebase/Core'
 
   target 'EatUpsTests' do
     inherit! :search_paths
