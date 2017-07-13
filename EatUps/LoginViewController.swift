@@ -13,8 +13,13 @@ import FBSDKLoginKit
 
 class LoginViewController: UIViewController {
     
+    
+    var ref: DatabaseReference!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        ref = Database.database().reference()
+
         
         // Add a custom login button to your app
         let loginButton = UIButton(type: .custom)
