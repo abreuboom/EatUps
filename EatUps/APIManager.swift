@@ -13,5 +13,14 @@ import Firebase
 import FirebaseDatabase
 
 class APIManager: SessionManager {
+    // MARK: TODO: Add App Keys
+    // MARK: Facebook API methods
+    // MARK: TODO: Get User Feed
+    
+
+
+    
+    
+    
     
 }
