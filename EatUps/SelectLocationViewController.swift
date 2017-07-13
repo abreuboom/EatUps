@@ -10,6 +10,8 @@ import UIKit
 
 class SelectLocationViewController: UIViewController {
 
+    @IBOutlet weak var locationsTableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     override func viewDidLoad() {
         super.viewDidLoad()
 
