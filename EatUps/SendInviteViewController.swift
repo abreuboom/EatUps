@@ -15,7 +15,7 @@ class SendInviteViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     
     @IBAction func didTapRequest(_ sender: Any) {
-    
+        
     }
     
     @IBAction func didTapKeepLooking(_ sender: Any) {

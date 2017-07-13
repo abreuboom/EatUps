@@ -21,6 +21,14 @@ class ReceivedInviteViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+//    function writeUserData(userId, name, email, imageUrl) {
+//    firebase.database().ref('users/' + userId).set({
+//    username: name,
+//    email: email,
+//    profile_picture : imageUrl
+//    });
+//    }
+        
 
     /*
     // MARK: - Navigation

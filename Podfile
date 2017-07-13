@@ -14,6 +14,7 @@ target 'EatUps' do
   pod 'FBSDKShareKit', '~> 4.22.1'
   pod 'Firebase/Core'
   pod 'Firebase/Database'
+  pod 'Firebase/Auth'
   pod 'KeychainAccess'
   pod 'Alamofire', '~> 4.4'
   pod 'AlamofireImage', '~> 3.1'

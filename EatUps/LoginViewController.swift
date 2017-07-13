@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import FacebookCore
 import FacebookLogin
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, LoginButtonDelegate {
+    
+    var loginButton: LoginButton
     
     @IBOutlet weak var logoImage: UIImageView!
     
@@ -31,17 +34,29 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if AccessToken.current == nil {
+            print("Not logged in")
+        }
+        else {
+            print("Logged in already")
+        }
+        
         // Added Facebook login button
-        let loginButton = LoginButton(readPermissions: [ .publicProfile ])
+        loginButton = LoginButton(readPermissions: [ .publicProfile ])
         loginButton.center = view.center
         view.addSubview(loginButton)
         
-        // Persisting user
-        //if let accessToken = AccessToken.current 
-            // User is logged in, use 'accessToken' here.
+        
+        // User is logged in, use 'accessToken' here.
 
         // Do any additional setup after loading the view.
     }
+    
+    // Initialise user with Facebook information
+    func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
+
+        }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
