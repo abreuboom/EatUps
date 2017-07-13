@@ -19,7 +19,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
-
+        
         
         // Add a custom login button to your app
         let loginButton = UIButton(type: .custom)
@@ -34,7 +34,7 @@ class LoginViewController: UIViewController {
         view.addSubview(loginButton)
     }
     
-    @objc func loginButtonClicked() {
+    @IBAction func loginButtonClicked(_ sender: UIButton) {
         let fbLoginManager = FBSDKLoginManager()
         fbLoginManager.logIn(withReadPermissions: ["public_profile", "email", "user_friends"], from: self) { (result, error) in
             if let error = error {
@@ -60,55 +60,63 @@ class LoginViewController: UIViewController {
                     
                     return
                 }
-                
-                // Present the main view
-                self.performSegue(withIdentifier: "loginSegue", sender: nil)
-                
+                else {
+                    if let uid = user?.uid {
+                        
+                        if let name = user?.displayName {
+                            self.ref.child("users").child(uid).setValue(["name": name])
+                        }
+                        if let photoURL = user?.photoURL {
+                            self.ref.child("users").child(uid).setValue(["profilePhotoURL": photoURL])
+                        }
+                    }
+                    self.performSegue(withIdentifier: "loginSegue", sender: nil)
+                }
             })
             
         }
     }
     
-//    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError?) {
-//        if let error = error {
-//            print(error.localizedDescription)
-//            return
-//        }
-//        let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-//    }
-//
-//    
-//    
-//    // Initialise user with Facebook information
-//    func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
-//        let request = GraphRequest(graphPath: "me", parameters: ["fields": "email, name"], accessToken: AccessToken.current, httpMethod: .GET, apiVersion: .defaultVersion)
-//        request.start { (response, result) in
-//            switch result {
-//            case .success(response: let value):
-//                print(value.dictionaryValue)
-//            case.failed(let error):
-//                print(error)
-//            }
-//        }
-//    }
-//    
-//    func loginButtonDidLogOut(_ loginButton: LoginButton) {
-//        // Do log out
-//    }
-
+    //    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError?) {
+    //        if let error = error {
+    //            print(error.localizedDescription)
+    //            return
+    //        }
+    //        let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+    //    }
+    //
+    //
+    //
+    //    // Initialise user with Facebook information
+    //    func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
+    //        let request = GraphRequest(graphPath: "me", parameters: ["fields": "email, name"], accessToken: AccessToken.current, httpMethod: .GET, apiVersion: .defaultVersion)
+    //        request.start { (response, result) in
+    //            switch result {
+    //            case .success(response: let value):
+    //                print(value.dictionaryValue)
+    //            case.failed(let error):
+    //                print(error)
+    //            }
+    //        }
+    //    }
+    //
+    //    func loginButtonDidLogOut(_ loginButton: LoginButton) {
+    //        // Do log out
+    //    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
