@@ -12,8 +12,6 @@ import FacebookLogin
 
 class LoginViewController: UIViewController, LoginButtonDelegate {
     
-    var loginButton: LoginButton
-    
     @IBOutlet weak var logoImage: UIImageView!
     
     @IBOutlet weak var usernameTextField: UITextField!
@@ -34,6 +32,7 @@ class LoginViewController: UIViewController, LoginButtonDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Persisting User
         if AccessToken.current == nil {
             print("Not logged in")
         }
@@ -42,21 +41,30 @@ class LoginViewController: UIViewController, LoginButtonDelegate {
         }
         
         // Added Facebook login button
-        loginButton = LoginButton(readPermissions: [ .publicProfile ])
+        let loginButton = LoginButton(readPermissions: [ .publicProfile ])
         loginButton.center = view.center
         view.addSubview(loginButton)
-        
-        
-        // User is logged in, use 'accessToken' here.
+        loginButton.delegate = self
 
         // Do any additional setup after loading the view.
     }
     
     // Initialise user with Facebook information
     func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
-
+        let request = GraphRequest(graphPath: "me", parameters: ["fields": "email, name"], accessToken: AccessToken.current, httpMethod: .GET, apiVersion: .defaultVersion)
+        request.start { (response, result) in
+            switch result {
+            case .success(response: let value):
+                print(value.dictionaryValue)
+            case.failed(let error):
+                print(error)
+            }
         }
+    }
     
+    func loginButtonDidLogOut(_ loginButton: LoginButton) {
+        // Do log out
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
