@@ -7,56 +7,75 @@
 //
 
 import UIKit
-import FacebookCore
 import FacebookLogin
 
-class LoginViewController: UIViewController, LoginButtonDelegate {
+class LoginViewController: UIViewController {
     
     @IBOutlet weak var logoImage: UIImageView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Persisting User
-        if AccessToken.current == nil {
-            print("Not logged in")
-        }
-        else {
-            print("Logged in already")
-        }
+        // Add a custom login button to your app
+        let loginButton = UIButton(type: .custom)
+        loginButton.backgroundColor = UIColor.darkGray
+        loginButton.frame = CGRect(x: 0, y: 0, width: 180, height: 40);
+        loginButton.center = view.center;
+        loginButton.setTitle("Login with Facebook", for: .normal )
         
-        // Added Facebook login button
-        let loginButton = LoginButton(readPermissions: [ .publicProfile ])
-        loginButton.center = view.center
+        // Handle clicks on the button
+        loginButton.addTarget(self, action: #selector(self.loginButtonClicked), for: .touchUpInside)
+        
         view.addSubview(loginButton)
-        loginButton.delegate = self
-
-        // Do any additional setup after loading the view.
     }
     
-    // Initialise user with Facebook information
-    func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
-        let request = GraphRequest(graphPath: "me", parameters: ["fields": "email, name"], accessToken: AccessToken.current, httpMethod: .GET, apiVersion: .defaultVersion)
-        request.start { (response, result) in
-            switch result {
-            case .success(response: let value):
-                print(value.dictionaryValue)
-            case.failed(let error):
+    @objc func loginButtonClicked() {
+        let loginManager = LoginManager()
+        loginManager.logIn([ .publicProfile, .email, .userFriends ], viewController: self) { loginResult in
+            switch loginResult {
+            case .failed(let error):
                 print(error)
+            case .cancelled:
+                print("User cancelled login.")
+            case .success(let grantedPermissions, let declinedPermissions, let accessToken):
+                print("Logged in!")
             }
         }
     }
     
-    func loginButtonDidLogOut(_ loginButton: LoginButton) {
-        // Do log out
-    }
+//    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError?) {
+//        if let error = error {
+//            print(error.localizedDescription)
+//            return
+//        }
+//        let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+//    }
+//
+//    
+//    
+//    // Initialise user with Facebook information
+//    func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
+//        let request = GraphRequest(graphPath: "me", parameters: ["fields": "email, name"], accessToken: AccessToken.current, httpMethod: .GET, apiVersion: .defaultVersion)
+//        request.start { (response, result) in
+//            switch result {
+//            case .success(response: let value):
+//                print(value.dictionaryValue)
+//            case.failed(let error):
+//                print(error)
+//            }
+//        }
+//    }
+//    
+//    func loginButtonDidLogOut(_ loginButton: LoginButton) {
+//        // Do log out
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
     /*
     // MARK: - Navigation
 

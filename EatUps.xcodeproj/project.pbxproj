@@ -309,6 +309,7 @@
 				TargetAttributes = {
 					2032ACBA1F1548FA00A4015C = {
 						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = 3CJT76PC4B;
 						ProvisioningStyle = Automatic;
 					};
 					2032ACCE1F1548FA00A4015C = {
@@ -686,7 +687,7 @@
 			baseConfigurationReference = BC478D15D68514DC49ED3C59 /* Pods-EatUps.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 3CJT76PC4B;
 				INFOPLIST_FILE = EatUps/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.abreuboom.EatUps;
@@ -700,7 +701,7 @@
 			baseConfigurationReference = E7D12FEC4E9F01F0EE5FEC0F /* Pods-EatUps.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 3CJT76PC4B;
 				INFOPLIST_FILE = EatUps/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.abreuboom.EatUps;
