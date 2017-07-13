@@ -77,33 +77,6 @@ class LoginViewController: UIViewController {
         }
     }
     
-    //    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError?) {
-    //        if let error = error {
-    //            print(error.localizedDescription)
-    //            return
-    //        }
-    //        let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-    //    }
-    //
-    //
-    //
-    //    // Initialise user with Facebook information
-    //    func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
-    //        let request = GraphRequest(graphPath: "me", parameters: ["fields": "email, name"], accessToken: AccessToken.current, httpMethod: .GET, apiVersion: .defaultVersion)
-    //        request.start { (response, result) in
-    //            switch result {
-    //            case .success(response: let value):
-    //                print(value.dictionaryValue)
-    //            case.failed(let error):
-    //                print(error)
-    //            }
-    //        }
-    //    }
-    //
-    //    func loginButtonDidLogOut(_ loginButton: LoginButton) {
-    //        // Do log out
-    //    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
