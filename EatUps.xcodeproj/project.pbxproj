@@ -33,7 +33,7 @@
 		D8A82FF21F1555DE0053C1A1 /* ResponseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FF11F1555DE0053C1A1 /* ResponseViewController.swift */; };
 		D8A82FF41F1573680053C1A1 /* ReceivedInviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FF31F1573680053C1A1 /* ReceivedInviteViewController.swift */; };
 		D8A82FF61F1575800053C1A1 /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FF51F1575800053C1A1 /* RatingViewController.swift */; };
-		D8A82FF81F1584010053C1A1 /* UsersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FF71F1584010053C1A1 /* UsersCollectionViewCell.swift */; };
+		D8A82FF81F1584010053C1A1 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FF71F1584010053C1A1 /* UserCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,7 +87,7 @@
 		D8A82FF11F1555DE0053C1A1 /* ResponseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseViewController.swift; sourceTree = "<group>"; };
 		D8A82FF31F1573680053C1A1 /* ReceivedInviteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceivedInviteViewController.swift; sourceTree = "<group>"; };
 		D8A82FF51F1575800053C1A1 /* RatingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
-		D8A82FF71F1584010053C1A1 /* UsersCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersCollectionViewCell.swift; sourceTree = "<group>"; };
+		D8A82FF71F1584010053C1A1 /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		E7D12FEC4E9F01F0EE5FEC0F /* Pods-EatUps.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EatUps.release.xcconfig"; path = "Pods/Target Support Files/Pods-EatUps/Pods-EatUps.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,6 +119,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0EAB32EC1F18386700419A73 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D8A82FF71F1584010053C1A1 /* UserCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		2032ACB21F1548FA00A4015C = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +155,7 @@
 				20E9318E1F16A3F700C4A4A1 /* API */,
 				20E9318F1F16A4D800C4A4A1 /* Models */,
 				D8A82FEA1F15507E0053C1A1 /* View Controllers */,
+				0EAB32EC1F18386700419A73 /* Views */,
 				2032ACBE1F1548FA00A4015C /* AppDelegate.swift */,
 				2032ACC01F1548FA00A4015C /* ViewController.swift */,
 				2032ACC21F1548FA00A4015C /* Main.storyboard */,
@@ -154,7 +163,6 @@
 				2032ACC71F1548FA00A4015C /* LaunchScreen.storyboard */,
 				2032ACCA1F1548FA00A4015C /* Info.plist */,
 				20E931941F16A65500C4A4A1 /* GoogleService-Info.plist */,
-				D8A82FF71F1584010053C1A1 /* UsersCollectionViewCell.swift */,
 			);
 			path = EatUps;
 			sourceTree = "<group>";
@@ -531,7 +539,7 @@
 				D8A82FF41F1573680053C1A1 /* ReceivedInviteViewController.swift in Sources */,
 				D8A82FF21F1555DE0053C1A1 /* ResponseViewController.swift in Sources */,
 				D8A82FEC1F1552A40053C1A1 /* SelectLocationViewController.swift in Sources */,
-				D8A82FF81F1584010053C1A1 /* UsersCollectionViewCell.swift in Sources */,
+				D8A82FF81F1584010053C1A1 /* UserCell.swift in Sources */,
 				2032ACBF1F1548FA00A4015C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

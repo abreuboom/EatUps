@@ -11,7 +11,7 @@ import Foundation
 class EatUp {
     
     // MARK: Properties
-//    var id: Int64 // For identifying which EatUp
+ //    var id: Int64 // For identifying which EatUp
 //    var users: [User_id: Bool?] // Participating users and respective ratings
 //    var place: String // EatUp location
 //    var org_id: Int64 // EatUp org

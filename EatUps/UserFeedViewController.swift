@@ -8,33 +8,35 @@
 
 import UIKit
 
-class UserFeedViewController: UIViewController {
+class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
+    // let User.location.availableUsers = availableUsers
+    @IBOutlet weak var collectionView: UICollectionView!
     
-    
-    
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        // Initialise collection view
+        collectionView.dataSource = self
+        collectionView.delegate = self
     }
-
+    
+    
+    // Configuring collection view cell views
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "userCell", for: indexPath) as! UserCell
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        // return availableUsers.count - 1
+        return 4
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
