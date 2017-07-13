@@ -9,9 +9,9 @@
 import Foundation
 import Alamofire
 import KeychainAccess
-
+import Firebase
+import FirebaseDatabase
 
 class APIManager: SessionManager {
-
-
+    
 }
