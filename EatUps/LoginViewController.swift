@@ -36,7 +36,7 @@ class LoginViewController: UIViewController {
     
     @objc func loginButtonClicked() {
         let fbLoginManager = FBSDKLoginManager()
-        fbLoginManager.logIn(withReadPermissions: ["publicProfile", "email", "userFriends"], from: self) { (result, error) in
+        fbLoginManager.logIn(withReadPermissions: ["public_profile", "email", "user_friends"], from: self) { (result, error) in
             if let error = error {
                 print("Failed to login: \(error.localizedDescription)")
                 return
