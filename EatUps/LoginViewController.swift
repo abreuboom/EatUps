@@ -7,12 +7,11 @@
 //
 
 import UIKit
+import Firebase
 import FacebookLogin
+import FBSDKLoginKit
 
 class LoginViewController: UIViewController {
-    
-    @IBOutlet weak var logoImage: UIImageView!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,16 +30,37 @@ class LoginViewController: UIViewController {
     }
     
     @objc func loginButtonClicked() {
-        let loginManager = LoginManager()
-        loginManager.logIn([ .publicProfile, .email, .userFriends ], viewController: self) { loginResult in
-            switch loginResult {
-            case .failed(let error):
-                print(error)
-            case .cancelled:
-                print("User cancelled login.")
-            case .success(let grantedPermissions, let declinedPermissions, let accessToken):
-                print("Logged in!")
+        let fbLoginManager = FBSDKLoginManager()
+        fbLoginManager.logIn(withReadPermissions: ["publicProfile", "email", "userFriends"], from: self) { (result, error) in
+            if let error = error {
+                print("Failed to login: \(error.localizedDescription)")
+                return
             }
+            
+            guard let accessToken = FBSDKAccessToken.current() else {
+                print("Failed to get access token")
+                return
+            }
+            
+            let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
+            
+            // Perform login by calling Firebase APIs
+            Auth.auth().signIn(with: credential, completion: { (user, error) in
+                if let error = error {
+                    print("Login error: \(error.localizedDescription)")
+                    let alertController = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)
+                    let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    alertController.addAction(okayAction)
+                    self.present(alertController, animated: true, completion: nil)
+                    
+                    return
+                }
+                
+                // Present the main view
+                self.performSegue(withIdentifier: "loginSegue", sender: nil)
+                
+            })
+            
         }
     }
     

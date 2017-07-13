@@ -7,13 +7,18 @@
 //
 
 import UIKit
+import Firebase
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var nameLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let id = NSUUID.init(uuidString: "John Abreu")
-        print(id)
+        
+        if let currentUser = Auth.auth().currentUser {
+            nameLabel.text = currentUser.displayName
+        }
         // Do any additional setup after loading the view, typically from a nib.
     }
 
