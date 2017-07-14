@@ -18,6 +18,7 @@ class ViewController: UIViewController {
         
         if let currentUser = Auth.auth().currentUser {
             nameLabel.text = currentUser.displayName
+            currentUser.uid
         }
         // Do any additional setup after loading the view, typically from a nib.
     }
