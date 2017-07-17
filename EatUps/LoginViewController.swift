@@ -35,7 +35,7 @@ class LoginViewController: UIViewController, LoginButtonDelegate {
         view.addSubview(loginButton)
     }
     
-    @IBAction func loginButtonClicked(_ sender: UIButton) {
+    @IBAction func loginButtonClicked(_ sender: LoginButton) {
         let loginManager = LoginManager()
         loginManager.logIn([ .publicProfile, .email, .userFriends ], viewController: self) { loginResult in
             switch loginResult {
@@ -45,14 +45,45 @@ class LoginViewController: UIViewController, LoginButtonDelegate {
                 print("User cancelled login.")
             case .success(let grantedPermissions, let declinedPermissions, let accessToken):
                 print("Logged in!")
+                self.loginButtonDidCompleteLogin(sender, result: loginResult)
                 self.performSegue(withIdentifier: "orgSegue", sender: sender)
             }
         }
     }
     
     func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
-        GraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email"], accessToken: AccessToken.current, httpMethod: .GET, apiVersion: .defaultVersion).start { (response, result) in
-            print(result)
+        var id = ""
+        GraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email"]).start { (response, result) in
+            switch result {
+            case .failed(let error):
+                print("error in graph request:", error)
+            case .success(let graphResponse):
+                if let responseDictionary = graphResponse.dictionaryValue{
+                    print(responseDictionary)
+                    id = responseDictionary["id"] as! String
+                    let name = responseDictionary["name"] as? String
+                    let email = responseDictionary["email"] as? String
+                    self.ref.child("users/\(id)").setValue(["name": name, "email": email])
+                }
+            }
+            
+        }
+        let accessToken = AccessToken.current
+        guard let accessTokenString = accessToken?.authenticationToken else { return }
+        
+        let credentials = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
+        
+        Auth.auth().signIn(with: credentials) { (user, error) in
+            if error != nil {
+                print(error?.localizedDescription)
+                return
+            }
+            else {
+                let photoURL = user?.photoURL
+                let urlString = photoURL?.absoluteString
+                self.ref.child("users/\(id)/profilePhotoURL").setValue(urlString!)
+                print("successfully logged in")
+            }
         }
     }
     

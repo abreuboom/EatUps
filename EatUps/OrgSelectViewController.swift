@@ -15,6 +15,7 @@ class OrgSelectViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var orgView: UICollectionView!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
+    //var ref: DatabaseReference
     var orgs: [String] = []
     
     override func viewDidLoad() {
@@ -22,11 +23,10 @@ class OrgSelectViewController: UIViewController, UICollectionViewDelegate, UICol
         // Set Firebase Database reference
         var ref = Database.database().reference()
         
-        var databaseHandle = ref.child("orgs").observe(.childAdded, with: { (snapshot) in
+        ref.child("orgs").child("org1").observeSingleEvent(of: .value, with: { (snapshot) in
+            let data = snapshot.value as? NSDictionary
             
-            let data = snapshot.value as? [String: Any]
-            
-            print(data)
+            print(snapshot)
             
             if let orgName = data?["name"] as? String {
                 
