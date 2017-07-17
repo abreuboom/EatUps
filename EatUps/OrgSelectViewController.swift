@@ -16,14 +16,9 @@ class OrgSelectViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var orgView: UICollectionView!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
-<<<<<<< HEAD
     var locationManager: CLLocationManager!
     
-=======
-    
-    
-    var ref: DatabaseReference
->>>>>>> 04c2a70803b3e51259e53aabeefa1ae425facfc1
+
     var orgs: [String] = []
     
     override func viewDidLoad() {
