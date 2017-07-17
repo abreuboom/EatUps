@@ -8,10 +8,11 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
 import FacebookLogin
-import FBSDKLoginKit
+import FacebookCore
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, LoginButtonDelegate {
     
     
     var ref: DatabaseReference!
@@ -29,52 +30,34 @@ class LoginViewController: UIViewController {
         loginButton.setTitle("Login with Facebook", for: .normal )
         
         // Handle clicks on the button
-        loginButton.addTarget(self, action: #selector(self.loginButtonClicked), for: .touchUpInside)
+        loginButton.addTarget(self, action: #selector(self.loginButtonClicked(_:)), for: .touchUpInside)
         
         view.addSubview(loginButton)
     }
     
     @IBAction func loginButtonClicked(_ sender: UIButton) {
-        let fbLoginManager = FBSDKLoginManager()
-        fbLoginManager.logIn(withReadPermissions: ["public_profile", "email", "user_friends"], from: self) { (result, error) in
-            if let error = error {
-                print("Failed to login: \(error.localizedDescription)")
-                return
+        let loginManager = LoginManager()
+        loginManager.logIn([ .publicProfile, .email, .userFriends ], viewController: self) { loginResult in
+            switch loginResult {
+            case .failed(let error):
+                print(error)
+            case .cancelled:
+                print("User cancelled login.")
+            case .success(let grantedPermissions, let declinedPermissions, let accessToken):
+                print("Logged in!")
+                self.performSegue(withIdentifier: "orgSegue", sender: sender)
             }
-            
-            guard let accessToken = FBSDKAccessToken.current() else {
-                print("Failed to get access token")
-                return
-            }
-            
-            let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
-            
-            // Perform login by calling Firebase APIs
-            Auth.auth().signIn(with: credential, completion: { (user, error) in
-                if let error = error {
-                    print("Login error: \(error.localizedDescription)")
-                    let alertController = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)
-                    let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                    alertController.addAction(okayAction)
-                    self.present(alertController, animated: true, completion: nil)
-                    
-                    return
-                }
-                else {
-                    if let uid = user?.uid {
-                        
-                        if let name = user?.displayName {
-                            self.ref.child("users").child(uid).setValue(["name": name])
-                        }
-                        if let photoURL = user?.photoURL {
-                            self.ref.child("users").child(uid).setValue(["profilePhotoURL": photoURL])
-                        }
-                    }
-                    self.performSegue(withIdentifier: "loginSegue", sender: nil)
-                }
-            })
-            
         }
+    }
+    
+    func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
+        GraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email"], accessToken: AccessToken.current, httpMethod: .GET, apiVersion: .defaultVersion).start { (response, result) in
+            print(result)
+        }
+    }
+    
+    func loginButtonDidLogOut(_ loginButton: LoginButton) {
+        
     }
     
     override func didReceiveMemoryWarning() {

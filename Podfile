@@ -22,6 +22,7 @@ target 'EatUps' do
   pod 'KeychainAccess'
   pod 'Alamofire', '~> 4.4'
   pod 'AlamofireImage', '~> 3.1'
+  pod "BouncyLayout"
 
   target 'EatUpsTests' do
     inherit! :search_paths

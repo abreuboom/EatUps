@@ -8,6 +8,6 @@
 
 import UIKit
 
-class UsersCollectionViewCell: UICollectionViewCell {
+class UserCell: UICollectionViewCell {
     
 }

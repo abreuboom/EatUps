@@ -8,6 +8,7 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
+  - BouncyLayout (1.1.0)
   - FacebookCore (0.2.0):
     - Bolts (~> 1.8)
     - FBSDKCoreKit (~> 4.15)
@@ -66,6 +67,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.4)
   - AlamofireImage (~> 3.1)
+  - BouncyLayout
   - FacebookCore (~> 0.2)
   - FacebookLogin (~> 0.2)
   - FacebookShare (~> 0.2)
@@ -81,6 +83,7 @@ SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
   AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  BouncyLayout: f91c6504437a61acd733404f55f75bd8154f5840
   FacebookCore: 2cb3f0fbff218e9d3119cec84bae983b232412de
   FacebookLogin: c9d606504735780a9e3002465a615512e0a691a5
   FacebookShare: 8e9ee8ea06505e6a1d3d719b0cc63e840fb8aaeb
@@ -97,6 +100,6 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
   KeychainAccess: a986406022dfc7c634c691ad3bec670cc6a32002
 
-PODFILE CHECKSUM: 3ef1a3aa12255c34913e10993aee663d1a3b7f02
+PODFILE CHECKSUM: ab0f71304b9d48be3eb648d6cd5ea317e0c728be
 
 COCOAPODS: 1.2.1
