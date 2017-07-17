@@ -15,6 +15,8 @@
 		2032ACC91F1548FA00A4015C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2032ACC71F1548FA00A4015C /* LaunchScreen.storyboard */; };
 		2032ACD41F1548FA00A4015C /* EatUpsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2032ACD31F1548FA00A4015C /* EatUpsTests.swift */; };
 		2032ACDF1F1548FA00A4015C /* EatUpsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2032ACDE1F1548FA00A4015C /* EatUpsUITests.swift */; };
+		208AF5751F1838BB003E76A8 /* OrgSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208AF5741F1838BB003E76A8 /* OrgSelectViewController.swift */; };
+		208AF5771F183BC3003E76A8 /* OrgCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208AF5761F183BC3003E76A8 /* OrgCell.swift */; };
 		20E9318D1F16A3F100C4A4A1 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E9318C1F16A3F100C4A4A1 /* APIManager.swift */; };
 		20E931911F16A4F900C4A4A1 /* Org.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E931901F16A4F900C4A4A1 /* Org.swift */; };
 		20E931931F16A56600C4A4A1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E931921F16A56600C4A4A1 /* User.swift */; };
@@ -68,6 +70,9 @@
 		2032ACDA1F1548FA00A4015C /* EatUpsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EatUpsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2032ACDE1F1548FA00A4015C /* EatUpsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EatUpsUITests.swift; sourceTree = "<group>"; };
 		2032ACE01F1548FA00A4015C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		208AF5741F1838BB003E76A8 /* OrgSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgSelectViewController.swift; sourceTree = "<group>"; };
+		208AF5761F183BC3003E76A8 /* OrgCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgCell.swift; sourceTree = "<group>"; };
+		20CE19381F198AFA008494F1 /* EatUps.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EatUps.entitlements; sourceTree = "<group>"; };
 		20E9318C1F16A3F100C4A4A1 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		20E931901F16A4F900C4A4A1 /* Org.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Org.swift; sourceTree = "<group>"; };
 		20E931921F16A56600C4A4A1 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -152,8 +157,10 @@
 		2032ACBD1F1548FA00A4015C /* EatUps */ = {
 			isa = PBXGroup;
 			children = (
+				20CE19381F198AFA008494F1 /* EatUps.entitlements */,
 				20E9318E1F16A3F700C4A4A1 /* API */,
 				20E9318F1F16A4D800C4A4A1 /* Models */,
+				208AF5781F183BCD003E76A8 /* Views */,
 				D8A82FEA1F15507E0053C1A1 /* View Controllers */,
 				0EAB32EC1F18386700419A73 /* Views */,
 				2032ACBE1F1548FA00A4015C /* AppDelegate.swift */,
@@ -183,6 +190,15 @@
 				2032ACE01F1548FA00A4015C /* Info.plist */,
 			);
 			path = EatUpsUITests;
+			sourceTree = "<group>";
+		};
+		208AF5781F183BCD003E76A8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				208AF5761F183BC3003E76A8 /* OrgCell.swift */,
+				D8A82FF71F1584010053C1A1 /* UsersCollectionViewCell.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		20E9318E1F16A3F700C4A4A1 /* API */ = {
@@ -230,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				D8A82FE61F154FC80053C1A1 /* LoginViewController.swift */,
+				208AF5741F1838BB003E76A8 /* OrgSelectViewController.swift */,
 				D8A82FEB1F1552A40053C1A1 /* SelectLocationViewController.swift */,
 				D8A82FED1F1553550053C1A1 /* UserFeedViewController.swift */,
 				D8A82FEF1F1554AF0053C1A1 /* SendInviteViewController.swift */,
@@ -319,6 +336,11 @@
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = 3CJT76PC4B;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					2032ACCE1F1548FA00A4015C = {
 						CreatedOnToolsVersion = 8.3.2;
@@ -527,6 +549,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				208AF5771F183BC3003E76A8 /* OrgCell.swift in Sources */,
 				20E931911F16A4F900C4A4A1 /* Org.swift in Sources */,
 				20E9318D1F16A3F100C4A4A1 /* APIManager.swift in Sources */,
 				D8A82FE71F154FC80053C1A1 /* LoginViewController.swift in Sources */,
@@ -541,6 +564,7 @@
 				D8A82FEC1F1552A40053C1A1 /* SelectLocationViewController.swift in Sources */,
 				D8A82FF81F1584010053C1A1 /* UserCell.swift in Sources */,
 				2032ACBF1F1548FA00A4015C /* AppDelegate.swift in Sources */,
+				208AF5751F1838BB003E76A8 /* OrgSelectViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -695,6 +719,7 @@
 			baseConfigurationReference = BC478D15D68514DC49ED3C59 /* Pods-EatUps.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = EatUps/EatUps.entitlements;
 				DEVELOPMENT_TEAM = 3CJT76PC4B;
 				INFOPLIST_FILE = EatUps/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -709,6 +734,7 @@
 			baseConfigurationReference = E7D12FEC4E9F01F0EE5FEC0F /* Pods-EatUps.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = EatUps/EatUps.entitlements;
 				DEVELOPMENT_TEAM = 3CJT76PC4B;
 				INFOPLIST_FILE = EatUps/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
