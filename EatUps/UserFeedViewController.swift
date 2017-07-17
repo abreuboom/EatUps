@@ -8,33 +8,55 @@
 
 import UIKit
 
-class UserFeedViewController: UIViewController {
+class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
+    var availableUsers: [User] = []
+    var selectedUser = User()
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var eatUpButton: UIButton!
     
-    
-    
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        // Load available users into table view
+        // availableUsers = User.location.availableUsers
+        
+        // Initialise collection view
+        collectionView.dataSource = self
+        collectionView.delegate = self
     }
-
+    
+    
+    // Configuring collection view cell views
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "userCell", for: indexPath) as! UserCell
+         cell.user = availableUsers[indexPath.item]
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        // return availableUsers.count - 1
+        return 4
+    }
+    
+    // Changes views and stores selected user
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! UserCell
+        if(cell.isSelected) {
+            cell.backgroundColor = UIColor.red
+            selectedUser = cell.user
+            eatUpButton.isHidden = false
+        }
+        else {
+            cell.backgroundColor = UIColor.white
+            eatUpButton.isHidden = true
+        }
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
