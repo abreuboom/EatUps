@@ -43,6 +43,8 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
         return filteredData.count
     }
     
+    // MARK: TODO: Create eatUp object when place is selected with place(org and location) and current user information
+    
     // This method updates filteredData based on the text in the Search Box
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         // When there is no text, filteredData is the same as the original data. For each item, return true if the item should be included and false if the
@@ -51,6 +53,15 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
             return item.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
         }
         locationsTableView.reloadData()
+    }
+    
+    // Sends local eatUp object to the user feed view controller
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "chooseUpee" {
+            let eatUp = sender as! EatUp
+            let userFeedViewController = segue.destination as! UserFeedViewController
+            userFeedViewController.eatUp = eatUp
+        }
     }
     
     override func didReceiveMemoryWarning() {

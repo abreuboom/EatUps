@@ -9,16 +9,25 @@
 import UIKit
 import BouncyLayout
 import FirebaseDatabase
+import CoreLocation
 
-class OrgSelectViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class OrgSelectViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, CLLocationManagerDelegate {
 
     @IBOutlet weak var orgView: UICollectionView!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
+    
+    var locationManager: CLLocationManager!
     
     var orgs: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Request permissions for locations
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
+        
         // Set Firebase Database reference
         var ref = Database.database().reference()
         
