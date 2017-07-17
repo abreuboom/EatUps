@@ -11,14 +11,8 @@ import UIKit
 class ResponseViewController: UIViewController {
     
     @IBOutlet weak var profileImage: UIImageView!
-    
     @IBOutlet weak var nameLabel: UILabel!
-    
     @IBOutlet weak var timerLabel: UILabel!
-    
-    @IBOutlet weak var didTapCancel: UIButton!
-    
-    
     
 
     override func viewDidLoad() {
