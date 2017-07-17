@@ -26,7 +26,7 @@ class OrgSelectViewController: UIViewController, UICollectionViewDelegate, UICol
             
             let data = snapshot.value as? [String: Any]
             
-            print(snapshot.value)
+            print(data)
             
             if let orgName = data?["name"] as? String {
                 
