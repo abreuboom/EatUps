@@ -56,7 +56,7 @@
     </array>
     <key>NSPhotoLibraryUsageDescription</key>
     <string>Allow photo access to help us build your profile.</string>
-    <key> NSLocationWhenInUseUsageDescription </key>
-    <string> Allow location access to help us find people in your area. </string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Allow location access to help us find people in your area.</string>
 </dict>
 </plist>

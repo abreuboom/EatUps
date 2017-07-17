@@ -26,8 +26,7 @@ class OrgSelectViewController: UIViewController, UICollectionViewDelegate, UICol
         
         // Request permissions for locations
         locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.requestAlwaysAuthorization()
+        getLocation()
         
         // Set Firebase Database reference
         var ref = Database.database().reference()
@@ -55,6 +54,37 @@ class OrgSelectViewController: UIViewController, UICollectionViewDelegate, UICol
         // Do any additional setup after loading the view.
     }
     
+    // MARK: Location manager methods
+    // Gets location of user
+    func getLocation() {
+        let status  = CLLocationManager.authorizationStatus()
+        if status == .notDetermined {
+            locationManager.requestWhenInUseAuthorization()
+            return
+        }
+        if status == .denied || status == .restricted {
+            let alert = UIAlertController(title: "Location Services Disabled", message: "Please enable Location Services in Settings", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(okAction)
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        locationManager.delegate = self
+        locationManager.startUpdatingLocation()
+    }
+    
+    // Location delegate methods
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let currentLocation = locations.last!
+        print("Current location: \(currentLocation)")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Error \(error)")
+    }
+    
+    
+    // MARK: Collection view methods
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return orgs.count
     }
@@ -65,6 +95,7 @@ class OrgSelectViewController: UIViewController, UICollectionViewDelegate, UICol
         
         return cell
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
