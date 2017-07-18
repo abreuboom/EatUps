@@ -22,7 +22,9 @@ class APIManager: SessionManager {
     var ref = Database.database().reference()
     var databaseHandle: DatabaseHandle!
     // MARK: TODO: Add App Keys
+    
     // MARK: Facebook API methods
+    
     // MARK: TODO: Get User Feed
     
     

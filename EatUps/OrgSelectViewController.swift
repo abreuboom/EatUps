@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseDatabase
 import CoreLocation
+import Firebase
 
 class OrgSelectViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
 
@@ -24,10 +25,6 @@ class OrgSelectViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Request permissions for locations
-        locationManager = CLLocationManager()
-        getLocation()
         
         // Set Firebase Database reference
         ref = Database.database().reference()
@@ -48,6 +45,11 @@ class OrgSelectViewController: UIViewController, UITableViewDelegate, UITableVie
         
         orgView.delegate = self
         orgView.dataSource = self
+        
+        // Request permissions for locations
+        locationManager = CLLocationManager()
+        getLocation()
+
     }
     
     // MARK: Location manager methods
@@ -71,9 +73,23 @@ class OrgSelectViewController: UIViewController, UITableViewDelegate, UITableVie
     
     // Location delegate methods
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        // Gets current location
         let currentLocation = locations.last!
-        //print("Current location: \(currentLocation)")
-        // MARK: TODO: User.current.location = currentLocation
+        print("Current location: \(currentLocation)")
+        
+        // Converts into string
+        let latitude: String = String(format: "%f", currentLocation.coordinate.latitude)
+        let longitude: String = String(format:"%f", currentLocation.coordinate.longitude)
+        let currentLocationString = "(\(latitude), \(longitude))"
+        let user = Auth.auth().currentUser
+        
+        // MARK: TODO: Set location in current user
+        if let user = user {
+            let id = user.uid
+            self.ref.child("users/\(id)/location").setValue(currentLocationString)
+        }
+
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
