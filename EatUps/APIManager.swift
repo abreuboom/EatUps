@@ -16,6 +16,8 @@ class APIManager: SessionManager {
     
     static var shared: APIManager = APIManager()
     
+    var places: [String] = []
+    
     var ref = Database.database().reference()
     var databaseHandle: DatabaseHandle!
     // MARK: TODO: Add App Keys
@@ -25,18 +27,25 @@ class APIManager: SessionManager {
     // MARK: TODO: Get User Feed
     
     
-    func getPlaces(org_id: String) -> [String] {
-        var places: [String] = []
+    func setUpDatabaseHandle(org_id: String, completion: @escaping (_ success: Bool, [String]) -> ()) {
         databaseHandle = ref.child("orgs/\(org_id)/places").observe(.value, with: { (snapshot) in
             let data = snapshot.value as? NSDictionary
             for (place, _) in data! {
-                let placeName = place as? String
-                places.append(placeName!)
+                let placeName = place as! String
+                self.places.append(placeName)
+                print(self.places)
+                print(placeName)
+            }
+            if self.places.isEmpty == true {
+                completion(false, self.places)
+            }
+            else {
+                completion(true, self.places)
             }
         })
-        return places
     }
     
-    
-    
+    func getPlaces() -> [String] {
+        return places
+    }
 }
