@@ -120,6 +120,8 @@ class OrgSelectViewController: UIViewController, UITableViewDelegate, UITableVie
         let cell = sender as! UITableViewCell
         if let indexPath = orgView.indexPath(for: cell) {
             let org = org_ids[indexPath.row]
+            let user_id = Auth.auth().currentUser?.uid ?? ""
+            ref.child("users/\(user_id)/org_id").setValue(org)
             let selectLocationViewController = segue.destination as! SelectLocationViewController
             selectLocationViewController.org = org
         }
