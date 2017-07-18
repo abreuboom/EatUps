@@ -14,16 +14,18 @@ import CoreLocation
 class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     var availableUsers: [User] = []
-    var selectedUser = User()
+    var selectedUser: User?
     var eatUp = EatUp()
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var eatUpButton: UIButton!
+    var ref: DatabaseReference?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Load available users into table view
-        var ref = Database.database().reference()
+        ref = Database.database().reference()
         // place = eatUp.place.location
         // org = place.parent()
         
@@ -45,7 +47,7 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         
         let layout = BouncyLayout()
         
-//        flowLayout = layout
+        flowLayout = layout
         
         // Initialise collection view
         collectionView.dataSource = self

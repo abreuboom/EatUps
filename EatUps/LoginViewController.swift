@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
 import FirebaseDatabase
 import FacebookLogin
 import FacebookCore
@@ -51,17 +52,17 @@ class LoginViewController: UIViewController, LoginButtonDelegate {
     }
     
     func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
-        var id = ""
+        let id = Auth.auth().currentUser?.uid
         GraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email"]).start { (response, result) in
             switch result {
             case .failed(let error):
                 print("error in graph request:", error)
             case .success(let graphResponse):
                 if let responseDictionary = graphResponse.dictionaryValue{
-                    id = responseDictionary["id"] as! String
+                    let facebookId = responseDictionary["id"] as! String
                     let name = responseDictionary["name"] as? String
                     let email = responseDictionary["email"] as? String
-                    self.ref.child("users/\(id)").setValue(["name": name, "email": email])
+                    self.ref.child("users/\(id!)").setValue(["id": facebookId, "name": name, "email": email])
                 }
             }
         }
@@ -78,7 +79,7 @@ class LoginViewController: UIViewController, LoginButtonDelegate {
             else {
                 let photoURL = user?.photoURL
                 let urlString = photoURL?.absoluteString
-                self.ref.child("users/\(id)/profilePhotoURL").setValue(urlString!)
+                self.ref.child("users/\(id!)/profilePhotoURL").setValue(urlString!)
                 print("successfully logged in")
                 self.performSegue(withIdentifier: "orgSegue", sender: nil)
             }
