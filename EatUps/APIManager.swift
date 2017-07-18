@@ -16,6 +16,8 @@ class APIManager: SessionManager {
     
     static var shared: APIManager = APIManager()
     
+    var places: [String]?
+    
     var ref = Database.database().reference()
     var databaseHandle: DatabaseHandle!
     // MARK: TODO: Add App Keys
@@ -30,11 +32,9 @@ class APIManager: SessionManager {
             for (place, _) in data! {
                 let placeName = place as? String
                 places.append(placeName!)
+                print(placeName)
             }
         })
         return places
     }
-    
-    
-    
 }

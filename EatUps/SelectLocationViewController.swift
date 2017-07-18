@@ -31,10 +31,13 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
         super.viewDidLoad()
         
         data = APIManager.shared.getPlaces(org_id: org!)
+        locationsTableView.reloadData()
+        
         
         locationsTableView.dataSource = self
         searchBar.delegate = self
         filteredData = data
+        
         
         locationsTableView.reloadData()
         print(data)
@@ -77,8 +80,6 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
     
 
     /*
