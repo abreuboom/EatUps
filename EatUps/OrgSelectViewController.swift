@@ -10,6 +10,7 @@ import UIKit
 import BouncyLayout
 import FirebaseDatabase
 import CoreLocation
+import Firebase
 
 class OrgSelectViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, CLLocationManagerDelegate {
 
@@ -26,14 +27,10 @@ class OrgSelectViewController: UIViewController, UICollectionViewDelegate, UICol
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Request permissions for locations
-        locationManager = CLLocationManager()
-        getLocation()
-        
         // Set Firebase Database reference
         ref = Database.database().reference()
         
-        databaseHandle = ref.child("org").observe(.value, with: { (snapshot) in
+        databaseHandle = ref.child("orgs").observe(.value, with: { (snapshot) in
 
             let data = snapshot.value as? NSDictionary
             
@@ -47,12 +44,14 @@ class OrgSelectViewController: UIViewController, UICollectionViewDelegate, UICol
         })
         
         let layout = BouncyLayout()
-        
         flowLayout = layout
-        
         
         orgView.delegate = self
         orgView.dataSource = self
+        
+        // Request permissions for locations
+        locationManager = CLLocationManager()
+        getLocation()
 
         // Do any additional setup after loading the view.
     }
@@ -78,9 +77,22 @@ class OrgSelectViewController: UIViewController, UICollectionViewDelegate, UICol
     
     // Location delegate methods
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        // Gets current location
         let currentLocation = locations.last!
         print("Current location: \(currentLocation)")
-        // MARK: TODO: User.current.location = currentLocation
+        
+        // Converts into string
+        let latitude: String = String(format: "%f", currentLocation.coordinate.latitude)
+        let longitude: String = String(format:"%f", currentLocation.coordinate.longitude)
+        let currentLocationString = "(\(latitude), \(longitude))"
+        let user = Auth.auth().currentUser
+        
+        // MARK: TODO: Set location in current user
+        if let user = user {
+            let id = user.uid
+            self.ref.child("users/\(id)/location").setValue(currentLocationString)
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

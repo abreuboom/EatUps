@@ -11,49 +11,49 @@ import BouncyLayout
 import FirebaseDatabase
 import CoreLocation
 
-class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, CLLocationManagerDelegate {
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var eatUpButton: UIButton!
+
+    var ref: DatabaseReference!
+    var databaseHandle: DatabaseHandle!
     
     var availableUsers: [User] = []
     var selectedUser = User()
     var eatUp = EatUp()
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var eatUpButton: UIButton!
+    
+    var locationManager: CLLocationManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Load available users into table view
-        var ref = Database.database().reference()
-        // place = eatUp.place.location
-        // org = place.parent()
-        
-//         scan everyone in org for location information close enough to that place
-        
-//         var databaseHandle = ref.observe(.childAdded, with: { (snapshot) in
-//            let data = snapshot.value as? [String: Any]
-        
-//            for org in orgs, get matching org
-//            for user in org.users
-//                let checkLocation = user.location
-//                (CLLocationDistance)distanceFromLocation:(const CLLocation *)location;
-//            if let orgName = data?["name"] as? String {
-//                
-//                self.orgs.append(orgName)
-//                self.orgView.reloadData()
-//            }
-//        })
-        
-        let layout = BouncyLayout()
-        
-//        flowLayout = layout
-        
+        getAvailableUsers()
+
         // Initialise collection view
         collectionView.dataSource = self
         collectionView.delegate = self
         
         //CLLocation.distance(from user.current.location : checkLocation)
+       
     }
     
+    func getAvailableUsers() {
+        ref = Database.database().reference()
+        databaseHandle = ref.child("users").observe(.value, with: { (snapshot) in
+            let data = snapshot.value as? NSDictionary
+            for (user, info) in data! {
+                let userDictionary = info as! NSDictionary
+                if let locationString = userDictionary["location"] as? String {
+                    let latitude = Double((locationString.components(separatedBy: ",")[0]))
+                    let longitude = Double((locationString.components(separatedBy: ",")[1]))
+                    let location = CLLocationCoordinate2DMake(latitude!, longitude!)
+                    
+                }
+            }
+        })
+    }
+
     
     // Configuring collection view cell views
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
