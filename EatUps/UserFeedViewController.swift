@@ -20,10 +20,11 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     var databaseHandle: DatabaseHandle!
     
     var availableUsers: [User] = []
-    var selectedUser = User()
+    var selectedUser: User?
     var eatUp = EatUp()
-    
+
     var locationManager: CLLocationManager!
+    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OrgCell: UICollectionViewCell {
+class OrgCell: UITableViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!
 }

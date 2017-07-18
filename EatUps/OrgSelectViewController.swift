@@ -7,15 +7,13 @@
 //
 
 import UIKit
-import BouncyLayout
 import FirebaseDatabase
 import CoreLocation
 import Firebase
 
-class OrgSelectViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, CLLocationManagerDelegate {
+class OrgSelectViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
 
-    @IBOutlet weak var orgView: UICollectionView!
-    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
+    @IBOutlet weak var orgView: UITableView!
     
     var ref: DatabaseReference!
     var databaseHandle: DatabaseHandle!
@@ -23,6 +21,7 @@ class OrgSelectViewController: UIViewController, UICollectionViewDelegate, UICol
     var locationManager: CLLocationManager!
     
     var orgs: [String] = []
+    var org_ids: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,16 +34,14 @@ class OrgSelectViewController: UIViewController, UICollectionViewDelegate, UICol
             let data = snapshot.value as? NSDictionary
             
             for (org, info) in data! {
+                let org_id = org as! String
                 let orgDictionary = info as! NSDictionary
                 let name = orgDictionary["name"] as? String ?? ""
                 self.orgs.append(name)
+                self.org_ids.append(org_id)
                 self.orgView.reloadData()
             }
-            let name = data?.value(forKey: "name")
         })
-        
-        let layout = BouncyLayout()
-        flowLayout = layout
         
         orgView.delegate = self
         orgView.dataSource = self
@@ -53,7 +50,6 @@ class OrgSelectViewController: UIViewController, UICollectionViewDelegate, UICol
         locationManager = CLLocationManager()
         getLocation()
 
-        // Do any additional setup after loading the view.
     }
     
     // MARK: Location manager methods
@@ -93,6 +89,7 @@ class OrgSelectViewController: UIViewController, UICollectionViewDelegate, UICol
             let id = user.uid
             self.ref.child("users/\(id)/location").setValue(currentLocationString)
         }
+
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -100,13 +97,13 @@ class OrgSelectViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
     
-    // MARK: Collection view methods
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    // MARK: TableView methods
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return orgs.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = orgView.dequeueReusableCell(withReuseIdentifier: "OrgCell", for: indexPath) as! OrgCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = orgView.dequeueReusableCell(withIdentifier: "OrgCell", for: indexPath) as! OrgCell
         cell.nameLabel.text = orgs[indexPath.row]
         
         return cell
@@ -119,14 +116,13 @@ class OrgSelectViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let cell = sender as! UITableViewCell
+        if let indexPath = orgView.indexPath(for: cell) {
+            let org = org_ids[indexPath.row]
+            let selectLocationViewController = segue.destination as! SelectLocationViewController
+            selectLocationViewController.org = org
+        }
     }
-    */
 
 }
