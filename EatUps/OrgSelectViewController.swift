@@ -76,15 +76,15 @@ class OrgSelectViewController: UIViewController, UITableViewDelegate, UITableVie
         
         // Gets current location
         let currentLocation = locations.last!
-        print("Current location: \(currentLocation)")
+//        print("Current location: \(currentLocation)")
         
         // Converts into string
         let latitude: String = String(format: "%f", currentLocation.coordinate.latitude)
         let longitude: String = String(format:"%f", currentLocation.coordinate.longitude)
-        let currentLocationString = "(\(latitude), \(longitude))"
+        let currentLocationString = "\(latitude), \(longitude)"
         let user = Auth.auth().currentUser
         
-        // MARK: TODO: Set location in current user
+        // Stores location property in current user
         if let user = user {
             let id = user.uid
             self.ref.child("users/\(id)/location").setValue(currentLocationString)

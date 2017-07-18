@@ -39,7 +39,9 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
        
     }
     
+    // Gets users in a set radius around the EatUp location
     func getAvailableUsers() {
+        // Gets location information of each user
         ref = Database.database().reference()
         databaseHandle = ref.child("users").observe(.value, with: { (snapshot) in
             let data = snapshot.value as? NSDictionary
@@ -48,7 +50,16 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
                 if let locationString = userDictionary["location"] as? String {
                     let latitude = Double((locationString.components(separatedBy: ",")[0]))
                     let longitude = Double((locationString.components(separatedBy: ",")[1]))
-                    let location = CLLocationCoordinate2DMake(latitude!, longitude!)
+                    let checkLocation = CLLocation(latitude: latitude!, longitude: longitude!)
+                    
+                    let testLocation = CLLocation(latitude: 37.785834, longitude: -122.406417)
+                    let distance = Int(checkLocation.distance(from: testLocation))
+                    
+//                    let distance = Int(checkLocation.distance(from: eatUp.location))
+                    let radius = 800
+                    if distance < radius {
+                        self.availableUsers.append(user as! User)
+                    }
                     
                 }
             }
