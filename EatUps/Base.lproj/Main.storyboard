@@ -157,6 +157,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="nameLabel" destination="6NF-GB-gqh" id="PV5-hJ-0z7"/>
+                                            <segue destination="376-rY-Lm4" kind="show" identifier="selectUpeeSegue" id="VeH-e4-WFE"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -173,7 +174,6 @@
                     <connections>
                         <outlet property="locationsTableView" destination="RLN-yg-Jg8" id="QFw-Rh-MNZ"/>
                         <outlet property="searchBar" destination="XVv-Bk-ADJ" id="XRE-2z-1x1"/>
-                        <segue destination="376-rY-Lm4" kind="show" identifier="chooseUpee" id="UB5-bV-tJi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LKa-go-P3h" userLabel="First Responder" sceneMemberID="firstResponder"/>
