@@ -15,32 +15,40 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     @IBOutlet weak var locationsTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var data: [String]?
+    var data: [String] = []
     
     //create an array to update as we filter through the locations to eat
-    var filteredData: [String]!
+    var filteredData: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
 
-        APIManager.shared.setUpDatabaseHandle(org_id: org!)
-        data = APIManager.shared.getPlaces()
+        APIManager.shared.setUpDatabaseHandle(org_id: org!, completion: { (success: Bool, data) in
+            if success == true {
+                self.data = data
+                self.filteredData = self.data
+                self.locationsTableView.reloadData()
+            }
+            else {
+                print("get data failed")
+            }
+        })
         
         locationsTableView.dataSource = self
         searchBar.delegate = self
-        filteredData = data
         
         
-        locationsTableView.reloadData()
-        print(data!)
+        
+        
+        print(data)
 
         // Do any additional setup after loading the view.
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath) as UITableViewCell
-        cell.textLabel?.text = filteredData[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath) as! LocationCell
+        cell.nameLabel.text = filteredData[indexPath.row]
         return cell
     }
     
@@ -53,7 +61,7 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     // This method updates filteredData based on the text in the Search Box
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         // When there is no text, filteredData is the same as the original data. For each item, return true if the item should be included and false if the
-        filteredData = searchText.isEmpty ? data : data?.filter { (item: String) -> Bool in
+        filteredData = searchText.isEmpty ? data : data.filter { (item: String) -> Bool in
             // If dataItem matches the searchText, return true to include it
             return item.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
         }

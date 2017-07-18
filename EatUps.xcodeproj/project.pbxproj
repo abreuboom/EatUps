@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0ED57BB01F1D3CFC00AC1A64 /* AvailableUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED57BAF1F1D3CFC00AC1A64 /* AvailableUserCell.swift */; };
 		0F94C76E144E1E4FD25B1F25 /* Pods_EatUps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73F38D920ADFD5A052C30A17 /* Pods_EatUps.framework */; };
+		2016F28C1F1EB4AB00CA814C /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2016F28B1F1EB4AB00CA814C /* LocationCell.swift */; };
 		2032ACBF1F1548FA00A4015C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2032ACBE1F1548FA00A4015C /* AppDelegate.swift */; };
 		2032ACC11F1548FA00A4015C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2032ACC01F1548FA00A4015C /* ViewController.swift */; };
 		2032ACC41F1548FA00A4015C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2032ACC21F1548FA00A4015C /* Main.storyboard */; };
@@ -58,6 +59,7 @@
 /* Begin PBXFileReference section */
 		0ED57BAF1F1D3CFC00AC1A64 /* AvailableUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvailableUserCell.swift; sourceTree = "<group>"; };
 		1312C3651A0BED44631D9496 /* Pods-EatUpsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EatUpsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EatUpsUITests/Pods-EatUpsUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		2016F28B1F1EB4AB00CA814C /* LocationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 		2032ACBB1F1548FA00A4015C /* EatUps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EatUps.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2032ACBE1F1548FA00A4015C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2032ACC01F1548FA00A4015C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				208AF5761F183BC3003E76A8 /* OrgCell.swift */,
+				2016F28B1F1EB4AB00CA814C /* LocationCell.swift */,
 				0ED57BAF1F1D3CFC00AC1A64 /* AvailableUserCell.swift */,
 			);
 			name = Views;
@@ -544,6 +547,7 @@
 				20E931911F16A4F900C4A4A1 /* Org.swift in Sources */,
 				20E9318D1F16A3F100C4A4A1 /* APIManager.swift in Sources */,
 				D8A82FE71F154FC80053C1A1 /* LoginViewController.swift in Sources */,
+				2016F28C1F1EB4AB00CA814C /* LocationCell.swift in Sources */,
 				0ED57BB01F1D3CFC00AC1A64 /* AvailableUserCell.swift in Sources */,
 				20E931991F16A66800C4A4A1 /* EatUp.swift in Sources */,
 				D8A82FF61F1575800053C1A1 /* RatingViewController.swift in Sources */,

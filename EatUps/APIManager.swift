@@ -27,15 +27,20 @@ class APIManager: SessionManager {
     // MARK: TODO: Get User Feed
     
     
-    func setUpDatabaseHandle(org_id: String){
+    func setUpDatabaseHandle(org_id: String, completion: @escaping (_ success: Bool, [String]) -> ()) {
         databaseHandle = ref.child("orgs/\(org_id)/places").observe(.value, with: { (snapshot) in
             let data = snapshot.value as? NSDictionary
             for (place, _) in data! {
                 let placeName = place as! String
                 self.places.append(placeName)
-                print(data as Any)
                 print(self.places)
                 print(placeName)
+            }
+            if self.places.isEmpty == true {
+                completion(false, self.places)
+            }
+            else {
+                completion(true, self.places)
             }
         })
     }
