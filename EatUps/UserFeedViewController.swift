@@ -9,6 +9,7 @@
 import UIKit
 import BouncyLayout
 import FirebaseDatabase
+import CoreLocation
 
 class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
@@ -24,13 +25,17 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         // Load available users into table view
         var ref = Database.database().reference()
         // place = eatUp.place.location
+        // org = place.parent()
         
-        // scan everyone in org for location information close enough to that place
-//         var databaseHandle = ref.child(orgs).observe(.childAdded, with: { (snapshot) in
+//         scan everyone in org for location information close enough to that place
+        
+//         var databaseHandle = ref.observe(.childAdded, with: { (snapshot) in
 //            let data = snapshot.value as? [String: Any]
-//            
-//            print(data)
-//            
+        
+//            for org in orgs, get matching org
+//            for user in org.users
+//                let checkLocation = user.location
+//                (CLLocationDistance)distanceFromLocation:(const CLLocation *)location;
 //            if let orgName = data?["name"] as? String {
 //                
 //                self.orgs.append(orgName)
@@ -45,6 +50,8 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         // Initialise collection view
         collectionView.dataSource = self
         collectionView.delegate = self
+        
+        //CLLocation.distance(from user.current.location : checkLocation)
     }
     
     

@@ -77,6 +77,7 @@ class OrgSelectViewController: UIViewController, UICollectionViewDelegate, UICol
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let currentLocation = locations.last!
         print("Current location: \(currentLocation)")
+        // MARK: TODO: User.current.location = currentLocation
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
