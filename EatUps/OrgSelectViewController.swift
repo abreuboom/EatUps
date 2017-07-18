@@ -15,24 +15,26 @@ class OrgSelectViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var orgView: UICollectionView!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
-    //var ref: DatabaseReference
+    var ref: DatabaseReference!
+    var databaseHandle: DatabaseHandle!
     var orgs: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Set Firebase Database reference
-        var ref = Database.database().reference()
+        ref = Database.database().reference()
         
-        ref.child("orgs").child("org1").observeSingleEvent(of: .value, with: { (snapshot) in
+        databaseHandle = ref.child("org").observe(.value, with: { (snapshot) in
+
             let data = snapshot.value as? NSDictionary
             
-            print(snapshot)
-            
-            if let orgName = data?["name"] as? String {
-                
-                self.orgs.append(orgName)
+            for (org, info) in data! {
+                let orgDictionary = info as! NSDictionary
+                let name = orgDictionary["name"] as? String ?? ""
+                self.orgs.append(name)
                 self.orgView.reloadData()
             }
+            let name = data?.value(forKey: "name")
         })
         
         let layout = BouncyLayout()
@@ -52,7 +54,7 @@ class OrgSelectViewController: UIViewController, UICollectionViewDelegate, UICol
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = orgView.dequeueReusableCell(withReuseIdentifier: "OrgCell", for: indexPath) as! OrgCell
-        
+        cell.nameLabel.text = orgs[indexPath.row]
         
         return cell
     }

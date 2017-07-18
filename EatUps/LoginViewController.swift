@@ -46,7 +46,6 @@ class LoginViewController: UIViewController, LoginButtonDelegate {
             case .success(let grantedPermissions, let declinedPermissions, let accessToken):
                 print("Logged in!")
                 self.loginButtonDidCompleteLogin(sender, result: loginResult)
-                self.performSegue(withIdentifier: "orgSegue", sender: sender)
             }
         }
     }
@@ -59,18 +58,16 @@ class LoginViewController: UIViewController, LoginButtonDelegate {
                 print("error in graph request:", error)
             case .success(let graphResponse):
                 if let responseDictionary = graphResponse.dictionaryValue{
-                    print(responseDictionary)
                     id = responseDictionary["id"] as! String
                     let name = responseDictionary["name"] as? String
                     let email = responseDictionary["email"] as? String
                     self.ref.child("users/\(id)").setValue(["name": name, "email": email])
                 }
             }
-            
         }
+        
         let accessToken = AccessToken.current
         guard let accessTokenString = accessToken?.authenticationToken else { return }
-        
         let credentials = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
         
         Auth.auth().signIn(with: credentials) { (user, error) in
@@ -83,6 +80,7 @@ class LoginViewController: UIViewController, LoginButtonDelegate {
                 let urlString = photoURL?.absoluteString
                 self.ref.child("users/\(id)/profilePhotoURL").setValue(urlString!)
                 print("successfully logged in")
+                self.performSegue(withIdentifier: "orgSegue", sender: nil)
             }
         }
     }
