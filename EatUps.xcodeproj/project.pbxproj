@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0ED57BB01F1D3CFC00AC1A64 /* AvailableUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED57BAF1F1D3CFC00AC1A64 /* AvailableUserCell.swift */; };
 		0F94C76E144E1E4FD25B1F25 /* Pods_EatUps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73F38D920ADFD5A052C30A17 /* Pods_EatUps.framework */; };
 		2032ACBF1F1548FA00A4015C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2032ACBE1F1548FA00A4015C /* AppDelegate.swift */; };
 		2032ACC11F1548FA00A4015C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2032ACC01F1548FA00A4015C /* ViewController.swift */; };
@@ -35,7 +36,6 @@
 		D8A82FF21F1555DE0053C1A1 /* ResponseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FF11F1555DE0053C1A1 /* ResponseViewController.swift */; };
 		D8A82FF41F1573680053C1A1 /* ReceivedInviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FF31F1573680053C1A1 /* ReceivedInviteViewController.swift */; };
 		D8A82FF61F1575800053C1A1 /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FF51F1575800053C1A1 /* RatingViewController.swift */; };
-		D8A82FF81F1584010053C1A1 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FF71F1584010053C1A1 /* UserCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +56,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0ED57BAF1F1D3CFC00AC1A64 /* AvailableUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvailableUserCell.swift; sourceTree = "<group>"; };
 		1312C3651A0BED44631D9496 /* Pods-EatUpsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EatUpsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EatUpsUITests/Pods-EatUpsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2032ACBB1F1548FA00A4015C /* EatUps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EatUps.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2032ACBE1F1548FA00A4015C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -92,7 +93,6 @@
 		D8A82FF11F1555DE0053C1A1 /* ResponseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseViewController.swift; sourceTree = "<group>"; };
 		D8A82FF31F1573680053C1A1 /* ReceivedInviteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceivedInviteViewController.swift; sourceTree = "<group>"; };
 		D8A82FF51F1575800053C1A1 /* RatingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
-		D8A82FF71F1584010053C1A1 /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		E7D12FEC4E9F01F0EE5FEC0F /* Pods-EatUps.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EatUps.release.xcconfig"; path = "Pods/Target Support Files/Pods-EatUps/Pods-EatUps.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,14 +124,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0EAB32EC1F18386700419A73 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				D8A82FF71F1584010053C1A1 /* UserCell.swift */,
-			);
-			name = Views;
-			sourceTree = "<group>";
-		};
 		2032ACB21F1548FA00A4015C = {
 			isa = PBXGroup;
 			children = (
@@ -162,7 +154,6 @@
 				20E9318F1F16A4D800C4A4A1 /* Models */,
 				208AF5781F183BCD003E76A8 /* Views */,
 				D8A82FEA1F15507E0053C1A1 /* View Controllers */,
-				0EAB32EC1F18386700419A73 /* Views */,
 				2032ACBE1F1548FA00A4015C /* AppDelegate.swift */,
 				2032ACC01F1548FA00A4015C /* ViewController.swift */,
 				2032ACC21F1548FA00A4015C /* Main.storyboard */,
@@ -196,7 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				208AF5761F183BC3003E76A8 /* OrgCell.swift */,
-				D8A82FF71F1584010053C1A1 /* UsersCollectionViewCell.swift */,
+				0ED57BAF1F1D3CFC00AC1A64 /* AvailableUserCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -553,6 +544,7 @@
 				20E931911F16A4F900C4A4A1 /* Org.swift in Sources */,
 				20E9318D1F16A3F100C4A4A1 /* APIManager.swift in Sources */,
 				D8A82FE71F154FC80053C1A1 /* LoginViewController.swift in Sources */,
+				0ED57BB01F1D3CFC00AC1A64 /* AvailableUserCell.swift in Sources */,
 				20E931991F16A66800C4A4A1 /* EatUp.swift in Sources */,
 				D8A82FF61F1575800053C1A1 /* RatingViewController.swift in Sources */,
 				D8A82FEE1F1553550053C1A1 /* UserFeedViewController.swift in Sources */,
@@ -562,7 +554,6 @@
 				D8A82FF41F1573680053C1A1 /* ReceivedInviteViewController.swift in Sources */,
 				D8A82FF21F1555DE0053C1A1 /* ResponseViewController.swift in Sources */,
 				D8A82FEC1F1552A40053C1A1 /* SelectLocationViewController.swift in Sources */,
-				D8A82FF81F1584010053C1A1 /* UserCell.swift in Sources */,
 				2032ACBF1F1548FA00A4015C /* AppDelegate.swift in Sources */,
 				208AF5751F1838BB003E76A8 /* OrgSelectViewController.swift in Sources */,
 			);
