@@ -15,13 +15,6 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     @IBOutlet weak var locationsTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    //fake data to test the search bar
-    let fakeData = ["New York, NY", "Los Angeles, CA", "Chicago, IL", "Houston, TX",
-                "Philadelphia, PA", "Phoenix, AZ", "San Diego, CA", "San Antonio, TX",
-                "Dallas, TX", "Detroit, MI", "San Jose, CA", "Indianapolis, IN",
-                "Jacksonville, FL", "San Francisco, CA", "Columbus, OH", "Austin, TX",
-                "Memphis, TN", "Baltimore, MD", "Charlotte, ND", "Fort Worth, TX"]
-    
     var data: [String]?
     
     //create an array to update as we filter through the locations to eat
@@ -30,9 +23,9 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        data = APIManager.shared.getPlaces(org_id: org!)
-        locationsTableView.reloadData()
-        
+
+        APIManager.shared.setUpDatabaseHandle(org_id: org!)
+        data = APIManager.shared.getPlaces()
         
         locationsTableView.dataSource = self
         searchBar.delegate = self
@@ -40,7 +33,7 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
         
         
         locationsTableView.reloadData()
-        print(data)
+        print(data!)
 
         // Do any additional setup after loading the view.
     }
