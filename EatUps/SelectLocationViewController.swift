@@ -38,9 +38,6 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
         locationsTableView.dataSource = self
         searchBar.delegate = self
         
-        
-        
-        
         print(data)
 
         // Do any additional setup after loading the view.
