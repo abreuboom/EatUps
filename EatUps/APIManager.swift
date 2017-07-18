@@ -28,20 +28,19 @@ class APIManager: SessionManager {
     // MARK: TODO: Get User Feed
     
     
+    //set up Organization's databasehandle
     func setUpDatabaseHandle(org_id: String){
         databaseHandle = ref.child("orgs/\(org_id)/places").observe(.value, with: { (snapshot) in
             let data = snapshot.value as? NSDictionary
             for (place, _) in data! {
                 let placeName = place as! String
                 self.places.append(placeName)
-                print(data as Any)
-                print(self.places)
-                print(placeName)
             }
         })
     }
     
     func getPlaces() -> [String] {
+        print(places)
         return places
     }
     
