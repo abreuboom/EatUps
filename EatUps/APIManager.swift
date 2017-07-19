@@ -132,6 +132,7 @@ class APIManager: SessionManager {
         return false
     }
     
+
     func getCurrentUser(completion: @escaping (Bool, [String: Any]) -> ()) {
         if let uid = Auth.auth().currentUser?.uid {
             databaseHandle = ref.child("users/\(uid)").observe(.value, with: { (snapshot) in
