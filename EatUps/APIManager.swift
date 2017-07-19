@@ -82,7 +82,16 @@ class APIManager: SessionManager {
         return false
     }
     
- //   func setUpDatabaseHandleRating(
+ /*   func getRating{
+     //get the child value from the database
+     
+     
+     
+     }
+    
+    
+ 
+ */
 }
 
 
