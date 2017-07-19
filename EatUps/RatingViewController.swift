@@ -7,11 +7,40 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class RatingViewController: UIViewController {
+    
+    var ref: DatabaseReference?
+    //var databaseHandle: DatabaseHandle?
+    
+   // var rating: [String]
 
+    @IBAction func didNotRate(_ sender: UIButton) {
+        //        self.ref.child("users/(user.uid)/username").setValue(username)
+
+       ref?.child("eatups").child("eatup_id").child("user_id").setValue("0")
+        
+    }
+    
+    
+    @IBAction func wouldEatUpAgain(_ sender: Any) {
+        ref?.child("eatups").child("eatup_id").child("user_id").setValue("1")
+
+        
+    }
+    
+    
+    @IBAction func wouldNotEatUpAgain(_ sender: Any) {
+        ref?.child("eatups").child("eatup_id").child("user_id").setValue("-1")
+
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ref = Database.database().reference()
 
         // Do any additional setup after loading the view.
     }

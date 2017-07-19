@@ -11,24 +11,24 @@ import CoreLocation
 
 class EatUp {
     
+    var dictionary: [String: Any]?
+    
     // MARK: Properties
-//    var id: Int64 // For identifying which EatUp
-//    var users: [String: Bool?] // Participating users and respective ratings
-//    var place: String // EatUp location
-//    var org_id: Int64 // EatUp org
-//    var time: NSDate // EatUp date and time
-//    
-//    // MARK: - Create initializer with dictionary
-//    init(dictionary: [String: Any]) {
-//        users = dictionary["users"] as! [String: Bool?]
-//        place = dictionary["place"] as! String
-//        org_id = dictionary["org_id"] as! Int64
-//        time = dictionary["time"] as! NSDate
-//        
-//        let eatUp = dictionary["eatUp"] as! [String: Any]
-//        self.eatUp = EatUp(dictionary: eatUp)
-//        
-//    }
+    var id: String // For identifying which EatUp
+    var users: [String: Bool?] // Participating users and respective ratings
+    var place: String // EatUp location
+    var org_id: Int64 // EatUp org
+    var time: NSDate // EatUp date and time
+    
+    // MARK: - Create initializer with dictionary
+    init(dictionary: [String: Any]) {
+        self.dictionary = dictionary
+        id = dictionary["id"] as! String
+        users = dictionary["users"] as! [String: Bool?]
+        place = dictionary["place"] as! String
+        org_id = dictionary["org_id"] as! Int64
+        time = dictionary["time"] as! NSDate
+    }
     
     class func stringToCLLocation(locationString: String) -> CLLocation {
         let latitude = Double((locationString.components(separatedBy: ",")[0]))

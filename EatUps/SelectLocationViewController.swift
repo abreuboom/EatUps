@@ -15,42 +15,41 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     @IBOutlet weak var locationsTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var data: [String] = []
+    var places: [String] = []
     
     //create an array to update as we filter through the locations to eat
-    var filteredData: [String] = []
+    var filteredPlaces: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
         APIManager.shared.setUpDatabaseHandle(org_id: org!, completion: { (success: Bool, data) in
             if success == true {
-                self.data = data
-                self.filteredData = self.data
+                self.places = data
+                self.filteredPlaces = self.places
                 self.locationsTableView.reloadData()
             }
             else {
-                print("get data failed")
+                print("setUpDatabaseHandle() failed")
             }
         })
         
         locationsTableView.dataSource = self
         searchBar.delegate = self
         
-        print(data)
+        print(places)
 
         // Do any additional setup after loading the view.
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath) as! LocationCell
-        cell.nameLabel.text = filteredData[indexPath.row]
+        cell.nameLabel.text = filteredPlaces[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredData.count
+        return filteredPlaces.count
     }
     
     // MARK: TODO: Create eatUp object when place is selected with place(org and location) and current user information
@@ -58,7 +57,7 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     // This method updates filteredData based on the text in the Search Box
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         // When there is no text, filteredData is the same as the original data. For each item, return true if the item should be included and false if the
-        filteredData = searchText.isEmpty ? data : data.filter { (item: String) -> Bool in
+        filteredPlaces = searchText.isEmpty ? places : places.filter { (item: String) -> Bool in
             // If dataItem matches the searchText, return true to include it
             return item.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
         }
@@ -68,9 +67,18 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     // Sends local eatUp object to the user feed view controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "chooseUpee" {
+<<<<<<< HEAD
             let locationCell = sender as! LocationCell
             let userFeedViewController = segue.destination as! UserFeedViewController
 //            userFeedViewController.locationCell = locationCell
+=======
+            let cell = sender as! UITableViewCell
+            if let indexPath = locationsTableView.indexPath(for: cell) {
+                let place = filteredPlaces[indexPath.row]
+                let userFeedViewController = segue.destination as! UserFeedViewController
+                userFeedViewController.place = place
+            }
+>>>>>>> aeec19fa879b1f051ac6110ee145f7755ba1afe5
         }
     }
     
@@ -78,16 +86,5 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

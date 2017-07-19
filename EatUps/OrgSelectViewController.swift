@@ -14,25 +14,25 @@ import Firebase
 class OrgSelectViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
 
     @IBOutlet weak var orgView: UITableView!
-    
+
     var ref: DatabaseReference!
     var databaseHandle: DatabaseHandle!
-    
+
     var locationManager: CLLocationManager!
-    
+
     var orgs: [String] = []
     var org_ids: [String] = []
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Set Firebase Database reference
         ref = Database.database().reference()
-        
+
         databaseHandle = ref.child("orgs").observe(.value, with: { (snapshot) in
 
             let data = snapshot.value as? NSDictionary
-            
+
             for (org, info) in data! {
                 let org_id = org as! String
                 let orgDictionary = info as! NSDictionary
@@ -42,16 +42,16 @@ class OrgSelectViewController: UIViewController, UITableViewDelegate, UITableVie
                 self.orgView.reloadData()
             }
         })
-        
+
         orgView.delegate = self
         orgView.dataSource = self
-        
+
         // Request permissions for locations
         locationManager = CLLocationManager()
         getLocation()
 
     }
-    
+
     // MARK: Location manager methods
     // Gets location of user
     func getLocation() {
@@ -70,18 +70,18 @@ class OrgSelectViewController: UIViewController, UITableViewDelegate, UITableVie
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
     }
-    
+
     // Location delegate methods
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
+
         // Gets current location
         let currentLocation = locations.last!
-//        print("Current location: \(currentLocation)")
+        // print("Current location: \(currentLocation)")
         
         // Converts into string
         let locationString = EatUp.CLLocationtoString(currentLocation: currentLocation)
         let user = Auth.auth().currentUser
-        
+
         // Stores location property in current user
         if let user = user {
             let id = user.uid
@@ -89,30 +89,30 @@ class OrgSelectViewController: UIViewController, UITableViewDelegate, UITableVie
         }
 
     }
-    
+
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Error \(error)")
     }
-    
-    
+
+
     // MARK: TableView methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return orgs.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = orgView.dequeueReusableCell(withIdentifier: "OrgCell", for: indexPath) as! OrgCell
         cell.nameLabel.text = orgs[indexPath.row]
-        
+
         return cell
     }
-    
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let cell = sender as! UITableViewCell
