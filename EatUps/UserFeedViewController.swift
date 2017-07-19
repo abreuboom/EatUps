@@ -24,7 +24,7 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     var users: [String] = []
     var availableUsers: [User] = []
     var selectedUser: User?
-    var place: String?
+    var place: String = ""
 
 
     var locationManager: CLLocationManager!
@@ -32,16 +32,26 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
-
-        APIManager.shared.getUsers { (success, users) in
-            if success == true {
-                self.availableUsers = users
-                self.collectionView.reloadData()
-            }
-            else {
-                print("getUsers() failed")
-            }
+        
+        APIManager.shared.getAvailableUsers(place: place) { (success, users) in
+                if success == true {
+                    self.availableUsers = users
+                    self.collectionView.reloadData()
+                }
+                else {
+                    print("getAvailableUsers() failed")
+                }
         }
+
+//        APIManager.shared.getUsers { (success, users) in
+//            if success == true {
+//                self.availableUsers = users
+//                self.collectionView.reloadData()
+//            }
+//            else {
+//                print("getUsers() failed")
+//            }
+//        }
 
         // Initialise collection view
         collectionView.dataSource = self
@@ -56,43 +66,6 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)]
         return NSAttributedString(string: str, attributes: attrs)
     }
-
-    // Gets users in a set radius around the EatUp location
-    func getAvailableUsers() {
-
-        ref = Database.database().reference()
-
-        // Gets location information of eatUp
-        let userOrg = Auth.auth().currentUser.org_id
-        databaseHandle = ref.queryOrdered(byChild: "orgs/\(u<#T##String#>serOrg).places").queryEqual(toValue: eatUpPlace).observe(.value, with: { (snapshot) in
-            let data = snapshot.value as? NSDictionary
-        })
-
-            // Gets location information of each user
-            self.databaseHandle = self.ref.child("users").observe(.value, with: { (snapshot) in
-                let data = snapshot.value as? NSDictionary
-
-            for (user, info) in data! {
-                let userDictionary = info as! NSDictionary
-                // Converts user's location string into CLLocation
-                if let userLocationString = userDictionary["location"] as? String {
-                    let userLocation = EatUp.stringToCLLocation(locationString: userLocationString)
-
-                    let testLocation = CLLocation(latitude: 37.785834, longitude: -122.406417)
-                    let distance = Int(userLocation.distance(from: testLocation))
-
-//                    let distance = Int(checkLocation.distance(from: eatUp.location))
-                    let radius = 800
-                    if distance < radius {
-                        self.availableUsers.append(user as! User)
-                    }
-
-                }
-            }
-        })
-    }
-    
-
 
 
     // Configuring collection view cell views
