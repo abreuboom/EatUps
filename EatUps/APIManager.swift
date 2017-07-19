@@ -117,6 +117,7 @@ class APIManager: SessionManager {
         return places
     }
 
+
     func getPlaceLocation(place: String) {
         // Gets location information of eatUp place
         let userOrg = String(describing: User.current?.org_id)
@@ -170,7 +171,6 @@ class APIManager: SessionManager {
 
     }
 
-
     func containsUser(arr: [User], targetUser: User) -> Bool {
         for user in arr {
             if user.id == targetUser.id {
@@ -183,7 +183,7 @@ class APIManager: SessionManager {
 
     func getCurrentUser(completion: @escaping (Bool, [String: Any]) -> ()) {
         if let uid = Auth.auth().currentUser?.uid {
-            self.databaseHandle = self.ref.child("users/\(uid)").observe(.value, with: { (snapshot) in
+            databaseHandle = ref.child("users/\(uid)").observe(.value, with: { (snapshot) in
                 if let data = snapshot.value as? [String: Any] {
                     completion(true, data)
                 }
