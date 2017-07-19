@@ -31,16 +31,30 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         super.viewDidLoad()
         ref = Database.database().reference()
         
-        APIManager.shared.getUsers { (success, users) in
-            if success == true {
-                self.availableUsers = users
-                self.collectionView.reloadData()
-                print(self.availableUsers)
+        databaseHandle = ref.child("users").observe(.value , with: { (snapshot) in
+            let data = snapshot.value as? NSDictionary
+            for (user, info) in data! {
+                let tempUser = User.init(dictionary: info as! [String : Any])
+                tempUser.id = user as? String
+                if APIManager.shared.containsUser(arr: self.availableUsers, targetUser: tempUser) == false {
+                    self.availableUsers.append(tempUser)
+                }
             }
-            else {
-                print("getUsers() failed")
-            }
-        }
+            self.collectionView.reloadData()
+            print(self.availableUsers)
+
+        })
+        
+//        APIManager.shared.getUsers { (success, users) in
+//            if success == true {
+//                self.availableUsers = users
+//                self.collectionView.reloadData()
+//                print(self.availableUsers)
+//            }
+//            else {
+//                print("getUsers() failed")
+//            }
+//        }
 
         // Initialise collection view
         collectionView.dataSource = self
