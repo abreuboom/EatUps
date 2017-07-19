@@ -10,8 +10,9 @@ import UIKit
 import BouncyLayout
 import FirebaseDatabase
 import CoreLocation
+import DZNEmptyDataSet
 
-class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, CLLocationManagerDelegate {
+class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, CLLocationManagerDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var eatUpButton: UIButton!
@@ -25,7 +26,6 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     var place: String?
 
     var locationManager: CLLocationManager!
-    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,8 +45,14 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        //CLLocation.distance(from user.current.location : checkLocation)
-       
+        collectionView.emptyDataSetSource = self
+        collectionView.emptyDataSetDelegate = self
+    }
+    
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        let str = "Don't worry, you'll find someone to EatUp with!"
+        let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)]
+        return NSAttributedString(string: str, attributes: attrs)
     }
     
     func getAvailableUsers() {
@@ -63,7 +69,6 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
             }
         })
     }
-
     
     // Configuring collection view cell views
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

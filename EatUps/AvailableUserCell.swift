@@ -12,11 +12,21 @@ class AvailableUserCell: UICollectionViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var photoView: UIImageView!
+    @IBOutlet weak var cardView: UIView!
     
     var user: User! {
         didSet {
-             nameLabel.text = user.name
-             photoView.af_setImage(withURL: user.profilePhotoUrl!)
+            cardView.layer.cornerRadius = 25
+            cardView.dropShadow()
+            
+            var firstName = user.name
+            
+            if let dotRange = firstName.range(of: " ") {
+                firstName.removeSubrange(dotRange.lowerBound..<firstName.endIndex)
+            }
+            
+            nameLabel.text = firstName
+            photoView.af_setImage(withURL: user.profilePhotoUrl!)
         }
     }
     
@@ -28,4 +38,13 @@ class AvailableUserCell: UICollectionViewCell {
     }
     
     
+}
+
+extension UIView {
+    func dropShadow() {
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOpacity = 0.1
+        self.layer.shadowOffset = CGSize(width: 0, height: 6)
+        self.layer.shadowRadius = 4
+    }
 }

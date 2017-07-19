@@ -45,12 +45,16 @@ class APIManager: SessionManager {
     }
     
     func getUsers(completion: @escaping (Bool, [User]) -> ()) {
-        databaseHandle = ref.child("users").observe(.childChanged, with: { (snapshot) in
+        databaseHandle = ref.observe(.childChanged, with: { (snapshot) in
             let data = snapshot.value as? NSDictionary
-            let tempUser = User.init(dictionary: data as! [String : Any])
-            tempUser.id = snapshot.key
-            self.users.append(tempUser)
-
+            for (user, info) in data! {
+                let tempUser = User.init(dictionary: info as! [String : Any])
+                tempUser.id = user as? String
+                if self.containsUser(arr: self.users, targetUser: tempUser) == false {
+                    self.users.append(tempUser)
+                }
+            }
+            
             if self.users.isEmpty == true {
                 completion(false, self.users)
             }
@@ -58,6 +62,15 @@ class APIManager: SessionManager {
                 completion(true, self.users)
             }
         })
-
+        
+    }
+    
+    func containsUser(arr: [User], targetUser: User) -> Bool {
+        for user in arr {
+            if user.id == targetUser.id {
+                return true
+            }
+        }
+        return false
     }
 }
