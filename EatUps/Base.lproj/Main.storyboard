@@ -14,7 +14,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="EatUps" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="BYZ-38-t0r" customClass="LoginViewController" customModule="EatUps" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -93,7 +93,6 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="nameLabel" destination="HXz-hy-DMC" id="LNC-cu-0yZ"/>
-                                            <segue destination="ldz-Cd-uAQ" kind="presentation" identifier="selectedOrgSegue" id="M1X-zI-zAf"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -112,6 +111,7 @@
                     </view>
                     <connections>
                         <outlet property="orgView" destination="c3C-qf-uQD" id="mKO-iB-GG7"/>
+                        <segue destination="BfX-7S-Xg9" kind="presentation" identifier="selectedOrgSegue" id="t20-IJ-N14"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="icE-nA-wzv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -130,9 +130,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RLN-yg-Jg8">
-                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RLN-yg-Jg8">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationCell" id="Js6-Ib-ZDX" customClass="LocationCell" customModule="EatUps" customModuleProvider="target">
@@ -170,8 +169,20 @@
                             </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="RLN-yg-Jg8" secondAttribute="trailing" id="IUP-49-5gW"/>
+                            <constraint firstItem="RLN-yg-Jg8" firstAttribute="leading" secondItem="ZP0-bb-ioQ" secondAttribute="leading" id="VC1-9s-kjg"/>
+                            <constraint firstItem="RLN-yg-Jg8" firstAttribute="top" secondItem="yYk-Z8-c9u" secondAttribute="bottom" id="sCO-wZ-gSj"/>
+                            <constraint firstItem="Noi-vy-8T4" firstAttribute="top" secondItem="RLN-yg-Jg8" secondAttribute="bottom" id="xLB-2e-Ezm"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="HFC-Zf-Pln"/>
+                    <navigationItem key="navigationItem" id="HFC-Zf-Pln">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="s8S-AN-Z4X">
+                            <connections>
+                                <action selector="logout:" destination="ldz-Cd-uAQ" id="3zC-sf-5uj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="locationsTableView" destination="RLN-yg-Jg8" id="QFw-Rh-MNZ"/>
                         <outlet property="searchBar" destination="XVv-Bk-ADJ" id="XRE-2z-1x1"/>
@@ -193,9 +204,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="waO-2c-jJ7">
-                                <rect key="frame" x="0.0" y="52" width="375" height="615"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="waO-2c-jJ7">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Fga-Lg-jZG">
                                     <size key="itemSize" width="177" height="253"/>
@@ -249,7 +259,7 @@
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S8u-Xc-Rzp">
                                                             <rect key="frame" x="8" y="174" width="133.5" height="18"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -295,6 +305,12 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="waO-2c-jJ7" firstAttribute="leading" secondItem="OnC-WZ-Pg5" secondAttribute="leading" id="GNE-Jb-MVZ"/>
+                            <constraint firstItem="waO-2c-jJ7" firstAttribute="top" secondItem="OnC-WZ-Pg5" secondAttribute="top" id="GNu-3N-6n8"/>
+                            <constraint firstItem="Z8E-ZJ-pLB" firstAttribute="top" secondItem="waO-2c-jJ7" secondAttribute="bottom" id="Lp4-DM-zKJ"/>
+                            <constraint firstAttribute="trailing" secondItem="waO-2c-jJ7" secondAttribute="trailing" id="stL-Ca-4QY"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="waO-2c-jJ7" id="Sto-fd-Eac"/>
@@ -521,7 +537,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Tf6-Q8-DVX">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BfX-7S-Xg9" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="selectLocationNavigation" automaticallyAdjustsScrollViewInsets="NO" id="BfX-7S-Xg9" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ld7-2N-ljz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -538,6 +554,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="M1X-zI-zAf"/>
+        <segue reference="qIe-up-56k"/>
     </inferredMetricsTieBreakers>
 </document>

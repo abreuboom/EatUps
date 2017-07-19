@@ -10,8 +10,8 @@ import UIKit
 
 class SelectLocationViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate {
     
-    var org: String?
-
+    var org_id: String!
+    
     @IBOutlet weak var locationsTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -23,25 +23,30 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        APIManager.shared.setUpDatabaseHandle(org_id: org!, completion: { (success: Bool, data) in
-            if success == true {
-                self.places = data
-                self.filteredPlaces = self.places
-                self.locationsTableView.reloadData()
-            }
-            else {
-                print("setUpDatabaseHandle() failed")
-            }
-        })
+        if let userOrgId = User.current?.org_id {
+            org_id = userOrgId
+            
+            
+            APIManager.shared.setUpDatabaseHandle(org_id: org_id, completion: { (success: Bool, data) in
+                if success == true {
+                    self.places = data
+                    self.filteredPlaces = self.places
+                    self.locationsTableView.reloadData()
+                }
+                else {
+                    print("setUpDatabaseHandle() failed")
+                }
+            })
+        }
         
         locationsTableView.dataSource = self
         searchBar.delegate = self
         
         print(places)
-
+        
         // Do any additional setup after loading the view.
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath) as! LocationCell
         cell.nameLabel.text = filteredPlaces[indexPath.row]
@@ -64,6 +69,10 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
         locationsTableView.reloadData()
     }
     
+    @IBAction func logout(_ sender: UIBarButtonItem) {
+        APIManager.shared.logout()
+    }
+    
     // Sends local eatUp object to the user feed view controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "chooseUpee" {
@@ -80,5 +89,5 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
 }
