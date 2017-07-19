@@ -26,7 +26,7 @@ class APIManager: SessionManager {
     
     // MARK: TODO: Get User Feed
     
-    
+// set up the Select Location database handle
     func setUpDatabaseHandle(org_id: String, completion: @escaping (_ success: Bool, [String]) -> ()) {
         databaseHandle = ref.child("orgs/\(org_id)/places").observe(.value, with: { (snapshot) in
             let data = snapshot.value as? NSDictionary
@@ -42,9 +42,14 @@ class APIManager: SessionManager {
             }
         })
     }
-    
+   
+    //get the places
     func getPlaces() -> [String] {
         print(places)
         return places
     }
+    
+ //   func setUpDatabaseHandleRating(
 }
+
+
