@@ -27,7 +27,7 @@ class RatingViewController: UIViewController {
             
             // set user to be the key of the current user
             
-            let user = snapshot.key
+            let user = User.current?.id
             
             //if user is not equal to the current id, then set the value of the rating
             
