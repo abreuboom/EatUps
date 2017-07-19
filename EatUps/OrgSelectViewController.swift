@@ -76,7 +76,7 @@ class OrgSelectViewController: UIViewController, UITableViewDelegate, UITableVie
         
         // Gets current location
         let currentLocation = locations.last!
-        print("Current location: \(currentLocation)")
+        // print("Current location: \(currentLocation)")
         
         // Converts into string
         let latitude: String = String(format: "%f", currentLocation.coordinate.latitude)

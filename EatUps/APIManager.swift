@@ -34,8 +34,6 @@ class APIManager: SessionManager {
             for (place, _) in data! {
                 let placeName = place as! String
                 self.places.append(placeName)
-                print(self.places)
-                print(placeName)
             }
             if self.places.isEmpty == true {
                 completion(false, self.places)
@@ -60,5 +58,6 @@ class APIManager: SessionManager {
                 completion(true, self.users)
             }
         })
+
     }
 }
