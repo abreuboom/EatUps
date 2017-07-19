@@ -32,7 +32,7 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
-        
+
         APIManager.shared.getAvailableUsers(place: place) { (success, users) in
                 if success == true {
                     self.availableUsers = users
