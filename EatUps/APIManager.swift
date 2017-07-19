@@ -17,6 +17,7 @@ class APIManager: SessionManager {
     static var shared: APIManager = APIManager()
     
     var places: [String] = []
+    var users: [User] = []
     
     var ref = Database.database().reference()
     var databaseHandle: DatabaseHandle!
@@ -45,7 +46,19 @@ class APIManager: SessionManager {
         })
     }
     
-    func getPlaces() -> [String] {
-        return places
+    func getUsers(completion: @escaping (Bool, [User]) -> ()) {
+        databaseHandle = ref.child("users").observe(.childChanged, with: { (snapshot) in
+            let data = snapshot.value as? NSDictionary
+            let tempUser = User.init(dictionary: data as! [String : Any])
+            tempUser.id = snapshot.key
+            self.users.append(tempUser)
+
+            if self.users.isEmpty == true {
+                completion(false, self.users)
+            }
+            else {
+                completion(true, self.users)
+            }
+        })
     }
 }
