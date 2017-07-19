@@ -10,6 +10,7 @@ import UIKit
 import BouncyLayout
 import FirebaseDatabase
 import CoreLocation
+import Firebase
 
 class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, CLLocationManagerDelegate {
     
@@ -21,7 +22,7 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     
     var availableUsers: [User] = []
     var selectedUser: User?
-    var eatUp = EatUp()
+    var eatUpPlace = ""
 
     var locationManager: CLLocationManager!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
@@ -41,19 +42,27 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     
     // Gets users in a set radius around the EatUp location
     func getAvailableUsers() {
-        // Gets location information of each user
+        
         ref = Database.database().reference()
-        databaseHandle = ref.child("users").observe(.value, with: { (snapshot) in
+        
+        // Gets location information of eatUp
+        let userOrg = Auth.auth().currentUser.org_id
+        databaseHandle = ref.queryOrdered(byChild: "orgs/\(u<#T##String#>serOrg).places").queryEqual(toValue: eatUpPlace).observe(.value, with: { (snapshot) in
             let data = snapshot.value as? NSDictionary
+        })
+        
+            // Gets location information of each user
+            self.databaseHandle = self.ref.child("users").observe(.value, with: { (snapshot) in
+                let data = snapshot.value as? NSDictionary
+                
             for (user, info) in data! {
                 let userDictionary = info as! NSDictionary
-                if let locationString = userDictionary["location"] as? String {
-                    let latitude = Double((locationString.components(separatedBy: ",")[0]))
-                    let longitude = Double((locationString.components(separatedBy: ",")[1]))
-                    let checkLocation = CLLocation(latitude: latitude!, longitude: longitude!)
+                // Converts user's location string into CLLocation
+                if let userLocationString = userDictionary["location"] as? String {
+                    let userLocation = EatUp.stringToCLLocation(locationString: userLocationString)
                     
                     let testLocation = CLLocation(latitude: 37.785834, longitude: -122.406417)
-                    let distance = Int(checkLocation.distance(from: testLocation))
+                    let distance = Int(userLocation.distance(from: testLocation))
                     
 //                    let distance = Int(checkLocation.distance(from: eatUp.location))
                     let radius = 800
@@ -65,6 +74,8 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
             }
         })
     }
+    
+    
 
     
     // Configuring collection view cell views
