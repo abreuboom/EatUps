@@ -36,7 +36,6 @@ class AvailableUserCell: UICollectionViewCell {
         super.awakeFromNib()
         
         User.getRoundProfilePics(photoView: photoView)
-        
     }
     
     

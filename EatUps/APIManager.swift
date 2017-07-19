@@ -119,23 +119,7 @@ class APIManager: SessionManager {
     }
     
     func getUsers(completion: @escaping (Bool, [User]) -> ()) {
-        databaseHandle = ref.observe(.value , with: { (snapshot) in
-            let data = snapshot.value as? NSDictionary
-            for (user, info) in data! {
-                let tempUser = User.init(dictionary: info as! [String : Any])
-                tempUser.id = user as? String
-                if self.containsUser(arr: self.users, targetUser: tempUser) == false {
-                    self.users.append(tempUser)
-                }
-            }
-            
-            if self.users.isEmpty == true {
-                completion(false, self.users)
-            }
-            else {
-                completion(true, self.users)
-            }
-        })
+        
         
     }
     
