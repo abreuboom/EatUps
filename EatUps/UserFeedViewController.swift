@@ -35,6 +35,7 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
             if success == true {
                 self.availableUsers = users
                 self.collectionView.reloadData()
+                print(self.availableUsers)
             }
             else {
                 print("getUsers() failed")

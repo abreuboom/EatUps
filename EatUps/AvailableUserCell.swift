@@ -26,7 +26,9 @@ class AvailableUserCell: UICollectionViewCell {
             }
             
             nameLabel.text = firstName
-            photoView.af_setImage(withURL: user.profilePhotoUrl!)
+            if let url = user.profilePhotoUrl {
+                photoView.af_setImage(withURL: url)
+            }
         }
     }
     

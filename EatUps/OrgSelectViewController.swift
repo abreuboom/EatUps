@@ -104,27 +104,26 @@ class OrgSelectViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = orgView.dequeueReusableCell(withIdentifier: "OrgCell", for: indexPath) as! OrgCell
-        cell.nameLabel.text = orgs[indexPath.row]
+        let org = orgs[indexPath.row]
+        cell.nameLabel.text = org
+        
+        let tapped:UITapGestureRecognizer = UITapGestureRecognizer(target: self , action: #selector(setOrg(_:)))
+        tapped.numberOfTapsRequired = 1
+        
+        cell.addGestureRecognizer(tapped)
         
         return cell
     }
     
+    @objc func setOrg(_ sender: UITapGestureRecognizer) {
+        let parent = sender.view as! OrgCell
+        let org_id = parent.nameLabel.text
+        APIManager.shared.setOrgId(org_id: org_id!)
+        self.performSegue(withIdentifier: "selectedOrgSegue", sender: nil)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let cell = sender as! UITableViewCell
-        if let indexPath = orgView.indexPath(for: cell) {
-            let org = org_ids[indexPath.row]
-            let user_id = Auth.auth().currentUser?.uid ?? ""
-            ref.child("users/\(user_id)/org_id").setValue(org)
-            let selectLocationViewController = segue.destination as! SelectLocationViewController
-            selectLocationViewController.org = org
-        }
-    }
-
 }
