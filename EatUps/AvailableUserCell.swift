@@ -15,8 +15,8 @@ class AvailableUserCell: UICollectionViewCell {
     
     var user: User! {
         didSet {
-            // nameLabel.text = user.name
-            // photoView.af_setImage(withURL: user.profilePicURL)
+             nameLabel.text = user.name
+             photoView.af_setImage(withURL: user.profilePhotoUrl!)
         }
     }
     

@@ -19,17 +19,27 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     var ref: DatabaseReference!
     var databaseHandle: DatabaseHandle!
     
+    var users: [String] = []
     var availableUsers: [User] = []
     var selectedUser: User?
-    var eatUp = EatUp()
+    var place: String?
 
     var locationManager: CLLocationManager!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ref = Database.database().reference()
         
-        getAvailableUsers()
+        APIManager.shared.getUsers { (success, users) in
+            if success == true {
+                self.availableUsers = users
+                self.collectionView.reloadData()
+            }
+            else {
+                print("getUsers() failed")
+            }
+        }
 
         // Initialise collection view
         collectionView.dataSource = self
@@ -40,7 +50,6 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     func getAvailableUsers() {
-        ref = Database.database().reference()
         databaseHandle = ref.child("users").observe(.value, with: { (snapshot) in
             let data = snapshot.value as? NSDictionary
             for (user, info) in data! {
@@ -64,8 +73,7 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // return availableUsers.count - 1
-        return 4
+        return availableUsers.count
     }
     
     // Changes views and stores selected user
