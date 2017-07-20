@@ -14,25 +14,25 @@ import Firebase
 class OrgSelectViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
 
     @IBOutlet weak var orgView: UITableView!
-    
+
     var ref: DatabaseReference!
     var databaseHandle: DatabaseHandle!
-    
+
     var locationManager: CLLocationManager!
-    
+
     var orgs: [String] = []
     var org_ids: [String] = []
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Set Firebase Database reference
         ref = Database.database().reference()
-        
+
         databaseHandle = ref.child("orgs").observe(.value, with: { (snapshot) in
 
             let data = snapshot.value as? NSDictionary
-            
+
             for (org, info) in data! {
                 let org_id = org as! String
                 let orgDictionary = info as! NSDictionary
@@ -42,16 +42,16 @@ class OrgSelectViewController: UIViewController, UITableViewDelegate, UITableVie
                 self.orgView.reloadData()
             }
         })
-        
+
         orgView.delegate = self
         orgView.dataSource = self
-        
+
         // Request permissions for locations
         locationManager = CLLocationManager()
         getLocation()
 
     }
-    
+
     // MARK: Location manager methods
     // Gets location of user
     func getLocation() {
@@ -70,51 +70,49 @@ class OrgSelectViewController: UIViewController, UITableViewDelegate, UITableVie
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
     }
-    
+
     // Location delegate methods
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
+
         // Gets current location
         let currentLocation = locations.last!
         // print("Current location: \(currentLocation)")
-        
+
         // Converts into string
-        let latitude: String = String(format: "%f", currentLocation.coordinate.latitude)
-        let longitude: String = String(format:"%f", currentLocation.coordinate.longitude)
-        let currentLocationString = "(\(latitude), \(longitude))"
+        let locationString = EatUp.CLLocationtoString(currentLocation: currentLocation)
         let user = Auth.auth().currentUser
-        
-        // MARK: TODO: Set location in current user
+
+        // Stores location property in current user
         if let user = user {
             let id = user.uid
-            self.ref.child("users/\(id)/location").setValue(currentLocationString)
+            self.ref.child("users/\(id)/location").setValue(locationString)
         }
 
     }
-    
+
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Error \(error)")
     }
-    
-    
+
+
     // MARK: TableView methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return orgs.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = orgView.dequeueReusableCell(withIdentifier: "OrgCell", for: indexPath) as! OrgCell
         let org = orgs[indexPath.row]
         cell.nameLabel.text = org
-        
+
         let tapped:UITapGestureRecognizer = UITapGestureRecognizer(target: self , action: #selector(setOrg(_:)))
         tapped.numberOfTapsRequired = 1
-        
+
         cell.addGestureRecognizer(tapped)
-        
+
         return cell
     }
-    
+
     @objc func setOrg(_ sender: UITapGestureRecognizer) {
         let parent = sender.view as! OrgCell
         let org_id = parent.nameLabel.text
@@ -127,3 +125,5 @@ class OrgSelectViewController: UIViewController, UITableViewDelegate, UITableVie
         // Dispose of any resources that can be recreated.
     }
 }
+
+
