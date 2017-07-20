@@ -99,7 +99,8 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     func selectUpee(_ sender: UITapGestureRecognizer) {
         let selectedUser = availableUsers[(sender.view?.tag)!]
         let name = selectedUser.name
-        eatUpButton.titleLabel?.text = "EatUp with \(name)"
+        eatUpButton.setTitle("EatUp with \(name!)", for: UIControlState.normal)
+        eatUpButton.sizeToFit()
     }
 
     override func didReceiveMemoryWarning() {
