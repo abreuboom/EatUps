@@ -16,14 +16,15 @@ class RatingViewController: UIViewController {
     
     //var rating: String
     
-    var dictionary = [String]()
+    var child = [String]()
 
     @IBAction func didNotRate(_ sender: UIButton) {
         //        self.ref.child("users/(user.uid)/username").setValue(username)
-        databaseHandle = ref?.child("eatups/eatup_id/users").observe(.childChanged, with: { (snapshot) in
+        databaseHandle = ref?.child("eatups/eatup_id/users").observe(.value, with: { (snapshot) in
             
-        let child = snapshot.value as? NSDictionary
-        for (user, rating) in child! {
+            self.child.append("1")
+            
+            for (user, rating) in child {
             
             // set user to be the key of the current user
             

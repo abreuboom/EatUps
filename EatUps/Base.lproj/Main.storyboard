@@ -250,7 +250,7 @@
                                                                 <constraint firstAttribute="height" constant="16" id="jK4-gO-oVo"/>
                                                             </constraints>
                                                         </stackView>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oFH-ga-fJP">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oFH-ga-fJP">
                                                             <rect key="frame" x="8" y="32" width="134" height="134"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="125" id="3Fy-aP-BgR"/>
