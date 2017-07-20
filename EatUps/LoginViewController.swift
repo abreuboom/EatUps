@@ -37,8 +37,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginButtonClicked(_ sender: LoginButton) {
-        let loginManager = LoginManager()
-        loginManager.logIn([ .publicProfile, .email, .userFriends ], viewController: self) { loginResult in
+        APIManager.shared.loginManager.logIn([ .publicProfile, .email, .userFriends ], viewController: self) { loginResult in
             switch loginResult {
             case .failed(let error):
                 print(error)
@@ -47,8 +46,13 @@ class LoginViewController: UIViewController {
             case .success(let grantedPermissions, let declinedPermissions, let accessToken):
                 print("Logged in!")
                 
-                APIManager.shared.login(success: { 
-                    self.performSegue(withIdentifier: "orgSegue", sender: nil)
+                APIManager.shared.login(success: {
+                    if User.current?.org_id == nil {
+                        self.performSegue(withIdentifier: "orgSegue", sender: nil)
+                    }
+                    else {
+                        self.performSegue(withIdentifier: "loginSegue", sender: nil)
+                    }
                 }, failure: { (error) in
                     print(error?.localizedDescription)
                 })

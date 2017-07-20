@@ -16,7 +16,7 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var eatUpButton: UIButton!
-
+    
     var ref: DatabaseReference!
     var databaseHandle: DatabaseHandle!
     
@@ -24,7 +24,7 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     var availableUsers: [User] = []
     var selectedUser: User?
     var place: String?
-
+    
     var locationManager: CLLocationManager!
     
     override func viewDidLoad() {
@@ -42,23 +42,30 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
             }
             self.collectionView.reloadData()
             print(self.availableUsers)
-
+            
         })
         
-//        APIManager.shared.getUsers { (success, users) in
-//            if success == true {
-//                self.availableUsers = users
-//                self.collectionView.reloadData()
-//                print(self.availableUsers)
-//            }
-//            else {
-//                print("getUsers() failed")
-//            }
-//        }
-
+        eatUpButton.layer.cornerRadius = eatUpButton.frame.width/3
+        eatUpButton.layer.masksToBounds = true
+        eatUpButton.titleEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        eatUpButton.sizeToFit()
+        eatUpButton.invalidateIntrinsicContentSize()
+        
+        //        APIManager.shared.getUsers { (success, users) in
+        //            if success == true {
+        //                self.availableUsers = users
+        //                self.collectionView.reloadData()
+        //                print(self.availableUsers)
+        //            }
+        //            else {
+        //                print("getUsers() failed")
+        //            }
+        //        }
+        
         // Initialise collection view
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.alwaysBounceVertical = true
         
         collectionView.emptyDataSetSource = self
         collectionView.emptyDataSetDelegate = self
@@ -88,7 +95,15 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     // Configuring collection view cell views
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "availableUserCell", for: indexPath) as! AvailableUserCell
-         cell.user = availableUsers[indexPath.item]
+        cell.user = availableUsers[indexPath.item]
+        
+        cell.cardView.tag = indexPath.item
+        
+        let tapped:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(selectUpee(_:)))
+        tapped.numberOfTapsRequired = 1
+        
+        cell.cardView.addGestureRecognizer(tapped)
+        
         return cell
     }
     
@@ -99,17 +114,21 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     // Changes views and stores selected user
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! AvailableUserCell
-        if(cell.isSelected) {
-            cell.backgroundColor = UIColor.red
-            selectedUser = cell.user
-            eatUpButton.isHidden = false
-        }
-        else {
-            cell.backgroundColor = UIColor.white
-            eatUpButton.isHidden = true
-        }
+        cell.cardView.backgroundColor = UIColor(red: 254/255, green: 63/255, blue: 103/255, alpha: 1)
+        cell.nameLabel.textColor = UIColor.white
     }
     
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! AvailableUserCell
+        cell.cardView.backgroundColor = UIColor.white
+        cell.nameLabel.textColor = UIColor.black
+    }
+    
+    func selectUpee(_ sender: UITapGestureRecognizer) {
+        let selectedUser = availableUsers[(sender.view?.tag)!]
+        let name = selectedUser.name
+        eatUpButton.titleLabel?.text = "EatUp with \(name)"
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

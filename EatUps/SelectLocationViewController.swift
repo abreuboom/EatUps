@@ -27,7 +27,7 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
             org_id = userOrgId
             
             
-            APIManager.shared.setUpDatabaseHandle(org_id: org_id, completion: { (success: Bool, data) in
+            APIManager.shared.getPlaces(org_id: org_id, completion: { (success: Bool, data) in
                 if success == true {
                     self.places = data
                     self.filteredPlaces = self.places

@@ -39,26 +39,25 @@ class User {
         }
     }
     
-    var facebook_id: String
-    var name: String
-    var org_id: String
+    var facebook_id: String?
+    var name: String?
+    var org_id: String?
     var profilePhotoUrl: URL?
     var id: String?
     
     init(dictionary: [String: Any]) {
         self.dictionary = dictionary
-        facebook_id = dictionary["id"] as! String
-        name = dictionary["name"] as! String
-        org_id = dictionary["org_id"] as! String
-        let photoUrl = dictionary["profilePhotoURL"] as! String
-        profilePhotoUrl = URL(string: photoUrl)
+        facebook_id = dictionary["id"] as? String
+        name = dictionary["name"] as? String
+        org_id = dictionary["org_id"] as? String
+        if let photoUrl = dictionary["profilePhotoURL"] as? String {
+            profilePhotoUrl = URL(string: photoUrl)
+        }
     }
     
     // Styles round profile picture icons
     class func getRoundProfilePics(photoView: UIImageView) {
-        photoView.layer.borderWidth = 1
         photoView.layer.masksToBounds = false
-        photoView.layer.borderColor = UIColor.white.cgColor
         photoView.layer.cornerRadius = photoView.frame.height/2
         photoView.clipsToBounds = true
     }
