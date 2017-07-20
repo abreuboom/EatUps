@@ -75,7 +75,7 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     
     // Sends local eatUp object to the user feed view controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "chooseUpee" {
+        if segue.identifier == "selectUpeeSegue" {
             let cell = sender as! UITableViewCell
             if let indexPath = locationsTableView.indexPath(for: cell) {
                 let place = filteredPlaces[indexPath.row]

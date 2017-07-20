@@ -32,7 +32,7 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
-
+        
         APIManager.shared.getAvailableUsers(place: place) { (success, users) in
                 if success == true {
                     self.availableUsers = users
@@ -42,16 +42,6 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
                     print("getAvailableUsers() failed")
                 }
         }
-
-//        APIManager.shared.getUsers { (success, users) in
-//            if success == true {
-//                self.availableUsers = users
-//                self.collectionView.reloadData()
-//            }
-//            else {
-//                print("getUsers() failed")
-//            }
-//        }
 
         // Initialise collection view
         collectionView.dataSource = self

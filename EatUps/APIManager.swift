@@ -21,6 +21,7 @@ class APIManager: SessionManager {
 
     var places: [String] = []
     var users: [User] = []
+    var placeLocation = CLLocation()
 
     var ref = Database.database().reference()
     var databaseHandle: DatabaseHandle!
@@ -118,58 +119,61 @@ class APIManager: SessionManager {
     }
 
 
-    func getPlaceLocation(place: String) {
-        // Gets location information of eatUp place
-        let userOrg = String(describing: User.current?.org_id)
+    func getPlaceLocation(place: String, completion: @escaping(Bool, CLLocation) -> ()) {
+        let userOrg = User.current?.org_id
         // change back to userOrg
         databaseHandle = self.ref.child("orgs/org_id/places/\(place)").observe(.value, with:{ (snapshot) in
-            let placeDictionary = snapshot.value as? NSDictionary
-            print(placeDictionary ?? "")
-            //            let placeLocationString =
-            //            let placeLocation = EatUp.stringToCLLocation(locationString: placeLocationString)
+            let placeLocationString = snapshot.value as? String
+            self.placeLocation = EatUp.stringToCLLocation(locationString: placeLocationString!)
         })
+        
+        if placeLocation == CLLocation() {
+            completion(false, CLLocation())
+        }
+        else {
+            completion(true, self.placeLocation)
+        }
+
     }
 
     // Gets users in a set radius around the EatUp location
     func getAvailableUsers(place: String, completion: @escaping (Bool, [User]) -> ()) {
 
-        getPlaceLocation(place: place)
-
-        // Gets location information of each user
-        self.databaseHandle = self.ref.child("users").observe(.value, with: { (snapshot) in
-            let data = snapshot.value as? NSDictionary
-
-            for (user, info) in data! {
-                let userDictionary = info as! NSDictionary
-                // Converts user's location string into CLLocation
-                if let userLocationString = userDictionary["location"] as? String {
-                    let userLocation = EatUp.stringToCLLocation(locationString: userLocationString)
-
-                    let testLocation = CLLocation(latitude: 37.785834, longitude: -122.406417)
-                    let distance = Int(userLocation.distance(from: testLocation))
-
-                    //                    let distance = Int(userLocation.distance(from: placeLocation))
-                    // Gets nearby users in a given radius
-                    let radius = 800
-                    if distance < radius {
-                        let tempUser = User.init(dictionary: info as! [String : Any])
-                        tempUser.id = user as? String
-                        if self.containsUser(arr: self.users, targetUser: tempUser) == false {
-                            self.users.append(tempUser)
+        // MARK: TODO: Completion handler for getplacelocation
+        getPlaceLocation(place: place) { (successBool, placeLocation) in
+            if successBool == true {
+                // Gets location information of each user
+                self.databaseHandle = self.ref.child("users").observe(.value, with: { (snapshot) in
+                    let data = snapshot.value as? NSDictionary
+                    
+                    for (user, info) in data! {
+                        let userDictionary = info as! NSDictionary
+                        // Converts user's location string into CLLocation
+                        if let userLocationString = userDictionary["location"] as? String {
+                            let userLocation = EatUp.stringToCLLocation(locationString: userLocationString)
+                            let distance = Int(userLocation.distance(from: placeLocation))
+                            // Gets nearby users in a given radius
+                            let radius = 800
+                            if distance < radius {
+                                let tempUser = User.init(dictionary: info as! [String : Any])
+                                tempUser.id = user as? String
+                                if self.containsUser(arr: self.users, targetUser: tempUser) == false {
+                                    self.users.append(tempUser)
+                                }
+                            }
+                            if self.users.isEmpty == true {
+                                completion(false, self.users)
+                            }
+                            else {
+                                completion(true, self.users)
+                            }
                         }
                     }
-
-                    if self.users.isEmpty == true {
-                        completion(false, self.users)
-                    }
-                    else {
-                        completion(true, self.users)
-                    }
-                }
+                })
             }
-        })
-
+        }
     }
+
 
     func containsUser(arr: [User], targetUser: User) -> Bool {
         for user in arr {
@@ -193,6 +197,4 @@ class APIManager: SessionManager {
             })
         }
     }
-
-    //   func setUpDatabaseHandleRating(
 }
