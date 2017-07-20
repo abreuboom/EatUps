@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 class EatUp {
     
@@ -27,6 +28,21 @@ class EatUp {
         place = dictionary["place"] as! String
         org_id = dictionary["org_id"] as! Int64
         time = dictionary["time"] as! NSDate
+    }
+    
+    // MARK: String and CLLocation conversion methods
+    class func stringToCLLocation(locationString: String) -> CLLocation {
+        let latitude = CLLocationDegrees((locationString.components(separatedBy: ",")[0]))
+        let longitude = CLLocationDegrees((locationString.components(separatedBy: ",")[1]))
+        let checkLocation = CLLocation(latitude: latitude!, longitude: longitude!)
+        return checkLocation
+    }
+    
+    class func CLLocationtoString(currentLocation: CLLocation) -> String {
+        let latitude: String = String(format: "%f", currentLocation.coordinate.latitude)
+        let longitude: String = String(format:"%f", currentLocation.coordinate.longitude)
+        let locationString = "\(latitude),\(longitude)"
+        return locationString
     }
     
 }

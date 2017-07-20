@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseDatabase
+import FirebaseAuth
 
 class RatingViewController: UIViewController {
     
@@ -16,49 +17,24 @@ class RatingViewController: UIViewController {
     
     //var rating: String
     
-    var dictionary = [String]()
+    var child = [String]()
 
     @IBAction func didNotRate(_ sender: UIButton) {
-        //        self.ref.child("users/(user.uid)/username").setValue(username)
-        databaseHandle = ref?.child("eatups/eatup_id/users").observe(.childChanged, with: { (snapshot) in
-            
-        let child = snapshot.value as? NSDictionary
-        for (user, rating) in child! {
-            
-            // set user to be the key of the current user
-            
-            let user = snapshot.key
-            
-            //if user is not equal to the current id, then set the value of the rating
-            
-            if User.current?.id != user{
-            // if user is equal to the current id, then print the user's value
-                    self.ref?.child("eatups/eatup_id/users").child("user_id").setValue("1")
-            }else{
-                print(child)
             }
-        }
-
-            
-        })
-        
-        
-        self.dismiss(animated: true, completion: nil)
-        
-    }
     
     
     @IBAction func wouldEatUpAgain(_ sender: Any) {
-        ref?.child("eatups").child("eatup_id").child("user_id").setValue("1")
-        self.dismiss(animated: true, completion: nil)
+        let uid = Auth.auth().currentUser?.uid
+        ref?.child("eatups/eatup_id/users/\(uid!)").setValue("1")
+        //self.dismiss(animated: true, completion: nil)
 
         
     }
     
     
     @IBAction func wouldNotEatUpAgain(_ sender: Any) {
-        ref?.child("eatups").child("eatup_id").child("user_id").setValue("-1")
-        self.dismiss(animated: true, completion: nil)
+        APIManager.shared.setUpDatabaseHandleRating()
+        //self.dismiss(animated: true, completion: nil)
 
         
     }
