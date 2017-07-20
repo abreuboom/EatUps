@@ -19,7 +19,7 @@ class AvailableUserCell: UICollectionViewCell {
             cardView.layer.cornerRadius = 25
             cardView.dropShadow()
             
-            var firstName = user.name
+            var firstName = user.name!
             
             if let dotRange = firstName.range(of: " ") {
                 firstName.removeSubrange(dotRange.lowerBound..<firstName.endIndex)

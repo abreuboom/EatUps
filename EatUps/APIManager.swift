@@ -25,6 +25,7 @@ class APIManager: SessionManager {
 
     var ref = Database.database().reference()
     var databaseHandle: DatabaseHandle!
+    let loginManager = LoginManager()
     // MARK: TODO: Add App Keys
 
     // MARK: Facebook API methods
@@ -35,25 +36,21 @@ class APIManager: SessionManager {
         let credentials = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
 
         Auth.auth().signIn(with: credentials) { (user, error) in
-
             if error != nil {
                 print(error?.localizedDescription as Any)
                 return
             }
             else {
                 // MARK: TODO: set User.current, so that it's persisted
-                self.getCurrentUser(completion: { (successBool, dictionary) in
+                self.getCurrentUser(completion: { (successBool, newUserBool, dictionary) in
                     if successBool == true {
-                        User.current = User(dictionary: dictionary)
-
                         let id = Auth.auth().currentUser?.uid
-
+                        User.current = User(dictionary: dictionary)
                         self.graphRequest(id: id!)
                         let photoURL = user?.photoURL
                         let urlString = photoURL?.absoluteString
                         self.ref.child("users/\(id!)/profilePhotoURL").setValue(urlString!)
                         print("successfully logged in")
-
                         success()
                     }
                 })
@@ -78,6 +75,7 @@ class APIManager: SessionManager {
     }
 
     func logout() {
+        loginManager.logOut()
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()
@@ -90,13 +88,25 @@ class APIManager: SessionManager {
 
     }
 
-    func setOrgId(org_id: String) {
+    func setOrgId(org_name: String) {
         let uid = Auth.auth().currentUser?.uid ?? ""
-        ref.child("users/\(uid)/org_id").setValue(org_id)
+        databaseHandle = ref.child("orgs").observe(.value, with: { (snapshot) in
+            let data = snapshot.value as! [String: Any]
+
+            for (id, info) in data {
+                let dictionary = info as! [String: Any]
+                let name = dictionary["name"] as! String
+                if name == org_name {
+                    self.ref.child("users/\(uid)/org_id").setValue(id)
+                }
+            }
+        })
+
+
     }
 
     // set up the Select Location database handle
-    func setUpDatabaseHandle(org_id: String, completion: @escaping (_ success: Bool, [String]) -> ()) {
+    func getPlaces(org_id: String, completion: @escaping (_ success: Bool, [String]) -> ()) {
         databaseHandle = ref.child("orgs/\(org_id)/places").observe(.value, with: { (snapshot) in
             let data = snapshot.value as? NSDictionary
             for (place, _) in data! {
@@ -126,7 +136,7 @@ class APIManager: SessionManager {
             let placeLocationString = snapshot.value as? String
             self.placeLocation = EatUp.stringToCLLocation(locationString: placeLocationString!)
         })
-        
+
         if placeLocation == CLLocation() {
             completion(false, CLLocation())
         }
@@ -145,7 +155,7 @@ class APIManager: SessionManager {
                 // Gets location information of each user
                 self.databaseHandle = self.ref.child("users").observe(.value, with: { (snapshot) in
                     let data = snapshot.value as? NSDictionary
-                    
+
                     for (user, info) in data! {
                         let userDictionary = info as! NSDictionary
                         // Converts user's location string into CLLocation
@@ -185,16 +195,48 @@ class APIManager: SessionManager {
     }
 
 
-    func getCurrentUser(completion: @escaping (Bool, [String: Any]) -> ()) {
+    func getCurrentUser(completion: @escaping (Bool, Bool, [String: Any]) -> ()) {
         if let uid = Auth.auth().currentUser?.uid {
-            databaseHandle = ref.child("users/\(uid)").observe(.value, with: { (snapshot) in
-                if let data = snapshot.value as? [String: Any] {
-                    completion(true, data)
+            ref.child("users").observeSingleEvent(of: .value, with: { (snapshot) in
+                if snapshot.hasChild(uid) {
+                    self.databaseHandle = self.ref.child("users/\(uid)").observe(.value, with: { (snapshot) in
+                        if let data = snapshot.value as? [String: Any] {
+                            completion(true, false, data)
+                        }
+                        else {
+                            completion(false, false, [:])
+                        }
+                    })
                 }
                 else {
-                    completion(false, [:])
+                    completion(true, true, [:])
                 }
             })
         }
+    }
+
+    func setUpDatabaseHandleRating(){
+    //        self.ref.child("users/(user.uid)/username").setValue(username)
+        databaseHandle = ref.child("eatups/eatup_id/users").observe(.value, with: { (snapshot) in
+
+            let child = snapshot.value as? [String: Any]
+
+            for (user, rating) in child! {
+
+    // set user to be the key of the current user
+
+                let currentUserId = User.current?.id
+
+    //if user is not equal to the current id, then set the value of the rating
+
+                if currentUserId != user {
+    // if user is equal to the current id, then print the user's value
+                    self.ref.child("eatups/eatup_id/users").child("user_id").setValue("-1")
+                } else{
+                    print(child)
+                }
+            }
+
+        })
     }
 }
