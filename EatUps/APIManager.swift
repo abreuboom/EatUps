@@ -161,7 +161,10 @@ class APIManager: SessionManager {
                         // Converts user's location string into CLLocation
                         if let userLocationString = userDictionary["location"] as? String {
                             let userLocation = EatUp.stringToCLLocation(locationString: userLocationString)
-                            let distance = Int(userLocation.distance(from: placeLocation))
+                            
+                            // for testing purposes
+                            let testLocation = CLLocation(latitude: 37.48137600, longitude: -122.15207300)
+                            let distance = Int(userLocation.distance(from: testLocation))
                             // Gets nearby users in a given radius
                             let radius = 800
                             if distance < radius {
