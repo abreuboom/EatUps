@@ -12,6 +12,7 @@ import FirebaseAuth
 import FirebaseDatabase
 import FacebookLogin
 import FacebookCore
+import PKHUD
 
 class LoginViewController: UIViewController {
     
@@ -36,6 +37,10 @@ class LoginViewController: UIViewController {
         view.addSubview(loginButton)
     }
     
+    @IBAction func logout(_ sender: UIButton) {
+        APIManager.shared.logout()
+    }
+    
     @IBAction func loginButtonClicked(_ sender: LoginButton) {
         APIManager.shared.loginManager.logIn([ .publicProfile, .email, .userFriends ], viewController: self) { loginResult in
             switch loginResult {
@@ -44,10 +49,9 @@ class LoginViewController: UIViewController {
             case .cancelled:
                 print("User cancelled login.")
             case .success(let grantedPermissions, let declinedPermissions, let accessToken):
-                print("Logged in!")
-                
                 APIManager.shared.login(success: {
-                    if User.current?.org_id == nil {
+                    print("Logged in!")
+                    if User.current?.org_id == "" {
                         self.performSegue(withIdentifier: "orgSegue", sender: nil)
                     }
                     else {

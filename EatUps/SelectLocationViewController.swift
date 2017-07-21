@@ -23,21 +23,18 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let userOrgId = User.current?.org_id {
-            org_id = userOrgId
-            
-            
-            APIManager.shared.getPlaces(org_id: org_id, completion: { (success: Bool, data) in
-                if success == true {
-                    self.places = data
-                    self.filteredPlaces = self.places
-                    self.locationsTableView.reloadData()
-                }
-                else {
-                    print("setUpDatabaseHandle() failed")
-                }
-            })
-        }
+        let org_id = User.current?.org_id
+        
+        APIManager.shared.getPlaces(org_id: org_id!, completion: { (success: Bool, data) in
+            if success == true {
+                self.places = data
+                self.filteredPlaces = self.places
+                self.locationsTableView.reloadData()
+            }
+            else {
+                print("setUpDatabaseHandle() failed")
+            }
+        })
         
         locationsTableView.dataSource = self
         searchBar.delegate = self
