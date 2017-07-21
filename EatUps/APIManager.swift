@@ -16,24 +16,25 @@ import FacebookCore
 import FacebookLogin
 
 class APIManager: SessionManager {
-    
+
     static var shared: APIManager = APIManager()
-    
+
     var places: [String] = []
     var users: [User] = []
-    
+    var placeLocation = CLLocation()
+
     var ref = Database.database().reference()
     var databaseHandle: DatabaseHandle!
     let loginManager = LoginManager()
     // MARK: TODO: Add App Keys
-    
+
     // MARK: Facebook API methods
-    
+
     func login(success: @escaping () -> (), failure: @escaping (Error?) -> ()) {
         let accessToken = AccessToken.current
         guard let accessTokenString = accessToken?.authenticationToken else { return }
         let credentials = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
-        
+
         Auth.auth().signIn(with: credentials) { (user, error) in
             if error != nil {
                 print(error?.localizedDescription as Any)
@@ -50,7 +51,7 @@ class APIManager: SessionManager {
             }
         }
     }
-    
+
     private func graphRequest(id: String, completion: @escaping (_ success: Bool) -> ()) {
         GraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email"]).start { (response, result) in
             switch result {
@@ -68,7 +69,7 @@ class APIManager: SessionManager {
             }
         }
     }
-    
+
     func logout() {
         loginManager.logOut()
         let firebaseAuth = Auth.auth()
@@ -78,16 +79,16 @@ class APIManager: SessionManager {
             print ("Error signing out: %@", signOutError)
         }
         User.current = nil
-        
+
         NotificationCenter.default.post(name: NSNotification.Name("didLogout"), object: nil)
-        
+
     }
-    
+
     func setOrgId(org_name: String) {
         let uid = Auth.auth().currentUser?.uid ?? ""
         databaseHandle = ref.child("orgs").observe(.value, with: { (snapshot) in
             let data = snapshot.value as! [String: Any]
-            
+
             for (id, info) in data {
                 let dictionary = info as! [String: Any]
                 let name = dictionary["name"] as! String
@@ -96,10 +97,10 @@ class APIManager: SessionManager {
                 }
             }
         })
-        
-        
+
+
     }
-    
+
     // set up the Select Location database handle
     func getPlaces(org_id: String, completion: @escaping (_ success: Bool, [String]) -> ()) {
         databaseHandle = ref.child("orgs/\(org_id)/places").observe(.value, with: { (snapshot) in
@@ -116,67 +117,73 @@ class APIManager: SessionManager {
             }
         })
     }
-    
+
     //get the places
     func getPlaces() -> [String] {
         print(places)
         return places
     }
-    
-    
-    func getPlaceLocation(place: String) {
-        // Gets location information of eatUp place
-        let userOrg = String(describing: User.current?.org_id)
+
+
+    func getPlaceLocation(place: String, completion: @escaping(Bool, CLLocation) -> ()) {
+        let userOrg = User.current?.org_id
         // change back to userOrg
         databaseHandle = self.ref.child("orgs/org_id/places/\(place)").observe(.value, with:{ (snapshot) in
-            let placeDictionary = snapshot.value as? NSDictionary
-            print(placeDictionary ?? "")
-            //            let placeLocationString =
-            //            let placeLocation = EatUp.stringToCLLocation(locationString: placeLocationString)
+            let placeLocationString = snapshot.value as? String
+            self.placeLocation = EatUp.stringToCLLocation(locationString: placeLocationString!)
         })
+
+        if placeLocation == CLLocation() {
+            completion(false, CLLocation())
+        }
+        else {
+            completion(true, self.placeLocation)
+        }
+
     }
-    
+
     // Gets users in a set radius around the EatUp location
     func getAvailableUsers(place: String, completion: @escaping (Bool, [User]) -> ()) {
-        
-        getPlaceLocation(place: place)
-        
-        // Gets location information of each user
-        self.databaseHandle = self.ref.child("users").observe(.value, with: { (snapshot) in
-            let data = snapshot.value as? NSDictionary
-            
-            for (user, info) in data! {
-                let userDictionary = info as! NSDictionary
-                // Converts user's location string into CLLocation
-                if let userLocationString = userDictionary["location"] as? String {
-                    let userLocation = EatUp.stringToCLLocation(locationString: userLocationString)
-                    
-                    let testLocation = CLLocation(latitude: 37.785834, longitude: -122.406417)
-                    let distance = Int(userLocation.distance(from: testLocation))
-                    
-                    //                    let distance = Int(userLocation.distance(from: placeLocation))
-                    // Gets nearby users in a given radius
-                    let radius = 800
-                    if distance < radius {
-                        let tempUser = User.init(dictionary: info as! [String : Any])
-                        tempUser.id = user as? String
-                        if self.containsUser(arr: self.users, targetUser: tempUser) == false {
-                            self.users.append(tempUser)
+
+        // MARK: TODO: Completion handler for getplacelocation
+        getPlaceLocation(place: place) { (successBool, placeLocation) in
+            if successBool == true {
+                // Gets location information of each user
+                self.databaseHandle = self.ref.child("users").observe(.value, with: { (snapshot) in
+                    let data = snapshot.value as? NSDictionary
+
+                    for (user, info) in data! {
+                        let userDictionary = info as! NSDictionary
+                        // Converts user's location string into CLLocation
+                        if let userLocationString = userDictionary["location"] as? String {
+                            let userLocation = EatUp.stringToCLLocation(locationString: userLocationString)
+
+                            // for testing purposes
+                            let testLocation = CLLocation(latitude: 37.48137600, longitude: -122.15207300)
+                            let distance = Int(userLocation.distance(from: testLocation))
+                            // Gets nearby users in a given radius
+                            let radius = 800
+                            if distance < radius {
+                                let tempUser = User.init(dictionary: info as! [String : Any])
+                                tempUser.id = user as? String
+                                if self.containsUser(arr: self.users, targetUser: tempUser) == false {
+                                    self.users.append(tempUser)
+                                }
+                            }
+                            if self.users.isEmpty == true {
+                                completion(false, self.users)
+                            }
+                            else {
+                                completion(true, self.users)
+                            }
                         }
                     }
-                    
-                    if self.users.isEmpty == true {
-                        completion(false, self.users)
-                    }
-                    else {
-                        completion(true, self.users)
-                    }
-                }
+                })
             }
-        })
-        
+        }
     }
-    
+
+
     func containsUser(arr: [User], targetUser: User) -> Bool {
         for user in arr {
             if user.id == targetUser.id {
@@ -185,7 +192,7 @@ class APIManager: SessionManager {
         }
         return false
     }
-    
+
     func populateUserInfo(uid: String, completion: @escaping (Bool) -> ()) {
         ref.child("users/\(uid)/org_id").observeSingleEvent(of: .value, with: { (snapshot) in
             if snapshot.value != nil {
@@ -196,11 +203,11 @@ class APIManager: SessionManager {
                 })
             }
         })
-        
+
         let photoURL = Auth.auth().currentUser?.photoURL
         let urlString = photoURL?.absoluteString
         self.ref.child("users/\(uid)/profilePhotoURL").setValue(urlString!)
-        
+
         databaseHandle = ref.child("users/\(uid)").observe(.value , with: { (snapshot) in
             if let data = snapshot.value as? [String: Any] {
                 User.current = User(dictionary: data)
@@ -211,21 +218,21 @@ class APIManager: SessionManager {
             }
         })
     }
-    
+
     func setUpDatabaseHandleRating(){
         //        self.ref.child("users/(user.uid)/username").setValue(username)
         databaseHandle = ref.child("eatups/eatup_id/users").observe(.value, with: { (snapshot) in
-            
+
             let child = snapshot.value as? [String: Any]
-            
+
             for (user, rating) in child! {
-                
-                // set user to be the key of the current user
-                
+
+    // set user to be the key of the current user
+
                 let currentUserId = User.current?.id
-                
-                //if user is not equal to the current id, then set the value of the rating
-                
+
+    //if user is not equal to the current id, then set the value of the rating
+
                 if currentUserId != user {
                     // if user is equal to the current id, then print the user's value
                     self.ref.child("eatups/eatup_id/users").child("user_id").setValue("-1")
