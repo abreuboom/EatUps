@@ -175,8 +175,6 @@ class APIManager: SessionManager {
 
     // Gets users in a set radius around the EatUp location
     func getAvailableUsers(place: String, completion: @escaping (Bool, [User]) -> ()) {
-
-        // MARK: TODO: Completion handler for getplacelocation
         getPlaceLocation(place: place) { (successBool, placeLocation) in
             if successBool == true {
                 // Gets location information of each user
@@ -193,7 +191,7 @@ class APIManager: SessionManager {
                             let testLocation = CLLocation(latitude: 37.48137600, longitude: -122.15207300)
                             let distance = Int(userLocation.distance(from: testLocation))
                             // Gets nearby users in a given radius
-                            let radius = 20000
+                            let radius = 2000
                             if distance < radius {
                                 let tempUser = User.init(dictionary: info as! [String : Any])
                                 tempUser.id = user as? String
@@ -223,7 +221,19 @@ class APIManager: SessionManager {
         }
         return false
     }
-    
+
+    // MARK: EatUp request handling methods
+    // Called when user sends another user an invite
+    func sendInvite(fromUserID: String) -> () {
+        self.ref.child("users/\(fromUserID)/status").setValue(fromUserID)
+    }
+
+    // Called when user resets status
+    func resetStatus(userID: String) -> () {
+        self.ref.child("users/\(userID)/status").setValue("")
+    }
+
+
     func setUpDatabaseHandleRating(){
         //        self.ref.child("users/(user.uid)/username").setValue(username)
         databaseHandle = ref.child("eatups/eatup_id/users").observe(.value, with: { (snapshot) in

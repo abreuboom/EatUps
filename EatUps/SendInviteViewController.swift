@@ -7,22 +7,50 @@
 //
 
 import UIKit
+import AlamofireImage
+import SRCountdownTimer
 
-class SendInviteViewController: UIViewController {
+class SendInviteViewController: UIViewController, SRCountdownTimerDelegate {
     
     @IBOutlet weak var profileImage: UIImageView!
-    
+    @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
+    
+    var selectedUser: User?
+    
+    var didNotRespondAlertController = UIAlertController(title: "User did not respond", message: "Please select another user", preferredStyle: .alert)
     
     @IBAction func didTapCancel(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
-        
+        APIManager.shared.resetStatus(userID: (self.selectedUser?.id)!)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        // Configure send invite user views
+        nameLabel.text = selectedUser?.name
+        if let url = selectedUser?.profilePhotoUrl {
+            profileImage.af_setImage(withURL: url)
+        }
+        
+        // Configure timer views
+        let timer = SRCountdownTimer()
+        timer.center = timerLabel.center
+        timer.start(beginingValue: 60)
+        
+        // Configure alert controller
+        let backAction = UIAlertAction(title: "Go Back", style: .cancel) { (action) in
+            self.dismiss(animated: true, completion: nil)
+            APIManager.shared.resetStatus(userID: (self.selectedUser?.id)!)
+        }
+        didNotRespondAlertController.addAction(backAction)
+        
         // Do any additional setup after loading the view.
+    }
+    
+    func timerDidEnd() {
+        self.present(self.didNotRespondAlertController, animated: true)
     }
 
     override func didReceiveMemoryWarning() {
