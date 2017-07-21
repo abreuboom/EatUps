@@ -22,27 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // MARK: TODO: Check for logged in user
         
-//        if Auth.auth().currentUser != nil {
-//            APIManager.shared.isNewUser(completion: { (bool) in
-//                if bool == true {
-//                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                    var homeTimelineViewController = storyboard.instantiateViewController(withIdentifier: "selectLocationNavigation")
-//                    if User.current?.org_id == nil {
-//                        homeTimelineViewController = storyboard.instantiateViewController(withIdentifier: "orgSelectViewController")
-//                    }
-//                    
-//                    self.window?.rootViewController = homeTimelineViewController
-//                }
-//            })
-//        }
-        
         NotificationCenter.default.addObserver(forName: Notification.Name("didLogout"), object: nil, queue: OperationQueue.main) { (Notification) in
             print("Logout notification received")
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
             self.window?.rootViewController = loginVC
         }
-        
         
         return true
     }

@@ -30,7 +30,7 @@ class APIManager: SessionManager {
 
     // MARK: Facebook API methods
 
-    func login(success: @escaping () -> (), failure: @escaping (Error?) -> ()) {
+    func login(completion: @escaping (Bool) -> ()) {
         let accessToken = AccessToken.current
         guard let accessTokenString = accessToken?.authenticationToken else { return }
         let credentials = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
@@ -45,32 +45,42 @@ class APIManager: SessionManager {
                 self.populateUserInfo(uid: uid!, completion: { (successBool) in
                     if successBool == true {
                         print("successfully logged in")
-                        success()
+                        completion(true)
+                    }
+                    else {
+                        completion(false)
                     }
                 })
             }
         }
     }
-    
+
     func populateUserInfo(uid: String, completion: @escaping (Bool) -> ()) {
-        ref.child("users/\(uid)/org_id").observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.child("users/\(uid)").observeSingleEvent(of: .value, with: { (snapshot) in
             if snapshot.value != nil {
+                if let data = snapshot.value as? [String: Any] {
+                    User.current = User(dictionary: data)
+                    completion(true)
+                }
+                else {
+                    completion(false)
+                }
+            }
+            else {
                 self.graphRequest(id: uid, completion: { (successBool) in
                     if successBool == true {
                         print("Created new user")
+                        
+                        let photoURL = Auth.auth().currentUser?.photoURL
+                        let urlString = photoURL?.absoluteString
+                        self.ref.child("users/\(uid)/profilePhotoURL").setValue(urlString!)
+                        self.databaseHandle = self.ref.child("users/\(uid)").observe(.value , with: { (snapshot) in
+                            if let data = snapshot.value as? [String: Any] {
+                                User.current = User(dictionary: data)
+                                completion(true)
+                            }
+                        })
                     }
-                    let photoURL = Auth.auth().currentUser?.photoURL
-                    let urlString = photoURL?.absoluteString
-                    self.ref.child("users/\(uid)/profilePhotoURL").setValue(urlString!)
-                    self.databaseHandle = self.ref.child("users/\(uid)").observe(.value , with: { (snapshot) in
-                        if let data = snapshot.value as? [String: Any] {
-                            User.current = User(dictionary: data)
-                            completion(true)
-                        }
-                        else {
-                            completion(false)
-                        }
-                    })
                 })
             }
         })
@@ -128,27 +138,23 @@ class APIManager: SessionManager {
 
     // set up the Select Location database handle
     func getPlaces(org_id: String, completion: @escaping (_ success: Bool, [String]) -> ()) {
-        databaseHandle = ref.child("orgs/\(org_id)/places").observe(.childChanged, with: { (snapshot) in
-            let data = snapshot.value as? NSDictionary
-            for (place, _) in data! {
-                let placeName = place as! String
-                self.places.append(placeName)
-            }
-            if self.places.isEmpty == true {
-                completion(false, self.places)
-            }
-            else {
-                completion(true, self.places)
+        print("org_id = \(org_id)")
+        ref.child("orgs/\(org_id)/places").observeSingleEvent(of: .value, with: { (snapshot) in
+            print(snapshot)
+            if let data = snapshot.value as? NSDictionary {
+                for (place, _) in data {
+                    let placeName = place as! String
+                    self.places.append(placeName)
+                }
+                if self.places.isEmpty == true {
+                    completion(false, self.places)
+                }
+                else {
+                    completion(true, self.places)
+                }
             }
         })
     }
-
-    //get the places
-    func getPlaces() -> [String] {
-        print(places)
-        return places
-    }
-
 
     func getPlaceLocation(place: String, completion: @escaping(Bool, CLLocation) -> ()) {
         let userOrg = User.current?.org_id
@@ -169,8 +175,6 @@ class APIManager: SessionManager {
 
     // Gets users in a set radius around the EatUp location
     func getAvailableUsers(place: String, completion: @escaping (Bool, [User]) -> ()) {
-
-        // MARK: TODO: Completion handler for getplacelocation
         getPlaceLocation(place: place) { (successBool, placeLocation) in
             if successBool == true {
                 // Gets location information of each user
@@ -187,7 +191,7 @@ class APIManager: SessionManager {
                             let testLocation = CLLocation(latitude: 37.48137600, longitude: -122.15207300)
                             let distance = Int(userLocation.distance(from: testLocation))
                             // Gets nearby users in a given radius
-                            let radius = 20000
+                            let radius = 2000
                             if distance < radius {
                                 let tempUser = User.init(dictionary: info as! [String : Any])
                                 tempUser.id = user as? String
@@ -218,19 +222,17 @@ class APIManager: SessionManager {
         return false
     }
 
-
-    func getCurrentUser(completion: @escaping (Bool, [String: Any]) -> ()) {
-        if let uid = Auth.auth().currentUser?.uid {
-            databaseHandle = ref.child("users/\(uid)").observe(.value, with: { (snapshot) in
-                if let data = snapshot.value as? [String: Any] {
-                    completion(true, data)
-                }
-                else {
-                    completion(false, [:])
-                }
-            })
-        }
+    // MARK: EatUp request handling methods
+    // Called when user sends another user an invite
+    func sendInvite(fromUserID: String) -> () {
+        self.ref.child("users/\(fromUserID)/status").setValue(fromUserID)
     }
+
+    // Called when user resets status
+    func resetStatus(userID: String) -> () {
+        self.ref.child("users/\(userID)/status").setValue("")
+    }
+
 
     func setUpDatabaseHandleRating(){
         //        self.ref.child("users/(user.uid)/username").setValue(username)
@@ -240,11 +242,11 @@ class APIManager: SessionManager {
 
             for (user, rating) in child! {
 
-    // set user to be the key of the current user
+                // set user to be the key of the current user
 
                 let currentUserId = User.current?.id
 
-    //if user is not equal to the current id, then set the value of the rating
+                //if user is not equal to the current id, then set the value of the rating
 
                 if currentUserId != user {
                     // if user is equal to the current id, then print the user's value
@@ -253,7 +255,7 @@ class APIManager: SessionManager {
                     print(child)
                 }
             }
-            
+
         })
     }
 }

@@ -73,15 +73,9 @@ class OrgSelectViewController: UIViewController, UITableViewDelegate, UITableVie
 
     // Location delegate methods
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-
-        // Gets current location
         let currentLocation = locations.last!
-        // print("Current location: \(currentLocation)")
-
-        // Converts into string
         let locationString = EatUp.CLLocationtoString(currentLocation: currentLocation)
         let user = Auth.auth().currentUser
-
         // Stores location property in current user
         if let user = user {
             let id = user.uid
