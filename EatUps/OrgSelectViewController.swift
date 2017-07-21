@@ -115,9 +115,16 @@ class OrgSelectViewController: UIViewController, UITableViewDelegate, UITableVie
 
     @objc func setOrg(_ sender: UITapGestureRecognizer) {
         let parent = sender.view as! OrgCell
-        let org_id = parent.nameLabel.text
-        APIManager.shared.setOrgId(org_id: org_id!)
-        self.performSegue(withIdentifier: "selectedOrgSegue", sender: nil)
+        let org_name = parent.nameLabel.text
+        APIManager.shared.setOrgId(org_name: org_name!) { (success) in
+            if success == true {
+                self.performSegue(withIdentifier: "selectedOrgSegue", sender: nil)
+            }
+            else {
+                print("setOrgId() failed")
+            }
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {

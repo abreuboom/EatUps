@@ -23,21 +23,18 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let userOrgId = User.current?.org_id {
-            org_id = userOrgId
-            
-            
-            APIManager.shared.setUpDatabaseHandle(org_id: org_id, completion: { (success: Bool, data) in
-                if success == true {
-                    self.places = data
-                    self.filteredPlaces = self.places
-                    self.locationsTableView.reloadData()
-                }
-                else {
-                    print("setUpDatabaseHandle() failed")
-                }
-            })
-        }
+        let org_id = User.current?.org_id
+        
+        APIManager.shared.getPlaces(org_id: org_id!, completion: { (success: Bool, data) in
+            if success == true {
+                self.places = data
+                self.filteredPlaces = self.places
+                self.locationsTableView.reloadData()
+            }
+            else {
+                print("setUpDatabaseHandle() failed")
+            }
+        })
         
         locationsTableView.dataSource = self
         searchBar.delegate = self
@@ -75,7 +72,7 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     
     // Sends local eatUp object to the user feed view controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "chooseUpee" {
+        if segue.identifier == "selectUpeeSegue" {
             let cell = sender as! UITableViewCell
             if let indexPath = locationsTableView.indexPath(for: cell) {
                 let place = filteredPlaces[indexPath.row]
