@@ -15,7 +15,7 @@ class SendInviteViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     
     @IBAction func didTapCancel(_ sender: Any) {
-      //  self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
         
     }
     

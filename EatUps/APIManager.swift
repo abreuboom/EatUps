@@ -166,7 +166,7 @@ class APIManager: SessionManager {
                             let testLocation = CLLocation(latitude: 37.48137600, longitude: -122.15207300)
                             let distance = Int(userLocation.distance(from: testLocation))
                             // Gets nearby users in a given radius
-                            let radius = 800
+                            let radius = 20000
                             if distance < radius {
                                 let tempUser = User.init(dictionary: info as! [String : Any])
                                 tempUser.id = user as? String
