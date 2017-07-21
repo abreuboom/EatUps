@@ -38,8 +38,9 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
             if success == true {
                 for user in users {
                     if self.availableUsers.contains(where: { (storedUser) -> Bool in
-                        return storedUser.id == user.id
+                        return storedUser.id == user.id || storedUser.name == user.name
                     }) {
+                        print(user.name)
                         print("duplicate user")
                     }
                     else {

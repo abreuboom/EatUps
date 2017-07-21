@@ -56,24 +56,31 @@ class APIManager: SessionManager {
     }
 
     func populateUserInfo(uid: String, completion: @escaping (Bool) -> ()) {
-        ref.child("users/\(uid)/org_id").observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.child("users/\(uid)").observeSingleEvent(of: .value, with: { (snapshot) in
             if snapshot.value != nil {
+                if let data = snapshot.value as? [String: Any] {
+                    User.current = User(dictionary: data)
+                    completion(true)
+                }
+                else {
+                    completion(false)
+                }
+            }
+            else {
                 self.graphRequest(id: uid, completion: { (successBool) in
                     if successBool == true {
                         print("Created new user")
+                        
+                        let photoURL = Auth.auth().currentUser?.photoURL
+                        let urlString = photoURL?.absoluteString
+                        self.ref.child("users/\(uid)/profilePhotoURL").setValue(urlString!)
+                        self.databaseHandle = self.ref.child("users/\(uid)").observe(.value , with: { (snapshot) in
+                            if let data = snapshot.value as? [String: Any] {
+                                User.current = User(dictionary: data)
+                                completion(true)
+                            }
+                        })
                     }
-                    let photoURL = Auth.auth().currentUser?.photoURL
-                    let urlString = photoURL?.absoluteString
-                    self.ref.child("users/\(uid)/profilePhotoURL").setValue(urlString!)
-                    self.databaseHandle = self.ref.child("users/\(uid)").observe(.value , with: { (snapshot) in
-                        if let data = snapshot.value as? [String: Any] {
-                            User.current = User(dictionary: data)
-                            completion(true)
-                        }
-                        else {
-                            completion(false)
-                        }
-                    })
                 })
             }
         })
@@ -131,7 +138,7 @@ class APIManager: SessionManager {
 
     // set up the Select Location database handle
     func getPlaces(org_id: String, completion: @escaping (_ success: Bool, [String]) -> ()) {
-        print(org_id)
+        print("org_id = \(org_id)")
         ref.child("orgs/\(org_id)/places").observeSingleEvent(of: .value, with: { (snapshot) in
             print(snapshot)
             if let data = snapshot.value as? NSDictionary {

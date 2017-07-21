@@ -25,21 +25,21 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
         
         let org_id = User.current?.org_id
         
-        APIManager.shared.getPlaces(org_id: org_id!, completion: { (success: Bool, data) in
-            if success == true {
-                self.places = data
-                self.filteredPlaces = self.places
-                self.locationsTableView.reloadData()
-            }
-            else {
-                print("getPlaces() failed")
-            }
-        })
+        if org_id != "" {
+            APIManager.shared.getPlaces(org_id: org_id!, completion: { (success: Bool, data) in
+                if success == true {
+                    self.places = data
+                    self.filteredPlaces = self.places
+                    self.locationsTableView.reloadData()
+                }
+                else {
+                    print("getPlaces() failed")
+                }
+            })
+        }
         
         locationsTableView.dataSource = self
         searchBar.delegate = self
-        
-        print(places)
         
         // Do any additional setup after loading the view.
     }
