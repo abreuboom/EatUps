@@ -194,28 +194,4 @@ class APIManager: SessionManager {
         }
     }
 
-    func setUpDatabaseHandleRating(){
-    //        self.ref.child("users/(user.uid)/username").setValue(username)
-        databaseHandle = ref.child("eatups/eatup_id/users").observe(.value, with: { (snapshot) in
-    
-            let child = snapshot.value as? [String: Any]
-    
-            for (user, rating) in child! {
-    
-    // set user to be the key of the current user
-    
-                let currentUserId = User.current?.id
-    
-    //if user is not equal to the current id, then set the value of the rating
-    
-                if currentUserId != user {
-    // if user is equal to the current id, then print the user's value
-                    self.ref.child("eatups/eatup_id/users").child("user_id").setValue("-1")
-                } else{
-                    print(child)
-                }
-            }
-    
-        })
-    }
 }

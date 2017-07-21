@@ -20,23 +20,81 @@ class RatingViewController: UIViewController {
     var child = [String]()
 
     @IBAction func didNotRate(_ sender: UIButton) {
+        let uid = Auth.auth().currentUser?.uid
+        ref?.child("eatups/eatup_id/users/\(uid!)").setValue("0")
+        
+        databaseHandle = ref?.child("eatups/eatup_id/users").observe(.value, with: { (snapshot) in
+            
+            let child = snapshot.value as? [String: Any]
+            
+            for (user, rating) in child! {
+                
+                // set user to be the key of the current user
+                //if user is not equal to the current id, then set the value of the rating
+                
+                if uid != user {
+                    self.ref?.child("eatups/eatup_id/users").child("user_id").setValue("0")
+                } else{
+                    // if user is equal to the current id, then print the user's value
+                    print(rating)
+                }
             }
+            
+        })
+
+        self.dismiss(animated: true, completion: nil)
+    }
     
     
     @IBAction func wouldEatUpAgain(_ sender: Any) {
         let uid = Auth.auth().currentUser?.uid
-        ref?.child("eatups/eatup_id/users/\(uid!)").setValue("1")
-        //self.dismiss(animated: true, completion: nil)
-
+        ref?.child("eatups/eatup_id/users/\(uid!)").setValue("0")
         
+        databaseHandle = ref?.child("eatups/eatup_id/users").observe(.value, with: { (snapshot) in
+            
+            let child = snapshot.value as? [String: Any]
+            
+            for (user, rating) in child! {
+                
+                // set user to be the key of the current user
+                //if user is not equal to the current id, then set the value of the rating
+                
+                if uid != user {
+                    self.ref?.child("eatups/eatup_id/users").child("user_id").setValue("1")
+                } else{
+                    // if user is equal to the current id, then print the user's value
+                    print(rating)
+                }
+            }
+            
+        })
+        self.dismiss(animated: true, completion: nil)
     }
     
     
     @IBAction func wouldNotEatUpAgain(_ sender: Any) {
-        APIManager.shared.setUpDatabaseHandleRating()
-        //self.dismiss(animated: true, completion: nil)
-
+        let uid = Auth.auth().currentUser?.uid
+        ref?.child("eatups/eatup_id/users/\(uid!)").setValue("0")
         
+        databaseHandle = ref?.child("eatups/eatup_id/users").observe(.value, with: { (snapshot) in
+            
+            let child = snapshot.value as? [String: Any]
+            
+            for (user, rating) in child! {
+                
+                // set user to be the key of the current user
+                //if user is not equal to the current id, then set the value of the rating
+                
+                if uid != user {
+                    self.ref?.child("eatups/eatup_id/users").child("user_id").setValue("-1")
+                } else{
+                    // if user is equal to the current id, then print the user's value
+                    print(rating)
+                }
+            }
+            
+        })
+        self.dismiss(animated: true, completion: nil)
     }
     
     
