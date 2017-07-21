@@ -35,8 +35,9 @@ class SendInviteViewController: UIViewController, SRCountdownTimerDelegate {
         }
         
         // Configure timer views
-        let timer = SRCountdownTimer()
-        timer.center = timerLabel.center
+        let timerRect = CGRect(x: 200, y: 200, width: 100, height: 100)
+        let timer = SRCountdownTimer(frame: timerRect)
+//        timer.center = timerLabel.center
         timer.start(beginingValue: 60)
         
         // Configure alert controller
