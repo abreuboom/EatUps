@@ -44,8 +44,6 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         // Styling eatUp button
         eatUpButton.layer.cornerRadius = eatUpButton.frame.width/5
         eatUpButton.layer.masksToBounds = true
-//        eatUpButton.titleEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-//        eatUpButton.invalidateIntrinsicContentSize()
         eatUpButton.isHidden = true
         
         // Initialise collection view
@@ -106,7 +104,14 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "requestEatUpSegue" {
+            let selectedUser = sender as! User
+            let sendInviteViewController = segue.destination as! SendInviteViewController
+            sendInviteViewController.selectedUser = selectedUser
+            APIManager.shared.sendInvite(fromUserID: selectedUser.id!)
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -65,6 +65,7 @@ PODS:
   - GTMSessionFetcher/Core (1.1.11)
   - KeychainAccess (3.0.2)
   - PKHUD (4.2.3)
+  - SRCountdownTimer (1.0.1)
 
 DEPENDENCIES:
   - Alamofire (~> 4.4)
@@ -82,6 +83,7 @@ DEPENDENCIES:
   - Firebase/Database
   - KeychainAccess
   - PKHUD (~> 4.0)
+  - SRCountdownTimer
 
 SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
@@ -105,7 +107,8 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
   KeychainAccess: a986406022dfc7c634c691ad3bec670cc6a32002
   PKHUD: c7692163a09875cbf15827dc581df3c5cf7f1015
+  SRCountdownTimer: 187458addb1e88cae62eb5aa57f48d7888f8c18c
 
-PODFILE CHECKSUM: c2c2bb428c7f1dd37f2ca2cc15e95e1aa9db6c08
+PODFILE CHECKSUM: 97b806351a2af0e00ed123fa41c481173a0fcd98
 
 COCOAPODS: 1.2.1
