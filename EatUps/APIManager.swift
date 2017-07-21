@@ -41,15 +41,9 @@ class APIManager: SessionManager {
                 return
             }
             else {
-                // MARK: TODO: set User.current, so that it's persisted
-                self.getCurrentUser(completion: { (successBool, newUserBool, dictionary) in
+                let uid = Auth.auth().currentUser?.uid
+                self.populateUserInfo(uid: uid!, completion: { (successBool) in
                     if successBool == true {
-                        let id = Auth.auth().currentUser?.uid
-                        User.current = User(dictionary: dictionary)
-                        self.graphRequest(id: id!)
-                        let photoURL = user?.photoURL
-                        let urlString = photoURL?.absoluteString
-                        self.ref.child("users/\(id!)/profilePhotoURL").setValue(urlString!)
                         print("successfully logged in")
                         success()
                     }
@@ -58,17 +52,19 @@ class APIManager: SessionManager {
         }
     }
 
-    private func graphRequest(id: String) {
+    private func graphRequest(id: String, completion: @escaping (_ success: Bool) -> ()) {
         GraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email"]).start { (response, result) in
             switch result {
             case .failed(let error):
                 print("error in graph request:", error)
+                completion(false)
             case .success(let graphResponse):
                 if let responseDictionary = graphResponse.dictionaryValue{
                     let facebookId = responseDictionary["id"] as? String
                     let name = responseDictionary["name"] as? String
                     let email = responseDictionary["email"] as? String
-                    self.ref.child("users/\(id)").setValue(["id": facebookId, "name": name, "email": email])
+                    self.ref.child("users/\(id)").setValue(["id": facebookId, "name": name, "email": email, "org_id": "", "profilePhotoURL": ""])
+                    completion(true)
                 }
             }
         }
@@ -161,7 +157,7 @@ class APIManager: SessionManager {
                         // Converts user's location string into CLLocation
                         if let userLocationString = userDictionary["location"] as? String {
                             let userLocation = EatUp.stringToCLLocation(locationString: userLocationString)
-                            
+
                             // for testing purposes
                             let testLocation = CLLocation(latitude: 37.48137600, longitude: -122.15207300)
                             let distance = Int(userLocation.distance(from: testLocation))
@@ -197,29 +193,34 @@ class APIManager: SessionManager {
         return false
     }
 
+    func populateUserInfo(uid: String, completion: @escaping (Bool) -> ()) {
+        ref.child("users/\(uid)/org_id").observeSingleEvent(of: .value, with: { (snapshot) in
+            if snapshot.value != nil {
+                self.graphRequest(id: uid, completion: { (successBool) in
+                    if successBool == true {
+                        print("Created new user")
+                    }
+                })
+            }
+        })
 
-    func getCurrentUser(completion: @escaping (Bool, Bool, [String: Any]) -> ()) {
-        if let uid = Auth.auth().currentUser?.uid {
-            ref.child("users").observeSingleEvent(of: .value, with: { (snapshot) in
-                if snapshot.hasChild(uid) {
-                    self.databaseHandle = self.ref.child("users/\(uid)").observe(.value, with: { (snapshot) in
-                        if let data = snapshot.value as? [String: Any] {
-                            completion(true, false, data)
-                        }
-                        else {
-                            completion(false, false, [:])
-                        }
-                    })
-                }
-                else {
-                    completion(true, true, [:])
-                }
-            })
-        }
+        let photoURL = Auth.auth().currentUser?.photoURL
+        let urlString = photoURL?.absoluteString
+        self.ref.child("users/\(uid)/profilePhotoURL").setValue(urlString!)
+
+        databaseHandle = ref.child("users/\(uid)").observe(.value , with: { (snapshot) in
+            if let data = snapshot.value as? [String: Any] {
+                User.current = User(dictionary: data)
+                completion(true)
+            }
+            else {
+                completion(false)
+            }
+        })
     }
 
     func setUpDatabaseHandleRating(){
-    //        self.ref.child("users/(user.uid)/username").setValue(username)
+        //        self.ref.child("users/(user.uid)/username").setValue(username)
         databaseHandle = ref.child("eatups/eatup_id/users").observe(.value, with: { (snapshot) in
 
             let child = snapshot.value as? [String: Any]
@@ -233,13 +234,13 @@ class APIManager: SessionManager {
     //if user is not equal to the current id, then set the value of the rating
 
                 if currentUserId != user {
-    // if user is equal to the current id, then print the user's value
+                    // if user is equal to the current id, then print the user's value
                     self.ref.child("eatups/eatup_id/users").child("user_id").setValue("-1")
                 } else{
                     print(child)
                 }
             }
-
+            
         })
     }
 }
