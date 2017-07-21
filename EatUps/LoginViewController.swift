@@ -18,6 +18,7 @@ class LoginViewController: UIViewController {
     
     
     var ref: DatabaseReference!
+    var loginOnce = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,19 +50,34 @@ class LoginViewController: UIViewController {
             case .cancelled:
                 print("User cancelled login.")
             case .success(let grantedPermissions, let declinedPermissions, let accessToken):
-                APIManager.shared.login(success: {
-                    print("Logged in!")
-                    if User.current?.org_id == "" {
-                        self.performSegue(withIdentifier: "orgSegue", sender: nil)
+                APIManager.shared.login(completion: { (success) in
+                    if success == true {
+                        self.loginOnce += 1
+                        if self.loginOnce <= 1 {
+                            print("Logged in!")
+                            if User.current?.org_id == "" {
+                                self.performSegue(withIdentifier: "orgSegue", sender: nil)
+                            }
+                            else {
+                                self.performSegue(withIdentifier: "loginSegue", sender: nil)
+                            }
+                        }
                     }
-                    else {
-                        self.performSegue(withIdentifier: "loginSegue", sender: nil)
-                    }
-                }, failure: { (error) in
-                    print(error?.localizedDescription)
                 })
             }
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        Auth.auth().addStateDidChangeListener { (auth, user) in
+            if user != nil {
+                if User.current?.id != nil {
+                    self.performSegue(withIdentifier: "loginSegue", sender: nil)
+                }
+            }
+        }
+        
+        
     }
     
     override func didReceiveMemoryWarning() {

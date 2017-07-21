@@ -30,7 +30,7 @@ class APIManager: SessionManager {
 
     // MARK: Facebook API methods
 
-    func login(success: @escaping () -> (), failure: @escaping (Error?) -> ()) {
+    func login(completion: @escaping (Bool) -> ()) {
         let accessToken = AccessToken.current
         guard let accessTokenString = accessToken?.authenticationToken else { return }
         let credentials = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
@@ -45,13 +45,16 @@ class APIManager: SessionManager {
                 self.populateUserInfo(uid: uid!, completion: { (successBool) in
                     if successBool == true {
                         print("successfully logged in")
-                        success()
+                        completion(true)
+                    }
+                    else {
+                        completion(false)
                     }
                 })
             }
         }
     }
-    
+
     func populateUserInfo(uid: String, completion: @escaping (Bool) -> ()) {
         ref.child("users/\(uid)/org_id").observeSingleEvent(of: .value, with: { (snapshot) in
             if snapshot.value != nil {
@@ -128,27 +131,23 @@ class APIManager: SessionManager {
 
     // set up the Select Location database handle
     func getPlaces(org_id: String, completion: @escaping (_ success: Bool, [String]) -> ()) {
-        databaseHandle = ref.child("orgs/\(org_id)/places").observe(.childChanged, with: { (snapshot) in
-            let data = snapshot.value as? NSDictionary
-            for (place, _) in data! {
-                let placeName = place as! String
-                self.places.append(placeName)
-            }
-            if self.places.isEmpty == true {
-                completion(false, self.places)
-            }
-            else {
-                completion(true, self.places)
+        print(org_id)
+        ref.child("orgs/\(org_id)/places").observeSingleEvent(of: .value, with: { (snapshot) in
+            print(snapshot)
+            if let data = snapshot.value as? NSDictionary {
+                for (place, _) in data {
+                    let placeName = place as! String
+                    self.places.append(placeName)
+                }
+                if self.places.isEmpty == true {
+                    completion(false, self.places)
+                }
+                else {
+                    completion(true, self.places)
+                }
             }
         })
     }
-
-    //get the places
-    func getPlaces() -> [String] {
-        print(places)
-        return places
-    }
-
 
     func getPlaceLocation(place: String, completion: @escaping(Bool, CLLocation) -> ()) {
         let userOrg = User.current?.org_id
@@ -215,18 +214,18 @@ class APIManager: SessionManager {
         }
         return false
     }
-    
+
     // MARK: EatUp request handling methods
     // Called when user sends another user an invite
     func sendInvite(fromUserID: String) -> () {
         self.ref.child("users/\(fromUserID)/status").setValue(fromUserID)
     }
-    
+
     // Called when user resets status
     func resetStatus(userID: String) -> () {
         self.ref.child("users/\(userID)/status").setValue("")
     }
-    
+
 
     func setUpDatabaseHandleRating(){
         //        self.ref.child("users/(user.uid)/username").setValue(username)
@@ -236,11 +235,11 @@ class APIManager: SessionManager {
 
             for (user, rating) in child! {
 
-    // set user to be the key of the current user
+                // set user to be the key of the current user
 
                 let currentUserId = User.current?.id
 
-    //if user is not equal to the current id, then set the value of the rating
+                //if user is not equal to the current id, then set the value of the rating
 
                 if currentUserId != user {
                     // if user is equal to the current id, then print the user's value
@@ -249,7 +248,7 @@ class APIManager: SessionManager {
                     print(child)
                 }
             }
-            
+
         })
     }
 }

@@ -14,38 +14,47 @@ import DZNEmptyDataSet
 import Firebase
 
 class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, CLLocationManagerDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
-    
+
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var eatUpButton: UIButton!
-    
+
     var ref: DatabaseReference!
     var databaseHandle: DatabaseHandle!
-    
+
     var users: [String] = []
     var availableUsers: [User] = []
     var selectedUser: User?
     var place: String = ""
     var locationManager: CLLocationManager!
-    
+
     var isUserSelected: Bool = false
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
-        
+
         // Populating collection view with available users
         APIManager.shared.getAvailableUsers(place: place) { (success, users) in
             if success == true {
-                self.availableUsers = users
+                for user in users {
+                    if self.availableUsers.contains(where: { (storedUser) -> Bool in
+                        return storedUser.id == user.id
+                    }) {
+                        print("duplicate user")
+                    }
+                    else {
+                        self.availableUsers.append(user)
+                    }
+                }
                 self.collectionView.reloadData()
             }
         }
-        
+
         // Styling eatUp button
         eatUpButton.layer.cornerRadius = eatUpButton.frame.width/5
         eatUpButton.layer.masksToBounds = true
         eatUpButton.isHidden = true
-        
+
         // Initialise collection view
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -53,7 +62,7 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         collectionView.emptyDataSetSource = self
         collectionView.emptyDataSetDelegate = self
     }
-    
+
     // MARK: Collection View Configuration
     // Setup placeholder text for empty collection view
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
@@ -61,26 +70,26 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)]
         return NSAttributedString(string: str, attributes: attrs)
     }
-    
+
     // Configuring collection view cell views
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "availableUserCell", for: indexPath) as! AvailableUserCell
         cell.user = availableUsers[indexPath.item]
         cell.cardView.tag = indexPath.item
         collectionView.allowsMultipleSelection = false
-        
+
         let tapped:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(selectUpee(_:)))
         tapped.numberOfTapsRequired = 1
         cell.cardView.addGestureRecognizer(tapped)
-        
+
         return cell
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return availableUsers.count
     }
-    
-    
+
+
     // Changing button text after selecting and deselecting user
     func selectUpee(_ sender: UITapGestureRecognizer) {
         let selectedUser = availableUsers[(sender.view?.tag)!]
@@ -102,8 +111,8 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
             cell.nameLabel.textColor = UIColor.white
         }
     }
-    
-    
+
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "requestEatUpSegue" {
             let selectedUser = sender as! User
@@ -116,5 +125,5 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
 }

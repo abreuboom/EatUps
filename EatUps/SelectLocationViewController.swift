@@ -32,7 +32,7 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
                 self.locationsTableView.reloadData()
             }
             else {
-                print("setUpDatabaseHandle() failed")
+                print("getPlaces() failed")
             }
         })
         
