@@ -51,6 +51,30 @@ class APIManager: SessionManager {
             }
         }
     }
+    
+    func populateUserInfo(uid: String, completion: @escaping (Bool) -> ()) {
+        ref.child("users/\(uid)/org_id").observeSingleEvent(of: .value, with: { (snapshot) in
+            if snapshot.value != nil {
+                self.graphRequest(id: uid, completion: { (successBool) in
+                    if successBool == true {
+                        print("Created new user")
+                    }
+                    let photoURL = Auth.auth().currentUser?.photoURL
+                    let urlString = photoURL?.absoluteString
+                    self.ref.child("users/\(uid)/profilePhotoURL").setValue(urlString!)
+                    self.databaseHandle = self.ref.child("users/\(uid)").observe(.value , with: { (snapshot) in
+                        if let data = snapshot.value as? [String: Any] {
+                            User.current = User(dictionary: data)
+                            completion(true)
+                        }
+                        else {
+                            completion(false)
+                        }
+                    })
+                })
+            }
+        })
+    }
 
     private func graphRequest(id: String, completion: @escaping (_ success: Bool) -> ()) {
         GraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email"]).start { (response, result) in
@@ -84,7 +108,7 @@ class APIManager: SessionManager {
 
     }
 
-    func setOrgId(org_name: String) {
+    func setOrgId(org_name: String, completion: @escaping (_ success: Bool) -> ()) {
         let uid = Auth.auth().currentUser?.uid ?? ""
         databaseHandle = ref.child("orgs").observe(.value, with: { (snapshot) in
             let data = snapshot.value as! [String: Any]
@@ -94,6 +118,7 @@ class APIManager: SessionManager {
                 let name = dictionary["name"] as! String
                 if name == org_name {
                     self.ref.child("users/\(uid)/org_id").setValue(id)
+                    completion(true)
                 }
             }
         })
@@ -103,7 +128,7 @@ class APIManager: SessionManager {
 
     // set up the Select Location database handle
     func getPlaces(org_id: String, completion: @escaping (_ success: Bool, [String]) -> ()) {
-        databaseHandle = ref.child("orgs/\(org_id)/places").observe(.value, with: { (snapshot) in
+        databaseHandle = ref.child("orgs/\(org_id)/places").observe(.childChanged, with: { (snapshot) in
             let data = snapshot.value as? NSDictionary
             for (place, _) in data! {
                 let placeName = place as! String
@@ -191,32 +216,6 @@ class APIManager: SessionManager {
             }
         }
         return false
-    }
-
-    func populateUserInfo(uid: String, completion: @escaping (Bool) -> ()) {
-        ref.child("users/\(uid)/org_id").observeSingleEvent(of: .value, with: { (snapshot) in
-            if snapshot.value != nil {
-                self.graphRequest(id: uid, completion: { (successBool) in
-                    if successBool == true {
-                        print("Created new user")
-                    }
-                })
-            }
-        })
-
-        let photoURL = Auth.auth().currentUser?.photoURL
-        let urlString = photoURL?.absoluteString
-        self.ref.child("users/\(uid)/profilePhotoURL").setValue(urlString!)
-
-        databaseHandle = ref.child("users/\(uid)").observe(.value , with: { (snapshot) in
-            if let data = snapshot.value as? [String: Any] {
-                User.current = User(dictionary: data)
-                completion(true)
-            }
-            else {
-                completion(false)
-            }
-        })
     }
 
     func setUpDatabaseHandleRating(){
