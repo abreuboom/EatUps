@@ -23,7 +23,7 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let org_id = User.current?.org_id
+        org_id = User.current?.org_id
         
         APIManager.shared.getPlaces(org_id: org_id!, completion: { (success: Bool, data) in
             if success == true {
