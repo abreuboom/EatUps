@@ -16,7 +16,6 @@ import FacebookCore
 import FacebookLogin
 
 class APIManager: SessionManager {
-
     static var shared: APIManager = APIManager()
 
     var places: [String] = []
@@ -182,6 +181,7 @@ class APIManager: SessionManager {
                     let data = snapshot.value as? NSDictionary
 
                     for (user, info) in data! {
+                        
                         let userDictionary = info as! NSDictionary
                         // Converts user's location string into CLLocation
                         if let userLocationString = userDictionary["location"] as? String {
@@ -191,7 +191,7 @@ class APIManager: SessionManager {
                             let testLocation = CLLocation(latitude: 37.48137600, longitude: -122.15207300)
                             let distance = Int(userLocation.distance(from: testLocation))
                             // Gets nearby users in a given radius
-                            let radius = 2000
+                            let radius = 100000
                             if distance < radius {
                                 let tempUser = User.init(dictionary: info as! [String : Any])
                                 tempUser.id = user as? String
