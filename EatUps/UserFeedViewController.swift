@@ -36,7 +36,16 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         // Populating collection view with available users
         APIManager.shared.getAvailableUsers(place: place) { (success, users) in
             if success == true {
-                self.availableUsers = users
+                for user in users {
+                    if self.availableUsers.contains(where: { (storedUser) -> Bool in
+                        return storedUser.id == user.id
+                    }) {
+                        print("duplicate user")
+                    }
+                    else {
+                        self.availableUsers.append(user)
+                    }
+                }
                 self.collectionView.reloadData()
             }
         }
@@ -44,8 +53,8 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         // Styling eatUp button
         eatUpButton.layer.cornerRadius = eatUpButton.frame.width/5
         eatUpButton.layer.masksToBounds = true
-//        eatUpButton.titleEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-//        eatUpButton.invalidateIntrinsicContentSize()
+        //        eatUpButton.titleEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        //        eatUpButton.invalidateIntrinsicContentSize()
         eatUpButton.isHidden = true
         
         // Initialise collection view
