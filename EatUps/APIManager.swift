@@ -14,6 +14,7 @@ import FirebaseDatabase
 import CoreLocation
 import FacebookCore
 import FacebookLogin
+import ChameleonFramework
 
 class APIManager: SessionManager {
     static var shared: APIManager = APIManager()
