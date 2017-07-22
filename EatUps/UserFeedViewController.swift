@@ -108,6 +108,7 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
             eatUpButton.sizeToFit()
             isUserSelected = true
             eatUpButton.isHidden = false
+            eatUpButton.tag = (sender.view?.tag)!
             cell.cardView.backgroundColor = UIColor(red: 254/255, green: 63/255, blue: 103/255, alpha: 1)
             cell.nameLabel.textColor = UIColor.white
         }
@@ -116,7 +117,8 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "requestEatUpSegue" {
-            let selectedUser = sender as! User
+            let selectedUserButton = sender as! UIButton
+            let selectedUser = availableUsers[selectedUserButton.tag]
             let sendInviteViewController = segue.destination as! SendInviteViewController
             sendInviteViewController.selectedUser = selectedUser
             APIManager.shared.sendInvite(fromUserID: selectedUser.id!)

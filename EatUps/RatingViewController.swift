@@ -27,21 +27,18 @@ class RatingViewController: UIViewController {
             
             let child = snapshot.value as? [String: Any]
             
-            for (user, rating) in child! {
+            for (user, _) in child! {
                 
                 // set user to be the key of the current user
                 //if user is not equal to the current id, then set the value of the rating
-                
-                if uid != user {
-                    self.ref?.child("eatups/eatup_id/users").child("user_id").setValue("0")
-                } else{
+                if user != uid!{
                     // if user is equal to the current id, then print the user's value
-                    print(rating)
+                    self.ref?.child("eatups/eatup_id/users/user_id").setValue("0")
                 }
             }
             
         })
-
+        
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -54,20 +51,18 @@ class RatingViewController: UIViewController {
             
             let child = snapshot.value as? [String: Any]
             
-            for (user, rating) in child! {
+            for (user, _) in child! {
                 
                 // set user to be the key of the current user
                 //if user is not equal to the current id, then set the value of the rating
-                
-                if uid != user {
-                    self.ref?.child("eatups/eatup_id/users").child("user_id").setValue("1")
-                } else{
+                if user != uid!{
                     // if user is equal to the current id, then print the user's value
-                    print(rating)
+                    self.ref?.child("eatups/eatup_id/users/user_id").setValue("1")
                 }
             }
             
         })
+        
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -80,20 +75,18 @@ class RatingViewController: UIViewController {
             
             let child = snapshot.value as? [String: Any]
             
-            for (user, rating) in child! {
+            for (user, _) in child! {
                 
                 // set user to be the key of the current user
                 //if user is not equal to the current id, then set the value of the rating
-                
-                if uid != user {
-                    self.ref?.child("eatups/eatup_id/users").child("user_id").setValue("-1")
-                } else{
+                if user != uid!{
                     // if user is equal to the current id, then print the user's value
-                    print(rating)
+                    self.ref?.child("eatups/eatup_id/users/user_id").setValue("-1")
                 }
             }
             
         })
+        
         self.dismiss(animated: true, completion: nil)
     }
     

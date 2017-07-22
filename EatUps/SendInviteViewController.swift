@@ -13,8 +13,8 @@ import SRCountdownTimer
 class SendInviteViewController: UIViewController, SRCountdownTimerDelegate {
     
     @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var timer: SRCountdownTimer!
     
     var selectedUser: User?
     
@@ -33,10 +33,9 @@ class SendInviteViewController: UIViewController, SRCountdownTimerDelegate {
         if let url = selectedUser?.profilePhotoUrl {
             profileImage.af_setImage(withURL: url)
         }
+        User.getRoundProfilePics(photoView: profileImage)
         
         // Configure timer views
-        let timer = SRCountdownTimer()
-        timer.center = timerLabel.center
         timer.start(beginingValue: 60)
         
         // Configure alert controller
