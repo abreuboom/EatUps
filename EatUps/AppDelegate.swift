@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FBSDKLoginKit
+import ChameleonFramework
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,6 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
             self.window?.rootViewController = loginVC
         }
+        Chameleon.setGlobalThemeUsingPrimaryColor(HexColor(hexString: "FE3F67"), withSecondaryColor: ComplementaryFlatColorOf(color: HexColor(hexString: "FE3F67")), usingFontName: "Made WAFFLE Soft", andContentStyle: .contrast)
+        UINavigationBar.appearance().backgroundColor = HexColor(hexString: "FE3F67")
+        UIApplication.shared.statusBarStyle = .lightContent
         
         return true
     }

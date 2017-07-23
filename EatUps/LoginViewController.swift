@@ -23,19 +23,6 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
-        
-        
-        // Add a custom login button to your app
-        let loginButton = UIButton(type: .custom)
-        loginButton.backgroundColor = UIColor.darkGray
-        loginButton.frame = CGRect(x: 0, y: 0, width: 180, height: 40);
-        loginButton.center = view.center;
-        loginButton.setTitle("Login with Facebook", for: .normal )
-        
-        // Handle clicks on the button
-        loginButton.addTarget(self, action: #selector(self.loginButtonClicked(_:)), for: .touchUpInside)
-        
-        view.addSubview(loginButton)
     }
     
     @IBAction func logout(_ sender: UIButton) {

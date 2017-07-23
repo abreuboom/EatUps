@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ChameleonFramework
 
 class SelectLocationViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate {
     
@@ -22,6 +23,8 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.hidesNavigationBarHairline = true
         
         org_id = User.current?.org_id
         

@@ -28,6 +28,9 @@
 		20E931991F16A66800C4A4A1 /* EatUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E931981F16A66800C4A4A1 /* EatUp.swift */; };
 		20E9319A1F16A66800C4A4A1 /* EatUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E931981F16A66800C4A4A1 /* EatUp.swift */; };
 		20E9319B1F16A66800C4A4A1 /* EatUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E931981F16A66800C4A4A1 /* EatUp.swift */; };
+		20E968DE1F23E16500237572 /* MADE Waffle Soft.otf in Resources */ = {isa = PBXBuildFile; fileRef = 20E968DD1F23E16500237572 /* MADE Waffle Soft.otf */; };
+		20E968DF1F23E16500237572 /* MADE Waffle Soft.otf in Resources */ = {isa = PBXBuildFile; fileRef = 20E968DD1F23E16500237572 /* MADE Waffle Soft.otf */; };
+		20E968E01F23E16500237572 /* MADE Waffle Soft.otf in Resources */ = {isa = PBXBuildFile; fileRef = 20E968DD1F23E16500237572 /* MADE Waffle Soft.otf */; };
 		75A55747BDE7F64C8E34B403 /* Pods_EatUpsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3949A7A3F71F1417454C007A /* Pods_EatUpsTests.framework */; };
 		888AB7688257CE444F2A3225 /* Pods_EatUpsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A88B9A60B7A635EB5F03418 /* Pods_EatUpsUITests.framework */; };
 		D8A82FE71F154FC80053C1A1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FE61F154FC80053C1A1 /* LoginViewController.swift */; };
@@ -81,6 +84,7 @@
 		20E931921F16A56600C4A4A1 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		20E931941F16A65500C4A4A1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		20E931981F16A66800C4A4A1 /* EatUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EatUp.swift; path = ../EatUp.swift; sourceTree = "<group>"; };
+		20E968DD1F23E16500237572 /* MADE Waffle Soft.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MADE Waffle Soft.otf"; sourceTree = "<group>"; };
 		2A88B9A60B7A635EB5F03418 /* Pods_EatUpsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EatUpsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		331F0F4EB1393E79451631DF /* Pods-EatUpsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EatUpsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EatUpsTests/Pods-EatUpsTests.release.xcconfig"; sourceTree = "<group>"; };
 		3949A7A3F71F1417454C007A /* Pods_EatUpsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EatUpsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,6 +155,7 @@
 		2032ACBD1F1548FA00A4015C /* EatUps */ = {
 			isa = PBXGroup;
 			children = (
+				20E968DD1F23E16500237572 /* MADE Waffle Soft.otf */,
 				20CE19381F198AFA008494F1 /* EatUps.entitlements */,
 				20E9318E1F16A3F700C4A4A1 /* API */,
 				20E9318F1F16A4D800C4A4A1 /* Models */,
@@ -377,6 +382,7 @@
 			files = (
 				2032ACC91F1548FA00A4015C /* LaunchScreen.storyboard in Resources */,
 				20E931951F16A65500C4A4A1 /* GoogleService-Info.plist in Resources */,
+				20E968DE1F23E16500237572 /* MADE Waffle Soft.otf in Resources */,
 				2032ACC61F1548FA00A4015C /* Assets.xcassets in Resources */,
 				2032ACC41F1548FA00A4015C /* Main.storyboard in Resources */,
 			);
@@ -387,6 +393,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				20E931961F16A65500C4A4A1 /* GoogleService-Info.plist in Resources */,
+				20E968DF1F23E16500237572 /* MADE Waffle Soft.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +402,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				20E931971F16A65500C4A4A1 /* GoogleService-Info.plist in Resources */,
+				20E968E01F23E16500237572 /* MADE Waffle Soft.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

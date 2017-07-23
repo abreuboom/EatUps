@@ -12,6 +12,7 @@ import FirebaseDatabase
 import CoreLocation
 import DZNEmptyDataSet
 import Firebase
+import ChameleonFramework
 
 class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, CLLocationManagerDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
 
@@ -31,7 +32,27 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.hidesNavigationBarHairline = true
+        
         ref = Database.database().reference()
+        
+        let uid = User.current?.id ?? ""
+        
+        databaseHandle = ref.child("users/\(uid)/status").observe(.childChanged, with: { (snapshot) in
+            let data = snapshot.value as! String
+            if data == uid {
+                print("inviting \(self.selectedUser?.name)")
+            }
+            else if data != "" {
+                self.ref.child("users/\(data)").observe(.childChanged, with: { (snapshot) in
+                    let userData = snapshot.value as! [String: Any]
+                    let inviter = User(dictionary: userData)
+                    inviter.id = snapshot.key
+                    print("invited by \(inviter.name)")
+                })
+            }
+        })
 
         // Populating collection view with available users
         APIManager.shared.getAvailableUsers(place: place) { (success, users) in
@@ -93,7 +114,7 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
 
     // Changing button text after selecting and deselecting user
     func selectUpee(_ sender: UITapGestureRecognizer) {
-        let selectedUser = availableUsers[(sender.view?.tag)!]
+        selectedUser = availableUsers[(sender.view?.tag)!]
         let selectedUserIndexPath = IndexPath(item: (sender.view?.tag)!, section: 0)
         let cell = collectionView.cellForItem(at: selectedUserIndexPath) as! AvailableUserCell
         if isUserSelected == true {
@@ -103,7 +124,7 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
             cell.nameLabel.textColor = UIColor.black
         }
         else {
-            let name = selectedUser.name
+            let name = selectedUser?.name
             eatUpButton.setTitle("EatUp with \(name!)", for: UIControlState.normal)
             eatUpButton.sizeToFit()
             isUserSelected = true
@@ -114,6 +135,11 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         }
     }
 
+    @IBAction func requestEatUp(_ sender: UIButton) {
+        let id = selectedUser?.id
+        APIManager.shared.requestEatUp(fromUserID: id!)
+        print("requested EatUp with \(id!)")
+    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "requestEatUpSegue" {
@@ -121,7 +147,6 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
             let selectedUser = availableUsers[selectedUserButton.tag]
             let sendInviteViewController = segue.destination as! SendInviteViewController
             sendInviteViewController.selectedUser = selectedUser
-            APIManager.shared.sendInvite(fromUserID: selectedUser.id!)
         }
     }
     override func didReceiveMemoryWarning() {
