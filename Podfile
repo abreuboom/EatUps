@@ -25,7 +25,7 @@ target 'EatUps' do
   pod "BouncyLayout"
   pod 'DZNEmptyDataSet'
   pod 'PKHUD', '~> 4.0'
-  pod 'SRCountdownTimer'
+  pod 'ChameleonFramework/Swift'
 
   target 'EatUpsTests' do
     inherit! :search_paths

@@ -8,12 +8,10 @@
 
 import UIKit
 import AlamofireImage
-import SRCountdownTimer
 
-class SendInviteViewController: UIViewController, SRCountdownTimerDelegate {
+class SendInviteViewController: UIViewController {
     
     @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     
     var selectedUser: User?
@@ -33,11 +31,7 @@ class SendInviteViewController: UIViewController, SRCountdownTimerDelegate {
         if let url = selectedUser?.profilePhotoUrl {
             profileImage.af_setImage(withURL: url)
         }
-        
-        // Configure timer views
-        let timer = SRCountdownTimer()
-        timer.center = timerLabel.center
-        timer.start(beginingValue: 60)
+        User.getRoundProfilePics(photoView: profileImage)
         
         // Configure alert controller
         let backAction = UIAlertAction(title: "Go Back", style: .cancel) { (action) in

@@ -9,6 +9,9 @@ PODS:
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
   - BouncyLayout (1.1.0)
+  - ChameleonFramework/Default (2.1.0)
+  - ChameleonFramework/Swift (2.1.0):
+    - ChameleonFramework/Default
   - DZNEmptyDataSet (1.8.1)
   - FacebookCore (0.2.0):
     - Bolts (~> 1.8)
@@ -65,12 +68,12 @@ PODS:
   - GTMSessionFetcher/Core (1.1.11)
   - KeychainAccess (3.0.2)
   - PKHUD (4.2.3)
-  - SRCountdownTimer (1.0.1)
 
 DEPENDENCIES:
   - Alamofire (~> 4.4)
   - AlamofireImage (~> 3.1)
   - BouncyLayout
+  - ChameleonFramework/Swift
   - DZNEmptyDataSet
   - FacebookCore (~> 0.2)
   - FacebookLogin (~> 0.2)
@@ -83,13 +86,13 @@ DEPENDENCIES:
   - Firebase/Database
   - KeychainAccess
   - PKHUD (~> 4.0)
-  - SRCountdownTimer
 
 SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
   AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   BouncyLayout: f91c6504437a61acd733404f55f75bd8154f5840
+  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   FacebookCore: 2cb3f0fbff218e9d3119cec84bae983b232412de
   FacebookLogin: c9d606504735780a9e3002465a615512e0a691a5
@@ -107,8 +110,7 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
   KeychainAccess: a986406022dfc7c634c691ad3bec670cc6a32002
   PKHUD: c7692163a09875cbf15827dc581df3c5cf7f1015
-  SRCountdownTimer: 187458addb1e88cae62eb5aa57f48d7888f8c18c
 
-PODFILE CHECKSUM: 97b806351a2af0e00ed123fa41c481173a0fcd98
+PODFILE CHECKSUM: bca83753cc9c11150d9d89214b42df605dfd2d67
 
 COCOAPODS: 1.2.1
