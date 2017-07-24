@@ -23,6 +23,7 @@ class PendingInviteViewController: UIViewController {
     var didNotRespondAlertController = UIAlertController(title: "User did not respond", message: "Please select another user", preferredStyle: .alert)
     
     @IBAction func didTapCancel(_ sender: Any) {
+
         APIManager.shared.resetStatus(userID: (self.selectedUser?.id)!)
         APIManager.shared.resetStatus(userID: (User.current?.id)!)
         self.dismiss(animated: true, completion: nil)
