@@ -22,7 +22,7 @@ class SendInviteViewController: UIViewController, SRCountdownTimerDelegate {
     
     @IBAction func didTapCancel(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
-        APIManager.shared.resetStatus(userID: (self.selectedUser?.id)!)
+      //  APIManager.shared.resetStatus(userID: (self.selectedUser?.id)!)
     }
     
     override func viewDidLoad() {
