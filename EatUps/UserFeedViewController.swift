@@ -38,21 +38,6 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         ref = Database.database().reference()
         
         let uid = User.current?.id ?? ""
-        
-        databaseHandle = ref.child("users/\(uid)/status").observe(.childChanged, with: { (snapshot) in
-            let data = snapshot.value as! String
-            if data == uid {
-                print("inviting \(self.selectedUser?.name)")
-            }
-            else if data != "" {
-                self.ref.child("users/\(data)").observe(.childChanged, with: { (snapshot) in
-                    let userData = snapshot.value as! [String: Any]
-                    let inviter = User(dictionary: userData)
-                    inviter.id = snapshot.key
-                    print("invited by \(inviter.name)")
-                })
-            }
-        })
 
         // Populating collection view with available users
         APIManager.shared.getAvailableUsers(place: place) { (success, users) in
@@ -145,8 +130,8 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         if segue.identifier == "requestEatUpSegue" {
             let selectedUserButton = sender as! UIButton
             let selectedUser = availableUsers[selectedUserButton.tag]
-            let sendInviteViewController = segue.destination as! SendInviteViewController
-            sendInviteViewController.selectedUser = selectedUser
+            let PendingInviteViewController = segue.destination as! PendingInviteViewController
+            PendingInviteViewController.selectedUser = selectedUser
         }
     }
     override func didReceiveMemoryWarning() {
