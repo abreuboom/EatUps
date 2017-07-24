@@ -407,6 +407,7 @@
                         <outlet property="collectionView" destination="waO-2c-jJ7" id="Sto-fd-Eac"/>
                         <outlet property="eatUpButton" destination="1ct-Ba-WaO" id="qBu-hn-xiC"/>
                         <segue destination="imY-7b-tui" kind="presentation" identifier="requestEatUpSegue" id="7Mk-zF-BLH"/>
+                        <segue destination="lZU-V8-fg5" kind="presentation" identifier="acceptedInviteSegue" id="oy3-we-Mls"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wpX-Sk-00X" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -476,6 +477,7 @@
         <!--Response View Controller-->
         <scene sceneID="gpb-zd-P8s">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NrJ-Hf-GAW" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="x4b-hn-Pic" customClass="ResponseViewController" customModule="EatUps" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Pcc-WE-SAk"/>
@@ -522,7 +524,6 @@
                         <outlet property="timerLabel" destination="gIz-Og-XR3" id="rwb-al-WIm"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NrJ-Hf-GAW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4008.8000000000002" y="929.68515742128943"/>
         </scene>
@@ -578,7 +579,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JJ3-xb-q0i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2004" y="1799"/>
+            <point key="canvasLocation" x="2991" y="1779"/>
         </scene>
         <!--Rating View Controller-->
         <scene sceneID="SkZ-ns-b8S">
@@ -646,7 +647,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1wm-YY-G8q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1077.5999999999999" y="1798.6506746626687"/>
+            <point key="canvasLocation" x="2065" y="1779"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Tf6-Q8-DVX">
@@ -676,6 +677,7 @@
         <image name="gradient_bg" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="oy3-we-Mls"/>
         <segue reference="qIe-up-56k"/>
     </inferredMetricsTieBreakers>
 </document>
