@@ -33,7 +33,11 @@ class PendingInviteViewController: UIViewController {
         
         ref = Database.database().reference()
         
-        checkResponse()
+        APIManager.shared.checkResponse(selectedUser: selectedUser!) { (success) in
+            if success == true {
+                self.performSegue(withIdentifier: "acceptedEatUpSegue", sender: nil)
+            }
+        }
         
         // Configure send invite user views
         nameLabel.text = selectedUser?.name
@@ -54,25 +58,6 @@ class PendingInviteViewController: UIViewController {
     
     func timerDidEnd() {
         self.present(self.didNotRespondAlertController, animated: true)
-    }
-    
-    func checkResponse() {
-        let uid = User.current?.id
-        databaseHandle = ref.child("users/\(uid)/status").observe(.value, with: { (snapshot) in
-            let data = snapshot.value as! String
-            if data == uid {
-                print("inviting \(self.selectedUser?.name)")
-            }
-            else if data != "" {
-                self.ref.child("users/\(data)").observeSingleEvent(of: .value, with: { (snapshot) in
-                    let userData = snapshot.value as! [String: Any]
-                    let inviter = User(dictionary: userData)
-                    inviter.id = snapshot.key
-                    print("invited by \(inviter.name)")
-                    self.performSegue(withIdentifier: "acceptedEatUpSegue", sender: nil)
-                })
-            }
-        })
     }
 
     override func didReceiveMemoryWarning() {

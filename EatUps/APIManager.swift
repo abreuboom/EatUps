@@ -238,10 +238,14 @@ class APIManager: SessionManager {
     }
     
     //
-    func handleInvite(response: Bool) {
+    func handleInvite(response: Bool, completion: @escaping (Bool) -> ()) {
         if let id = User.current?.id {
             if response == true {
-                ref.child("users/\(id)/status").setValue(Any?)
+                ref.child("users/\(id)/status").observeSingleEvent(of: .value, with: { (snapshot) in
+                    let data = snapshot.value as? String
+                    self.ref.child("users/\(id)/status").setValue(data)
+                    completion(true)
+                })
             }
             else {
                 ref.child("users/\(id)/status").setValue("")
@@ -263,6 +267,34 @@ class APIManager: SessionManager {
         })
     }
     
+    func checkResponse(selectedUser: User, completion: @escaping (Bool) -> ()) {
+        let uid = User.current?.id
+        databaseHandle = ref.child("users/\(uid)/status").observe(.value, with: { (snapshot) in
+            let data = snapshot.value as! String
+            if data == uid {
+                print("inviting \(selectedUser.name)")
+            }
+            else if data != "" {
+                self.ref.child("users/\(data)").observeSingleEvent(of: .value, with: { (snapshot) in
+                    let userData = snapshot.value as! [String: Any]
+                    let inviter = User(dictionary: userData)
+                    inviter.id = snapshot.key
+                    print("invited by \(inviter.name)")
+                    completion(true)
+                })
+            }
+        })
+    }
+    
+    func checkForInvite(completion: @escaping (Bool, String) -> ()) {
+        let uid = User.current?.id
+        databaseHandle = ref.child("users/\(uid!)/status").observe(.value, with: { (snapshot) in
+            let data = snapshot.value as? String
+            if data != "" && data != nil && data != uid! {
+                completion(true, data!)
+            }
+        })
+    }
     
     func setUpDatabaseHandleRating() {
         //        self.ref.child("users/(user.uid)/username").setValue(username)
