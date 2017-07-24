@@ -36,7 +36,7 @@
 		D8A82FE71F154FC80053C1A1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FE61F154FC80053C1A1 /* LoginViewController.swift */; };
 		D8A82FEC1F1552A40053C1A1 /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FEB1F1552A40053C1A1 /* SelectLocationViewController.swift */; };
 		D8A82FEE1F1553550053C1A1 /* UserFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FED1F1553550053C1A1 /* UserFeedViewController.swift */; };
-		D8A82FF01F1554AF0053C1A1 /* SendInviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FEF1F1554AF0053C1A1 /* SendInviteViewController.swift */; };
+		D8A82FF01F1554AF0053C1A1 /* PendingInviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FEF1F1554AF0053C1A1 /* PendingInviteViewController.swift */; };
 		D8A82FF21F1555DE0053C1A1 /* ResponseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FF11F1555DE0053C1A1 /* ResponseViewController.swift */; };
 		D8A82FF41F1573680053C1A1 /* ReceivedInviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FF31F1573680053C1A1 /* ReceivedInviteViewController.swift */; };
 		D8A82FF61F1575800053C1A1 /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FF51F1575800053C1A1 /* RatingViewController.swift */; };
@@ -95,7 +95,7 @@
 		D8A82FE61F154FC80053C1A1 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D8A82FEB1F1552A40053C1A1 /* SelectLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectLocationViewController.swift; sourceTree = "<group>"; };
 		D8A82FED1F1553550053C1A1 /* UserFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserFeedViewController.swift; sourceTree = "<group>"; };
-		D8A82FEF1F1554AF0053C1A1 /* SendInviteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendInviteViewController.swift; sourceTree = "<group>"; };
+		D8A82FEF1F1554AF0053C1A1 /* PendingInviteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingInviteViewController.swift; sourceTree = "<group>"; };
 		D8A82FF11F1555DE0053C1A1 /* ResponseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseViewController.swift; sourceTree = "<group>"; };
 		D8A82FF31F1573680053C1A1 /* ReceivedInviteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceivedInviteViewController.swift; sourceTree = "<group>"; };
 		D8A82FF51F1575800053C1A1 /* RatingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
@@ -248,7 +248,7 @@
 				208AF5741F1838BB003E76A8 /* OrgSelectViewController.swift */,
 				D8A82FEB1F1552A40053C1A1 /* SelectLocationViewController.swift */,
 				D8A82FED1F1553550053C1A1 /* UserFeedViewController.swift */,
-				D8A82FEF1F1554AF0053C1A1 /* SendInviteViewController.swift */,
+				D8A82FEF1F1554AF0053C1A1 /* PendingInviteViewController.swift */,
 				D8A82FF11F1555DE0053C1A1 /* ResponseViewController.swift */,
 				D8A82FF31F1573680053C1A1 /* ReceivedInviteViewController.swift */,
 				D8A82FF51F1575800053C1A1 /* RatingViewController.swift */,
@@ -560,7 +560,7 @@
 				20E931991F16A66800C4A4A1 /* EatUp.swift in Sources */,
 				D8A82FF61F1575800053C1A1 /* RatingViewController.swift in Sources */,
 				D8A82FEE1F1553550053C1A1 /* UserFeedViewController.swift in Sources */,
-				D8A82FF01F1554AF0053C1A1 /* SendInviteViewController.swift in Sources */,
+				D8A82FF01F1554AF0053C1A1 /* PendingInviteViewController.swift in Sources */,
 				20E931931F16A56600C4A4A1 /* User.swift in Sources */,
 				2032ACC11F1548FA00A4015C /* ViewController.swift in Sources */,
 				D8A82FF41F1573680053C1A1 /* ReceivedInviteViewController.swift in Sources */,

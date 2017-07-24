@@ -8,23 +8,32 @@
 
 import UIKit
 import AlamofireImage
+import FirebaseDatabase
 
-class SendInviteViewController: UIViewController {
+class PendingInviteViewController: UIViewController {
     
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    
+    var ref: DatabaseReference!
+    var databaseHandle: DatabaseHandle!
     
     var selectedUser: User?
     
     var didNotRespondAlertController = UIAlertController(title: "User did not respond", message: "Please select another user", preferredStyle: .alert)
     
     @IBAction func didTapCancel(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
         APIManager.shared.resetStatus(userID: (self.selectedUser?.id)!)
+        APIManager.shared.resetStatus(userID: (User.current?.id)!)
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ref = Database.database().reference()
+        
+        checkResponse()
         
         // Configure send invite user views
         nameLabel.text = selectedUser?.name
@@ -45,6 +54,25 @@ class SendInviteViewController: UIViewController {
     
     func timerDidEnd() {
         self.present(self.didNotRespondAlertController, animated: true)
+    }
+    
+    func checkResponse() {
+        let uid = User.current?.id
+        databaseHandle = ref.child("users/\(uid)/status").observe(.value, with: { (snapshot) in
+            let data = snapshot.value as! String
+            if data == uid {
+                print("inviting \(self.selectedUser?.name)")
+            }
+            else if data != "" {
+                self.ref.child("users/\(data)").observeSingleEvent(of: .value, with: { (snapshot) in
+                    let userData = snapshot.value as! [String: Any]
+                    let inviter = User(dictionary: userData)
+                    inviter.id = snapshot.key
+                    print("invited by \(inviter.name)")
+                    self.performSegue(withIdentifier: "acceptedEatUpSegue", sender: nil)
+                })
+            }
+        })
     }
 
     override func didReceiveMemoryWarning() {

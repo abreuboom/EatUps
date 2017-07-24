@@ -49,7 +49,7 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath) as! LocationCell
-        cell.nameLabel.text = filteredPlaces[indexPath.row]
+        cell.nameLabel.text = String.randomEmoji() + " " + filteredPlaces[indexPath.row]
         return cell
     }
     
@@ -90,4 +90,13 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
         // Dispose of any resources that can be recreated.
     }
     
+}
+
+extension String{
+    static func randomEmoji()->String{
+        let emojiStart = 0x1F601
+        let ascii = emojiStart + Int(arc4random_uniform(UInt32(35)))
+        let emoji = UnicodeScalar(ascii)?.description
+        return emoji ?? "😍"
+    }
 }

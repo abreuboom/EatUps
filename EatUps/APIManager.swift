@@ -257,6 +257,8 @@ class APIManager: SessionManager {
             print(timeStamp)
             let eatup = self.ref.child("eatups").childByAutoId()
             eatup.setValue(["org_id": User.current?.org_id ?? "", "time": timeStamp, "inviter": inviterId, "invitee": id])
+            self.ref.child("users/\(id)/eatup_history/\(eatup.key)").setValue(timeStamp)
+            self.ref.child("users/\(invitee)/eatup_history/\(eatup.key)").setValue(timeStamp)
             completion(true, eatup.key)
         })
     }
