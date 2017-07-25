@@ -21,6 +21,8 @@ class PendingInviteViewController: UIViewController {
     var selectedUser: User?
     
     var didNotRespondAlertController = UIAlertController(title: "User did not respond", message: "Please select another user", preferredStyle: .alert)
+
+    
     
     @IBAction func didTapCancel(_ sender: Any) {
 
@@ -53,13 +55,16 @@ class PendingInviteViewController: UIViewController {
             APIManager.shared.resetStatus(userID: (self.selectedUser?.id)!)
         }
         didNotRespondAlertController.addAction(backAction)
-        
-        // Do any additional setup after loading the view.
     }
-    
+        
+        // Chat stuff
+        
+        // notification setup
+        
     func timerDidEnd() {
         self.present(self.didNotRespondAlertController, animated: true)
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -76,5 +81,6 @@ class PendingInviteViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
 
 }

@@ -165,6 +165,7 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     @IBAction func requestEatUp(_ sender: UIButton) {
         let id = selectedUser?.id
         APIManager.shared.requestEatUp(fromUserID: id!)
+        self.performSegue(withIdentifier: "requestEatUpSegue", sender: sender)
         print("requested EatUp with \(id!)")
     }
     

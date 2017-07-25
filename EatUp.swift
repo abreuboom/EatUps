@@ -29,6 +29,11 @@ class EatUp {
         org_id = dictionary["org_id"] as! Int64
         time = dictionary["time"] as! NSDate
     }
+    
+    // MARK: TODO: Get current eatUp ID
+    class func getEatUpID() -> String {
+        return "eatup_id"
+    }
 
     // MARK: String and CLLocation conversion methods
     class func stringToCLLocation(locationString: String) -> CLLocation {
@@ -44,5 +49,6 @@ class EatUp {
         let locationString = "\(latitude),\(longitude)"
         return locationString
     }
+    
 
 }
