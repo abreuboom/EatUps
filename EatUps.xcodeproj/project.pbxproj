@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0E7F65911F26FB2C005BA42E /* Helper Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F65901F26FB2C005BA42E /* Helper Files.swift */; };
 		0E7F65931F26FB4B005BA42E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F65921F26FB4B005BA42E /* Message.swift */; };
-		0E7F65951F26FB68005BA42E /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F65941F26FB68005BA42E /* Conversation.swift */; };
 		0E7F65971F26FB91005BA42E /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F65961F26FB91005BA42E /* ChatCell.swift */; };
 		0E7F65991F26FBB6005BA42E /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F65981F26FBB6005BA42E /* ChatViewController.swift */; };
 		0ED57BB01F1D3CFC00AC1A64 /* AvailableUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED57BAF1F1D3CFC00AC1A64 /* AvailableUserCell.swift */; };
@@ -67,7 +66,6 @@
 /* Begin PBXFileReference section */
 		0E7F65901F26FB2C005BA42E /* Helper Files.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Helper Files.swift"; sourceTree = "<group>"; };
 		0E7F65921F26FB4B005BA42E /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
-		0E7F65941F26FB68005BA42E /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		0E7F65961F26FB91005BA42E /* ChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
 		0E7F65981F26FBB6005BA42E /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		0ED57BAF1F1D3CFC00AC1A64 /* AvailableUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvailableUserCell.swift; sourceTree = "<group>"; };
@@ -227,7 +225,6 @@
 				20E931921F16A56600C4A4A1 /* User.swift */,
 				20E931901F16A4F900C4A4A1 /* Org.swift */,
 				0E7F65921F26FB4B005BA42E /* Message.swift */,
-				0E7F65941F26FB68005BA42E /* Conversation.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -575,7 +572,6 @@
 				0ED57BB01F1D3CFC00AC1A64 /* AvailableUserCell.swift in Sources */,
 				20E931991F16A66800C4A4A1 /* EatUp.swift in Sources */,
 				0E7F65931F26FB4B005BA42E /* Message.swift in Sources */,
-				0E7F65951F26FB68005BA42E /* Conversation.swift in Sources */,
 				D8A82FF61F1575800053C1A1 /* RatingViewController.swift in Sources */,
 				D8A82FEE1F1553550053C1A1 /* UserFeedViewController.swift in Sources */,
 				0E7F65971F26FB91005BA42E /* ChatCell.swift in Sources */,

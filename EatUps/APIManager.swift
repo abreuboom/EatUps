@@ -270,18 +270,19 @@ class APIManager: SessionManager {
     func checkResponse(selectedUser: User, completion: @escaping (Bool) -> ()) {
         let uid = User.current?.id
         databaseHandle = ref.child("users/\(uid)/status").observe(.value, with: { (snapshot) in
-            let data = snapshot.value as! String
-            if data == uid {
-                print("inviting \(selectedUser.name)")
-            }
-            else if data != "" {
-                self.ref.child("users/\(data)").observeSingleEvent(of: .value, with: { (snapshot) in
-                    let userData = snapshot.value as! [String: Any]
-                    let inviter = User(dictionary: userData)
-                    inviter.id = snapshot.key
-                    print("invited by \(inviter.name)")
-                    completion(true)
-                })
+            if let data = snapshot.value as? String {
+                if data == uid {
+                    print("inviting \(selectedUser.name)")
+                }
+                else if data != "" {
+                    self.ref.child("users/\(data)").observeSingleEvent(of: .value, with: { (snapshot) in
+                        let userData = snapshot.value as! [String: Any]
+                        let inviter = User(dictionary: userData)
+                        inviter.id = snapshot.key
+                        print("invited by \(inviter.name)")
+                        completion(true)
+                    })
+                }
             }
         })
     }

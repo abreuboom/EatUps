@@ -45,6 +45,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     var items = [Message]()
     let barHeight: CGFloat = 50
     var currentUser = User.current
+    var selectedUser: User?
     
     
     //MARK: Methods
@@ -81,11 +82,11 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    func composeMessage(type: MessageType, content: Any)  {
+    func composeMessage(content: Any)  {
         let message = Message.init(content: content, owner: .sender, timestamp: Int(Date().timeIntervalSince1970))
-        Message.send(message: message, toID: (currentUser?.id!)!, eatUpID: EatUp.getEatUpID(), completion: {(_) in
+        Message.send(message: message, toID: (selectedUser?.id)!, eatUpID: EatUp.getEatUpID(), completion: {(_) in
         })
-    }
+    } 
     
     func animateExtraButtons(toHide: Bool)  {
         switch toHide {
@@ -110,7 +111,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func sendMessage(_ sender: Any) {
         if let text = self.inputTextField.text {
             if text.characters.count > 0 {
-                self.composeMessage(type: .text, content: self.inputTextField.text!)
+                self.composeMessage(content: self.inputTextField.text!)
                 self.inputTextField.text = ""
             }
         }

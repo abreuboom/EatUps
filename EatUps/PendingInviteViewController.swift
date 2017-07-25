@@ -9,6 +9,7 @@
 import UIKit
 import AlamofireImage
 import FirebaseDatabase
+import SRCountdownTimer
 
 class PendingInviteViewController: UIViewController {
     
@@ -71,6 +72,12 @@ class PendingInviteViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "inviteToChatSegue" {
+            let ChatViewController = segue.destination as! ChatViewController
+            ChatViewController.selectedUser = selectedUser
+        }
+    }
 
     /*
     // MARK: - Navigation

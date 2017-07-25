@@ -62,22 +62,11 @@ enum ViewControllerType {
     case conversations
 }
 
-enum PhotoSource {
-    case library
-    case camera
-}
-
 enum ShowExtraView {
     case contacts
     case profile
     case preview
     case map
-}
-
-enum MessageType {
-    case photo
-    case text
-    case location
 }
 
 enum MessageOwner {

@@ -22,10 +22,10 @@ target 'EatUps' do
   pod 'KeychainAccess'
   pod 'Alamofire', '~> 4.4'
   pod 'AlamofireImage', '~> 3.1'
-  pod "BouncyLayout"
   pod 'DZNEmptyDataSet'
   pod 'PKHUD', '~> 4.0'
   pod 'ChameleonFramework/Swift'
+  pod 'SRCountdownTimer'
 
   target 'EatUpsTests' do
     inherit! :search_paths

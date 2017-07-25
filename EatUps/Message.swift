@@ -38,10 +38,10 @@ class Message {
     class func downloadAllMessages(forUserID: String, eatUpID: String, completion: @escaping (Message) -> Swift.Void) {
         if let currentUserID = Auth.auth().currentUser?.uid {
             Database.database().reference().child("eatups").child(eatUpID).observe(.value, with: { (snapshot) in
-                if snapshot.exists() {
-                    let data = snapshot.value as! [String: String]
-                    let location = data["conversation"]!
-                    Database.database().reference().child("conversations").child(location).observe(.childAdded, with: { (snap) in
+                if snapshot.hasChild("conversation") {
+                    let data = snapshot.value as! [String: Any]
+                    let location = data["conversation"] as! String
+                Database.database().reference().child("conversations").child(location).observe(.childAdded, with: { (snap) in
                         if snap.exists() {
                             let receivedMessage = snap.value as! [String: Any]
                             let content = receivedMessage["content"] as! String
@@ -95,10 +95,11 @@ class Message {
     
     class func uploadMessage(withValues: [String: Any], toID: String, eatUpID: String, completion: @escaping (Bool) -> Swift.Void) {
         
-        if let currentUserID = Auth.auth().currentUser?.uid {Database.database().reference().child("eatups").child(eatUpID).observe(.value, with: { (snapshot) in
-                if snapshot.exists() {
-                    let data = snapshot.value as! [String: String]
-                    let location = data["conversation"]!
+        if let currentUserID = Auth.auth().currentUser?.uid {
+            Database.database().reference().child("eatups").child(eatUpID).observe(.value, with: { (snapshot) in
+                if snapshot.hasChild("conversation") {
+                    let data = snapshot.value as! [String: Any]
+                    let location = data["conversation"] as! String
                     Database.database().reference().child("conversations").child(location).childByAutoId().setValue(withValues, withCompletionBlock: { (error, _) in
                         if error == nil {
                             completion(true)
