@@ -73,9 +73,9 @@ class PendingInviteViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "inviteToChatSegue" {
-            let ChatViewController = segue.destination as! ChatViewController
-            ChatViewController.selectedUser = selectedUser
+        if segue.identifier == "pendingToFindSegue" {
+            let FindUpeeViewController = segue.destination as! FindUpeeViewController
+            FindUpeeViewController.selectedUser = selectedUser
         }
     }
 

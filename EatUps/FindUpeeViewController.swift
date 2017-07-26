@@ -12,6 +12,8 @@ class FindUpeeViewController: UIViewController {
 
     @IBOutlet weak var profileView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    
+    var selectedUser: User?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +24,13 @@ class FindUpeeViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "findToChatSegue" {
+            let ChatViewController = segue.destination as! ChatViewController
+            ChatViewController.selectedUser = selectedUser
+        }
     }
 
 
