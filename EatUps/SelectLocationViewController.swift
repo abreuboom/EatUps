@@ -28,6 +28,13 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
         
         org_id = User.current?.org_id
         
+        locationsTableView.dataSource = self
+        searchBar.delegate = self
+        
+        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         if org_id != "" {
             APIManager.shared.getPlaces(org_id: org_id!, completion: { (success: Bool, data) in
                 if success == true {
@@ -40,11 +47,6 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
                 }
             })
         }
-        
-        locationsTableView.dataSource = self
-        searchBar.delegate = self
-        
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillDisappear(_ animated: Bool) {

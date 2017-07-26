@@ -41,7 +41,7 @@ class PendingInviteViewController: UIViewController, SRCountdownTimerDelegate {
         
         APIManager.shared.checkResponse(selectedUser: selectedUser!) { (success) in
             if success == true {
-                self.performSegue(withIdentifier: "acceptedEatUpSegue", sender: nil)
+                self.performSegue(withIdentifier: "pendingToFindSegue", sender: nil)
             }
         }
         
@@ -67,7 +67,7 @@ class PendingInviteViewController: UIViewController, SRCountdownTimerDelegate {
     func timerDidEnd() {
         APIManager.shared.checkResponse(selectedUser: selectedUser!) { (success) in
             if success == true {
-                self.performSegue(withIdentifier: "acceptedEatUpSegue", sender: nil)
+                self.performSegue(withIdentifier: "pendingToFindSegue", sender: nil)
             }
             else {
                     APIManager.shared.resetStatus(userID: (self.selectedUser?.id)!)
