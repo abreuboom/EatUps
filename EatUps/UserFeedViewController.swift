@@ -25,6 +25,7 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     var users: [String] = []
     var availableUsers: [User] = []
     var selectedUser: User?
+    var eatupId: String?
     var place: String = ""
     var locationManager: CLLocationManager!
     
@@ -57,44 +58,21 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
             }
         }
         
-        APIManager.shared.checkForInvite { (success, userId) in
-            if success == true {
-                print("Invited by: \(userId)")
-                var message = ""
+        APIManager.shared.checkForInvite { (invited, eatupID) in
+            if invited == true {
                 let uid = User.current?.id
-                self.ref.child("users/\(uid!)/status").observeSingleEvent(of: .value, with: { (snapshot) in
-                    let userId = snapshot.value as? String
-                    self.ref.child("users/\(userId!)/name").observeSingleEvent(of: .value, with: { (snapshot) in
-                        let data = snapshot.value as? String
-                        message = data!
+                self.ref.child("eatups/\(eatupID)/invitee").observeSingleEvent(of: .value, with: { (snapshot) in
+                    if let eatupDictionary = snapshot.value as? [String: Any] {
+                        let eatup = EatUp(dictionary: eatupDictionary)
+                        eatup.id = snapshot.key
                         
-                        
-                        let alertController = UIAlertController(title: "EatUp with", message: message, preferredStyle: .alert)
-                        
-                        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
-                            APIManager.shared.handleInvite(response: false, completion: { (success) in
-                                if success == true {
-                                    self.dismiss(animated: true, completion: {
-                                    })
-                                }
-                            })
-                        }
-                        alertController.addAction(cancelAction)
-                        
-                        let acceptAction = UIAlertAction(title: "Accept", style: .default) { action in
-                            APIManager.shared.handleInvite(response: true, completion: { (success) in
-                                if success == true {
-                                    self.performSegue(withIdentifier: "acceptedInviteSegue", sender: nil)
-                                }
-                            })
-                        }
-                        alertController.addAction(acceptAction)
-                        
-                        self.present(alertController, animated: true) {
-                            // ...
-                        }
-                        
-                    })
+                        let inviteVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "inviteViewController") as! InviteViewController
+                        inviteVC.eatup = eatup
+                        self.addChildViewController(inviteVC)
+                        inviteVC.view.frame = self.view.frame
+                        self.view.addSubview(inviteVC.cardView)
+                        inviteVC.didMove(toParentViewController: self)
+                    }
                 })
             }
         }
@@ -164,16 +142,21 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     
     @IBAction func requestEatUp(_ sender: UIButton) {
         let id = selectedUser?.id
-        APIManager.shared.requestEatUp(fromUserID: id!)
-        self.performSegue(withIdentifier: "requestEatUpSegue", sender: nil)
+        APIManager.shared.requestEatUp(toUserID: id!) { (success, eatup) in
+            if success == true {
+                self.eatupId = eatup
+                self.performSegue(withIdentifier: "requestEatUpSegue", sender: nil)
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "requestEatUpSegue" {
             let selectedUserButton = sender as! UIButton
             let selectedUser = availableUsers[selectedUserButton.tag]
-            let PendingInviteViewController = segue.destination as! PendingInviteViewController
-            PendingInviteViewController.selectedUser = selectedUser
+            let pendingInviteViewController = segue.destination as! PendingInviteViewController
+            pendingInviteViewController.selectedUser = selectedUser
+            pendingInviteViewController.eatupId = eatupId
         }
     }
     override func didReceiveMemoryWarning() {
