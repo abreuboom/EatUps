@@ -34,12 +34,13 @@ class RatingViewController: UIViewController {
                 if user != uid!{
                     // if user is equal to the current id, then print the user's value
                     self.ref?.child("eatups/eatup_id/users/user_id").setValue("0")
+                    self.performSegue(withIdentifier: "ratingSegue", sender: nil)
+
                 }
             }
             
         })
         
-        self.dismiss(animated: true, completion: nil)
     }
     
     
@@ -62,8 +63,8 @@ class RatingViewController: UIViewController {
             }
             
         })
-        
-        self.dismiss(animated: true, completion: nil)
+         //   self.performSegue(withIdentifier: "loginSegue", sender: nil)
+
     }
     
     
@@ -87,7 +88,7 @@ class RatingViewController: UIViewController {
             
         })
         
-        self.dismiss(animated: true, completion: nil)
+        //self.performSegue(withIdentifier: "loginSegue", sender: nil)
     }
     
     
@@ -108,10 +109,8 @@ class RatingViewController: UIViewController {
     
 
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    //override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-    }
-    
 
 }
