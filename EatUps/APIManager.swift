@@ -18,7 +18,6 @@ import FacebookLogin
 class APIManager: SessionManager {
     static var shared: APIManager = APIManager()
     
-    var places: [String] = []
     var users: [User] = []
     var placeLocation = CLLocation()
     
@@ -138,19 +137,19 @@ class APIManager: SessionManager {
     
     // set up the Select Location database handle
     func getPlaces(org_id: String, completion: @escaping (_ success: Bool, [String]) -> ()) {
-        print("org_id = \(org_id)")
+        var places: [String] = []
         ref.child("orgs/\(org_id)/places").observeSingleEvent(of: .value, with: { (snapshot) in
             print(snapshot)
             if let data = snapshot.value as? NSDictionary {
                 for (place, _) in data {
                     let placeName = place as! String
-                    self.places.append(placeName)
+                    places.append(placeName)
                 }
-                if self.places.isEmpty == true {
-                    completion(false, self.places)
+                if places.isEmpty == true {
+                    completion(false, places)
                 }
                 else {
-                    completion(true, self.places)
+                    completion(true, places)
                 }
             }
         })
@@ -215,6 +214,54 @@ class APIManager: SessionManager {
         }
     }
     
+    //    func getUsersCount(place: String) -> String {
+    //        var users: [String] = []
+    //        var availableUsers: [User] = []
+    //
+    //        getAvailableUsers(place: place) { (success, users) in
+    //            if success == true {
+    //                for user in users {
+    //                    if availableUsers.contains(where: { (storedUser) -> Bool in
+    //                        return storedUser.id == user.id || storedUser.name == user.name
+    //                    }){}
+    //                    else {
+    //                        availableUsers.append(user)
+    //                    }
+    //                }
+    //                return String(availableUsers.count)
+    //            }
+    //        }
+    //
+    //    }
+    
+    
+    func getUsersCount(place: String, completion: @escaping(Bool, Int) -> ()) {
+        var users: [String] = []
+        var availableUsers: [User] = []
+        var usersCount: Int?
+        
+        getAvailableUsers(place: place) { (success, users) in
+            if success == true {
+                for user in users {
+                    if availableUsers.contains(where: { (storedUser) -> Bool in
+                        return storedUser.id == user.id || storedUser.name == user.name
+                    }) != true {
+                        
+                        availableUsers.append(user)
+                    }
+                }
+                usersCount = availableUsers.count
+                if usersCount == nil {
+                    completion(false, -20)
+                }
+                else {
+                    completion(true, usersCount!)
+                }
+            }
+            
+        }
+        
+    }
     
     func containsUser(arr: [User], targetUser: User) -> Bool {
         for user in arr {

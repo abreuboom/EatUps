@@ -21,6 +21,8 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     //create an array to update as we filter through the locations to eat
     var filteredPlaces: [String] = []
     
+    var userCountIndexes: [Int] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,23 +30,35 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
         
         org_id = User.current?.org_id
         
+        locationsTableView.dataSource = self
+        searchBar.delegate = self
+        
+        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         if org_id != "" {
             APIManager.shared.getPlaces(org_id: org_id!, completion: { (success: Bool, data) in
                 if success == true {
                     self.places = data
                     self.filteredPlaces = self.places
-                    self.locationsTableView.reloadData()
+                    for place in self.places {
+                        APIManager.shared.getUsersCount(place: place, completion: { (success: Bool, usersCount) -> () in
+                            if success == true {
+                                self.userCountIndexes.append(usersCount)
+                                self.locationsTableView.reloadData()
+                            }
+                        })
+                    }
+                    
                 }
                 else {
                     print("getPlaces() failed")
                 }
             })
+            
+            
         }
-        
-        locationsTableView.dataSource = self
-        searchBar.delegate = self
-        
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -55,7 +69,10 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath) as! LocationCell
-        cell.nameLabel.text = String.randomEmoji() + " " + filteredPlaces[indexPath.row]
+        let placeString = filteredPlaces[indexPath.row]
+        cell.nameLabel.text = String.randomEmoji() + " " + placeString
+        cell.usersCountLabel.text = "\(userCountIndexes[indexPath.row]) nearby"
+        
         return cell
     }
     
