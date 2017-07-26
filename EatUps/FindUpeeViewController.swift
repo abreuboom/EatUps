@@ -1,19 +1,17 @@
 //
-//  ResponseViewController.swift
+//  FindUpeeViewController.swift
 //  EatUps
 //
-//  Created by Marissa Bush on 7/11/17.
+//  Created by Maxine Kwan on 7/25/17.
 //  Copyright © 2017 John Abreu. All rights reserved.
 //
 
 import UIKit
 
-class ResponseViewController: UIViewController {
-    
-    @IBOutlet weak var profileImage: UIImageView!
+class FindUpeeViewController: UIViewController {
+
+    @IBOutlet weak var profileView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var timerLabel: UILabel!
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +23,7 @@ class ResponseViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
 
     /*
     // MARK: - Navigation
