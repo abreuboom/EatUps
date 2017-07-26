@@ -157,24 +157,29 @@ class APIManager: SessionManager {
     }
     
     func getPlaceLocation(place: String, completion: @escaping(Bool, CLLocation) -> ()) {
-        let userOrg = User.current?.org_id
-        // change back to userOrg
-        databaseHandle = self.ref.child("orgs/org_id/places/\(place)").observe(.value, with:{ (snapshot) in
-            let placeLocationString = snapshot.value as? String
-            self.placeLocation = EatUp.stringToCLLocation(locationString: placeLocationString!)
-        })
-        
-        if placeLocation == CLLocation() {
-            completion(false, CLLocation())
-        }
-        else {
-            completion(true, self.placeLocation)
+        if let org_id = User.current?.org_id {
+            ref.child("orgs/\(org_id)/places/\(place)").observeSingleEvent(of: .value, with: { (snapshot) in
+                if let placeLocationString = snapshot.value as? String {
+                    //                let placeLocationString = data[place] as? String
+                    self.placeLocation = EatUp.stringToCLLocation(locationString: placeLocationString)
+                }
+                if self.placeLocation.coordinate.latitude == 0 {
+                    if self.placeLocation.coordinate.longitude == 0 {
+                        completion(false, CLLocation())
+                    }
+                }
+                else {
+                    completion(true, self.placeLocation)
+                }
+                
+            })
         }
         
     }
     
     // Gets users in a set radius around the EatUp location
     func getAvailableUsers(place: String, completion: @escaping (Bool, [User]) -> ()) {
+        users = []
         getPlaceLocation(place: place) { (successBool, placeLocation) in
             if successBool == true {
                 // Gets location information of each user
@@ -187,12 +192,9 @@ class APIManager: SessionManager {
                         // Converts user's location string into CLLocation
                         if let userLocationString = userDictionary["location"] as? String {
                             let userLocation = EatUp.stringToCLLocation(locationString: userLocationString)
-                            
-                            // for testing purposes
-                            let testLocation = CLLocation(latitude: 37.48137600, longitude: -122.15207300)
-                            let distance = Int(userLocation.distance(from: testLocation))
+                            let distance = Int(userLocation.distance(from: placeLocation))
                             // Gets nearby users in a given radius
-                            let radius = 100000
+                            let radius = 400
                             if distance < radius {
                                 let tempUser = User.init(dictionary: info as! [String : Any])
                                 tempUser.id = user as? String
