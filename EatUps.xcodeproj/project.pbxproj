@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0EC37D521F281B2700EA438C /* FindUpeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC37D511F281B2700EA438C /* FindUpeeViewController.swift */; };
 		0ED57BB01F1D3CFC00AC1A64 /* AvailableUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED57BAF1F1D3CFC00AC1A64 /* AvailableUserCell.swift */; };
 		0F94C76E144E1E4FD25B1F25 /* Pods_EatUps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73F38D920ADFD5A052C30A17 /* Pods_EatUps.framework */; };
 		2016F28C1F1EB4AB00CA814C /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2016F28B1F1EB4AB00CA814C /* LocationCell.swift */; };
@@ -37,8 +38,6 @@
 		D8A82FEC1F1552A40053C1A1 /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FEB1F1552A40053C1A1 /* SelectLocationViewController.swift */; };
 		D8A82FEE1F1553550053C1A1 /* UserFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FED1F1553550053C1A1 /* UserFeedViewController.swift */; };
 		D8A82FF01F1554AF0053C1A1 /* PendingInviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FEF1F1554AF0053C1A1 /* PendingInviteViewController.swift */; };
-		D8A82FF21F1555DE0053C1A1 /* ResponseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FF11F1555DE0053C1A1 /* ResponseViewController.swift */; };
-		D8A82FF41F1573680053C1A1 /* ReceivedInviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FF31F1573680053C1A1 /* ReceivedInviteViewController.swift */; };
 		D8A82FF61F1575800053C1A1 /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FF51F1575800053C1A1 /* RatingViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +59,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0EC37D511F281B2700EA438C /* FindUpeeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindUpeeViewController.swift; sourceTree = "<group>"; };
 		0ED57BAF1F1D3CFC00AC1A64 /* AvailableUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvailableUserCell.swift; sourceTree = "<group>"; };
 		1312C3651A0BED44631D9496 /* Pods-EatUpsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EatUpsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EatUpsUITests/Pods-EatUpsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2016F28B1F1EB4AB00CA814C /* LocationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
@@ -96,8 +96,6 @@
 		D8A82FEB1F1552A40053C1A1 /* SelectLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectLocationViewController.swift; sourceTree = "<group>"; };
 		D8A82FED1F1553550053C1A1 /* UserFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserFeedViewController.swift; sourceTree = "<group>"; };
 		D8A82FEF1F1554AF0053C1A1 /* PendingInviteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingInviteViewController.swift; sourceTree = "<group>"; };
-		D8A82FF11F1555DE0053C1A1 /* ResponseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseViewController.swift; sourceTree = "<group>"; };
-		D8A82FF31F1573680053C1A1 /* ReceivedInviteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceivedInviteViewController.swift; sourceTree = "<group>"; };
 		D8A82FF51F1575800053C1A1 /* RatingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
 		E7D12FEC4E9F01F0EE5FEC0F /* Pods-EatUps.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EatUps.release.xcconfig"; path = "Pods/Target Support Files/Pods-EatUps/Pods-EatUps.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -249,9 +247,8 @@
 				D8A82FEB1F1552A40053C1A1 /* SelectLocationViewController.swift */,
 				D8A82FED1F1553550053C1A1 /* UserFeedViewController.swift */,
 				D8A82FEF1F1554AF0053C1A1 /* PendingInviteViewController.swift */,
-				D8A82FF11F1555DE0053C1A1 /* ResponseViewController.swift */,
-				D8A82FF31F1573680053C1A1 /* ReceivedInviteViewController.swift */,
 				D8A82FF51F1575800053C1A1 /* RatingViewController.swift */,
+				0EC37D511F281B2700EA438C /* FindUpeeViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -328,7 +325,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "John Abreu";
 				TargetAttributes = {
 					2032ACBA1F1548FA00A4015C = {
@@ -559,12 +556,11 @@
 				0ED57BB01F1D3CFC00AC1A64 /* AvailableUserCell.swift in Sources */,
 				20E931991F16A66800C4A4A1 /* EatUp.swift in Sources */,
 				D8A82FF61F1575800053C1A1 /* RatingViewController.swift in Sources */,
+				0EC37D521F281B2700EA438C /* FindUpeeViewController.swift in Sources */,
 				D8A82FEE1F1553550053C1A1 /* UserFeedViewController.swift in Sources */,
 				D8A82FF01F1554AF0053C1A1 /* PendingInviteViewController.swift in Sources */,
 				20E931931F16A56600C4A4A1 /* User.swift in Sources */,
 				2032ACC11F1548FA00A4015C /* ViewController.swift in Sources */,
-				D8A82FF41F1573680053C1A1 /* ReceivedInviteViewController.swift in Sources */,
-				D8A82FF21F1555DE0053C1A1 /* ResponseViewController.swift in Sources */,
 				D8A82FEC1F1552A40053C1A1 /* SelectLocationViewController.swift in Sources */,
 				2032ACBF1F1548FA00A4015C /* AppDelegate.swift in Sources */,
 				208AF5751F1838BB003E76A8 /* OrgSelectViewController.swift in Sources */,
@@ -634,7 +630,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -642,7 +640,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -684,7 +686,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -692,7 +696,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
