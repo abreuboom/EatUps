@@ -47,6 +47,12 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        filteredPlaces = []
+        places = []
+        locationsTableView.deselectRow(at: locationsTableView.indexPathForSelectedRow!, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath) as! LocationCell
         cell.nameLabel.text = String.randomEmoji() + " " + filteredPlaces[indexPath.row]
