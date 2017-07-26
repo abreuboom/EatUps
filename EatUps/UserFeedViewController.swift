@@ -165,8 +165,12 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     @IBAction func requestEatUp(_ sender: UIButton) {
         let id = selectedUser?.id
         APIManager.shared.requestEatUp(fromUserID: id!)
+<<<<<<< HEAD
         self.performSegue(withIdentifier: "requestEatUpSegue", sender: sender)
         print("requested EatUp with \(id!)")
+=======
+        self.performSegue(withIdentifier: "requestEatUpSegue", sender: nil)
+>>>>>>> 53077d947cebff1dbc64bd116bb95e88ce75665c
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
