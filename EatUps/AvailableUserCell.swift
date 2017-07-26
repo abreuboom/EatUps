@@ -19,11 +19,7 @@ class AvailableUserCell: UICollectionViewCell {
             cardView.layer.cornerRadius = 25
             cardView.dropShadow()
             
-            var firstName = user.name!
-            
-            if let dotRange = firstName.range(of: " ") {
-                firstName.removeSubrange(dotRange.lowerBound..<firstName.endIndex)
-            }
+            var firstName = User.firstName(name: user.name!)
             
             nameLabel.text = firstName
             if let url = user.profilePhotoUrl {
@@ -37,8 +33,6 @@ class AvailableUserCell: UICollectionViewCell {
         
         User.getRoundProfilePics(photoView: photoView)
     }
-    
-    
 }
 
 extension UIView {

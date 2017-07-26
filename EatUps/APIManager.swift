@@ -213,7 +213,7 @@ class APIManager: SessionManager {
         }
     }
     
-    
+    // Checks if array contains a given user
     func containsUser(arr: [User], targetUser: User) -> Bool {
         for user in arr {
             if user.id == targetUser.id {
@@ -223,13 +223,34 @@ class APIManager: SessionManager {
         return false
     }
     
+    // Returns User object from a given user id
+    func getUser(uid: String, completion: @escaping (Bool, User) -> ()) {
+        ref.child("users/\(uid)").observeSingleEvent(of: .value, with: { (snapshot) in
+            if let data = snapshot.value as? [String: Any] {
+                let user = User(dictionary: data)
+                user.id = snapshot.key
+                completion(true, user)
+            }
+        })
+    }
+    
     // MARK: EatUp request handling methods
     // Called when user sends another user an invite
-    func requestEatUp(fromUserID: String) {
-        if let currentUserId = User.current?.id {
-            ref.child("users/\(fromUserID)/status").setValue(currentUserId)
-            ref.child("users/\(currentUserId)/status").setValue(currentUserId)
-        }
+    func requestEatUp(toUserID: String, completion: @escaping (Bool, String) -> ()) {
+        let id = User.current?.id ?? ""
+        
+        let eatup = self.ref.child("eatups").childByAutoId()
+        let timeStamp = String(NSDate().timeIntervalSince1970)
+        eatup.setValue(["org_id": User.current?.org_id ?? "", "time": timeStamp, "inviter": id, "invitee": "none"])
+        ref.child("users/\(id)/eatup_history/\(eatup.key)").setValue(timeStamp)
+        
+        ref.child("users/\(toUserID)/status").setValue(eatup.key)
+        ref.child("users/\(id)/status").setValue(eatup.key)
+        ref.child("users/\(id)/status").observeSingleEvent(of: .value, with: { (snapshot) in
+            if let eatupID = snapshot.value as? String {
+                completion(true, eatup.key)
+            }
+        })
     }
     
     // Called when user resets status
@@ -242,9 +263,14 @@ class APIManager: SessionManager {
         if let id = User.current?.id {
             if response == true {
                 ref.child("users/\(id)/status").observeSingleEvent(of: .value, with: { (snapshot) in
-                    let data = snapshot.value as? String
-                    self.ref.child("users/\(id)/status").setValue(data)
-                    completion(true)
+                    let eatupID = snapshot.value as? String
+                    self.ref.child("eatups/\(eatupID)/time").observeSingleEvent(of: .value, with: { (snapshot) in
+                        let time = snapshot.value as? String
+                        self.ref.child("users/\(id)/eatup_history/\(eatupID)").setValue(time)
+                        self.ref.child("eatups/\(eatupID)/invitee").setValue(id)
+                        completion(true)
+                    })
+                    
                 })
             }
             else {
@@ -253,35 +279,21 @@ class APIManager: SessionManager {
         }
     }
     
-    func createEatUp(invitee: String, completion: @escaping (Bool, String) -> ()) {
-        let id = User.current?.id ?? ""
-        ref.child("users/\(id)/status").observeSingleEvent(of: .value, with: { (snapshot) in
-            let inviterId = snapshot.value as! String
-            let timeStamp = String(NSDate().timeIntervalSince1970)
-            print(timeStamp)
-            let eatup = self.ref.child("eatups").childByAutoId()
-            eatup.setValue(["org_id": User.current?.org_id ?? "", "time": timeStamp, "inviter": inviterId, "invitee": id])
-            self.ref.child("users/\(id)/eatup_history/\(eatup.key)").setValue(timeStamp)
-            self.ref.child("users/\(invitee)/eatup_history/\(eatup.key)").setValue(timeStamp)
-            completion(true, eatup.key)
-        })
-    }
-    
-    func checkResponse(selectedUser: User, completion: @escaping (Bool) -> ()) {
+    func checkResponse(selectedUser: User, eatupID: String, completion: @escaping (Bool) -> ()) {
         let uid = User.current?.id
-        databaseHandle = ref.child("users/\(uid)/status").observe(.value, with: { (snapshot) in
+        databaseHandle = ref.child("eatups/\(eatupID)/invitee").observe(.value, with: { (snapshot) in
             let data = snapshot.value as! String
             if data == uid {
-                print("inviting \(selectedUser.name)")
+                completion(true)
             }
-            else if data != "" {
-                self.ref.child("users/\(data)").observeSingleEvent(of: .value, with: { (snapshot) in
-                    let userData = snapshot.value as! [String: Any]
-                    let inviter = User(dictionary: userData)
-                    inviter.id = snapshot.key
-                    print("invited by \(inviter.name)")
-                    completion(true)
+            else if data == "" {
+                self.ref.child("eatups/\(eatupID)").removeValue()
+                self.ref.child("users/\(uid!)/status").setValue("", withCompletionBlock: { (error, databaseReference) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }
                 })
+                completion(false)
             }
         })
     }
@@ -290,7 +302,7 @@ class APIManager: SessionManager {
         let uid = User.current?.id
         databaseHandle = ref.child("users/\(uid!)/status").observe(.value, with: { (snapshot) in
             let data = snapshot.value as? String
-            if data != "" && data != nil && data != uid! {
+            if data != "" && data != nil {
                 completion(true, data!)
             }
         })
