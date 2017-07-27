@@ -602,6 +602,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="gradient_bg" translatesAutoresizingMaskIntoConstraints="NO" id="05i-zY-OjU">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7kk-Zu-Rhg">
                                 <rect key="frame" x="87" y="119" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -751,7 +755,7 @@
         <image name="gradient_bg" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fQv-Qi-FeE"/>
         <segue reference="ijv-PM-fef"/>
+        <segue reference="jjh-46-bM1"/>
     </inferredMetricsTieBreakers>
 </document>

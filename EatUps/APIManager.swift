@@ -267,12 +267,12 @@ class APIManager: SessionManager {
 
     // MARK: EatUp request handling methods
     // Called when user sends another user an invite
-    func requestEatUp(toUserID: String, completion: @escaping (Bool, String) -> ()) {
+    func requestEatUp(toUserID: String, place: String, completion: @escaping (Bool, String) -> ()) {
         let id = User.current?.id ?? ""
 
         let eatup = self.ref.child("eatups").childByAutoId()
-        let timeStamp = String(NSDate().timeIntervalSince1970)
-        eatup.setValue(["org_id": User.current?.org_id ?? "", "time": timeStamp, "inviter": id, "invitee": "none"])
+        let timeStamp = Int(Date().timeIntervalSince1970)
+        eatup.setValue(["place": place, "org_id": User.current?.org_id ?? "", "time": timeStamp, "inviter": id, "invitee": "none"])
 
         ref.child("users/\(id)/status").setValue(eatup.key)
         ref.child("users/\(toUserID)/status").setValue(eatup.key, withCompletionBlock: { (error, databaseRef) in

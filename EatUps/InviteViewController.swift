@@ -31,10 +31,18 @@ class InviteViewController: UIViewController {
         }
         placeLabel.setTitle(eatup?.place, for: .normal)
         placeLabel.sizeToFit()
+        
+        cardView.layer.cornerRadius = 25
+        cardView.dropShadow()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Init as above and then...
+        // Get superview's CGSize
+        let size = super.view.frame.size;
+        self.view.center = CGPoint.init(x: size.width/2, y: size.height/2)
         
         User.getRoundProfilePics(photoView: profilePhotoView)
 
@@ -45,7 +53,7 @@ class InviteViewController: UIViewController {
         let eatupId = eatup?.id ?? ""
         APIManager.shared.handleInvite(eatupId: eatupId, response: true, completion: { (success) in
             if success == true {
-                self.parent?.performSegue(withIdentifier: "acceptedInviteSegue", sender: nil)
+                self.parent?.performSegue(withIdentifier: "pendingToFindSegue", sender: nil)
             }
         })
     }
@@ -54,8 +62,7 @@ class InviteViewController: UIViewController {
         let eatupId = eatup?.id ?? ""
         APIManager.shared.handleInvite(eatupId: eatupId, response: false, completion: { (success) in
             if success == true {
-                self.dismiss(animated: true, completion: {
-                })
+                self.view.removeFromSuperview()
             }
         })
     }
