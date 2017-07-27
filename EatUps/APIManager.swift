@@ -193,7 +193,7 @@ class APIManager: SessionManager {
                             let userLocation = EatUp.stringToCLLocation(locationString: userLocationString)
                             let distance = Int(userLocation.distance(from: placeLocation))
                             // Gets nearby users in a given radius
-                            let radius = 400
+                            let radius = 350
                             if distance < radius {
                                 let tempUser = User.init(dictionary: info as! [String : Any])
                                 tempUser.id = user as? String
