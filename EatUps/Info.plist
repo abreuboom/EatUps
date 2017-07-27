@@ -48,17 +48,10 @@
 	<array>
 		<string>MADE Waffle Soft.otf</string>
 	</array>
-<<<<<<< HEAD
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>location</string>
-	</array>
-=======
     <key>UIBackgroundModes</key>
     <array>
         <string>location</string>
     </array>
->>>>>>> 77c1c84f20cb4dcb3d4f9b9337d9a872deebbbbe
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -67,14 +60,8 @@
 	<array>
 		<string>armv7</string>
 	</array>
-<<<<<<< HEAD
-
-	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleLightContent</string>
-=======
     <key>UIStatusBarStyle</key>
     <string>UIStatusBarStyleLightContent</string>
->>>>>>> 77c1c84f20cb4dcb3d4f9b9337d9a872deebbbbe
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

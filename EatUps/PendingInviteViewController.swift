@@ -47,7 +47,6 @@ class PendingInviteViewController: UIViewController, SRCountdownTimerDelegate {
             self.dismiss(animated: true, completion: nil)
             APIManager.shared.resetStatus(userID: (self.selectedUser?.id)!)
         }
-        didNotRespondAlertController.addAction(backAction)
     }
 
         // Chat stuff
@@ -55,7 +54,6 @@ class PendingInviteViewController: UIViewController, SRCountdownTimerDelegate {
         // notification setup
 
         // Do any additional setup after loading the view.
-    }
 
     @IBAction func didTapCancel(_ sender: Any) {
         APIManager.shared.resetStatus(userID: (self.selectedUser?.id)!)
@@ -72,7 +70,6 @@ class PendingInviteViewController: UIViewController, SRCountdownTimerDelegate {
             else {
                     APIManager.shared.resetStatus(userID: (self.selectedUser?.id)!)
                 }
-                self.present(self.didNotRespondAlertController, animated: true)
         }
     }
 
