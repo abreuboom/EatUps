@@ -44,6 +44,7 @@ class APIManager: SessionManager {
                     if successBool == true {
                         User.current?.id = uid
                         print("successfully logged in")
+                        print("Welcome back \(User.current?.name ?? "")")
                         completion(true)
                     }
                     else {
@@ -267,59 +268,39 @@ class APIManager: SessionManager {
 
     // MARK: EatUp request handling methods
     // Called when user sends another user an invite
-    func requestEatUp(toUserID: String, completion: @escaping (Bool, String) -> ()) {
+    func requestEatUp(toUserID: String, place: String, completion: @escaping (Bool, String) -> ()) {
         let id = User.current?.id ?? ""
 
         let eatup = self.ref.child("eatups").childByAutoId()
-        let timeStamp = String(NSDate().timeIntervalSince1970)
-        eatup.setValue(["org_id": User.current?.org_id ?? "", "time": timeStamp, "inviter": id, "invitee": "none"])
-        ref.child("users/\(id)/eatup_history/\(eatup.key)").setValue(timeStamp)
+        let timeStamp = Int(Date().timeIntervalSince1970)
+        eatup.setValue(["place": place, "org_id": User.current?.org_id ?? "", "time": timeStamp, "inviter": id, "invitee": "none"])
 
-        ref.child("users/\(toUserID)/status").setValue(eatup.key)
         ref.child("users/\(id)/status").setValue(eatup.key)
-        ref.child("users/\(id)/status").observeSingleEvent(of: .value, with: { (snapshot) in
-            if let eatupID = snapshot.value as? String {
+        ref.child("users/\(toUserID)/status").setValue(eatup.key, withCompletionBlock: { (error, databaseRef) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else {
                 completion(true, eatup.key)
             }
         })
     }
-
-    // Called when user resets status
-    func resetStatus(userID: String) {
-        ref.child("users/\(userID)/status").setValue("")
-    }
-
-    //
-    func handleInvite(response: Bool, completion: @escaping (Bool) -> ()) {
-        if let id = User.current?.id {
-            if response == true {
-                ref.child("users/\(id)/status").observeSingleEvent(of: .value, with: { (snapshot) in
-                    let eatupID = snapshot.value as? String
-                    self.ref.child("eatups/\(eatupID)/time").observeSingleEvent(of: .value, with: { (snapshot) in
-                        let time = snapshot.value as? String
-                        self.ref.child("users/\(id)/eatup_history/\(eatupID)").setValue(time)
-                        self.ref.child("eatups/\(eatupID)/invitee").setValue(id)
-                        completion(true)
-                    })
-
-                })
-            }
-            else {
-                ref.child("users/\(id)/status").setValue("")
-            }
-        }
-    }
-
-    func checkResponse(selectedUser: User, eatupID: String, completion: @escaping (Bool) -> ()) {
-        let uid = User.current?.id
-        databaseHandle = ref.child("eatups/\(eatupID)/invitee").observe(.value, with: { (snapshot) in
+    
+    func checkResponse(selectedUser: User, eatupId: String, completion: @escaping (Bool) -> ()) {
+        let uid = User.current?.id ?? ""
+        databaseHandle = ref.child("eatups/\(eatupId)/invitee").observe(.value, with: { (snapshot) in
             let data = snapshot.value as! String
             if data == uid {
-                completion(true)
+                self.ref.child("eatups/\(eatupId)/time").observeSingleEvent(of: .value, with: { (snapshot) in
+                    if let timeStamp = snapshot.value as? String {
+                        self.ref.child("users/\(uid)/eatup_history/\(eatupId)").setValue(timeStamp)
+                        completion(true)
+                    }
+                })
             }
             else if data == "" {
-                self.ref.child("eatups/\(eatupID)").removeValue()
-                self.ref.child("users/\(uid!)/status").setValue("", withCompletionBlock: { (error, databaseReference) in
+                self.ref.child("eatups/\(eatupId)").removeValue()
+                self.ref.child("users/\(uid)/status").setValue("", withCompletionBlock: { (error, databaseReference) in
                     if let error = error {
                         print(error.localizedDescription)
                     }
@@ -329,6 +310,11 @@ class APIManager: SessionManager {
         })
     }
 
+    // Called when user resets status
+    func resetStatus(userID: String) {
+        ref.child("users/\(userID)/status").setValue("")
+    }
+    
     func checkForInvite(completion: @escaping (Bool, String) -> ()) {
         let uid = User.current?.id
         databaseHandle = ref.child("users/\(uid!)/status").observe(.value, with: { (snapshot) in
@@ -337,6 +323,31 @@ class APIManager: SessionManager {
                 completion(true, data!)
             }
         })
+    }
+
+    // Checks if current user has been invited to an eatup and handles their response
+    func handleInvite(eatupId: String, response: Bool, completion: @escaping (Bool) -> ()) {
+        if let uid = User.current?.id {
+            if response == true {
+                    ref.child("eatups/\(eatupId)/time").observeSingleEvent(of: .value, with: { (snapshot) in
+                        let time = snapshot.value as? String
+                        self.ref.child("users/\(uid)/eatup_history/\(eatupId)").setValue(time)
+                        self.ref.child("eatups/\(eatupId)/invitee").setValue(uid)
+                        completion(true)
+                    })
+            }
+            else {
+                ref.child("users/\(uid)/status").setValue("")
+                ref.child("eatups/\(eatupId)/invitee").setValue("", withCompletionBlock: { (error, databaseRef) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }
+                    else {
+                        completion(false)
+                    }
+                })
+            }
+        }
     }
 
     func setUpDatabaseHandleRating() {

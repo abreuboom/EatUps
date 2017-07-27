@@ -56,10 +56,10 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
             }
         }
         
-        APIManager.shared.checkForInvite { (invited, eatupID) in
+        APIManager.shared.checkForInvite { (invited, eatupId) in
             if invited == true {
-                let uid = User.current?.id
-                self.ref.child("eatups/\(eatupID)/invitee").observeSingleEvent(of: .value, with: { (snapshot) in
+                if eatupId != nil {
+                self.ref.child("eatups/\(eatupId)").observeSingleEvent(of: .value, with: { (snapshot) in
                     if let eatupDictionary = snapshot.value as? [String: Any] {
                         let eatup = EatUp(dictionary: eatupDictionary)
                         eatup.id = snapshot.key
@@ -68,10 +68,12 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
                         inviteVC.eatup = eatup
                         self.addChildViewController(inviteVC)
                         inviteVC.view.frame = self.view.frame
-                        self.view.addSubview(inviteVC.cardView)
-                        inviteVC.didMove(toParentViewController: self)
+                        inviteVC.view.center = self.view.center
+//                        self.view.addSubview(inviteVC.cardView)
+                        self.addChildViewController(inviteVC)
                     }
                 })
+                }
             }
         }
         
@@ -140,7 +142,7 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     
     @IBAction func requestEatUp(_ sender: UIButton) {
         let id = selectedUser?.id
-        APIManager.shared.requestEatUp(toUserID: id!) { (success, eatup) in
+        APIManager.shared.requestEatUp(toUserID: id!, place: place) { (success, eatup) in
             if success == true {
                 self.eatupId = eatup
                 self.performSegue(withIdentifier: "requestEatUpSegue", sender: sender)

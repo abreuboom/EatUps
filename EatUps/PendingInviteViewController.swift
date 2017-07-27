@@ -28,7 +28,7 @@ class PendingInviteViewController: UIViewController, SRCountdownTimerDelegate {
         
         ref = Database.database().reference()
         
-        APIManager.shared.checkResponse(selectedUser: selectedUser!, eatupID: eatupId!) { (success) in
+        APIManager.shared.checkResponse(selectedUser: selectedUser!, eatupId: eatupId!) { (success) in
             if success == true {
                 self.performSegue(withIdentifier: "acceptedEatUpSegue", sender: nil)
             }
@@ -58,7 +58,7 @@ class PendingInviteViewController: UIViewController, SRCountdownTimerDelegate {
     }
     
     func timerDidEnd() {
-        APIManager.shared.checkResponse(selectedUser: selectedUser!, eatupID: eatupId!) { (success) in
+        APIManager.shared.checkResponse(selectedUser: selectedUser!, eatupId: eatupId!) { (success) in
             if success == true {
                 self.performSegue(withIdentifier: "acceptedEatUpSegue", sender: nil)
             }
