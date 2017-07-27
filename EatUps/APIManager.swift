@@ -214,26 +214,6 @@ class APIManager: SessionManager {
         }
     }
 
-    //    func getUsersCount(place: String) -> String {
-    //        var users: [String] = []
-    //        var availableUsers: [User] = []
-    //
-    //        getAvailableUsers(place: place) { (success, users) in
-    //            if success == true {
-    //                for user in users {
-    //                    if availableUsers.contains(where: { (storedUser) -> Bool in
-    //                        return storedUser.id == user.id || storedUser.name == user.name
-    //                    }){}
-    //                    else {
-    //                        availableUsers.append(user)
-    //                    }
-    //                }
-    //                return String(availableUsers.count)
-    //            }
-    //        }
-    //
-    //    }
-
 
     func getUsersCount(place: String, completion: @escaping(Bool, Int) -> ()) {
         var users: [String] = []
@@ -251,6 +231,7 @@ class APIManager: SessionManager {
                     }
                 }
                 usersCount = availableUsers.count
+                print(place, availableUsers)
                 if usersCount == nil {
                     completion(false, -20)
                 }
