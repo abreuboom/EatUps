@@ -145,7 +145,7 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         APIManager.shared.requestEatUp(toUserID: id!) { (success, eatup) in
             if success == true {
                 self.eatupId = eatup
-                self.performSegue(withIdentifier: "requestEatUpSegue", sender: nil)
+                self.performSegue(withIdentifier: "requestEatUpSegue", sender: sender)
             }
         }
     }

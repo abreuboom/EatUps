@@ -53,6 +53,7 @@ class PendingInviteViewController: UIViewController, SRCountdownTimerDelegate {
     @IBAction func didTapCancel(_ sender: Any) {
         APIManager.shared.resetStatus(userID: (self.selectedUser?.id)!)
         APIManager.shared.resetStatus(userID: (User.current?.id)!)
+        ref.child("eatups/\(eatupId)").removeValue()
         self.dismiss(animated: true, completion: nil)
     }
     
