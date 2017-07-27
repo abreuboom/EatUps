@@ -194,7 +194,7 @@ class APIManager: SessionManager {
                             let userLocation = EatUp.stringToCLLocation(locationString: userLocationString)
                             let distance = Int(userLocation.distance(from: placeLocation))
                             // Gets nearby users in a given radius
-                            let radius = 400
+                            let radius = 350
                             if distance < radius {
                                 let tempUser = User.init(dictionary: info as! [String : Any])
                                 tempUser.id = user as? String
@@ -215,26 +215,6 @@ class APIManager: SessionManager {
         }
     }
 
-    //    func getUsersCount(place: String) -> String {
-    //        var users: [String] = []
-    //        var availableUsers: [User] = []
-    //
-    //        getAvailableUsers(place: place) { (success, users) in
-    //            if success == true {
-    //                for user in users {
-    //                    if availableUsers.contains(where: { (storedUser) -> Bool in
-    //                        return storedUser.id == user.id || storedUser.name == user.name
-    //                    }){}
-    //                    else {
-    //                        availableUsers.append(user)
-    //                    }
-    //                }
-    //                return String(availableUsers.count)
-    //            }
-    //        }
-    //
-    //    }
-
 
     func getUsersCount(place: String, completion: @escaping(Bool, Int) -> ()) {
         var users: [String] = []
@@ -252,6 +232,7 @@ class APIManager: SessionManager {
                     }
                 }
                 usersCount = availableUsers.count
+                print(place, availableUsers)
                 if usersCount == nil {
                     completion(false, -20)
                 }
