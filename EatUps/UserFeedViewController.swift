@@ -19,6 +19,10 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var eatUpButton: UIButton!
     
+    @IBOutlet var inviteView: InviteView!
+    @IBOutlet weak var blurEffect: UIVisualEffectView!
+    var effect: UIVisualEffect!
+    
     var ref: DatabaseReference!
     var databaseHandle: DatabaseHandle!
     
@@ -33,6 +37,11 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        effect = blurEffect.effect!
+        blurEffect.effect = nil
+        inviteView.layer.cornerRadius = 25
+        inviteView.dropShadow()
         
         self.navigationController?.hidesNavigationBarHairline = true
         
@@ -61,20 +70,14 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         APIManager.shared.checkForInvite { (invited, eatupId) in
             if invited == true {
                 if eatupId != nil {
-                self.ref.child("eatups/\(eatupId)").observeSingleEvent(of: .value, with: { (snapshot) in
-                    if let eatupDictionary = snapshot.value as? [String: Any] {
-                        let eatup = EatUp(dictionary: eatupDictionary)
-                        eatup.id = snapshot.key
-                        
-                        let inviteVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "inviteViewController") as! InviteViewController
-                        inviteVC.eatup = eatup
-                        self.addChildViewController(inviteVC)
-                        inviteVC.view.frame = self.view.frame
-                        inviteVC.view.center = self.view.center
-//                        self.view.addSubview(inviteVC.cardView)
-                        self.addChildViewController(inviteVC)
-                    }
-                })
+                    self.ref.child("eatups/\(eatupId)").observeSingleEvent(of: .value, with: { (snapshot) in
+                        if let eatupDictionary = snapshot.value as? [String: Any] {
+                            let eatup = EatUp(dictionary: eatupDictionary)
+                            eatup.id = snapshot.key
+                            
+                            self.animateInviteIn(eatup: eatup)
+                        }
+                    })
                 }
             }
         }
@@ -90,6 +93,35 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         collectionView.alwaysBounceVertical = true
         collectionView.emptyDataSetSource = self
         collectionView.emptyDataSetDelegate = self
+    }
+    
+    func animateInviteIn(eatup: EatUp) {
+        self.view.bringSubview(toFront: blurEffect)
+        inviteView.eatup = eatup
+        inviteView.populateInviteInfo()
+        inviteView.layer.position = self.view.center
+        inviteView.center = CGPoint(x: blurEffect.contentView.frame.size.width/2, y: blurEffect.contentView.frame.size.height/2)
+        self.view.addSubview(inviteView)
+        
+        inviteView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+        inviteView.alpha = 0
+        
+        UIView.animate(withDuration: 0.4) { 
+            self.blurEffect.effect = self.effect
+            self.inviteView.alpha = 1
+            self.inviteView.transform = CGAffineTransform.identity
+        }
+    }
+    
+    func animateInviteOut() {
+        UIView.animate(withDuration: 0.2, animations: { 
+            self.inviteView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+            self.inviteView.alpha = 0
+            self.blurEffect.effect = nil
+        }) { (success) in
+            self.view.sendSubview(toBack: self.blurEffect)
+            self.inviteView.removeFromSuperview()
+        }
     }
     
     // MARK: Collection View Configuration
