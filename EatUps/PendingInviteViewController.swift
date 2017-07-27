@@ -30,7 +30,10 @@ class PendingInviteViewController: UIViewController, SRCountdownTimerDelegate {
         
         APIManager.shared.checkResponse(selectedUser: selectedUser!, eatupId: eatupId!) { (success) in
             if success == true {
-                self.performSegue(withIdentifier: "acceptedEatUpSegue", sender: nil)
+                self.performSegue(withIdentifier: "pendingToFindSegue", sender: nil)
+            }
+            else {
+                self.dismiss(animated: true, completion: nil)
             }
         }
         

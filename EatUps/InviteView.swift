@@ -20,8 +20,7 @@ class InviteView: UIView {
         let eatupId = eatup?.id ?? ""
         APIManager.shared.handleInvite(eatupId: eatupId, response: true, completion: { (success) in
             if success == true {
-                let userFeedVC = super.superview as! UserFeedViewController
-                userFeedVC.performSegue(withIdentifier: "pendingToFindSegue", sender: nil)
+                self.parentViewController?.performSegue(withIdentifier: "feedToFindSegue", sender: nil)
             }
         })
     }
@@ -30,8 +29,7 @@ class InviteView: UIView {
         let eatupId = eatup?.id ?? ""
         APIManager.shared.handleInvite(eatupId: eatupId, response: false, completion: { (success) in
             if success == true {
-                let userFeedVC = super.superview as! UserFeedViewController
-                userFeedVC.animateInviteOut()
+                self.parentViewController?.animateInviteOut()
             }
         })
     }
@@ -59,5 +57,7 @@ class InviteView: UIView {
         // Drawing code
     }
     */
+    
+    
 
 }
