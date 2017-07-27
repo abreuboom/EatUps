@@ -58,10 +58,10 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
             }
         }
         
-        APIManager.shared.checkForInvite { (invited, eatupID) in
+        APIManager.shared.checkForInvite { (invited, eatupId) in
             if invited == true {
                 let uid = User.current?.id
-                self.ref.child("eatups/\(eatupID)/invitee").observeSingleEvent(of: .value, with: { (snapshot) in
+                self.ref.child("users/\(eatupId)/invitee").observeSingleEvent(of: .value, with: { (snapshot) in
                     if let eatupDictionary = snapshot.value as? [String: Any] {
                         let eatup = EatUp(dictionary: eatupDictionary)
                         eatup.id = snapshot.key

@@ -42,7 +42,8 @@ class InviteViewController: UIViewController {
     }
 
     @IBAction func acceptEatUp(_ sender: UIButton) {
-        APIManager.shared.handleInvite(response: true, completion: { (success) in
+        let eatupId = eatup?.id ?? ""
+        APIManager.shared.handleInvite(eatupId: eatupId, response: true, completion: { (success) in
             if success == true {
                 self.parent?.performSegue(withIdentifier: "acceptedInviteSegue", sender: nil)
             }
@@ -50,7 +51,8 @@ class InviteViewController: UIViewController {
     }
     
     @IBAction func rejectEatUp(_ sender: UIButton) {
-        APIManager.shared.handleInvite(response: false, completion: { (success) in
+        let eatupId = eatup?.id ?? ""
+        APIManager.shared.handleInvite(eatupId: eatupId, response: false, completion: { (success) in
             if success == true {
                 self.dismiss(animated: true, completion: {
                 })

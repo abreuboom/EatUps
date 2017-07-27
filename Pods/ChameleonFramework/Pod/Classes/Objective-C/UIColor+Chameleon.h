@@ -457,7 +457,7 @@ typedef NS_ENUM (NSInteger, UIShadeStyle) {
  *
  *  Returns a randomly generated flat color object NOT found in the specified array.
  *
- *  @param excludedColors An array specifying which colors NOT to return.
+ *  @param colors An array specifying which colors NOT to return.
  *
  *  @return A flat @c UIColor object in the HSB colorspace.
  *
