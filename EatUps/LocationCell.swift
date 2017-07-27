@@ -12,6 +12,7 @@ class LocationCell: UITableViewCell {
 
     @IBOutlet weak var cardView: UIView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var usersCountLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

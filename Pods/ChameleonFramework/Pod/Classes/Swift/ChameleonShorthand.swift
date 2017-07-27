@@ -151,9 +151,7 @@ public func FlatBlue() -> UIColor {
 }
 
 public func FlatBrown() -> UIColor {
-	return UIColor.flatBrown()
-    
-    
+	return UIColor.flatBrown() 
 }
 
 public func FlatCoffee() -> UIColor {

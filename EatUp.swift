@@ -14,20 +14,23 @@ class EatUp {
     var dictionary: [String: Any]?
 
     // MARK: Properties
-    var id: String // For identifying which EatUp
-    var users: [String: Bool?] // Participating users and respective ratings
+    var id: String? // For identifying which EatUp
+    var inviter: String // User who requested EatUp
+    var invitee: String // User who accepted EatUp
+    var conversationId: String? // ID for conversation
     var place: String // EatUp location
-    var org_id: Int64 // EatUp org
-    var time: NSDate // EatUp date and time
+    var org_id: String // EatUp org
+    var time: Int // EatUp date and time
 
     // MARK: - Create initializer with dictionary
     init(dictionary: [String: Any]) {
         self.dictionary = dictionary
-        id = dictionary["id"] as! String
-        users = dictionary["users"] as! [String: Bool?]
+        inviter = dictionary["inviter"] as! String
+        invitee = dictionary["invitee"] as! String
+        //conversationId = dictionary["conversation"] as! String
         place = dictionary["place"] as! String
-        org_id = dictionary["org_id"] as! Int64
-        time = dictionary["time"] as! NSDate
+        org_id = dictionary["org_id"] as! String
+        time = dictionary["time"] as! Int
     }
     
     // MARK: TODO: Get current eatUp ID

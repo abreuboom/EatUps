@@ -61,4 +61,12 @@ class User {
         photoView.layer.cornerRadius = photoView.frame.height/2
         photoView.clipsToBounds = true
     }
+    
+    class func firstName(name: String) -> String {
+        var firstName = name
+        if let dotRange = firstName.range(of: " ") {
+            firstName.removeSubrange(dotRange.lowerBound..<firstName.endIndex)
+        }
+        return firstName
+    }
 }
