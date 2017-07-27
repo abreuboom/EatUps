@@ -11,7 +11,7 @@ import Firebase
 
 class FindUpeeViewController: UIViewController {
 
-    @IBOutlet weak var profileView: UIImageView!
+    @IBOutlet weak var profilePhotoView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     
     var selectedUser: User?
@@ -19,14 +19,39 @@ class FindUpeeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if selectedUser == nil {
+            Database.database().reference().child("eatups").child(eatupId!).child("inviter").observe(.value, with: { (snapshot) in
+                    let inviter = snapshot.value as! String
+                APIManager.shared.getUser(uid: inviter) { (success, inviter) in
+                    if success == true {
+                        self.selectedUser = inviter
+                        self.customizeView()
+                    }
+                }
+                })
+        }
+        else {
+            customizeView()
+        }
 
         // Do any additional setup after loading the view.
+    }
+    
+    func customizeView() {
+        if let photoURL = selectedUser?.profilePhotoUrl {
+            self.profilePhotoView.af_setImage(withURL: photoURL)
+            User.getRoundProfilePics(photoView: self.profilePhotoView)
+        }
+        if let name = selectedUser?.name {
+            self.nameLabel.text = User.firstName(name: name)
+        }
     }
     
     @IBAction func didFinishEatUp(_ sender: Any) {
         // Deletes the EatUp conversation
 //        if let currentUserID = Auth.auth().currentUser?.uid {
-//            Database.database().reference().child("eatups").child(eatupId).observe(.value, with: { (snapshot) in
+//            Database.database().reference().child("eatups").child(eatupId!).observe(.value, with: { (snapshot) in
 //                if snapshot.hasChild("conversation") {
 //                    let data = snapshot.value as! [String: Any]
 //                    let location = data["conversation"] as! String

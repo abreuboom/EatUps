@@ -621,7 +621,7 @@
                     </view>
                     <connections>
                         <outlet property="nameLabel" destination="kIQ-9w-G5D" id="Xv6-hN-MEz"/>
-                        <outlet property="profileView" destination="7kk-Zu-Rhg" id="WYX-tp-kik"/>
+                        <outlet property="profilePhotoView" destination="7kk-Zu-Rhg" id="xvi-Vd-eZX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xVU-NK-2F3" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -190,6 +190,10 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
             pendingInviteViewController.selectedUser = selectedUser
             pendingInviteViewController.eatupId = eatupId
         }
+        else if segue.identifier == "feedToFindSegue" {
+            let findUpeeViewController = segue.destination as! FindUpeeViewController
+            findUpeeViewController.eatupId = self.inviteView.eatup?.id
+        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
