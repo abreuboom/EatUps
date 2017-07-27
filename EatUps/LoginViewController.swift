@@ -25,10 +25,6 @@ class LoginViewController: UIViewController {
         ref = Database.database().reference()
     }
     
-    @IBAction func logout(_ sender: UIButton) {
-        APIManager.shared.logout()
-    }
-    
     @IBAction func loginButtonClicked(_ sender: LoginButton) {
         APIManager.shared.loginManager.logIn([ .publicProfile, .email, .userFriends ], viewController: self) { loginResult in
             switch loginResult {
