@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E7F65911F26FB2C005BA42E /* Helper Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F65901F26FB2C005BA42E /* Helper Files.swift */; };
+		0E7F65931F26FB4B005BA42E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F65921F26FB4B005BA42E /* Message.swift */; };
+		0E7F65971F26FB91005BA42E /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F65961F26FB91005BA42E /* ChatCell.swift */; };
+		0E7F65991F26FBB6005BA42E /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F65981F26FBB6005BA42E /* ChatViewController.swift */; };
 		0EC37D521F281B2700EA438C /* FindUpeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC37D511F281B2700EA438C /* FindUpeeViewController.swift */; };
 		0ED57BB01F1D3CFC00AC1A64 /* AvailableUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED57BAF1F1D3CFC00AC1A64 /* AvailableUserCell.swift */; };
 		0F94C76E144E1E4FD25B1F25 /* Pods_EatUps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73F38D920ADFD5A052C30A17 /* Pods_EatUps.framework */; };
@@ -60,6 +64,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E7F65901F26FB2C005BA42E /* Helper Files.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Helper Files.swift"; sourceTree = "<group>"; };
+		0E7F65921F26FB4B005BA42E /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		0E7F65961F26FB91005BA42E /* ChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
+		0E7F65981F26FBB6005BA42E /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		0EC37D511F281B2700EA438C /* FindUpeeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindUpeeViewController.swift; sourceTree = "<group>"; };
 		0ED57BAF1F1D3CFC00AC1A64 /* AvailableUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvailableUserCell.swift; sourceTree = "<group>"; };
 		1312C3651A0BED44631D9496 /* Pods-EatUpsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EatUpsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EatUpsUITests/Pods-EatUpsUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -168,6 +176,7 @@
 				2032ACC71F1548FA00A4015C /* LaunchScreen.storyboard */,
 				2032ACCA1F1548FA00A4015C /* Info.plist */,
 				20E931941F16A65500C4A4A1 /* GoogleService-Info.plist */,
+				0E7F65901F26FB2C005BA42E /* Helper Files.swift */,
 			);
 			path = EatUps;
 			sourceTree = "<group>";
@@ -196,6 +205,7 @@
 				208AF5761F183BC3003E76A8 /* OrgCell.swift */,
 				2016F28B1F1EB4AB00CA814C /* LocationCell.swift */,
 				0ED57BAF1F1D3CFC00AC1A64 /* AvailableUserCell.swift */,
+				0E7F65961F26FB91005BA42E /* ChatCell.swift */,
 				200E364B1F2A7146003FA9C7 /* InviteView.swift */,
 			);
 			name = Views;
@@ -215,6 +225,7 @@
 				20E931981F16A66800C4A4A1 /* EatUp.swift */,
 				20E931921F16A56600C4A4A1 /* User.swift */,
 				20E931901F16A4F900C4A4A1 /* Org.swift */,
+				0E7F65921F26FB4B005BA42E /* Message.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -251,6 +262,7 @@
 				D8A82FED1F1553550053C1A1 /* UserFeedViewController.swift */,
 				D8A82FEF1F1554AF0053C1A1 /* PendingInviteViewController.swift */,
 				D8A82FF51F1575800053C1A1 /* RatingViewController.swift */,
+				0E7F65981F26FBB6005BA42E /* ChatViewController.swift */,
 				0EC37D511F281B2700EA438C /* FindUpeeViewController.swift */,
 			);
 			name = "View Controllers";
@@ -556,18 +568,24 @@
 			files = (
 				208AF5771F183BC3003E76A8 /* OrgCell.swift in Sources */,
 				20E931911F16A4F900C4A4A1 /* Org.swift in Sources */,
+				0E7F65991F26FBB6005BA42E /* ChatViewController.swift in Sources */,
 				20E9318D1F16A3F100C4A4A1 /* APIManager.swift in Sources */,
 				D8A82FE71F154FC80053C1A1 /* LoginViewController.swift in Sources */,
 				2016F28C1F1EB4AB00CA814C /* LocationCell.swift in Sources */,
 				0ED57BB01F1D3CFC00AC1A64 /* AvailableUserCell.swift in Sources */,
 				20E931991F16A66800C4A4A1 /* EatUp.swift in Sources */,
+				0E7F65931F26FB4B005BA42E /* Message.swift in Sources */,
 				D8A82FF61F1575800053C1A1 /* RatingViewController.swift in Sources */,
 				0EC37D521F281B2700EA438C /* FindUpeeViewController.swift in Sources */,
 				200E364C1F2A7146003FA9C7 /* InviteView.swift in Sources */,
 				D8A82FEE1F1553550053C1A1 /* UserFeedViewController.swift in Sources */,
+				0E7F65971F26FB91005BA42E /* ChatCell.swift in Sources */,
 				D8A82FF01F1554AF0053C1A1 /* PendingInviteViewController.swift in Sources */,
 				20E931931F16A56600C4A4A1 /* User.swift in Sources */,
 				2032ACC11F1548FA00A4015C /* ViewController.swift in Sources */,
+				D8A82FF41F1573680053C1A1 /* ReceivedInviteViewController.swift in Sources */,
+				D8A82FF21F1555DE0053C1A1 /* ResponseViewController.swift in Sources */,
+				0E7F65911F26FB2C005BA42E /* Helper Files.swift in Sources */,
 				D8A82FEC1F1552A40053C1A1 /* SelectLocationViewController.swift in Sources */,
 				2032ACBF1F1548FA00A4015C /* AppDelegate.swift in Sources */,
 				208AF5751F1838BB003E76A8 /* OrgSelectViewController.swift in Sources */,

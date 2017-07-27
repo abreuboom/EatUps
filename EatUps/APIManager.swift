@@ -207,7 +207,7 @@ class APIManager: SessionManager {
                             }
                             else {
                                 completion(true, self.users)
-                                
+
                             }
                         }
                     }
@@ -232,7 +232,7 @@ class APIManager: SessionManager {
                     }
                 }
                 usersCount = availableUsers.count
-                
+
                 if usersCount == nil {
                     completion(false, -20)
                 }
@@ -285,7 +285,7 @@ class APIManager: SessionManager {
             }
         })
     }
-    
+
     func checkResponse(selectedUser: User, eatupId: String, completion: @escaping (Bool) -> ()) {
         let uid = User.current?.id ?? ""
         databaseHandle = ref.child("eatups/\(eatupId)/invitee").observe(.value, with: { (snapshot) in
@@ -319,7 +319,7 @@ class APIManager: SessionManager {
     func resetStatus(userID: String) {
         ref.child("users/\(userID)/status").setValue("")
     }
-    
+
     func checkForInvite(completion: @escaping (Bool, String) -> ()) {
         let uid = User.current?.id
         databaseHandle = ref.child("users/\(uid!)/status").observe(.value, with: { (snapshot) in
