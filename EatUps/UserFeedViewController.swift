@@ -44,11 +44,10 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         APIManager.shared.getAvailableUsers(place: place) { (success, users) in
             if success == true {
                 for user in users {
-                    if self.availableUsers.contains(where: { (storedUser) -> Bool in
+                    // Does not add self and other users into user feed view
+                    if (user.id == uid || self.availableUsers.contains(where: { (storedUser) -> Bool in
                         return storedUser.id == user.id || storedUser.name == user.name
-                    }) {
-                    }
-                    else {
+                    })) != true {
                         self.availableUsers.append(user)
                     }
                 }
