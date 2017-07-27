@@ -50,27 +50,16 @@ class FindUpeeViewController: UIViewController {
     
     @IBAction func didFinishEatUp(_ sender: Any) {
         // Deletes the EatUp conversation
-//        if let currentUserID = Auth.auth().currentUser?.uid {
-//            Database.database().reference().child("eatups").child(eatupId!).observe(.value, with: { (snapshot) in
-//                if snapshot.hasChild("conversation") {
-//                    let data = snapshot.value as! [String: Any]
-//                    let location = data["conversation"] as! String
-//                    Database.database().reference().child("conversations").child(location).childByAutoId().setValue(withValues, withCompletionBlock: { (error, _) in
-//                        if error == nil {
-//                            completion(true)
-//                        } else {
-//                            completion(false)
-//                        }
-//                    })
-//                } else {
-//                    Database.database().reference().child("conversations").childByAutoId().childByAutoId().setValue(withValues, withCompletionBlock: { (error, reference) in
-//                        let data = ["conversation": reference.parent!.key]
-//                        Database.database().reference().child("eatups").child(eatUpID).updateChildValues(data)
-//                        completion(true)
-//                    })
-//                }
-//            })
-//        }
+        if let currentUserID = Auth.auth().currentUser?.uid {
+            Database.database().reference().child("eatups").child(eatupId!).observe(.value, with: { (snapshot) in
+                if snapshot.hasChild("conversation") {
+                    let eatupInfo = snapshot.value as! NSDictionary
+                    let conversationKey = eatupInfo["conversation"] as! String
+                    let ref = Database.database().reference().child("conversations")
+                    ref.child(conversationKey).removeValue()
+            }
+            })
+        }
     }
     
     override func didReceiveMemoryWarning() {
