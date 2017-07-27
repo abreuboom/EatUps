@@ -604,6 +604,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Finished with eatup"/>
                                 <connections>
+                                    <action selector="didFinishEatUp:" destination="WXc-wC-v7g" eventType="touchUpInside" id="5VD-fb-YVq"/>
                                     <segue destination="lZU-V8-fg5" kind="show" identifier="findToRatingSegue" id="YfW-sN-Cws"/>
                                 </connections>
                             </button>
@@ -931,7 +932,7 @@
                     </constraints>
                 </view>
             </objects>
-            <point key="canvasLocation" x="3009" y="242"/>
+            <point key="canvasLocation" x="3008.8000000000002" y="241.52923538230885"/>
         </scene>
     </scenes>
     <resources>

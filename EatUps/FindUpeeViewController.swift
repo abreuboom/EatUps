@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class FindUpeeViewController: UIViewController {
 
@@ -14,13 +15,39 @@ class FindUpeeViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     
     var selectedUser: User?
+    var eatupId: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-
+    
+    @IBAction func didFinishEatUp(_ sender: Any) {
+        // Deletes the EatUp conversation
+//        if let currentUserID = Auth.auth().currentUser?.uid {
+//            Database.database().reference().child("eatups").child(eatupId).observe(.value, with: { (snapshot) in
+//                if snapshot.hasChild("conversation") {
+//                    let data = snapshot.value as! [String: Any]
+//                    let location = data["conversation"] as! String
+//                    Database.database().reference().child("conversations").child(location).childByAutoId().setValue(withValues, withCompletionBlock: { (error, _) in
+//                        if error == nil {
+//                            completion(true)
+//                        } else {
+//                            completion(false)
+//                        }
+//                    })
+//                } else {
+//                    Database.database().reference().child("conversations").childByAutoId().childByAutoId().setValue(withValues, withCompletionBlock: { (error, reference) in
+//                        let data = ["conversation": reference.parent!.key]
+//                        Database.database().reference().child("eatups").child(eatUpID).updateChildValues(data)
+//                        completion(true)
+//                    })
+//                }
+//            })
+//        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -30,6 +57,7 @@ class FindUpeeViewController: UIViewController {
         if segue.identifier == "findToChatSegue" {
             let ChatViewController = segue.destination as! ChatViewController
             ChatViewController.selectedUser = selectedUser
+            ChatViewController.eatupId = eatupId
         }
     }
 
