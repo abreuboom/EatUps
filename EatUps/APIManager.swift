@@ -179,9 +179,9 @@ class APIManager: SessionManager {
 
     // Gets users in a set radius around the EatUp location
     func getAvailableUsers(place: String, completion: @escaping (Bool, [User]) -> ()) {
-        users = []
         getPlaceLocation(place: place) { (successBool, placeLocation) in
             if successBool == true {
+                self.users = []
                 // Gets location information of each user
                 self.databaseHandle = self.ref.child("users").observe(.value, with: { (snapshot) in
                     let data = snapshot.value as? NSDictionary
@@ -207,6 +207,7 @@ class APIManager: SessionManager {
                             }
                             else {
                                 completion(true, self.users)
+                                
                             }
                         }
                     }
@@ -217,9 +218,9 @@ class APIManager: SessionManager {
 
 
     func getUsersCount(place: String, completion: @escaping(Bool, Int) -> ()) {
-        var users: [String] = []
         var availableUsers: [User] = []
         var usersCount: Int?
+        var users: [String] = []
 
         getAvailableUsers(place: place) { (success, users) in
             if success == true {
@@ -227,17 +228,17 @@ class APIManager: SessionManager {
                     if availableUsers.contains(where: { (storedUser) -> Bool in
                         return storedUser.id == user.id || storedUser.name == user.name
                     }) != true {
-
                         availableUsers.append(user)
                     }
                 }
                 usersCount = availableUsers.count
-                print(place, availableUsers)
+                
                 if usersCount == nil {
                     completion(false, -20)
                 }
                 else {
                     completion(true, usersCount!)
+                    self.users = []
                 }
             }
 
