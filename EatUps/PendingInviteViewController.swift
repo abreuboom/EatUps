@@ -33,6 +33,9 @@ class PendingInviteViewController: UIViewController, SRCountdownTimerDelegate {
             if success == true {
                 self.performSegue(withIdentifier: "pendingToFindSegue", sender: nil)
             }
+            else {
+                self.dismiss(animated: true, completion: nil)
+            }
         }
 
         // Configure send invite user views

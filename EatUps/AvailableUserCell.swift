@@ -42,4 +42,15 @@ extension UIView {
         self.layer.shadowOffset = CGSize(width: 0, height: 6)
         self.layer.shadowRadius = 4
     }
+    
+    var parentViewController: UserFeedViewController? {
+        var parentResponder: UIResponder? = self
+        while parentResponder != nil {
+            parentResponder = parentResponder!.next
+            if let viewController = parentResponder as? UserFeedViewController {
+                return viewController
+            }
+        }
+        return nil
+    }
 }
