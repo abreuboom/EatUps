@@ -222,16 +222,16 @@ class APIManager: SessionManager {
 
         getAvailableUsers(place: place) { (success, users) in
             if success == true {
+                availableUsers = []
                 for user in users {
                     if availableUsers.contains(where: { (storedUser) -> Bool in
                         return storedUser.id == user.id || storedUser.name == user.name
                     }) != true {
-
                         availableUsers.append(user)
                     }
                 }
                 usersCount = availableUsers.count
-                print(place, availableUsers)
+                print(place, availableUsers, usersCount)
                 if usersCount == nil {
                     completion(false, -20)
                 }
