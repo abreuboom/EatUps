@@ -299,9 +299,9 @@ class APIManager: SessionManager {
         let uid = User.current?.id ?? ""
         databaseHandle = ref.child("eatups/\(eatupId)/invitee").observe(.value, with: { (snapshot) in
             if let data = snapshot.value as? String {
-                if data == uid {
+                if data != "" && data != "none" {
                     self.ref.child("eatups/\(eatupId)/time").observeSingleEvent(of: .value, with: { (snapshot) in
-                        if let timeStamp = snapshot.value as? String {
+                        if let timeStamp = snapshot.value as? Int {
                             self.ref.child("users/\(uid)/eatup_history/\(eatupId)").setValue(timeStamp)
                             completion(true)
                         }

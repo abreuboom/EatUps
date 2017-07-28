@@ -73,7 +73,7 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
         super.viewWillDisappear(animated)
         filteredPlaces = []
         places = []
-        locationsTableView.deselectRow(at: locationsTableView.indexPathForSelectedRow!, animated: true)
+        //locationsTableView.deselectRow(at: locationsTableView.indexPathForSelectedRow!, animated: true)
         
         let eatupAtViewCopy = EatupAtView()
         eatupAtViewCopy.frame = eatupAtView.frame
