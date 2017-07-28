@@ -137,8 +137,9 @@ class APIManager: SessionManager {
     }
     
     // set up the Select Location database handle
-    func getPlaces(org_id: String, completion: @escaping (_ success: Bool, [String]) -> ()) {
+    func getPlaces(org_id: String, completion: @escaping (_ success: Bool, [String], [String]) -> ()) {
         var places: [String] = []
+        var emojis: [String] = []
         ref.child("orgs/\(org_id)/places").observeSingleEvent(of: .value, with: { (snapshot) in
             print(snapshot)
             if let data = snapshot.value as? NSDictionary {
@@ -146,12 +147,21 @@ class APIManager: SessionManager {
                     let placeName = place as! String
                     places.append(placeName)
                 }
-                if places.isEmpty == true {
-                    completion(false, places)
-                }
-                else {
-                    completion(true, places)
-                }
+                self.ref.child("orgs/\(org_id)/emojis").observeSingleEvent(of: .value, with: { (snapshot) in
+                    if let emojiDictionary = snapshot.value as? NSDictionary {
+                        for (_, emojiData) in emojiDictionary {
+                            let emoji = emojiData as! String
+                            emojis.append(emoji)
+                        }
+                        if places.isEmpty == true {
+                            completion(false, places, emojis)
+                        }
+                        else {
+                            completion(true, places, emojis)
+                        }
+                    }
+                })
+                
             }
         })
     }
@@ -207,7 +217,7 @@ class APIManager: SessionManager {
                             }
                             else {
                                 completion(true, self.users)
-
+                                
                             }
                         }
                     }
@@ -216,35 +226,58 @@ class APIManager: SessionManager {
         }
     }
     
+//    func getUsersCount(places: [String], completion: @escaping (Bool, [Int]) -> ()) {
+//        var userCounts: [Int] = []
+//        for i in 0...places.count-1 {
+//            let place = places[i]
+//            var availableUsers: [User] = []
+//            let uid = User.current?.id ?? ""
+//            
+//            // Populating collection view with available users
+//            APIManager.shared.getAvailableUsers(place: place) { (success, users) in
+//                if success == true {
+//                    print(
+//                    for user in users {
+//                        // Does not add self and other users into user feed view
+//                        if (user.id == uid || availableUsers.contains(where: { (storedUser) -> Bool in
+//                            return storedUser.id == user.id
+//                        })) != true {
+//                            availableUsers.append(user)
+//                        }
+//                    }
+//                    userCounts.append(availableUsers.count)
+//                    if i == places.count-1 {
+//                        completion(true, userCounts)
+//                    }
+//                }
+//            }
+//        }
+//    }
     
-    func getUsersCount(place: String, completion: @escaping(Bool, Int) -> ()) {
-        var availableUsers: [User] = []
-        var usersCount: Int?
-        var users: [String] = []
-        
-        getAvailableUsers(place: place) { (success, users) in
-            if success == true {
-                for user in users {
-                    if availableUsers.contains(where: { (storedUser) -> Bool in
-                        return storedUser.id == user.id || storedUser.name == user.name
-                    }) != true {
-                        availableUsers.append(user)
-                    }
-                }
-                usersCount = availableUsers.count
-
-                if usersCount == nil {
-                    completion(false, -20)
-                }
-                else {
-                    completion(true, usersCount!)
-                    self.users = []
-                }
-            }
-            
-        }
-        
-    }
+    //    func getUsersCount(place: String, completion: @escaping(Bool, Int) -> ()) {
+    //        let uid = User.current?.id ?? ""
+    //        var availableUsers: [User] = []
+    //        var usersCount: Int?
+    //        var users: [String] = []
+    //
+    //        getAvailableUsers(place: place) { (success, users) in
+    //            if success == true {
+    //                for user in users {
+    //                    if (user.id == uid || availableUsers.contains(where: { (storedUser) -> Bool in
+    //                        return storedUser.id == user.id})) != true {
+    //                        availableUsers.append(user)
+    //                    }
+    //                }
+    //                usersCount = availableUsers.count
+    //
+    //                completion(true, usersCount!)
+    //                self.users = []
+    //                print(place, availableUsers, usersCount)
+    //            }
+    //
+    //        }
+    //
+    //    }
     
     func containsUser(arr: [User], targetUser: User) -> Bool {
         for user in arr {
@@ -285,7 +318,7 @@ class APIManager: SessionManager {
             }
         })
     }
-
+    
     func checkResponse(selectedUser: User, eatupId: String, completion: @escaping (Bool) -> ()) {
         let uid = User.current?.id ?? ""
         databaseHandle = ref.child("eatups/\(eatupId)/invitee").observe(.value, with: { (snapshot) in
@@ -319,7 +352,7 @@ class APIManager: SessionManager {
     func resetStatus(userID: String) {
         ref.child("users/\(userID)/status").setValue("")
     }
-
+    
     func checkForInvite(completion: @escaping (Bool, String) -> ()) {
         let uid = User.current?.id
         databaseHandle = ref.child("users/\(uid!)/status").observe(.value, with: { (snapshot) in
