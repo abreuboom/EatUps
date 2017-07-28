@@ -25,6 +25,7 @@
 		2032ACDF1F1548FA00A4015C /* EatUpsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2032ACDE1F1548FA00A4015C /* EatUpsUITests.swift */; };
 		208AF5751F1838BB003E76A8 /* OrgSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208AF5741F1838BB003E76A8 /* OrgSelectViewController.swift */; };
 		208AF5771F183BC3003E76A8 /* OrgCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208AF5761F183BC3003E76A8 /* OrgCell.swift */; };
+		20B887021F2B9EE8006B6571 /* EatupAtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B887011F2B9EE8006B6571 /* EatupAtView.swift */; };
 		20E9318D1F16A3F100C4A4A1 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E9318C1F16A3F100C4A4A1 /* APIManager.swift */; };
 		20E931911F16A4F900C4A4A1 /* Org.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E931901F16A4F900C4A4A1 /* Org.swift */; };
 		20E931931F16A56600C4A4A1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E931921F16A56600C4A4A1 /* User.swift */; };
@@ -88,6 +89,7 @@
 		2032ACE01F1548FA00A4015C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		208AF5741F1838BB003E76A8 /* OrgSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgSelectViewController.swift; sourceTree = "<group>"; };
 		208AF5761F183BC3003E76A8 /* OrgCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgCell.swift; sourceTree = "<group>"; };
+		20B887011F2B9EE8006B6571 /* EatupAtView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EatupAtView.swift; sourceTree = "<group>"; };
 		20CE19381F198AFA008494F1 /* EatUps.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EatUps.entitlements; sourceTree = "<group>"; };
 		20E9318C1F16A3F100C4A4A1 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		20E931901F16A4F900C4A4A1 /* Org.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Org.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 				0ED57BAF1F1D3CFC00AC1A64 /* AvailableUserCell.swift */,
 				0E7F65961F26FB91005BA42E /* ChatCell.swift */,
 				200E364B1F2A7146003FA9C7 /* InviteView.swift */,
+				20B887011F2B9EE8006B6571 /* EatupAtView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -571,6 +574,7 @@
 				0E7F65991F26FBB6005BA42E /* ChatViewController.swift in Sources */,
 				20E9318D1F16A3F100C4A4A1 /* APIManager.swift in Sources */,
 				D8A82FE71F154FC80053C1A1 /* LoginViewController.swift in Sources */,
+				20B887021F2B9EE8006B6571 /* EatupAtView.swift in Sources */,
 				2016F28C1F1EB4AB00CA814C /* LocationCell.swift in Sources */,
 				0ED57BB01F1D3CFC00AC1A64 /* AvailableUserCell.swift in Sources */,
 				20E931991F16A66800C4A4A1 /* EatUp.swift in Sources */,
@@ -583,8 +587,6 @@
 				D8A82FF01F1554AF0053C1A1 /* PendingInviteViewController.swift in Sources */,
 				20E931931F16A56600C4A4A1 /* User.swift in Sources */,
 				2032ACC11F1548FA00A4015C /* ViewController.swift in Sources */,
-				D8A82FF41F1573680053C1A1 /* ReceivedInviteViewController.swift in Sources */,
-				D8A82FF21F1555DE0053C1A1 /* ResponseViewController.swift in Sources */,
 				0E7F65911F26FB2C005BA42E /* Helper Files.swift in Sources */,
 				D8A82FEC1F1552A40053C1A1 /* SelectLocationViewController.swift in Sources */,
 				2032ACBF1F1548FA00A4015C /* AppDelegate.swift in Sources */,

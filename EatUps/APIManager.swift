@@ -254,30 +254,6 @@ class APIManager: SessionManager {
 //        }
 //    }
     
-    //    func getUsersCount(place: String, completion: @escaping(Bool, Int) -> ()) {
-    //        let uid = User.current?.id ?? ""
-    //        var availableUsers: [User] = []
-    //        var usersCount: Int?
-    //        var users: [String] = []
-    //
-    //        getAvailableUsers(place: place) { (success, users) in
-    //            if success == true {
-    //                for user in users {
-    //                    if (user.id == uid || availableUsers.contains(where: { (storedUser) -> Bool in
-    //                        return storedUser.id == user.id})) != true {
-    //                        availableUsers.append(user)
-    //                    }
-    //                }
-    //                usersCount = availableUsers.count
-    //
-    //                completion(true, usersCount!)
-    //                self.users = []
-    //                print(place, availableUsers, usersCount)
-    //            }
-    //
-    //        }
-    //
-    //    }
     
     func containsUser(arr: [User], targetUser: User) -> Bool {
         for user in arr {

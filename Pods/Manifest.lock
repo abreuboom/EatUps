@@ -1,4 +1,5 @@
 PODS:
+  - ActiveLabel (0.7.1)
   - Alamofire (4.5.0)
   - AlamofireImage (3.2.0):
     - Alamofire (~> 4.1)
@@ -78,6 +79,7 @@ PODS:
   - SRCountdownTimer (1.0.1)
 
 DEPENDENCIES:
+  - ActiveLabel
   - Alamofire (~> 4.4)
   - AlamofireImage (~> 3.1)
   - BouncyLayout
@@ -98,6 +100,7 @@ DEPENDENCIES:
   - SRCountdownTimer
 
 SPEC CHECKSUMS:
+  ActiveLabel: 68625f22775f51c31bb691ca8de20f1e5a3bc825
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
   AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
@@ -124,6 +127,6 @@ SPEC CHECKSUMS:
   PKHUD: c7692163a09875cbf15827dc581df3c5cf7f1015
   SRCountdownTimer: 187458addb1e88cae62eb5aa57f48d7888f8c18c
 
-PODFILE CHECKSUM: 91af17ce39757e8b66d24a30dcf20cb26b06e972
+PODFILE CHECKSUM: 9bd895db3d84994fda7c80ab1fb4c4ae4897bd2a
 
 COCOAPODS: 1.2.1
