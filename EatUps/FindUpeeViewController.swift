@@ -7,20 +7,61 @@
 //
 
 import UIKit
+import Firebase
 
 class FindUpeeViewController: UIViewController {
 
-    @IBOutlet weak var profileView: UIImageView!
+    @IBOutlet weak var profilePhotoView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     
     var selectedUser: User?
+    var eatupId: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if selectedUser == nil {
+            Database.database().reference().child("eatups").child(eatupId!).child("inviter").observe(.value, with: { (snapshot) in
+                    let inviter = snapshot.value as! String
+                APIManager.shared.getUser(uid: inviter) { (success, inviter) in
+                    if success == true {
+                        self.selectedUser = inviter
+                        self.customizeView()
+                    }
+                }
+                })
+        }
+        else {
+            customizeView()
+        }
 
         // Do any additional setup after loading the view.
     }
-
+    
+    func customizeView() {
+        if let photoURL = selectedUser?.profilePhotoUrl {
+            self.profilePhotoView.af_setImage(withURL: photoURL)
+            User.getRoundProfilePics(photoView: self.profilePhotoView)
+        }
+        if let name = selectedUser?.name {
+            self.nameLabel.text = User.firstName(name: name)
+        }
+    }
+    
+    @IBAction func didFinishEatUp(_ sender: Any) {
+        // Deletes the EatUp conversation
+        if let currentUserID = Auth.auth().currentUser?.uid {
+            Database.database().reference().child("eatups").child(eatupId!).observe(.value, with: { (snapshot) in
+                if snapshot.hasChild("conversation") {
+                    let eatupInfo = snapshot.value as! NSDictionary
+                    let conversationKey = eatupInfo["conversation"] as! String
+                    let ref = Database.database().reference().child("conversations")
+                    ref.child(conversationKey).removeValue()
+            }
+            })
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -30,6 +71,7 @@ class FindUpeeViewController: UIViewController {
         if segue.identifier == "findToChatSegue" {
             let ChatViewController = segue.destination as! ChatViewController
             ChatViewController.selectedUser = selectedUser
+            ChatViewController.eatupId = eatupId
         }
     }
 

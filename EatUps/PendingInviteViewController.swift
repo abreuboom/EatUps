@@ -85,6 +85,7 @@ class PendingInviteViewController: UIViewController, SRCountdownTimerDelegate {
         if segue.identifier == "pendingToFindSegue" {
             let FindUpeeViewController = segue.destination as! FindUpeeViewController
             FindUpeeViewController.selectedUser = selectedUser
+            FindUpeeViewController.eatupId = eatupId
         }
     }
 

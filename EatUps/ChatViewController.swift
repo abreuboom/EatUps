@@ -46,6 +46,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     let barHeight: CGFloat = 50
     var currentUser = User.current
     var selectedUser: User?
+    var eatupId: String?
     
     
     //MARK: Methods
@@ -54,7 +55,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.contentInset.bottom = self.barHeight
         self.tableView.scrollIndicatorInsets.bottom = self.barHeight
-        self.navigationItem.title = self.currentUser?.name
+        self.navigationItem.title = self.selectedUser?.name
         self.navigationItem.setHidesBackButton(true, animated: false)
         let icon = UIImage.init(named: "back")?.withRenderingMode(.alwaysOriginal)
         let backButton = UIBarButtonItem.init(image: icon!, style: .plain, target: self, action: #selector(self.dismissSelf))
@@ -62,9 +63,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     //Downloads messages
-    // MARK TODO: write function to get current eatup id
     func fetchData() {
-        Message.downloadAllMessages(forUserID: (currentUser?.id!)!, eatUpID: EatUp.getEatUpID(), completion: {[weak weakSelf = self] (message) in
+        Message.downloadAllMessages(forUserID: (currentUser?.id!)!, eatUpID: eatupId!, completion: {[weak weakSelf = self] (message) in
             weakSelf?.items.append(message)
             weakSelf?.items.sort{ $0.timestamp < $1.timestamp }
             DispatchQueue.main.async {
@@ -84,7 +84,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func composeMessage(content: Any)  {
         let message = Message.init(content: content, owner: .sender, timestamp: Int(Date().timeIntervalSince1970))
-        Message.send(message: message, toID: (selectedUser?.id)!, eatUpID: EatUp.getEatUpID(), completion: {(_) in
+        Message.send(message: message, toID: (selectedUser?.id)!, eatUpID: eatupId!, completion: {(_) in
         })
     } 
     
