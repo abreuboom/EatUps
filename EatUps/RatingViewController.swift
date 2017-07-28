@@ -9,11 +9,17 @@
 import UIKit
 import FirebaseDatabase
 import FirebaseAuth
+import ChameleonFramework
 
 class RatingViewController: UIViewController {
     
     var ref: DatabaseReference?
     var databaseHandle: DatabaseHandle?
+    var selectedUser: User?
+    var eatupId: String?
+    
+    @IBOutlet weak var profilePicView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
     
     //var rating: String
     
@@ -98,6 +104,9 @@ class RatingViewController: UIViewController {
         super.viewDidLoad()
         
         ref = Database.database().reference()
+        
+        // Sets view background colour
+        self.view.backgroundColor = GradientColor(gradientStyle: .topToBottom, frame: self.view.frame, colors: [HexColor(hexString: "FE8F72"), HexColor(hexString: "FE3F67")])
 
         // Do any additional setup after loading the view.
     }
