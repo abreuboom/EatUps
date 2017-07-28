@@ -18,13 +18,12 @@ class RatingViewController: UIViewController {
     var selectedUser: User?
     var eatupId: String?
     
-    @IBOutlet weak var profilePicView: UIImageView!
+    @IBOutlet weak var profilePhotoView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     
     //var rating: String
     
     var child = [String]()
-    var eatupId: String?
 
     @IBAction func didNotRate(_ sender: UIButton) {
         let uid = Auth.auth().currentUser?.uid
@@ -107,6 +106,14 @@ class RatingViewController: UIViewController {
         
         // Sets view background colour
         self.view.backgroundColor = GradientColor(gradientStyle: .topToBottom, frame: self.view.frame, colors: [HexColor(hexString: "FE8F72"), HexColor(hexString: "FE3F67")])
+        
+        if let photoURL = selectedUser?.profilePhotoUrl {
+            self.profilePhotoView.af_setImage(withURL: photoURL)
+            User.getRoundProfilePics(photoView: self.profilePhotoView)
+        }
+        if let name = selectedUser?.name {
+            self.nameLabel.text = User.firstName(name: name)
+        }
 
         // Do any additional setup after loading the view.
     }
