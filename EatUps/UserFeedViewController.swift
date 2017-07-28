@@ -124,7 +124,6 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         inviteView.parent = self
         inviteView.frame = CGRect.init(x: self.view.bounds.minX, y: self.view.bounds.minY, width: self.view.frame.width, height: self.view.frame.height)
         inviteView.populateInviteInfo()
-        inviteView.center = self.view.center
         self.view.addSubview(inviteView)
         
         inviteView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
