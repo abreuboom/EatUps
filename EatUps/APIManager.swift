@@ -137,8 +137,9 @@ class APIManager: SessionManager {
     }
     
     // set up the Select Location database handle
-    func getPlaces(org_id: String, completion: @escaping (_ success: Bool, [String]) -> ()) {
+    func getPlaces(org_id: String, completion: @escaping (_ success: Bool, [String], [String]) -> ()) {
         var places: [String] = []
+        var emojis: [String] = []
         ref.child("orgs/\(org_id)/places").observeSingleEvent(of: .value, with: { (snapshot) in
             print(snapshot)
             if let data = snapshot.value as? NSDictionary {
@@ -146,12 +147,21 @@ class APIManager: SessionManager {
                     let placeName = place as! String
                     places.append(placeName)
                 }
-                if places.isEmpty == true {
-                    completion(false, places)
-                }
-                else {
-                    completion(true, places)
-                }
+                self.ref.child("orgs/\(org_id)/emojis").observeSingleEvent(of: .value, with: { (snapshot) in
+                    if let emojiDictionary = snapshot.value as? NSDictionary {
+                        for (_, emojiData) in emojiDictionary {
+                            let emoji = emojiData as! String
+                            emojis.append(emoji)
+                        }
+                        if places.isEmpty == true {
+                            completion(false, places, emojis)
+                        }
+                        else {
+                            completion(true, places, emojis)
+                        }
+                    }
+                })
+                
             }
         })
     }

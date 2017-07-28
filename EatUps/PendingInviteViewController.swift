@@ -10,6 +10,7 @@ import UIKit
 import AlamofireImage
 import FirebaseDatabase
 import SRCountdownTimer
+import ChameleonFramework
 
 class PendingInviteViewController: UIViewController, SRCountdownTimerDelegate {
 
@@ -28,7 +29,8 @@ class PendingInviteViewController: UIViewController, SRCountdownTimerDelegate {
         super.viewDidLoad()
 
         ref = Database.database().reference()
-
+        self.view.backgroundColor = GradientColor(gradientStyle: .topToBottom, frame: self.view.frame, colors: [HexColor(hexString: "FE8F72"), HexColor(hexString: "FE3F67")])
+        
         APIManager.shared.checkResponse(selectedUser: selectedUser!, eatupId: eatupId!) { (success) in
             if success == true {
                 self.performSegue(withIdentifier: "pendingToFindSegue", sender: nil)
@@ -59,7 +61,6 @@ class PendingInviteViewController: UIViewController, SRCountdownTimerDelegate {
         timer.lineColor = .white
         timer.lineWidth = 4.0
         timer.trailLineColor = .clear
-        timer.isLabelHidden = true
         timer.tintColor = .white
         
     }
