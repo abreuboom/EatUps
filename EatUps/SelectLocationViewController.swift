@@ -13,6 +13,9 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     
     var org_id: String!
     
+    @IBAction func didTapMapView(_ sender: Any) {
+        self.performSegue(withIdentifier: "mapViewSegue", sender: nil)
+    }
     @IBOutlet weak var locationsTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -60,13 +63,13 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
             
         }
     }
-    
+    /*
     override func viewWillDisappear(_ animated: Bool) {
         filteredPlaces = []
         places = []
         locationsTableView.deselectRow(at: locationsTableView.indexPathForSelectedRow!, animated: true)
     }
-    
+    */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath) as! LocationCell
         let placeString = filteredPlaces[indexPath.row]
