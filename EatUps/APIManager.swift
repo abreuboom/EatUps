@@ -57,7 +57,7 @@ class APIManager: SessionManager {
     
     func populateUserInfo(uid: String, completion: @escaping (Bool) -> ()) {
         ref.child("users/\(uid)").observeSingleEvent(of: .value, with: { (snapshot) in
-            if snapshot.value != nil {
+            if snapshot.hasChild("name") {
                 if let data = snapshot.value as? [String: Any] {
                     User.current = User(dictionary: data)
                     completion(true)
