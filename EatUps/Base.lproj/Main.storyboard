@@ -57,7 +57,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="GXc-uI-uSJ" secondAttribute="trailing" constant="8" id="9yt-ei-2za"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="9rm-kd-RMV" secondAttribute="bottom" constant="16" id="A9o-li-cjr"/>
@@ -702,7 +702,7 @@
             <objects>
                 <navigationController storyboardIdentifier="selectLocationNavigation" automaticallyAdjustsScrollViewInsets="NO" id="BfX-7S-Xg9" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="Ld7-2N-ljz">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Ld7-2N-ljz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
