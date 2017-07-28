@@ -18,12 +18,13 @@ class RatingViewController: UIViewController {
     //var rating: String
     
     var child = [String]()
+    var eatupId: String?
 
     @IBAction func didNotRate(_ sender: UIButton) {
         let uid = Auth.auth().currentUser?.uid
-        ref?.child("eatups/eatup_id/users/\(uid!)").setValue("0")
+        ref?.child("eatups/\(eatupId!)\(uid!)").setValue("0")
         
-        databaseHandle = ref?.child("eatups/eatup_id/users").observe(.value, with: { (snapshot) in
+        databaseHandle = ref?.child("eatups/\(eatupId!)/users").observe(.value, with: { (snapshot) in
             
             let child = snapshot.value as? [String: Any]
             
@@ -38,7 +39,6 @@ class RatingViewController: UIViewController {
 
                 }
             }
-            
         })
         
     }
@@ -46,9 +46,9 @@ class RatingViewController: UIViewController {
     
     @IBAction func wouldEatUpAgain(_ sender: Any) {
         let uid = Auth.auth().currentUser?.uid
-        ref?.child("eatups/eatup_id/users/\(uid!)").setValue("0")
+        ref?.child("eatups/\(eatupId!)\(uid!)").setValue("0")
         
-        databaseHandle = ref?.child("eatups/eatup_id/users").observe(.value, with: { (snapshot) in
+        databaseHandle = ref?.child("eatups/\(eatupId!)/users").observe(.value, with: { (snapshot) in
             
             let child = snapshot.value as? [String: Any]
             
@@ -59,20 +59,20 @@ class RatingViewController: UIViewController {
                 if user != uid!{
                     // if user is equal to the current id, then print the user's value
                     self.ref?.child("eatups/eatup_id/users/user_id").setValue("1")
+                    self.performSegue(withIdentifier: "ratingSegue", sender: nil)
+                    
                 }
             }
-            
         })
-         //   self.performSegue(withIdentifier: "loginSegue", sender: nil)
-
+        
     }
     
     
     @IBAction func wouldNotEatUpAgain(_ sender: Any) {
         let uid = Auth.auth().currentUser?.uid
-        ref?.child("eatups/eatup_id/users/\(uid!)").setValue("0")
+        ref?.child("eatups/\(eatupId!)\(uid!)").setValue("0")
         
-        databaseHandle = ref?.child("eatups/eatup_id/users").observe(.value, with: { (snapshot) in
+        databaseHandle = ref?.child("eatups/\(eatupId!)/users").observe(.value, with: { (snapshot) in
             
             let child = snapshot.value as? [String: Any]
             
@@ -83,12 +83,12 @@ class RatingViewController: UIViewController {
                 if user != uid!{
                     // if user is equal to the current id, then print the user's value
                     self.ref?.child("eatups/eatup_id/users/user_id").setValue("-1")
+                    self.performSegue(withIdentifier: "ratingSegue", sender: nil)
+                    
                 }
             }
-            
         })
         
-        //self.performSegue(withIdentifier: "loginSegue", sender: nil)
     }
     
     
