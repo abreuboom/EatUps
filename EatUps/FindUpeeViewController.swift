@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import ChameleonFramework
 
 class FindUpeeViewController: UIViewController {
 
@@ -19,6 +20,9 @@ class FindUpeeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Sets background colour of view
+        self.view.backgroundColor = GradientColor(gradientStyle: .topToBottom, frame: self.view.frame, colors: [HexColor(hexString: "FE8F72"), HexColor(hexString: "FE3F67")])
         
         if selectedUser == nil {
             Database.database().reference().child("eatups").child(eatupId!).child("inviter").observe(.value, with: { (snapshot) in
@@ -44,7 +48,7 @@ class FindUpeeViewController: UIViewController {
             User.getRoundProfilePics(photoView: self.profilePhotoView)
         }
         if let name = selectedUser?.name {
-            self.nameLabel.text = User.firstName(name: name)
+            self.nameLabel.text = "Find \(User.firstName(name: name))!"
         }
     }
     
@@ -72,6 +76,11 @@ class FindUpeeViewController: UIViewController {
             let ChatViewController = segue.destination as! ChatViewController
             ChatViewController.selectedUser = selectedUser
             ChatViewController.eatupId = eatupId
+        }
+        else if segue.identifier == "findToRatingSegue" {
+            let RatingViewController = segue.destination as! RatingViewController
+            RatingViewController.selectedUser = selectedUser
+            RatingViewController.eatupId = eatupId
         }
     }
 
