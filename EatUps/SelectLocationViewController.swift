@@ -17,11 +17,11 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     @IBOutlet weak var searchBar: UISearchBar!
     
     var places: [String] = []
+    var emojis: [String] = []
+    var userCountIndex: [Int] = []
     
     //create an array to update as we filter through the locations to eat
     var filteredPlaces: [String] = []
-    
-    var userCountIndexes: [Int] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,19 +38,18 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     
     override func viewWillAppear(_ animated: Bool) {
         if org_id != "" {
-            APIManager.shared.getPlaces(org_id: org_id!, completion: { (success: Bool, data) in
+            APIManager.shared.getPlaces(org_id: org_id!, completion: { (success: Bool, placesData, emojisData) in
                 if success == true {
-                    self.places = data
+                    self.places = placesData
+                    self.emojis = emojisData
                     self.filteredPlaces = self.places
-                    for place in self.places {
-                        APIManager.shared.getUsersCount(place: place, completion: { (success: Bool, usersCount) -> () in
-                            if success == true {
-                                self.userCountIndexes.append(usersCount)
-                                self.locationsTableView.reloadData()
-                            }
-                        })
-                    }
-                    
+//                    APIManager.shared.getUsersCount(places: self.places, completion: { (success, userCounts) in
+//                        if success == true {
+//                            self.userCountIndex = userCounts
+//                            print(self.userCountIndex)
+//                            self.locationsTableView.reloadData()
+//                        }
+//                    })
                 }
                 else {
                     print("getPlaces() failed")
@@ -69,9 +68,9 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath) as! LocationCell
-        let placeString = filteredPlaces[indexPath.row]
-        cell.nameLabel.text = String.randomEmoji() + " " + placeString
-        cell.usersCountLabel.text = "\(userCountIndexes[indexPath.row]) nearby"
+        let placeString = "\(emojis[indexPath.row])  \(filteredPlaces[indexPath.row])"
+        cell.nameLabel.text =  placeString
+//        cell.usersCountLabel?.text = "\(userCountIndex[indexPath.row]) nearby"
         
         return cell
     }
@@ -113,13 +112,4 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
         // Dispose of any resources that can be recreated.
     }
     
-}
-
-extension String{
-    static func randomEmoji()->String{
-        let emojiStart = 0x1F601
-        let ascii = emojiStart + Int(arc4random_uniform(UInt32(35)))
-        let emoji = UnicodeScalar(ascii)?.description
-        return emoji ?? "😍"
-    }
 }

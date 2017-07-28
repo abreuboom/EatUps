@@ -59,7 +59,7 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
                 for user in users {
                     // Does not add self and other users into user feed view
                     if (user.id == uid || self.availableUsers.contains(where: { (storedUser) -> Bool in
-                        return storedUser.id == user.id || storedUser.name == user.name
+                        return storedUser.id == user.id
                     })) != true {
                         self.availableUsers.append(user)
                     }
