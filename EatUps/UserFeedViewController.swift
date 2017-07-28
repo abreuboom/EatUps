@@ -71,7 +71,7 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
                 for user in users {
                     // Does not add self and other users into user feed view
                     if (user.id == uid || self.availableUsers.contains(where: { (storedUser) -> Bool in
-                        return storedUser.id == user.id
+                        return storedUser.id == user.id || storedUser.name == user.name
                     })) != true {
                         self.availableUsers.append(user)
                     }
@@ -176,7 +176,7 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
                 }, completion: { (success) in
                     if success == true {
                         self.isUserSelected = true
-                        self.eatUpButton.tag = (cell.tag)
+                        self.eatUpButton.tag = cell.cardView.tag
                         
                     }
                 })
@@ -259,6 +259,7 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
             findUpeeViewController.eatupId = self.inviteView.eatup?.id
         }
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
