@@ -27,6 +27,7 @@ target 'EatUps' do
   pod 'PKHUD', '~> 4.0'
   pod 'ChameleonFramework/Swift'
   pod 'SRCountdownTimer'
+  pod 'EasyAnimation'
 
   target 'EatUpsTests' do
     inherit! :search_paths

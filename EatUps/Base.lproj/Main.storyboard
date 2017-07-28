@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F2073" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -29,9 +29,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradient_bg" translatesAutoresizingMaskIntoConstraints="NO" id="B4o-nI-cpZ">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9rm-kd-RMV">
                                 <rect key="frame" x="16" y="603" width="343" height="48"/>
                                 <color key="backgroundColor" red="0.3534657678" green="0.52353903759999998" blue="0.96621346470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -64,15 +61,11 @@
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="GXc-uI-uSJ" secondAttribute="trailing" constant="8" id="9yt-ei-2za"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="9rm-kd-RMV" secondAttribute="bottom" constant="16" id="A9o-li-cjr"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="B4o-nI-cpZ" secondAttribute="bottom" id="BrR-Yg-GHI"/>
                             <constraint firstItem="5wT-sd-1Pi" firstAttribute="top" secondItem="GXc-uI-uSJ" secondAttribute="bottom" id="Bvq-fD-uEs"/>
                             <constraint firstItem="5wT-sd-1Pi" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="8" id="IOb-zQ-NqX"/>
                             <constraint firstItem="9rm-kd-RMV" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="SbL-gR-48e"/>
-                            <constraint firstAttribute="trailing" secondItem="B4o-nI-cpZ" secondAttribute="trailing" id="T1i-qa-5uW"/>
-                            <constraint firstItem="B4o-nI-cpZ" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="fGj-bu-GSg"/>
                             <constraint firstItem="GXc-uI-uSJ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="120" id="o7t-SY-ZcJ"/>
                             <constraint firstItem="GXc-uI-uSJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="8" id="uuq-Zl-8hI"/>
-                            <constraint firstItem="B4o-nI-cpZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="yDc-vE-oec"/>
                             <constraint firstItem="9rm-kd-RMV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="yyB-Zn-eiw"/>
                             <constraint firstAttribute="trailingMargin" secondItem="5wT-sd-1Pi" secondAttribute="trailing" constant="8" id="zkH-Ug-8ED"/>
                         </constraints>
@@ -283,7 +276,7 @@
                                 </view>
                                 <blurEffect style="light"/>
                             </visualEffectView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="waO-2c-jJ7">
+                            <collectionView clipsSubviews="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="waO-2c-jJ7">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Fga-Lg-jZG">
@@ -373,16 +366,12 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ct-Ba-WaO">
-                                <rect key="frame" x="144" y="535" width="87" height="36"/>
-                                <color key="backgroundColor" red="0.99607843137254903" green="0.24705882352941178" blue="0.40392156862745099" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="250" constant="85" id="6Iv-9i-50D"/>
-                                    <constraint firstAttribute="height" constant="36" id="faq-cu-RmD"/>
-                                </constraints>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ct-Ba-WaO">
+                                <rect key="frame" x="103" y="500" width="170" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
-                                <state key="normal" title="EatUp!"/>
+                                <state key="normal" image="EatUp Button"/>
                                 <connections>
                                     <action selector="requestEatUp:" destination="376-rY-Lm4" eventType="touchUpInside" id="MRc-aa-eXf"/>
                                 </connections>
@@ -392,10 +381,8 @@
                         <constraints>
                             <constraint firstItem="waO-2c-jJ7" firstAttribute="leading" secondItem="OnC-WZ-Pg5" secondAttribute="leading" id="GNE-Jb-MVZ"/>
                             <constraint firstItem="waO-2c-jJ7" firstAttribute="top" secondItem="OnC-WZ-Pg5" secondAttribute="top" id="GNu-3N-6n8"/>
-                            <constraint firstItem="Z8E-ZJ-pLB" firstAttribute="top" secondItem="1ct-Ba-WaO" secondAttribute="bottom" constant="32" id="Lle-Dk-qgB"/>
                             <constraint firstItem="Z8E-ZJ-pLB" firstAttribute="top" secondItem="waO-2c-jJ7" secondAttribute="bottom" id="Lp4-DM-zKJ"/>
                             <constraint firstAttribute="trailing" secondItem="waO-2c-jJ7" secondAttribute="trailing" id="stL-Ca-4QY"/>
-                            <constraint firstItem="1ct-Ba-WaO" firstAttribute="centerX" secondItem="OnC-WZ-Pg5" secondAttribute="centerX" id="tWR-8X-o8W"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="eatups" id="H6m-nl-f4h"/>

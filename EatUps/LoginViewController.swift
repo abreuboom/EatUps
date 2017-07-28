@@ -13,6 +13,7 @@ import FirebaseDatabase
 import FacebookLogin
 import FacebookCore
 import PKHUD
+import ChameleonFramework
 
 class LoginViewController: UIViewController {
     
@@ -22,6 +23,8 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.backgroundColor = GradientColor(gradientStyle: .topToBottom, frame: self.view.frame, colors: [HexColor(hexString: "FE8F72"), HexColor(hexString: "FE3F67")])
         ref = Database.database().reference()
     }
     
