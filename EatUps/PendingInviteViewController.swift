@@ -49,14 +49,22 @@ class PendingInviteViewController: UIViewController, SRCountdownTimerDelegate {
         let backAction = UIAlertAction(title: "Go Back", style: .cancel) { (action) in
             self.dismiss(animated: true, completion: nil)
             APIManager.shared.resetStatus(userID: (self.selectedUser?.id)!)
+            
         }
+        
+        // Timer setup
+        timer.start(beginingValue: 60)
+        timer.backgroundColor = UIColor(white: 0, alpha: 0)
+        timer.isOpaque = false
+        timer.lineColor = .white
+        timer.lineWidth = 4.0
+        timer.trailLineColor = .clear
+        timer.isLabelHidden = true
+        timer.tintColor = .white
+        
     }
 
-        // Chat stuff
 
-        // notification setup
-
-        // Do any additional setup after loading the view.
 
     @IBAction func didTapCancel(_ sender: Any) {
         APIManager.shared.resetStatus(userID: (self.selectedUser?.id)!)
