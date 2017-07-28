@@ -23,9 +23,11 @@ class EatupAtView: UIView {
                 })
             }
             eatupAtLabel.text = eatupAtLabel.text! + place! + " with"
-            eatupAtLabel.sizeToFit()
-
         }
+    }
+    
+    func reset() {
+        eatupAtLabel.text = "EatUp @"
     }
     
 
