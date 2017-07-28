@@ -27,6 +27,9 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     var ref: DatabaseReference!
     var databaseHandle: DatabaseHandle!
     
+    @IBOutlet weak var eatupAtParent: UIView!
+    @IBOutlet var eatupAtView: EatupAtView!
+    
     var users: [String] = []
     var availableUsers: [User] = []
     var selectedUser: User?
@@ -35,6 +38,15 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     var locationManager: CLLocationManager!
     
     var isUserSelected: Bool = false
+    
+    override func viewWillAppear(_ animated: Bool) {
+        eatupAtView.layer.cornerRadius = eatupAtView.frame.width/5
+        eatupAtView.dropShadow()
+        eatupAtView.center = eatupAtParent.center
+        eatupAtParent.addSubview(eatupAtView)
+        
+        eatupAtView.place = place
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

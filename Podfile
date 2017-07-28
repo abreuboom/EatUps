@@ -28,6 +28,7 @@ target 'EatUps' do
   pod 'ChameleonFramework/Swift'
   pod 'SRCountdownTimer'
   pod 'EasyAnimation'
+  pod 'ActiveLabel'
 
   target 'EatUpsTests' do
     inherit! :search_paths
