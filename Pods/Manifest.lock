@@ -13,6 +13,7 @@ PODS:
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
   - DZNEmptyDataSet (1.8.1)
+  - EasyAnimation (2.0.1)
   - FacebookCore (0.2.0):
     - Bolts (~> 1.8)
     - FBSDKCoreKit (~> 4.15)
@@ -82,6 +83,7 @@ DEPENDENCIES:
   - BouncyLayout
   - ChameleonFramework/Swift
   - DZNEmptyDataSet
+  - EasyAnimation
   - FacebookCore (~> 0.2)
   - FacebookLogin (~> 0.2)
   - FacebookShare (~> 0.2)
@@ -102,6 +104,7 @@ SPEC CHECKSUMS:
   BouncyLayout: f91c6504437a61acd733404f55f75bd8154f5840
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
+  EasyAnimation: 0bc71a385be3fc0239e487fb8f0dde626e6c7466
   FacebookCore: 2cb3f0fbff218e9d3119cec84bae983b232412de
   FacebookLogin: c9d606504735780a9e3002465a615512e0a691a5
   FacebookShare: 8e9ee8ea06505e6a1d3d719b0cc63e840fb8aaeb
@@ -121,6 +124,6 @@ SPEC CHECKSUMS:
   PKHUD: c7692163a09875cbf15827dc581df3c5cf7f1015
   SRCountdownTimer: 187458addb1e88cae62eb5aa57f48d7888f8c18c
 
-PODFILE CHECKSUM: 22c0ba415eff48efadb809d8b75b02d285845cf4
+PODFILE CHECKSUM: 91af17ce39757e8b66d24a30dcf20cb26b06e972
 
 COCOAPODS: 1.2.1
