@@ -346,8 +346,10 @@ class APIManager: SessionManager {
                 ref.child("eatups/\(eatupId)/time").observeSingleEvent(of: .value, with: { (snapshot) in
                     let time = snapshot.value as? String
                     self.ref.child("users/\(uid)/eatup_history/\(eatupId)").setValue(time)
-                    self.ref.child("eatups/\(eatupId)/invitee").setValue(uid)
-                    completion(true)
+                    self.ref.child("eatups/\(eatupId)/invitee").setValue(uid, withCompletionBlock: { (error, databaseRef) in
+                        completion(true)
+                    })
+                    
                 })
             }
             else {

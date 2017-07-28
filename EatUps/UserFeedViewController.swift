@@ -39,17 +39,26 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     
     var isUserSelected: Bool = false
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         eatupAtView.layer.cornerRadius = eatupAtView.frame.width/5
         eatupAtView.dropShadow()
         eatupAtView.center = eatupAtParent.center
-        eatupAtParent.addSubview(eatupAtView)
         
         eatupAtView.place = place
+        let size = eatupAtView.eatupAtLabel.sizeThatFits(self.view.bounds.size)
+        eatupAtView.eatupAtLabel.frame.size = size
+        eatupAtView.frame = CGRect.init(x: eatupAtParent.center.x - (eatupAtView.eatupAtLabel.bounds.size.width + 32)/2, y: eatupAtParent.center.y - eatupAtView.bounds.size.height/2, width: eatupAtView.eatupAtLabel.bounds.size.width + 32, height: eatupAtView.bounds.size.height)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        eatupAtView.reset()
+        eatupAtView.removeFromSuperview()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        eatupAtParent.addSubview(eatupAtView)
         
         effect = blurEffect.effect!
         blurEffect.effect = nil
@@ -112,7 +121,10 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     func animateInviteIn(eatup: EatUp) {
         self.view.bringSubview(toFront: blurEffect)
         inviteView.eatup = eatup
+        inviteView.parent = self
+        inviteView.frame = CGRect.init(x: self.view.bounds.minX, y: self.view.bounds.minY, width: self.view.frame.width, height: self.view.frame.height)
         inviteView.populateInviteInfo()
+        inviteView.center = self.view.center
         self.view.addSubview(inviteView)
         
         inviteView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)

@@ -15,6 +15,7 @@ class InviteView: UIView {
     @IBOutlet weak var placeLabel: UIButton!
     
     var eatup: EatUp?
+    var parent: UserFeedViewController?
 
     @IBAction func acceptEatup(_ sender: UIButton) {
         let eatupId = eatup?.id ?? ""
@@ -29,7 +30,7 @@ class InviteView: UIView {
         let eatupId = eatup?.id ?? ""
         APIManager.shared.handleInvite(eatupId: eatupId, response: false, completion: { (success) in
             if success == true {
-                self.parentViewController?.animateInviteOut()
+                self.parent?.animateInviteOut()
             }
         })
     }
