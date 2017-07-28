@@ -43,6 +43,7 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
                     self.places = placesData
                     self.emojis = emojisData
                     self.filteredPlaces = self.places
+                    self.locationsTableView.reloadData()
 //                    APIManager.shared.getUsersCount(places: self.places, completion: { (success, userCounts) in
 //                        if success == true {
 //                            self.userCountIndex = userCounts
