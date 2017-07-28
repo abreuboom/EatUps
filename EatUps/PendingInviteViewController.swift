@@ -61,7 +61,7 @@ class PendingInviteViewController: UIViewController, SRCountdownTimerDelegate {
         timer.lineColor = .white
         timer.lineWidth = 4.0
         timer.trailLineColor = .clear
-        timer.tintColor = .white
+        timer.labelTextColor = .white
         
     }
 
