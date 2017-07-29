@@ -266,7 +266,8 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
             pendingInviteViewController.eatupId = eatupId
         }
         else if segue.identifier == "feedToFindSegue" {
-            let findUpeeViewController = segue.destination as! FindUpeeViewController
+            let navigationViewController = segue.destination as! UINavigationController
+            let findUpeeViewController = navigationViewController.viewControllers.first as! FindUpeeViewController
             findUpeeViewController.eatupId = self.inviteView.eatup?.id
         }
     }
