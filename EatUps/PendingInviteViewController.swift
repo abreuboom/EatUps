@@ -93,7 +93,8 @@ class PendingInviteViewController: UIViewController, SRCountdownTimerDelegate {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "pendingToFindSegue" {
-            let FindUpeeViewController = segue.destination as! FindUpeeViewController
+            let navigationViewController = segue.destination as! UINavigationController
+            let FindUpeeViewController = navigationViewController.viewControllers.first as! FindUpeeViewController
             FindUpeeViewController.selectedUser = selectedUser
             FindUpeeViewController.eatupId = eatupId
         }
