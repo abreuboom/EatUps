@@ -434,8 +434,11 @@
                             <constraint firstAttribute="trailing" secondItem="kPc-tQ-hm1" secondAttribute="trailing" id="u8J-l1-sNz"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="eatups" id="H6m-nl-f4h"/>
+                    <navigationItem key="navigationItem" title="eatups" id="H6m-nl-f4h">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="u0o-Xx-zM9"/>
+                    </navigationItem>
                     <connections>
+                        <outlet property="barButtonItem" destination="u0o-Xx-zM9" id="VwA-oB-dit"/>
                         <outlet property="blurEffect" destination="cJC-77-ZVD" id="0qc-sZ-SqG"/>
                         <outlet property="collectionView" destination="waO-2c-jJ7" id="Sto-fd-Eac"/>
                         <outlet property="eatUpButton" destination="1ct-Ba-WaO" id="qBu-hn-xiC"/>

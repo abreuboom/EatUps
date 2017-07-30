@@ -45,7 +45,9 @@ class APIManager: SessionManager {
                         User.current?.id = uid
                         print("successfully logged in")
                         print("Welcome back \(User.current?.name ?? "")")
+                        UserDefaults.standard.setValue(Auth.auth().currentUser?.uid, forKey: "uid")
                         completion(true)
+                        
                     }
                     else {
                         completion(false)
@@ -117,6 +119,8 @@ class APIManager: SessionManager {
             print ("Error signing out: %@", signOutError)
         }
         User.current = nil
+        
+        UserDefaults.standard.removeObject(forKey: "uid")
         
         NotificationCenter.default.post(name: NSNotification.Name("didLogout"), object: nil)
         
