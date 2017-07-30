@@ -71,9 +71,9 @@ class APIManager: SessionManager {
                     if successBool == true {
                         print("Created new user")
                         
-                        let photoURL = Auth.auth().currentUser?.photoURL
-                        let urlString = photoURL?.absoluteString
-                        self.ref.child("users/\(uid)/profilePhotoURL").setValue(urlString!)
+//                        let photoURL = Auth.auth().currentUser?.photoURL
+//                        let urlString = photoURL?.absoluteString
+//                        self.ref.child("users/\(uid)/profilePhotoURL").setValue(urlString!)
                         self.databaseHandle = self.ref.child("users/\(uid)").observe(.value , with: { (snapshot) in
                             if let data = snapshot.value as? [String: Any] {
                                 User.current = User(dictionary: data)
@@ -87,7 +87,7 @@ class APIManager: SessionManager {
     }
     
     private func graphRequest(id: String, completion: @escaping (_ success: Bool) -> ()) {
-        GraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email"]).start { (response, result) in
+        GraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email, picture.width(500)"]).start { (response, result) in
             switch result {
             case .failed(let error):
                 print("error in graph request:", error)
@@ -97,7 +97,11 @@ class APIManager: SessionManager {
                     let facebookId = responseDictionary["id"] as? String
                     let name = responseDictionary["name"] as? String
                     let email = responseDictionary["email"] as? String
-                    self.ref.child("users/\(id)").setValue(["id": facebookId, "name": name, "email": email, "org_id": "", "profilePhotoURL": ""])
+                    let photoURLString = "https://graph.facebook.com/" + facebookId! + "/picture?width=500"
+                    let photoURL = URL(string: photoURLString)
+                    let imageURL = ((responseDictionary["picture"] as? [String: Any])?["data"] as? [String: Any])?["url"] as? String
+                    
+                    self.ref.child("users/\(id)").setValue(["id": facebookId, "name": name, "email": email, "org_id": "", "profilePhotoURL": imageURL, "status": ""])
                     completion(true)
                 }
             }
