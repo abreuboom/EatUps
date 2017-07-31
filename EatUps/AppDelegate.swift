@@ -31,6 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         //Chameleon.setGlobalThemeUsingPrimaryColor(HexColor(hexString: "FE3F67"), withSecondaryColor: ContrastColorOf(backgroundColor: HexColor(hexString: "FE3F67"), returnFlat: false),  andContentStyle: .contrast)
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
         UINavigationBar.appearance().backgroundColor = HexColor(hexString: "FE3F67")
         UIApplication.shared.statusBarStyle = .lightContent
         

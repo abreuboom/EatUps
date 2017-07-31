@@ -41,7 +41,7 @@ class Message {
                 if snapshot.hasChild("conversation") {
                     let data = snapshot.value as! [String: Any]
                     let location = data["conversation"] as! String
-                Database.database().reference().child("conversations").child(location).observe(.childAdded, with: { (snap) in
+                    Database.database().reference().child("conversations").child(location).observe(.childAdded, with: { (snap) in
                         if snap.exists() {
                             let receivedMessage = snap.value as! [String: Any]
                             let content = receivedMessage["content"] as! String
@@ -74,7 +74,7 @@ class Message {
     class func uploadMessage(withValues: [String: Any], toID: String, eatUpID: String, completion: @escaping (Bool) -> Swift.Void) {
         
         if let currentUserID = Auth.auth().currentUser?.uid {
-            Database.database().reference().child("eatups").child(eatUpID).observe(.value, with: { (snapshot) in
+            Database.database().reference().child("eatups").child(eatUpID).observeSingleEvent(of: .value, with: { (snapshot) in
                 if snapshot.hasChild("conversation") {
                     let data = snapshot.value as! [String: Any]
                     let location = data["conversation"] as! String
@@ -89,7 +89,12 @@ class Message {
                     Database.database().reference().child("conversations").childByAutoId().childByAutoId().setValue(withValues, withCompletionBlock: { (error, reference) in
                         let data = ["conversation": reference.parent!.key]
                         Database.database().reference().child("eatups").child(eatUpID).updateChildValues(data)
-                        completion(true)
+                        
+                        if error == nil {
+                            completion(true)
+                        } else {
+                            completion(false)
+                        }
                     })
                 }
             })
