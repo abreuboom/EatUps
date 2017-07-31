@@ -45,7 +45,9 @@ class APIManager: SessionManager {
                         User.current?.id = uid
                         print("successfully logged in")
                         print("Welcome back \(User.current?.name ?? "")")
+                        UserDefaults.standard.setValue(Auth.auth().currentUser?.uid, forKey: "uid")
                         completion(true)
+                        
                     }
                     else {
                         completion(false)
@@ -57,7 +59,7 @@ class APIManager: SessionManager {
     
     func populateUserInfo(uid: String, completion: @escaping (Bool) -> ()) {
         ref.child("users/\(uid)").observeSingleEvent(of: .value, with: { (snapshot) in
-            if snapshot.value != nil {
+            if snapshot.hasChild("name") {
                 if let data = snapshot.value as? [String: Any] {
                     User.current = User(dictionary: data)
                     completion(true)
@@ -70,10 +72,6 @@ class APIManager: SessionManager {
                 self.graphRequest(id: uid, completion: { (successBool) in
                     if successBool == true {
                         print("Created new user")
-                        
-                        let photoURL = Auth.auth().currentUser?.photoURL
-                        let urlString = photoURL?.absoluteString
-                        self.ref.child("users/\(uid)/profilePhotoURL").setValue(urlString!)
                         self.databaseHandle = self.ref.child("users/\(uid)").observe(.value , with: { (snapshot) in
                             if let data = snapshot.value as? [String: Any] {
                                 User.current = User(dictionary: data)
@@ -87,7 +85,7 @@ class APIManager: SessionManager {
     }
     
     private func graphRequest(id: String, completion: @escaping (_ success: Bool) -> ()) {
-        GraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email"]).start { (response, result) in
+        GraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email, picture.width(500)"]).start { (response, result) in
             switch result {
             case .failed(let error):
                 print("error in graph request:", error)
@@ -97,7 +95,11 @@ class APIManager: SessionManager {
                     let facebookId = responseDictionary["id"] as? String
                     let name = responseDictionary["name"] as? String
                     let email = responseDictionary["email"] as? String
-                    self.ref.child("users/\(id)").setValue(["id": facebookId, "name": name, "email": email, "org_id": "", "profilePhotoURL": ""])
+                    let photoURLString = "https://graph.facebook.com/" + facebookId! + "/picture?width=500"
+                    let photoURL = URL(string: photoURLString)
+                    let imageURL = ((responseDictionary["picture"] as? [String: Any])?["data"] as? [String: Any])?["url"] as? String
+                    
+                    self.ref.child("users/\(id)").setValue(["id": facebookId, "name": name, "email": email, "org_id": "", "profilePhotoURL": imageURL, "status": ""])
                     completion(true)
                 }
             }
@@ -113,6 +115,8 @@ class APIManager: SessionManager {
             print ("Error signing out: %@", signOutError)
         }
         User.current = nil
+        
+        UserDefaults.standard.removeObject(forKey: "uid")
         
         NotificationCenter.default.post(name: NSNotification.Name("didLogout"), object: nil)
         
@@ -299,9 +303,9 @@ class APIManager: SessionManager {
         let uid = User.current?.id ?? ""
         databaseHandle = ref.child("eatups/\(eatupId)/invitee").observe(.value, with: { (snapshot) in
             if let data = snapshot.value as? String {
-                if data == uid {
+                if data != "" && data != "none" {
                     self.ref.child("eatups/\(eatupId)/time").observeSingleEvent(of: .value, with: { (snapshot) in
-                        if let timeStamp = snapshot.value as? String {
+                        if let timeStamp = snapshot.value as? Int {
                             self.ref.child("users/\(uid)/eatup_history/\(eatupId)").setValue(timeStamp)
                             completion(true)
                         }
@@ -389,5 +393,33 @@ class APIManager: SessionManager {
             }
             
         })
+    }
+    
+    func getUserEatupIds(completion: @escaping (Bool, [String]) -> ()) {
+        let uid = User.current?.id
+        var eatups: [String] = []
+        ref.child("users/\(uid)/eatup_history").observeSingleEvent(of: .value, with: { (snapshot) in
+            let data = snapshot.value as? [String: Any]
+            for (id, _) in data! {
+                eatups.append(id)
+            }
+            completion(true, eatups)
+        })
+    }
+    
+    func getEatups(eatupIds: [String], completion: @escaping (Bool, [EatUp]) -> ()) {
+        var eatups: [EatUp] = []
+        for id in eatupIds {
+            ref.child("eatups/\(id)").observeSingleEvent(of: .value, with: { (snapshot) in
+                if let data = snapshot.value as? [String: Any] {
+                    let eatup = EatUp.init(dictionary: data)
+                    eatup.id = snapshot.key
+                    eatups.append(eatup)
+                }
+                if eatups.count == eatupIds.count {
+                    completion(true, eatups)
+                }
+            })
+        }
     }
 }

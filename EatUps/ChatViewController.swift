@@ -55,7 +55,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.contentInset.bottom = self.barHeight
         self.tableView.scrollIndicatorInsets.bottom = self.barHeight
-        self.navigationItem.title = self.selectedUser?.name
+        self.navigationItem.title = User.firstName(name: (self.selectedUser?.name)!)
         self.navigationItem.setHidesBackButton(true, animated: false)
         let icon = UIImage.init(named: "back")?.withRenderingMode(.alwaysOriginal)
         let backButton = UIBarButtonItem.init(image: icon!, style: .plain, target: self, action: #selector(self.dismissSelf))
@@ -87,25 +87,6 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         Message.send(message: message, toID: (selectedUser?.id)!, eatUpID: eatupId!, completion: {(_) in
         })
     } 
-    
-    func animateExtraButtons(toHide: Bool)  {
-        switch toHide {
-        case true:
-            self.bottomConstraint.constant = 0
-            UIView.animate(withDuration: 0.3) {
-                self.inputBar.layoutIfNeeded()
-            }
-        default:
-            self.bottomConstraint.constant = -50
-            UIView.animate(withDuration: 0.3) {
-                self.inputBar.layoutIfNeeded()
-            }
-        }
-    }
-    
-    @IBAction func showMessage(_ sender: Any) {
-        self.animateExtraButtons(toHide: true)
-    }
     
     
     @IBAction func sendMessage(_ sender: Any) {
@@ -153,7 +134,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         case .sender:
             let cell = tableView.dequeueReusableCell(withIdentifier: "Sender", for: indexPath) as! SenderCell
             cell.clearCellData()
-            cell.profilePic.af_setImage(withURL: (User.current?.profilePhotoUrl)!)
+            cell.profilePic.af_setImage(withURL: (selectedUser?.profilePhotoUrl)!)
             cell.message.text = self.items[indexPath.row].content as! String
             return cell
             }

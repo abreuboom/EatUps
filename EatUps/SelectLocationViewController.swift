@@ -11,7 +11,7 @@ import ChameleonFramework
 
 class SelectLocationViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate {
     
-    var org_id: String!
+    var org_id = User.current?.org_id
     
     @IBOutlet var eatupAtView: EatupAtView!
     @IBOutlet weak var eatupAtParent: UIView!
@@ -28,15 +28,15 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        getPlaces()
+        
         eatupAtView.layer.cornerRadius = eatupAtView.frame.width/5
         eatupAtView.dropShadow()
         eatupAtView.center = eatupAtParent.center
         eatupAtParent.addSubview(eatupAtView)
         
         self.navigationController?.hidesNavigationBarHairline = true
-        
-        org_id = User.current?.org_id
-        
+   
         locationsTableView.dataSource = self
         searchBar.delegate = self
         
@@ -46,34 +46,36 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     override func viewWillAppear(_ animated: Bool) {
         self.locationsTableView.setContentOffset(CGPoint.init(x: 0, y: searchBar.frame.size.height) , animated: true)
         if org_id != "" {
-            APIManager.shared.getPlaces(org_id: org_id!, completion: { (success: Bool, placesData, emojisData) in
-                if success == true {
-                    self.places = placesData
-                    self.emojis = emojisData
-                    self.filteredPlaces = self.places
-                    self.locationsTableView.reloadData()
-//                    APIManager.shared.getUsersCount(places: self.places, completion: { (success, userCounts) in
-//                        if success == true {
-//                            self.userCountIndex = userCounts
-//                            print(self.userCountIndex)
-//                            self.locationsTableView.reloadData()
-//                        }
-//                    })
-                }
-                else {
-                    print("getPlaces() failed")
-                }
-            })
-            
-            
+            getPlaces()
         }
+    }
+    
+    func getPlaces() {
+        APIManager.shared.getPlaces(org_id: org_id!, completion: { (success: Bool, placesData, emojisData) in
+            if success == true {
+                self.places = placesData
+                self.emojis = emojisData
+                self.filteredPlaces = self.places
+                self.locationsTableView.reloadData()
+                //                    APIManager.shared.getUsersCount(places: self.places, completion: { (success, userCounts) in
+                //                        if success == true {
+                //                            self.userCountIndex = userCounts
+                //                            print(self.userCountIndex)
+                //                            self.locationsTableView.reloadData()
+                //                        }
+                //                    })
+            }
+            else {
+                print("getPlaces() failed")
+            }
+        })
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         filteredPlaces = []
         places = []
-        locationsTableView.deselectRow(at: locationsTableView.indexPathForSelectedRow!, animated: true)
+        //locationsTableView.deselectRow(at: locationsTableView.indexPathForSelectedRow!, animated: true)
         
         let eatupAtViewCopy = EatupAtView()
         eatupAtViewCopy.frame = eatupAtView.frame

@@ -16,11 +16,15 @@ class EatupAtView: UIView {
     
     var place: String? {
         didSet {
+            
             eatupAtLabel.customize { (label) in
-                eatupAtLabel.mentionColor = HexColor(hexString: "FE3F67")
-                eatupAtLabel.handleMentionTap({ (_) in
+                let customType = ActiveType.custom(pattern: "\\@Epic\\") //Regex that looks for "with"
+                eatupAtLabel.enabledTypes = [ customType]
+                
+                eatupAtLabel.customColor[customType] = HexColor(hexString: "FE3F67")
+                eatupAtLabel.handleCustomTap(for: customType) { _ in
                     self.parentViewController?.navigationController?.popViewController(animated: true)
-                })
+                }
             }
             eatupAtLabel.text = eatupAtLabel.text! + place! + " with"
         }
