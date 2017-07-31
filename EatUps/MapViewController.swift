@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMaps
+import FirebaseDatabase
 
 class MapViewController: UIViewController {
     
@@ -17,26 +18,28 @@ class MapViewController: UIViewController {
     var latitudeCoor: Float = 0.0
     var longitudeCoor: Float = 0.0
     var places = [String]()
+    var ref: DatabaseReference?
 
     override func loadView() {
         
         
         latitudeCoor = 37.480364
         longitudeCoor = -122.155644
-        let locationString = "37.480364,-122.155644"
-        let camera = GMSCameraPosition.camera(withTarget: EatUp.CLLocationtoCLLocationCoordinate2D(locationString: locationString), zoom: 15)
+        let camera = GMSCameraPosition.camera(withLatitude: CLLocationDegrees(latitudeCoor), longitude: CLLocationDegrees(longitudeCoor), zoom: 15)
         let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         view = mapView
         
         let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitudeCoor), longitude: CLLocationDegrees(longitudeCoor))
+        /*marker.position = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitudeCoor), longitude: CLLocationDegrees(longitudeCoor))
         marker.title = "idk"
-        marker.snippet = "idk"
+        marker.snippet = "idk"*/
         marker.map = mapView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ref = Database.database().reference()
         
         org_id = User.current?.org_id
         if org_id != ""{
@@ -46,19 +49,29 @@ class MapViewController: UIViewController {
                 
                 for place in self.places {
                     APIManager.shared.getPlaceLocation(place: place, completion: { (success: Bool, placeLocation) in
-                         
-                 })
-                }
-            }
-            else {
-                print("getPlaces() failed")
-            }
+                        
+                        if success == true {
+                            self.latitudeCoor = Float(placeLocation.coordinate.latitude)
+                            self.longitudeCoor = Float(placeLocation.coordinate.longitude)
+                            let marker = GMSMarker()
+                            marker.position = CLLocationCoordinate2D(latitude: CLLocationDegrees(self.latitudeCoor), longitude: CLLocationDegrees(self.longitudeCoor))
+                            marker.title = place
+                            marker.snippet = "Facebook University"
+
+                        }
+                        
+                        else {
+                            print("failed")
+                        }
             
 
         // Do any additional setup after loading the view.
+                    })
+                }
+        
+                }
             })
         }
-        
     }
 
     override func didReceiveMemoryWarning() {

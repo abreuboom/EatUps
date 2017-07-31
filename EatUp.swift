@@ -53,10 +53,4 @@ class EatUp {
         return locationString
     }
     
-    class func CLLocationtoCLLocationCoordinate2D(locationString: String) -> CLLocationCoordinate2D{
-        let latitude = CLLocationDegrees((locationString.components(separatedBy: ",")[0]))
-        let longitude = CLLocationDegrees((locationString.components(separatedBy: ",")[1]))
-        let locationCoordinates = CLLocationCoordinate2DMake(latitude!, longitude!)
-        return locationCoordinates
-    }
 }
