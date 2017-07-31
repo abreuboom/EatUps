@@ -69,6 +69,16 @@ enum ShowExtraView {
     case map
 }
 
+enum PhotoSource {
+    case library
+    case camera
+}
+
+enum MessageType {
+    case photo
+    case text
+}
+
 enum MessageOwner {
     case sender
     case receiver

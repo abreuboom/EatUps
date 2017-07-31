@@ -125,9 +125,10 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         self.view.bringSubview(toFront: blurEffect)
         inviteView.eatup = eatup
         inviteView.parent = self
-        inviteView.frame = CGRect.init(x: self.view.bounds.minX, y: self.view.bounds.minY, width: self.view.frame.width, height: self.view.frame.height)
         inviteView.populateInviteInfo()
-        self.view.superview?.addSubview(inviteView)
+        inviteView.frame = CGRect.init(x: self.view.bounds.minX, y: self.view.bounds.minY, width: self.view.frame.width, height: self.view.frame.height)
+        inviteView.center = self.view.center
+        self.view.addSubview(inviteView)
         
         inviteView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
         inviteView.alpha = 0
