@@ -25,6 +25,9 @@
 		2032ACDF1F1548FA00A4015C /* EatUpsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2032ACDE1F1548FA00A4015C /* EatUpsUITests.swift */; };
 		208AF5751F1838BB003E76A8 /* OrgSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208AF5741F1838BB003E76A8 /* OrgSelectViewController.swift */; };
 		208AF5771F183BC3003E76A8 /* OrgCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208AF5761F183BC3003E76A8 /* OrgCell.swift */; };
+		208CA71F1F2E8E30000B1D2F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208CA71E1F2E8E30000B1D2F /* ProfileViewController.swift */; };
+		208CA7221F2EA79E000B1D2F /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208CA7211F2EA79E000B1D2F /* ProfileCell.swift */; };
+		208CA7241F2EA7B1000B1D2F /* EatUpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208CA7231F2EA7B1000B1D2F /* EatUpCell.swift */; };
 		20B887021F2B9EE8006B6571 /* EatupAtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B887011F2B9EE8006B6571 /* EatupAtView.swift */; };
 		20E9318D1F16A3F100C4A4A1 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E9318C1F16A3F100C4A4A1 /* APIManager.swift */; };
 		20E931911F16A4F900C4A4A1 /* Org.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E931901F16A4F900C4A4A1 /* Org.swift */; };
@@ -89,6 +92,9 @@
 		2032ACE01F1548FA00A4015C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		208AF5741F1838BB003E76A8 /* OrgSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgSelectViewController.swift; sourceTree = "<group>"; };
 		208AF5761F183BC3003E76A8 /* OrgCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgCell.swift; sourceTree = "<group>"; };
+		208CA71E1F2E8E30000B1D2F /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		208CA7211F2EA79E000B1D2F /* ProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		208CA7231F2EA7B1000B1D2F /* EatUpCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EatUpCell.swift; sourceTree = "<group>"; };
 		20B887011F2B9EE8006B6571 /* EatupAtView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EatupAtView.swift; sourceTree = "<group>"; };
 		20CE19381F198AFA008494F1 /* EatUps.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EatUps.entitlements; sourceTree = "<group>"; };
 		20E9318C1F16A3F100C4A4A1 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
@@ -169,6 +175,7 @@
 				20CE19381F198AFA008494F1 /* EatUps.entitlements */,
 				20E9318E1F16A3F700C4A4A1 /* API */,
 				20E9318F1F16A4D800C4A4A1 /* Models */,
+				208CA7201F2EA778000B1D2F /* Cells */,
 				208AF5781F183BCD003E76A8 /* Views */,
 				D8A82FEA1F15507E0053C1A1 /* View Controllers */,
 				2032ACBE1F1548FA00A4015C /* AppDelegate.swift */,
@@ -204,14 +211,23 @@
 		208AF5781F183BCD003E76A8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				208AF5761F183BC3003E76A8 /* OrgCell.swift */,
-				2016F28B1F1EB4AB00CA814C /* LocationCell.swift */,
-				0ED57BAF1F1D3CFC00AC1A64 /* AvailableUserCell.swift */,
-				0E7F65961F26FB91005BA42E /* ChatCell.swift */,
 				200E364B1F2A7146003FA9C7 /* InviteView.swift */,
 				20B887011F2B9EE8006B6571 /* EatupAtView.swift */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		208CA7201F2EA778000B1D2F /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				208AF5761F183BC3003E76A8 /* OrgCell.swift */,
+				2016F28B1F1EB4AB00CA814C /* LocationCell.swift */,
+				0ED57BAF1F1D3CFC00AC1A64 /* AvailableUserCell.swift */,
+				0E7F65961F26FB91005BA42E /* ChatCell.swift */,
+				208CA7211F2EA79E000B1D2F /* ProfileCell.swift */,
+				208CA7231F2EA7B1000B1D2F /* EatUpCell.swift */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		20E9318E1F16A3F700C4A4A1 /* API */ = {
@@ -267,6 +283,7 @@
 				D8A82FF51F1575800053C1A1 /* RatingViewController.swift */,
 				0E7F65981F26FBB6005BA42E /* ChatViewController.swift */,
 				0EC37D511F281B2700EA438C /* FindUpeeViewController.swift */,
+				208CA71E1F2E8E30000B1D2F /* ProfileViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -584,11 +601,14 @@
 				200E364C1F2A7146003FA9C7 /* InviteView.swift in Sources */,
 				D8A82FEE1F1553550053C1A1 /* UserFeedViewController.swift in Sources */,
 				0E7F65971F26FB91005BA42E /* ChatCell.swift in Sources */,
+				208CA71F1F2E8E30000B1D2F /* ProfileViewController.swift in Sources */,
 				D8A82FF01F1554AF0053C1A1 /* PendingInviteViewController.swift in Sources */,
 				20E931931F16A56600C4A4A1 /* User.swift in Sources */,
 				2032ACC11F1548FA00A4015C /* ViewController.swift in Sources */,
 				0E7F65911F26FB2C005BA42E /* Helper Files.swift in Sources */,
 				D8A82FEC1F1552A40053C1A1 /* SelectLocationViewController.swift in Sources */,
+				208CA7221F2EA79E000B1D2F /* ProfileCell.swift in Sources */,
+				208CA7241F2EA7B1000B1D2F /* EatUpCell.swift in Sources */,
 				2032ACBF1F1548FA00A4015C /* AppDelegate.swift in Sources */,
 				208AF5751F1838BB003E76A8 /* OrgSelectViewController.swift in Sources */,
 			);

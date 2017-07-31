@@ -72,10 +72,6 @@ class APIManager: SessionManager {
                 self.graphRequest(id: uid, completion: { (successBool) in
                     if successBool == true {
                         print("Created new user")
-                        
-//                        let photoURL = Auth.auth().currentUser?.photoURL
-//                        let urlString = photoURL?.absoluteString
-//                        self.ref.child("users/\(uid)/profilePhotoURL").setValue(urlString!)
                         self.databaseHandle = self.ref.child("users/\(uid)").observe(.value , with: { (snapshot) in
                             if let data = snapshot.value as? [String: Any] {
                                 User.current = User(dictionary: data)
@@ -397,5 +393,33 @@ class APIManager: SessionManager {
             }
             
         })
+    }
+    
+    func getUserEatupIds(completion: @escaping (Bool, [String]) -> ()) {
+        let uid = User.current?.id
+        var eatups: [String] = []
+        ref.child("users/\(uid)/eatup_history").observeSingleEvent(of: .value, with: { (snapshot) in
+            let data = snapshot.value as? [String: Any]
+            for (id, _) in data! {
+                eatups.append(id)
+            }
+            completion(true, eatups)
+        })
+    }
+    
+    func getEatups(eatupIds: [String], completion: @escaping (Bool, [EatUp]) -> ()) {
+        var eatups: [EatUp] = []
+        for id in eatupIds {
+            ref.child("eatups/\(id)").observeSingleEvent(of: .value, with: { (snapshot) in
+                if let data = snapshot.value as? [String: Any] {
+                    let eatup = EatUp.init(dictionary: data)
+                    eatup.id = snapshot.key
+                    eatups.append(eatup)
+                }
+                if eatups.count == eatupIds.count {
+                    completion(true, eatups)
+                }
+            })
+        }
     }
 }

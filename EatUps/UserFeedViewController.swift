@@ -15,7 +15,7 @@ import Firebase
 import ChameleonFramework
 import EasyAnimation
 
-class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, CLLocationManagerDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, CLLocationManagerDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, InviteViewDelegate {
     
     @IBOutlet weak var barButtonItem: UIBarButtonItem!
     
@@ -60,20 +60,6 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let customView = UIImageView()
-        if let profilePhotoURL = User.current?.profilePhotoUrl {
-            customView.af_setImage(withURL: (profilePhotoURL))
-        }
-        else {
-            customView.image = #imageLiteral(resourceName: "profile pic")
-        }
-        User.getRoundProfilePics(photoView: customView)
-        let customViewItem = UIBarButtonItem(customView: customView)
-        
-        
-        barButtonItem.customView = customView
-        barButtonItem = customViewItem
         
         eatupAtParent.addSubview(eatupAtView)
         
@@ -141,7 +127,7 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         inviteView.parent = self
         inviteView.frame = CGRect.init(x: self.view.bounds.minX, y: self.view.bounds.minY, width: self.view.frame.width, height: self.view.frame.height)
         inviteView.populateInviteInfo()
-        self.view.addSubview(inviteView)
+        self.view.superview?.addSubview(inviteView)
         
         inviteView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
         inviteView.alpha = 0
@@ -272,6 +258,10 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
                 self.performSegue(withIdentifier: "requestEatUpSegue", sender: sender)
             }
         }
+    }
+    
+    func dismiss() {
+        animateInviteOut()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

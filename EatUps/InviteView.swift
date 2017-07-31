@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol InviteViewDelegate: class {
+    func dismiss()
+}
+
 class InviteView: UIView {
+    
+    weak var delegate: InviteViewDelegate!
     
     @IBOutlet weak var profilePhotoView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
