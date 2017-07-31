@@ -17,6 +17,7 @@ target 'EatUps' do
   pod 'Firebase/Core'
   pod 'Firebase/Database'
   pod 'Firebase/Auth'
+  pod 'Firebase/Storage'
 
   # Other Pods
   pod 'KeychainAccess'

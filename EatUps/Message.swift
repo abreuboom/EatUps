@@ -24,6 +24,7 @@
 import Foundation
 import UIKit
 import Firebase
+import FirebaseStorage
 
 class Message {
     
@@ -33,6 +34,8 @@ class Message {
     var timestamp: Int
     private var toID: String?
     private var fromID: String?
+    var image: UIImage?
+    var type: MessageType
     
     //MARK: Methods
     class func downloadAllMessages(forUserID: String, eatUpID: String, completion: @escaping (Message) -> Swift.Void) {
@@ -44,14 +47,21 @@ class Message {
                     Database.database().reference().child("conversations").child(location).observe(.childAdded, with: { (snap) in
                         if snap.exists() {
                             let receivedMessage = snap.value as! [String: Any]
+                            let messageType = receivedMessage["type"] as! String
+                            var type = MessageType.text
+                            switch messageType {
+                            case "photo":
+                                type = .photo
+                            default: break
+                            }
                             let content = receivedMessage["content"] as! String
                             let fromID = receivedMessage["fromID"] as! String
                             let timestamp = receivedMessage["timestamp"] as! Int
                             if fromID == currentUserID {
-                                let message = Message.init(content: content, owner: .receiver, timestamp: timestamp)
+                                let message = Message.init(type: type, content: content, owner: .receiver, timestamp: timestamp)
                                 completion(message)
                             } else {
-                                let message = Message.init(content: content, owner: .sender, timestamp: timestamp)
+                                let message = Message.init(type: type, content: content, owner: .sender, timestamp: timestamp)
                                 completion(message)
                             }
                         }
@@ -61,12 +71,40 @@ class Message {
         }
     }
     
+    func downloadImage(indexpathRow: Int, completion: @escaping (Bool, Int) -> Swift.Void)  {
+        if self.type == .photo {
+            let imageLink = self.content as! String
+            let imageURL = URL.init(string: imageLink)
+            URLSession.shared.dataTask(with: imageURL!, completionHandler: { (data, response, error) in
+                if error == nil {
+                    self.image = UIImage.init(data: data!)
+                    completion(true, indexpathRow)
+                }
+            }).resume()
+        }
+    }
+    
     class func send(message: Message, toID: String, eatUpID: String, completion: @escaping (Bool) -> Swift.Void)  {
         if let currentUserID = Auth.auth().currentUser?.uid {
-            let values = ["content": message.content, "fromID": currentUserID, "toID": toID, "timestamp": message.timestamp]
-            Message.uploadMessage(withValues: values, toID: toID, eatUpID: eatUpID, completion: { (status) in
+            switch message.type {
+            case .photo:
+                let imageData = UIImageJPEGRepresentation((message.content as! UIImage), 0.5)
+                let child = UUID().uuidString
+                Storage.storage().reference().child("messagePics").child(child).putData(imageData!, metadata: nil, completion: { (metadata, error) in
+                    if error == nil {
+                        let path = metadata?.downloadURL()?.absoluteString
+                        let values = ["type": "photo", "content": path!, "fromID": currentUserID, "toID": toID, "timestamp": message.timestamp] as [String : Any]
+                        Message.uploadMessage(withValues: values, toID: toID, eatUpID: eatUpID, completion: { (status) in
+                            completion(status)
+                        })
+                    }
+                })
+            case .text:
+                let values = ["type": "text", "content": message.content, "fromID": currentUserID, "toID": toID, "timestamp": message.timestamp]
+                Message.uploadMessage(withValues: values, toID: toID, eatUpID: eatUpID, completion: { (status) in
                 completion(status)
-            })
+                })
+            }
         }
     }
     
@@ -103,9 +141,10 @@ class Message {
     
     
     //MARK: Inits
-    init(content: Any, owner: MessageOwner, timestamp: Int) {
+    init(type: MessageType, content: Any, owner: MessageOwner, timestamp: Int) {
         self.content = content
         self.owner = owner
         self.timestamp = timestamp
+        self.type = type
     }
 }

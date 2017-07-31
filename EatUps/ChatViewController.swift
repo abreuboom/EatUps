@@ -24,8 +24,9 @@
 import UIKit
 import Firebase
 import AlamofireImage
+import Photos
 
-class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,  UINavigationControllerDelegate {
+class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,  UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     //MARK: Properties
     @IBOutlet var inputBar: UIView!
@@ -44,6 +45,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     var items = [Message]()
     let barHeight: CGFloat = 50
+    let imagePicker = UIImagePickerController()
     var currentUser = User.current
     var selectedUser: User?
     var eatupId: String?
@@ -51,6 +53,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //MARK: Methods
     func customization() {
+        self.imagePicker.delegate = self
         self.tableView.estimatedRowHeight = self.barHeight
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.contentInset.bottom = self.barHeight
@@ -82,17 +85,60 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    func composeMessage(content: Any)  {
-        let message = Message.init(content: content, owner: .sender, timestamp: Int(Date().timeIntervalSince1970))
+    func composeMessage(type: MessageType, content: Any)  {
+        let message = Message.init(type: type, content: content, owner: .sender, timestamp: Int(Date().timeIntervalSince1970))
         Message.send(message: message, toID: (selectedUser?.id)!, eatUpID: eatupId!, completion: {(_) in
         })
     } 
     
+    func animateExtraButtons(toHide: Bool)  {
+        switch toHide {
+        case true:
+            self.bottomConstraint.constant = 0
+            UIView.animate(withDuration: 0.3) {
+                self.inputBar.layoutIfNeeded()
+            }
+        default:
+            self.bottomConstraint.constant = -50
+            UIView.animate(withDuration: 0.3) {
+                self.inputBar.layoutIfNeeded()
+            }
+        }
+    }
+    
+    @IBAction func showMessage(_ sender: Any) {
+        self.animateExtraButtons(toHide: true)
+    }
+    
+    @IBAction func selectGallery(_ sender: Any) {
+        self.animateExtraButtons(toHide: true)
+        let status = PHPhotoLibrary.authorizationStatus()
+        if (status == .authorized || status == .notDetermined) {
+            self.imagePicker.sourceType = .savedPhotosAlbum;
+            self.present(self.imagePicker, animated: true, completion: nil)
+        }
+        
+    }
+    
+    @IBAction func selectCamera(_ sender: Any) {
+        self.animateExtraButtons(toHide: true)
+        let status = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+        if (status == .authorized || status == .notDetermined) {
+            self.imagePicker.sourceType = .camera
+            self.imagePicker.allowsEditing = false
+            self.present(self.imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    @IBAction func showOptions(_ sender: Any) {
+        self.animateExtraButtons(toHide: false)
+    }
+
     
     @IBAction func sendMessage(_ sender: Any) {
         if let text = self.inputTextField.text {
             if text.characters.count > 0 {
-                self.composeMessage(content: self.inputTextField.text!)
+                self.composeMessage(type: .text, content: self.inputTextField.text!)
                 self.inputTextField.text = ""
             }
         }
@@ -129,19 +175,62 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         case .receiver:
             let cell = tableView.dequeueReusableCell(withIdentifier: "Receiver", for: indexPath) as! ReceiverCell
             cell.clearCellData()
-            cell.message.text = self.items[indexPath.row].content as! String
+            switch self.items[indexPath.row].type {
+            case .text:
+                cell.message.text = self.items[indexPath.row].content as! String
+            case .photo:
+                if let image = self.items[indexPath.row].image {
+                    cell.messageBackground.image = image
+                    cell.message.isHidden = true
+                } else {
+                    cell.messageBackground.image = UIImage.init(named: "loading")
+                    self.items[indexPath.row].downloadImage(indexpathRow: indexPath.row, completion: { (state, index) in
+                        if state == true {
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
+                            }
+                        }
+                    })
+                }
+            }
             return cell
         case .sender:
             let cell = tableView.dequeueReusableCell(withIdentifier: "Sender", for: indexPath) as! SenderCell
             cell.clearCellData()
             cell.profilePic.af_setImage(withURL: (selectedUser?.profilePhotoUrl)!)
-            cell.message.text = self.items[indexPath.row].content as! String
+            switch self.items[indexPath.row].type {
+            case .text:
+                cell.message.text = self.items[indexPath.row].content as! String
+            case .photo:
+                if let image = self.items[indexPath.row].image {
+                    cell.messageBackground.image = image
+                    cell.message.isHidden = true
+                } else {
+                    cell.messageBackground.image = UIImage.init(named: "loading")
+                    self.items[indexPath.row].downloadImage(indexpathRow: indexPath.row, completion: { (state, index) in
+                        if state == true {
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
+                            }
+                        }
+                    })
+                }
+            }
             return cell
             }
         }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.inputTextField.resignFirstResponder()
+        switch self.items[indexPath.row].type {
+        case .photo:
+            if let photo = self.items[indexPath.row].image {
+                let info = ["viewType" : ShowExtraView.preview, "pic": photo] as [String : Any]
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showExtraView"), object: nil, userInfo: info)
+                self.inputAccessoryView?.isHidden = true
+            }
+            default: break
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -149,7 +238,16 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         return true
     }
     
-        
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+            self.composeMessage(type: .photo, content: pickedImage)
+        } else {
+            let pickedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+            self.composeMessage(type: .photo, content: pickedImage)
+        }
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
     //MARK: ViewController lifecycle
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
