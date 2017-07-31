@@ -100,7 +100,7 @@ class Message {
                     }
                 })
             case .text:
-                let values = ["content": message.content, "fromID": currentUserID, "toID": toID, "timestamp": message.timestamp]
+                let values = ["type": "text", "content": message.content, "fromID": currentUserID, "toID": toID, "timestamp": message.timestamp]
                 Message.uploadMessage(withValues: values, toID: toID, eatUpID: eatUpID, completion: { (status) in
                 completion(status)
                 })

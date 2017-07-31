@@ -1088,7 +1088,7 @@
                         </view>
                         <view alpha="0.60000002384185791" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UKm-ZN-wtt">
                             <rect key="frame" x="0.0" y="0.0" width="376" height="1"/>
-                            <color key="backgroundColor" red="0.50588235290000005" green="0.56470588239999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.99607843137254903" green="0.24705882352941178" blue="0.40392156862745099" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="6WE-Uc-IDp"/>
                             </constraints>
