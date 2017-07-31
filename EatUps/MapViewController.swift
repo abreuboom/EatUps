@@ -46,8 +46,8 @@ class MapViewController: UIViewController {
                 
                 for place in self.places {
                     APIManager.shared.getPlaceLocation(place: place, completion: { (success: Bool, placeLocation) in
-                        <#code#>
-                    })
+                         
+                 })
                 }
             }
             else {
