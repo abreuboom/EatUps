@@ -17,6 +17,7 @@ target 'EatUps' do
   pod 'Firebase/Core'
   pod 'Firebase/Database'
   pod 'Firebase/Auth'
+  pod 'Firebase/Storage'
 
   # Other Pods
   pod 'KeychainAccess'
@@ -29,6 +30,7 @@ target 'EatUps' do
   pod 'SRCountdownTimer'
   pod 'EasyAnimation'
   pod 'ActiveLabel'
+  pod 'YYKit'
 
   target 'EatUpsTests' do
     inherit! :search_paths
