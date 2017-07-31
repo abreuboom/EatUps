@@ -15,7 +15,7 @@ import Firebase
 import ChameleonFramework
 import EasyAnimation
 
-class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, CLLocationManagerDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, InviteViewDelegate {
+class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, CLLocationManagerDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
 
     @IBOutlet weak var barButtonItem: UIBarButtonItem!
 
@@ -262,10 +262,10 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         }
     }
 
-    func dismiss() {
-        animateInviteOut()
+    @IBAction func profileButton(_ sender: UIBarButtonItem) {
+        self.performSegue(withIdentifier: "profileSegue", sender: nil)
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "requestEatUpSegue" {
             let selectedUserButton = sender as! UIButton

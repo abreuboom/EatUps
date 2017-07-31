@@ -398,7 +398,7 @@ class APIManager: SessionManager {
     func getUserEatupIds(completion: @escaping (Bool, [String]) -> ()) {
         let uid = User.current?.id
         var eatups: [String] = []
-        ref.child("users/\(uid)/eatup_history").observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.child("users/\(uid!)/eatup_history").observeSingleEvent(of: .value, with: { (snapshot) in
             let data = snapshot.value as? [String: Any]
             for (id, _) in data! {
                 eatups.append(id)
