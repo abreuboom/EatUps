@@ -434,8 +434,11 @@
                             <constraint firstAttribute="trailing" secondItem="kPc-tQ-hm1" secondAttribute="trailing" id="u8J-l1-sNz"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="eatups" id="H6m-nl-f4h"/>
+                    <navigationItem key="navigationItem" title="eatups" id="H6m-nl-f4h">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="u0o-Xx-zM9"/>
+                    </navigationItem>
                     <connections>
+                        <outlet property="barButtonItem" destination="u0o-Xx-zM9" id="VwA-oB-dit"/>
                         <outlet property="blurEffect" destination="cJC-77-ZVD" id="0qc-sZ-SqG"/>
                         <outlet property="collectionView" destination="waO-2c-jJ7" id="Sto-fd-Eac"/>
                         <outlet property="eatUpButton" destination="1ct-Ba-WaO" id="qBu-hn-xiC"/>
@@ -774,7 +777,7 @@
             <objects>
                 <navigationController storyboardIdentifier="selectLocationNavigation" automaticallyAdjustsScrollViewInsets="NO" id="BfX-7S-Xg9" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="Ld7-2N-ljz">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Ld7-2N-ljz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1010,7 +1013,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Z4f-0U-Ojy" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="5PX-eG-Qj8">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="5PX-eG-Qj8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.99607843139999996" green="0.2470588235" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1035,7 +1038,7 @@
         <image name="send" width="32" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qIe-up-56k"/>
-        <segue reference="jjh-46-bM1"/>
+        <segue reference="t20-IJ-N14"/>
+        <segue reference="fQv-Qi-FeE"/>
     </inferredMetricsTieBreakers>
 </document>

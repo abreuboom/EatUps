@@ -17,6 +17,8 @@ import EasyAnimation
 
 class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, CLLocationManagerDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
+    @IBOutlet weak var barButtonItem: UIBarButtonItem!
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var eatUpButton: UIButton!
     
@@ -39,7 +41,7 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     
     var isUserSelected: Bool = false
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         eatupAtView.layer.cornerRadius = eatupAtView.frame.width/5
         eatupAtView.dropShadow()
         eatupAtView.center = eatupAtParent.center
@@ -48,6 +50,7 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         let size = eatupAtView.eatupAtLabel.sizeThatFits(self.view.bounds.size)
         eatupAtView.eatupAtLabel.frame.size = size
         eatupAtView.frame = CGRect.init(x: eatupAtParent.center.x - (eatupAtView.eatupAtLabel.bounds.size.width + 32)/2, y: eatupAtParent.center.y - eatupAtView.bounds.size.height/2, width: eatupAtView.eatupAtLabel.bounds.size.width + 32, height: eatupAtView.bounds.size.height)
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -57,6 +60,20 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let customView = UIImageView()
+        if let profilePhotoURL = User.current?.profilePhotoUrl {
+            customView.af_setImage(withURL: (profilePhotoURL))
+        }
+        else {
+            customView.image = #imageLiteral(resourceName: "profile pic")
+        }
+        User.getRoundProfilePics(photoView: customView)
+        let customViewItem = UIBarButtonItem(customView: customView)
+        
+        
+        barButtonItem.customView = customView
+        barButtonItem = customViewItem
         
         eatupAtParent.addSubview(eatupAtView)
         

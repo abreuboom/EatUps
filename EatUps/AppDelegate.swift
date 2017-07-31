@@ -21,11 +21,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
         // MARK: TODO: Check for logged in user
+        if UserDefaults.standard.value(forKey: "uid") != nil {
+            User.current?.id = Auth.auth().currentUser?.uid
+            let loginVC = storyboard.instantiateViewController(withIdentifier: "selectLocationNavigation")
+            self.window?.rootViewController = loginVC
+        }
         
         NotificationCenter.default.addObserver(forName: Notification.Name("didLogout"), object: nil, queue: OperationQueue.main) { (Notification) in
             print("Logout notification received")
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
             self.window?.rootViewController = loginVC
         }
