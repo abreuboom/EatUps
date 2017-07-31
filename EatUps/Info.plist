@@ -43,7 +43,7 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Allow location access to help us find people in your area.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Allow photo access to help us build your profile.</string>
+	<string>Allow photo access to help us build your profile and send to friends.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>MADE Waffle Soft.otf</string>
@@ -70,5 +70,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+    <key>NSCameraUsageDescription</key>
+    <string>Photos will be used for sending pictures in conversations.</string>
+    <key>NSLocationUsageDescription</key>
+    <string>Allow location access to help us find people in your area.</string>
 </dict>
 </plist>
