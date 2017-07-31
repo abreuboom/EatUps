@@ -30,8 +30,6 @@ class MapViewController: UIViewController {
         let camera = GMSCameraPosition.camera(withLatitude: CLLocationDegrees(latitudeCoor), longitude: CLLocationDegrees(longitudeCoor), zoom: 15)
         let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         view = mapView
-        let marker = GMSMarker()
-        marker.map = mapView
         
         ref = Database.database().reference()
         
@@ -45,12 +43,16 @@ class MapViewController: UIViewController {
                     APIManager.shared.getPlaceLocation(place: place, completion: { (success: Bool, placeLocation) in
                         
                         if success == true {
-                            self.latitudeCoor = Float(placeLocation.coordinate.latitude)
-                            self.longitudeCoor = Float(placeLocation.coordinate.longitude)
+                            for place in self.places{
+                                let marker = GMSMarker()
+                                self.latitudeCoor = Float(placeLocation.coordinate.latitude)
+                                self.longitudeCoor = Float(placeLocation.coordinate.longitude)
                             
-                            marker.position = CLLocationCoordinate2D(latitude: CLLocationDegrees(self.latitudeCoor), longitude: CLLocationDegrees(self.longitudeCoor))
-                            marker.title = place
-                            marker.snippet = "Facebook University"
+                                marker.position = CLLocationCoordinate2D(latitude: CLLocationDegrees(self.latitudeCoor), longitude: CLLocationDegrees(self.longitudeCoor))
+                                marker.title = place
+                                marker.snippet = "Facebook University"
+                                marker.map = mapView
+                            }
                         }
                         
                         else {
