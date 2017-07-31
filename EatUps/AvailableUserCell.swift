@@ -7,6 +7,7 @@
 //
 import UIKit
 import AlamofireImage
+import YYKit
 
 class AvailableUserCell: UICollectionViewCell {
     
@@ -23,7 +24,8 @@ class AvailableUserCell: UICollectionViewCell {
             
             nameLabel.text = firstName
             if let url = user.profilePhotoUrl {
-                photoView.af_setImage(withURL: url)
+                photoView.setImageWith(url, placeholder: #imageLiteral(resourceName: "gray_circle"), options: [.progressiveBlur, .setImageWithFadeAnimation], completion: nil)
+                //photoView.af_setImage(withURL: url)
             }
         }
     }

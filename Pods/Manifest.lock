@@ -77,6 +77,9 @@ PODS:
   - nanopb/encode (0.3.8)
   - PKHUD (4.2.3)
   - SRCountdownTimer (1.0.1)
+  - YYKit (1.0.9):
+    - YYKit/no-arc (= 1.0.9)
+  - YYKit/no-arc (1.0.9)
 
 DEPENDENCIES:
   - ActiveLabel
@@ -98,6 +101,7 @@ DEPENDENCIES:
   - KeychainAccess
   - PKHUD (~> 4.0)
   - SRCountdownTimer
+  - YYKit
 
 SPEC CHECKSUMS:
   ActiveLabel: 68625f22775f51c31bb691ca8de20f1e5a3bc825
@@ -126,7 +130,8 @@ SPEC CHECKSUMS:
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   PKHUD: c7692163a09875cbf15827dc581df3c5cf7f1015
   SRCountdownTimer: 187458addb1e88cae62eb5aa57f48d7888f8c18c
+  YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: 9bd895db3d84994fda7c80ab1fb4c4ae4897bd2a
+PODFILE CHECKSUM: ee1b6ccd7800f770d9f1c784d04d6f586e57e1d5
 
 COCOAPODS: 1.2.1

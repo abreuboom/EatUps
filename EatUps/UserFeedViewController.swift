@@ -123,11 +123,13 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     
     func animateInviteIn(eatup: EatUp) {
         self.view.bringSubview(toFront: blurEffect)
+        self.view.addSubview(inviteView)
         inviteView.eatup = eatup
-        inviteView.parent = self
-        inviteView.frame = CGRect.init(x: self.view.bounds.minX, y: self.view.bounds.minY, width: self.view.frame.width, height: self.view.frame.height)
         inviteView.populateInviteInfo()
-        self.view.superview?.addSubview(inviteView)
+        inviteView.parent = self
+        inviteView.frame = self.view.bounds
+        inviteView.center = blurEffect.center
+        
         
         inviteView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
         inviteView.alpha = 0

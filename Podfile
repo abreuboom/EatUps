@@ -29,6 +29,7 @@ target 'EatUps' do
   pod 'SRCountdownTimer'
   pod 'EasyAnimation'
   pod 'ActiveLabel'
+  pod 'YYKit'
 
   target 'EatUpsTests' do
     inherit! :search_paths
