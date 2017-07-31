@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F2073" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -1335,10 +1335,10 @@
             </objects>
             <point key="canvasLocation" x="3009" y="2659"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation View Controller-->
         <scene sceneID="0H2-fo-zIA">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Z4f-0U-Ojy" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Z4f-0U-Ojy" customClass="NavigationViewController" customModule="EatUps" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="5PX-eG-Qj8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -1349,10 +1349,66 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
+                        <outlet property="previewImageView" destination="EbK-YE-iDI" id="18N-XB-3Gn"/>
+                        <outlet property="previewView" destination="Pb6-wi-WHu" id="bjH-au-92N"/>
+                        <outlet property="scrollView" destination="hnt-Ir-7A9" id="Map-gL-f4h"/>
                         <segue destination="WXc-wC-v7g" kind="relationship" relationship="rootViewController" id="T9R-bG-Zwx"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TK3-PL-aJS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="Pb6-wi-WHu">
+                    <rect key="frame" x="0.0" y="0.0" width="382" height="252"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hnt-Ir-7A9">
+                            <rect key="frame" x="0.0" y="0.0" width="382" height="252"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EbK-YE-iDI">
+                                    <rect key="frame" x="0.0" y="0.0" width="382" height="252"/>
+                                    <gestureRecognizers/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="EbK-YE-iDI" firstAttribute="centerX" secondItem="hnt-Ir-7A9" secondAttribute="centerX" id="0aJ-Bg-ASq"/>
+                                <constraint firstAttribute="trailing" secondItem="EbK-YE-iDI" secondAttribute="trailing" id="Hk5-M3-0d4"/>
+                                <constraint firstItem="EbK-YE-iDI" firstAttribute="top" secondItem="hnt-Ir-7A9" secondAttribute="top" id="N08-GU-msF"/>
+                                <constraint firstItem="EbK-YE-iDI" firstAttribute="leading" secondItem="hnt-Ir-7A9" secondAttribute="leading" id="PIo-TG-a24"/>
+                                <constraint firstAttribute="bottom" secondItem="EbK-YE-iDI" secondAttribute="bottom" id="aHP-f4-8gX"/>
+                                <constraint firstItem="EbK-YE-iDI" firstAttribute="centerY" secondItem="hnt-Ir-7A9" secondAttribute="centerY" id="jG6-0v-7sR"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="delegate" destination="Z4f-0U-Ojy" id="0GW-P9-iMj"/>
+                                <outletCollection property="gestureRecognizers" destination="7qa-Wv-cJb" appends="YES" id="eAl-DM-EVu"/>
+                            </connections>
+                        </scrollView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="430-yX-Jt1">
+                            <rect key="frame" x="332" y="25" width="25" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="25" id="3eB-lx-zxV"/>
+                                <constraint firstAttribute="height" constant="25" id="HEh-R1-dki"/>
+                            </constraints>
+                            <state key="normal" image="Cancel" backgroundImage="close"/>
+                            <connections>
+                                <action selector="closeView:" destination="Z4f-0U-Ojy" eventType="touchUpInside" id="OSX-eB-5yN"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="hnt-Ir-7A9" secondAttribute="trailing" id="2US-fP-Gee"/>
+                        <constraint firstItem="430-yX-Jt1" firstAttribute="top" secondItem="Pb6-wi-WHu" secondAttribute="top" constant="25" id="60c-Ny-pBh"/>
+                        <constraint firstAttribute="trailing" secondItem="430-yX-Jt1" secondAttribute="trailing" constant="25" id="C8W-cm-pn6"/>
+                        <constraint firstItem="hnt-Ir-7A9" firstAttribute="leading" secondItem="Pb6-wi-WHu" secondAttribute="leading" id="e35-NV-gfQ"/>
+                        <constraint firstItem="hnt-Ir-7A9" firstAttribute="top" secondItem="Pb6-wi-WHu" secondAttribute="top" id="tEc-zE-yqp"/>
+                        <constraint firstAttribute="bottom" secondItem="hnt-Ir-7A9" secondAttribute="bottom" id="ycD-Qa-zPN"/>
+                    </constraints>
+                </view>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="7qa-Wv-cJb">
+                    <connections>
+                        <action selector="doubleTapGesture:" destination="Z4f-0U-Ojy" id="bUS-ri-BSv"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2025" y="1951"/>
         </scene>
@@ -1362,6 +1418,7 @@
         <image name="Cancel" width="58" height="58"/>
         <image name="Chat" width="24" height="24"/>
         <image name="EatUp Button" width="138" height="60"/>
+        <image name="close" width="16" height="16"/>
         <image name="more" width="64" height="50"/>
         <image name="right_arrow" width="30" height="22"/>
         <image name="selectCamera" width="64" height="50"/>
