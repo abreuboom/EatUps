@@ -10,6 +10,11 @@ import UIKit
 
 class ProfileCell: UITableViewCell {
 
+    @IBOutlet weak var cardView: UIView!
+    @IBOutlet weak var photoView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var orgLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
