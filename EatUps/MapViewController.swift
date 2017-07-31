@@ -19,6 +19,8 @@ class MapViewController: UIViewController {
     var longitudeCoor: Float = 0.0
     var places = [String]()
     var ref: DatabaseReference?
+    
+    
 
     override func loadView() {
         
@@ -28,16 +30,8 @@ class MapViewController: UIViewController {
         let camera = GMSCameraPosition.camera(withLatitude: CLLocationDegrees(latitudeCoor), longitude: CLLocationDegrees(longitudeCoor), zoom: 15)
         let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         view = mapView
-        
         let marker = GMSMarker()
-        /*marker.position = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitudeCoor), longitude: CLLocationDegrees(longitudeCoor))
-        marker.title = "idk"
-        marker.snippet = "idk"*/
         marker.map = mapView
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
         
         ref = Database.database().reference()
         
@@ -53,11 +47,10 @@ class MapViewController: UIViewController {
                         if success == true {
                             self.latitudeCoor = Float(placeLocation.coordinate.latitude)
                             self.longitudeCoor = Float(placeLocation.coordinate.longitude)
-                            let marker = GMSMarker()
+                            
                             marker.position = CLLocationCoordinate2D(latitude: CLLocationDegrees(self.latitudeCoor), longitude: CLLocationDegrees(self.longitudeCoor))
                             marker.title = place
                             marker.snippet = "Facebook University"
-
                         }
                         
                         else {
@@ -72,8 +65,10 @@ class MapViewController: UIViewController {
                 }
             })
         }
-    }
 
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
