@@ -48,13 +48,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="eatups" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GXc-uI-uSJ">
-                                <rect key="frame" x="24" y="140" width="327" height="56"/>
+                                <rect key="frame" x="24" y="140" width="327" height="52.5"/>
                                 <fontDescription key="fontDescription" name="MADEWaffleSoft" family="MADE Waffle Soft" pointSize="45"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meetup and eat!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5wT-sd-1Pi">
-                                <rect key="frame" x="24" y="196" width="327" height="21"/>
+                                <rect key="frame" x="24" y="192.5" width="327" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -559,11 +559,11 @@
                         <viewControllerLayoutGuide type="bottom" id="fmK-vU-9Pj"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="b8d-ZD-dI5">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="URK-sp-aPv">
-                                <rect key="frame" x="0.0" y="16" width="375" height="587"/>
+                                <rect key="frame" x="0.0" y="36" width="375" height="631"/>
                                 <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
@@ -951,7 +951,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.39607843139999999" green="0.46666666670000001" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="biG-a9-TsC" firstAttribute="top" secondItem="XVC-b9-BKM" secondAttribute="bottom" constant="32" id="8wj-2d-MxH"/>
                             <constraint firstItem="7kk-Zu-Rhg" firstAttribute="centerX" secondItem="bP0-nJ-PkN" secondAttribute="centerX" id="9vG-iN-ll0"/>
@@ -987,13 +987,6 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="How was your EatUp with" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="atD-to-JSu">
-                                <rect key="frame" x="75" y="40" width="227" height="74"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="64" translatesAutoresizingMaskIntoConstraints="NO" id="7p3-zy-Jme">
                                 <rect key="frame" x="97.5" y="513" width="180" height="58"/>
                                 <subviews>
@@ -1019,39 +1012,62 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XOh-dk-lHy">
-                                <rect key="frame" x="131" y="112" width="128" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XOh-dk-lHy">
+                                <rect key="frame" x="123.5" y="120" width="128" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="128" id="Arg-Y3-Cvl"/>
+                                    <constraint firstAttribute="width" secondItem="XOh-dk-lHy" secondAttribute="height" multiplier="1:1" id="Nhl-B3-If4"/>
+                                </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oMx-9B-fdc">
-                                <rect key="frame" x="324" y="28" width="35" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Skip">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oMx-9B-fdc">
+                                <rect key="frame" x="303" y="8" width="64" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="64" id="EJx-W2-aGG"/>
+                                    <constraint firstAttribute="width" secondItem="oMx-9B-fdc" secondAttribute="height" multiplier="23:10" id="osZ-ld-fne"/>
+                                </constraints>
+                                <state key="normal" image="Skip">
                                     <color key="titleColor" red="0.99019607843137258" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="didNotRate:" destination="lZU-V8-fg5" eventType="touchUpInside" id="AvP-DM-ooA"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xNj-Iz-H5n">
-                                <rect key="frame" x="42" y="259" width="291" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xNj-Iz-H5n">
+                                <rect key="frame" x="8" y="264" width="359" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <color key="textColor" red="0.99019607843137258" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="highlightedColor" red="0.99019607843137258" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Would you eatup with them again?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3P3-eA-CMg">
-                                <rect key="frame" x="57" y="412" width="263" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Would you eatup with them again?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3P3-eA-CMg">
+                                <rect key="frame" x="56" y="460.5" width="263" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How was your EatUp with" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="atD-to-JSu">
+                                <rect key="frame" x="8" y="64" width="359" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.39607843139999999" green="0.46666666670000001" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="xNj-Iz-H5n" firstAttribute="leading" secondItem="29E-vj-1DT" secondAttribute="leading" constant="8" id="AeQ-2Z-AkZ"/>
                             <constraint firstItem="7p3-zy-Jme" firstAttribute="centerX" secondItem="29E-vj-1DT" secondAttribute="centerX" id="Eni-dg-dwE"/>
+                            <constraint firstAttribute="trailing" secondItem="oMx-9B-fdc" secondAttribute="trailing" constant="8" id="NnB-KX-9jI"/>
+                            <constraint firstItem="atD-to-JSu" firstAttribute="top" secondItem="q11-43-36N" secondAttribute="bottom" constant="64" id="Q47-Uj-12I"/>
+                            <constraint firstItem="atD-to-JSu" firstAttribute="leading" secondItem="29E-vj-1DT" secondAttribute="leading" constant="8" id="W9n-N2-ldC"/>
+                            <constraint firstItem="3P3-eA-CMg" firstAttribute="centerX" secondItem="29E-vj-1DT" secondAttribute="centerX" id="WcK-BL-VdY"/>
+                            <constraint firstItem="7p3-zy-Jme" firstAttribute="top" secondItem="3P3-eA-CMg" secondAttribute="bottom" constant="32" id="Y5v-vo-oc3"/>
+                            <constraint firstAttribute="trailing" secondItem="xNj-Iz-H5n" secondAttribute="trailing" constant="8" id="aqN-5D-Ajb"/>
+                            <constraint firstAttribute="trailing" secondItem="atD-to-JSu" secondAttribute="trailing" constant="8" id="cDg-6d-aIz"/>
+                            <constraint firstItem="XOh-dk-lHy" firstAttribute="top" secondItem="q11-43-36N" secondAttribute="bottom" constant="120" id="ceE-6n-0BJ"/>
+                            <constraint firstItem="atD-to-JSu" firstAttribute="centerX" secondItem="29E-vj-1DT" secondAttribute="centerX" id="fid-2w-P6x"/>
                             <constraint firstItem="bHM-ja-8xW" firstAttribute="top" secondItem="7p3-zy-Jme" secondAttribute="bottom" constant="32" id="tKa-Xi-nAc"/>
+                            <constraint firstItem="XOh-dk-lHy" firstAttribute="centerX" secondItem="29E-vj-1DT" secondAttribute="centerX" id="uEu-kE-O1c"/>
+                            <constraint firstItem="xNj-Iz-H5n" firstAttribute="top" secondItem="XOh-dk-lHy" secondAttribute="bottom" constant="16" id="udq-Y0-DoZ"/>
+                            <constraint firstItem="oMx-9B-fdc" firstAttribute="top" secondItem="q11-43-36N" secondAttribute="bottom" constant="8" id="yZo-G1-Hlq"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1069,7 +1085,7 @@
             <objects>
                 <navigationController storyboardIdentifier="selectLocationNavigation" automaticallyAdjustsScrollViewInsets="NO" id="BfX-7S-Xg9" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="Ld7-2N-ljz">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Ld7-2N-ljz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.9171485305" green="0.31313836569999998" blue="0.41574707630000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1351,7 +1367,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Z4f-0U-Ojy" customClass="NavigationViewController" customModule="EatUps" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="5PX-eG-Qj8">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="5PX-eG-Qj8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.99607843139999996" green="0.2470588235" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1431,6 +1447,7 @@
         <image name="Done Button" width="138" height="60"/>
         <image name="EatUp Button" width="138" height="60"/>
         <image name="Reject" width="58" height="58"/>
+        <image name="Skip" width="138" height="60"/>
         <image name="close" width="16" height="16"/>
         <image name="more" width="64" height="50"/>
         <image name="right_arrow" width="30" height="22"/>
