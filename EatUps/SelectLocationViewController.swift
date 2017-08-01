@@ -8,8 +8,11 @@
 
 import UIKit
 import ChameleonFramework
+import CoreLocation
+import FirebaseDatabase
+import Firebase
 
-class SelectLocationViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate {
+class SelectLocationViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate {
     
     var org_id = User.current?.org_id
     
@@ -18,6 +21,11 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     @IBOutlet weak var locationsTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
+    var ref = Database.database().reference()
+    var databaseHandle: DatabaseHandle!
+    
+    var locationManager: CLLocationManager!
+
     var places: [String] = []
     var emojis: [String] = []
     var userCountIndex: [Int] = []
@@ -40,7 +48,11 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
         locationsTableView.dataSource = self
         searchBar.delegate = self
         
-        // Do any additional setup after loading the view.
+        // Request permissions for locations
+        locationManager = CLLocationManager()
+        getLocation()
+        
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,6 +83,8 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
         })
     }
     
+    
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         filteredPlaces = []
@@ -85,6 +99,43 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
             eatupAtViewCopy.removeFromSuperview()
         })
     }
+    
+    // MARK: Location manager methods
+    // Gets location of user
+    func getLocation() {
+        let status  = CLLocationManager.authorizationStatus()
+        if status == .notDetermined {
+            locationManager.requestWhenInUseAuthorization()
+            return
+        }
+        if status == .denied || status == .restricted {
+            let alert = UIAlertController(title: "Location Services Disabled", message: "Please enable Location Services in Settings", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(okAction)
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        locationManager.delegate = self
+        locationManager.startUpdatingLocation()
+    }
+    
+    // Location delegate methods
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let currentLocation = locations.last!
+        let locationString = EatUp.CLLocationtoString(currentLocation: currentLocation) 
+        let user = Auth.auth().currentUser
+        // Stores location property in current user
+        if let user = user {
+            let id = user.uid
+            self.ref.child("users/\(id)/location").setValue(locationString)
+        }
+        
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Error \(error)")
+    }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath) as! LocationCell
