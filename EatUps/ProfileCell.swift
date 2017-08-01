@@ -16,6 +16,7 @@ class ProfileCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var orgLabel: UILabel!
     
+    @IBOutlet weak var editProfileButton: UIButton!
     @IBOutlet weak var eatupCount: UILabel!
     @IBOutlet weak var invitedCount: UILabel!
     @IBOutlet weak var inviterCount: UILabel!
@@ -26,6 +27,9 @@ class ProfileCell: UITableViewCell {
         
         cardView.layer.cornerRadius = 25
         cardView.dropShadow()
+        
+        editProfileButton.layer.cornerRadius = editProfileButton.frame.width/5
+        editProfileButton.layer.masksToBounds = true
         
         photoView.setImageWith(User.current?.profilePhotoUrl, placeholder: #imageLiteral(resourceName: "gray_circle"), options: [.progressiveBlur, .setImageWithFadeAnimation], completion: nil)
         User.getRoundProfilePics(photoView: photoView)

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import YYKit
 
 protocol InviteViewDelegate: class {
     func dismiss()
@@ -27,7 +28,7 @@ class InviteView: UIView {
         let eatupId = eatup?.id ?? ""
         APIManager.shared.handleInvite(eatupId: eatupId, response: true, completion: { (success) in
             if success == true {
-                self.parentViewController?.performSegue(withIdentifier: "feedToFindSegue", sender: nil)
+                self.parent?.performSegue(withIdentifier: "feedToFindSegue", sender: nil)
             }
         })
     }
@@ -54,7 +55,7 @@ class InviteView: UIView {
                 }
             }
         }
-        placeLabel.setTitle(eatup?.place, for: .normal)
+        placeLabel.setTitle("@\(eatup?.place ?? "")", for: .normal)
         placeLabel.sizeToFit()
     }
     /*

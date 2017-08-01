@@ -361,9 +361,10 @@ class APIManager: SessionManager {
                 ref.child("eatups/\(eatupId)/invitee").setValue("", withCompletionBlock: { (error, databaseRef) in
                     if let error = error {
                         print(error.localizedDescription)
+                        completion(false)
                     }
                     else {
-                        completion(false)
+                        completion(true)
                     }
                 })
             }

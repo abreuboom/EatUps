@@ -31,6 +31,7 @@ target 'EatUps' do
   pod 'EasyAnimation'
   pod 'ActiveLabel'
   pod 'YYKit'
+  pod 'DateToolsSwift'
 
   target 'EatUpsTests' do
     inherit! :search_paths

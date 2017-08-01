@@ -8,6 +8,7 @@
 
 import UIKit
 import YYKit
+import DateToolsSwift
 
 class EatUpCell: UITableViewCell {
     
@@ -28,7 +29,9 @@ class EatUpCell: UITableViewCell {
             User.getRoundProfilePics(photoView: self.photoView)
             
             placeLabel.text = eatup.place
-            timeLabel.text = String(eatup.time)
+            let doubleDate = Double(eatup.time)
+            let date = Date.init(timeIntervalSince1970: doubleDate)
+            timeLabel.text = Date.shortTimeAgo(since: date)
             
             if eatup.invitee == User.current?.id {
                 invitedLabel.text = "Invited"
