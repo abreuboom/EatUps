@@ -15,68 +15,69 @@ import Firebase
 import ChameleonFramework
 import EasyAnimation
 
-class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, CLLocationManagerDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, InviteViewDelegate {
-
+class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, CLLocationManagerDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    
     @IBOutlet weak var barButtonItem: UIBarButtonItem!
-
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var eatUpButton: UIButton!
-
+    
     @IBOutlet var inviteView: InviteView!
     @IBOutlet weak var blurEffect: UIVisualEffectView!
     var effect: UIVisualEffect!
-
+    
     var ref: DatabaseReference!
     var databaseHandle: DatabaseHandle!
-
+    
     @IBOutlet weak var eatupAtParent: UIView!
     @IBOutlet var eatupAtView: EatupAtView!
-
+    
     var users: [String] = []
     var availableUsers: [User] = []
     var selectedUser: User?
     var eatupId: String?
     var place: String = ""
     var locationManager: CLLocationManager!
-
+    var inviter: Bool = false
+    
     var isUserSelected: Bool = false
-
+    
     override func viewWillAppear(_ animated: Bool) {
         eatupAtView.layer.cornerRadius = eatupAtView.frame.width/5
         eatupAtView.dropShadow()
         eatupAtView.center = eatupAtParent.center
-
+        
         eatupAtView.place = place
         let size = eatupAtView.eatupAtLabel.sizeThatFits(self.view.bounds.size)
         eatupAtView.eatupAtLabel.frame.size = size
         eatupAtView.frame = CGRect.init(x: eatupAtParent.center.x - (eatupAtView.eatupAtLabel.bounds.size.width + 32)/2, y: eatupAtParent.center.y - eatupAtView.bounds.size.height/2, width: eatupAtView.eatupAtLabel.bounds.size.width + 32, height: eatupAtView.bounds.size.height)
-
+        
     }
-
+    
     override func viewDidDisappear(_ animated: Bool) {
         eatupAtView.reset()
         eatupAtView.removeFromSuperview()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         eatupAtParent.addSubview(eatupAtView)
-
+        
         effect = blurEffect.effect!
         blurEffect.effect = nil
         inviteView.layer.cornerRadius = 25
         inviteView.dropShadow()
         inviteView.layer.position = blurEffect.contentView.center
         inviteView.center = CGPoint(x: blurEffect.contentView.frame.size.width/2, y: blurEffect.contentView.frame.size.height/2)
-
-
+        
+        
         self.navigationController?.hidesNavigationBarHairline = true
-
+        
         ref = Database.database().reference()
-
+        
         let uid = User.current?.id ?? ""
-
+        
         // Populating collection view with available users
         APIManager.shared.getAvailableUsers(place: place) { (success, users) in
             if success == true {
@@ -91,7 +92,7 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
                 self.collectionView.reloadData()
             }
         }
-
+        
         APIManager.shared.checkForInvite { (invited, eatupId) in
             if invited == true {
                 if eatupId != nil {
@@ -99,19 +100,19 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
                         if let eatupDictionary = snapshot.value as? [String: Any] {
                             let eatup = EatUp(dictionary: eatupDictionary)
                             eatup.id = snapshot.key
-
+                            
                             self.animateInviteIn(eatup: eatup)
                         }
                     })
                 }
             }
         }
-
+        
         // Styling eatUp button
         eatUpButton.layer.cornerRadius = eatUpButton.frame.width/5
         eatUpButton.layer.masksToBounds = true
         eatUpButton.layer.position.y = self.view.frame.maxY + 50
-
+        
         // Initialise collection view
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -120,38 +121,39 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         collectionView.emptyDataSetSource = self
         collectionView.emptyDataSetDelegate = self
     }
-
+    
     func animateInviteIn(eatup: EatUp) {
-        self.view.bringSubview(toFront: blurEffect)
-        self.view.addSubview(inviteView)
-        inviteView.eatup = eatup
-        inviteView.populateInviteInfo()
-        inviteView.parent = self
-        inviteView.frame = self.view.bounds
-        inviteView.center = blurEffect.center
-
-        
-        inviteView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
-        inviteView.alpha = 0
-
-        UIView.animate(withDuration: 0.4) {
-            self.blurEffect.effect = self.effect
-            self.inviteView.alpha = 1
-            self.inviteView.transform = CGAffineTransform.identity
+        if inviter == false {
+            self.view.bringSubview(toFront: blurEffect)
+            self.view.bringSubview(toFront: inviteView)
+            inviteView.eatup = eatup
+            inviteView.populateInviteInfo()
+            inviteView.parent = self
+            
+            inviteView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+            inviteView.alpha = 0
+            
+            UIView.animate(withDuration: 0.4) {
+                self.blurEffect.effect = self.effect
+                self.inviteView.alpha = 1
+                self.inviteView.transform = CGAffineTransform.identity
+            }
         }
     }
-
+    
     func animateInviteOut() {
-        UIView.animate(withDuration: 0.2, animations: {
-            self.inviteView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
-            self.inviteView.alpha = 0
-            self.blurEffect.effect = nil
-        }) { (success) in
-            self.view.sendSubview(toBack: self.blurEffect)
-            self.inviteView.removeFromSuperview()
+        if inviter == false {
+            UIView.animate(withDuration: 0.2, animations: {
+                self.inviteView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+                self.inviteView.alpha = 0
+                self.blurEffect.effect = nil
+            }) { (success) in
+                self.view.sendSubview(toBack: self.blurEffect)
+                self.view.sendSubview(toBack: self.inviteView)
+            }
         }
     }
-
+    
     // MARK: Collection View Configuration
     // Setup placeholder text for empty collection view
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
@@ -159,29 +161,29 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)]
         return NSAttributedString(string: str, attributes: attrs)
     }
-
+    
     // Configuring collection view cell views
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "availableUserCell", for: indexPath) as! AvailableUserCell
         cell.user = availableUsers[indexPath.item]
         cell.cardView.tag = indexPath.item
         collectionView.allowsMultipleSelection = false
-
+        
         //        let tapped:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(selectUpee(_:)))
         //        tapped.numberOfTapsRequired = 1
         //        cell.cardView.addGestureRecognizer(tapped)
-
+        
         return cell
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return availableUsers.count
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedUser = availableUsers[indexPath.row]
         let cell = collectionView.cellForItem(at: indexPath) as! AvailableUserCell
-
+        
         if cell.isSelected == true {
             if isUserSelected == false {
                 isUserSelected = true
@@ -193,7 +195,7 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
                     if success == true {
                         self.isUserSelected = true
                         self.eatUpButton.tag = cell.cardView.tag
-
+                        
                     }
                 })
             }
@@ -220,15 +222,15 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
             })
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! AvailableUserCell
         isUserSelected = false
         cell.cardView.backgroundColor = UIColor.white
         cell.nameLabel.textColor = UIColor.black
     }
-
-
+    
+    
     // Changing button text after selecting and deselecting user
     func selectUpee(_ sender: UITapGestureRecognizer) {
         selectedUser = availableUsers[(sender.view?.tag)!]
@@ -251,8 +253,9 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
             cell.nameLabel.textColor = UIColor.white
         }
     }
-
+    
     @IBAction func requestEatUp(_ sender: UIButton) {
+        inviter = true
         let id = selectedUser?.id
         APIManager.shared.requestEatUp(toUserID: id!, place: place) { (success, eatup) in
             if success == true {
@@ -261,11 +264,11 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
             }
         }
     }
-
-    func dismiss() {
-        animateInviteOut()
+    
+    @IBAction func profileButton(_ sender: UIBarButtonItem) {
+        self.performSegue(withIdentifier: "profileSegue", sender: nil)
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "requestEatUpSegue" {
             let selectedUserButton = sender as! UIButton
@@ -280,10 +283,10 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
             findUpeeViewController.eatupId = self.inviteView.eatup?.id
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
 }

@@ -25,7 +25,6 @@ class AvailableUserCell: UICollectionViewCell {
             nameLabel.text = firstName
             if let url = user.profilePhotoUrl {
                 photoView.setImageWith(url, placeholder: #imageLiteral(resourceName: "gray_circle"), options: [.progressiveBlur, .setImageWithFadeAnimation], completion: nil)
-                //photoView.af_setImage(withURL: url)
             }
         }
     }

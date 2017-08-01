@@ -13,6 +13,7 @@ PODS:
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
+  - DateToolsSwift (2.0.3)
   - DZNEmptyDataSet (1.8.1)
   - EasyAnimation (2.0.1)
   - FacebookCore (0.2.0):
@@ -94,6 +95,7 @@ DEPENDENCIES:
   - AlamofireImage (~> 3.1)
   - BouncyLayout
   - ChameleonFramework/Swift
+  - DateToolsSwift
   - DZNEmptyDataSet
   - EasyAnimation
   - FacebookCore (~> 0.2)
@@ -118,6 +120,7 @@ SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   BouncyLayout: f91c6504437a61acd733404f55f75bd8154f5840
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
+  DateToolsSwift: bf69bf9056d9e53c5c03f06e51f219b9b8b02f9e
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   EasyAnimation: 0bc71a385be3fc0239e487fb8f0dde626e6c7466
   FacebookCore: 2cb3f0fbff218e9d3119cec84bae983b232412de
@@ -141,6 +144,6 @@ SPEC CHECKSUMS:
   SRCountdownTimer: 187458addb1e88cae62eb5aa57f48d7888f8c18c
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: 22737934099dd47cf48d6e7ec9053209feeb9fce
+PODFILE CHECKSUM: 420441c3bfc1a451b65c68588adce7df036f9af3
 
 COCOAPODS: 1.2.1

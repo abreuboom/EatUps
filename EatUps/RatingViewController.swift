@@ -51,7 +51,7 @@ class RatingViewController: UIViewController {
     
     @IBAction func wouldEatUpAgain(_ sender: Any) {
         let uid = Auth.auth().currentUser?.uid
-        ref?.child("eatups/\(eatupId!)\(uid!)").setValue("0")
+        ref?.child("eatups/\(eatupId!)/\(uid!)").setValue("0")
         
         databaseHandle = ref?.child("eatups/\(eatupId!)/users").observe(.value, with: { (snapshot) in
             
