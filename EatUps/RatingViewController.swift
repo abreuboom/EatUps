@@ -27,8 +27,6 @@ class RatingViewController: UIViewController {
 
     @IBAction func didNotRate(_ sender: UIButton) {
         let uid = Auth.auth().currentUser?.uid
-        ref?.child("eatups/\(eatupId!)/\(uid!)").setValue("0")
-        
         databaseHandle = ref?.child("eatups/\(eatupId!)/users").observe(.value, with: { (snapshot) in
             
             let child = snapshot.value as? [String: Any]
@@ -51,7 +49,6 @@ class RatingViewController: UIViewController {
     
     @IBAction func wouldEatUpAgain(_ sender: Any) {
         let uid = Auth.auth().currentUser?.uid
-        ref?.child("eatups/\(eatupId!)/\(uid!)").setValue("0")
         
         databaseHandle = ref?.child("eatups/\(eatupId!)/users").observe(.value, with: { (snapshot) in
             
@@ -73,9 +70,7 @@ class RatingViewController: UIViewController {
     
     
     @IBAction func wouldNotEatUpAgain(_ sender: Any) {
-        let uid = Auth.auth().currentUser?.uid
-        ref?.child("eatups/\(eatupId!)/\(uid!)").setValue("0")
-        
+        let uid = Auth.auth().currentUser?.uid        
         databaseHandle = ref?.child("eatups/\(eatupId!)/users").observe(.value, with: { (snapshot) in
             
             let child = snapshot.value as? [String: Any]
