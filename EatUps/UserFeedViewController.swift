@@ -96,7 +96,7 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         self.view.bringSubview(toFront: blurEffect)
         inviteView.eatup = eatup
         inviteView.populateInviteInfo()
-        inviteView.layer.position = self.view.center
+        inviteView.layer.position = self.view.center 
         inviteView.center = CGPoint(x: blurEffect.contentView.frame.size.width/2, y: blurEffect.contentView.frame.size.height/2)
         self.view.addSubview(inviteView)
 
