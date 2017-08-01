@@ -425,4 +425,13 @@ class APIManager: SessionManager {
             })
         }
     }
+    
+    func getOrg(orgId: String, completion: @escaping (Bool, Org) -> ()) {
+        ref.child("orgs/\(orgId)").observeSingleEvent(of: .value, with: { (snapshot) in
+            if let data = snapshot.value as? [String: Any] {
+                let org = Org.init(dictionary: data)
+                org.id = snapshot.key
+            }
+        })
+    }
 }

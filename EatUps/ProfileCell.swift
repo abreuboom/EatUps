@@ -35,7 +35,13 @@ class ProfileCell: UITableViewCell {
         User.getRoundProfilePics(photoView: photoView)
         
         nameLabel.text = User.current?.name
-        orgLabel.text = User.current?.org_id
+        
+        
+        APIManager.shared.getOrg(orgId: (User.current?.org_id)!) { (success, org) in
+            if success == true {
+                self.orgLabel.text = org.name
+            }
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
