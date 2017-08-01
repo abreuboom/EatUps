@@ -287,6 +287,8 @@ class APIManager: SessionManager {
         let eatup = self.ref.child("eatups").childByAutoId()
         let timeStamp = Int(Date().timeIntervalSince1970)
         eatup.setValue(["place": place, "org_id": User.current?.org_id ?? "", "time": timeStamp, "inviter": id, "invitee": "none"])
+        eatup.child("users/\(id)").setValue("")
+        eatup.child("users/\(toUserID)").setValue("")
         
         ref.child("users/\(id)/status").setValue(eatup.key)
         ref.child("users/\(toUserID)/status").setValue(eatup.key, withCompletionBlock: { (error, databaseRef) in
@@ -422,5 +424,14 @@ class APIManager: SessionManager {
                 }
             })
         }
+    }
+    
+    func getOrg(orgId: String, completion: @escaping (Bool, Org) -> ()) {
+        ref.child("orgs/\(orgId)").observeSingleEvent(of: .value, with: { (snapshot) in
+            if let data = snapshot.value as? [String: Any] {
+                let org = Org.init(dictionary: data)
+                org.id = snapshot.key
+            }
+        })
     }
 }
