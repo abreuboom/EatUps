@@ -65,7 +65,7 @@ class PendingInviteViewController: UIViewController, SRCountdownTimerDelegate {
         timer.trailLineColor = .clear
         timer.labelTextColor = .white
         timer.labelFont = UIFont.boldSystemFont(ofSize: 25)
-        timer.start(beginingValue: 5)
+        timer.start(beginingValue: 60)
         timer.delegate = self
         
     }
@@ -81,14 +81,7 @@ class PendingInviteViewController: UIViewController, SRCountdownTimerDelegate {
     
     
     func timerDidEnd() {
-        APIManager.shared.checkResponse(selectedUser: selectedUser!, eatupId: eatupId!) { (success) in
-            if success == true {
-                self.performSegue(withIdentifier: "pendingToFindSegue", sender: nil)
-            }
-            else {
-                self.didTapCancel(self)
-                }
-        }
+        self.didTapCancel(self)
     }
 
     override func didReceiveMemoryWarning() {
