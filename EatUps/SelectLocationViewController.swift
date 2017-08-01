@@ -38,10 +38,14 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
         
         getPlaces()
         
+        eatupAtView.reset()
         eatupAtView.layer.cornerRadius = eatupAtView.frame.width/5
         eatupAtView.dropShadow()
         eatupAtView.center = eatupAtParent.center
         eatupAtParent.addSubview(eatupAtView)
+        let size = eatupAtView.eatupAtLabel.sizeThatFits(self.view.bounds.size)
+        eatupAtView.eatupAtLabel.frame.size = size
+        eatupAtView.frame = CGRect.init(x: eatupAtParent.center.x - (eatupAtView.eatupAtLabel.bounds.size.width + 32)/2, y: eatupAtParent.center.y - eatupAtView.bounds.size.height/2, width: eatupAtView.eatupAtLabel.bounds.size.width + 32, height: eatupAtView.bounds.size.height)
         
         self.navigationController?.hidesNavigationBarHairline = true
    

@@ -31,7 +31,7 @@ class EatupAtView: UIView {
     }
     
     func reset() {
-        eatupAtLabel.text = "EatUp @"
+        eatupAtLabel.text = "Choose a place to eatup!"
     }
     
 
