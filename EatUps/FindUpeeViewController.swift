@@ -53,6 +53,7 @@ class FindUpeeViewController: UIViewController {
     }
     
     @IBAction func didFinishEatUp(_ sender: Any) {
+        performSegue(withIdentifier: "findToRatingSegue", sender: UIButton())
         // Deletes the EatUp conversation
         if let currentUserID = Auth.auth().currentUser?.uid {
             Database.database().reference().child("eatups").child(eatupId!).observe(.value, with: { (snapshot) in
@@ -83,6 +84,7 @@ class FindUpeeViewController: UIViewController {
             RatingViewController.eatupId = eatupId
         }
     }
+    
 
 
     /*
