@@ -181,8 +181,9 @@ public class SRCountdownTimer: UIView {
      */
     public func end() {
         self.currentCounterValue = 0
+        delegate?.timerDidEnd?()
         timer?.invalidate()
         
-        delegate?.timerDidEnd?()
+        
     }
 }
