@@ -18,7 +18,7 @@ class EatupAtView: UIView {
         didSet {
             
             eatupAtLabel.customize { (label) in
-                let customType = ActiveType.custom(pattern: "\\@Epic\\") //Regex that looks for "with"
+                let customType = ActiveType.custom(pattern: "@\(place!)") //Regex that looks for "with"
                 eatupAtLabel.enabledTypes = [ customType]
                 
                 eatupAtLabel.customColor[customType] = HexColor(hexString: "FE3F67")

@@ -27,7 +27,7 @@ class RatingViewController: UIViewController {
 
     @IBAction func didNotRate(_ sender: UIButton) {
         let uid = Auth.auth().currentUser?.uid
-        ref?.child("eatups/\(eatupId!)\(uid!)").setValue("0")
+        ref?.child("eatups/\(eatupId!)/\(uid!)").setValue("0")
         
         databaseHandle = ref?.child("eatups/\(eatupId!)/users").observe(.value, with: { (snapshot) in
             
@@ -39,7 +39,7 @@ class RatingViewController: UIViewController {
                 //if user is not equal to the current id, then set the value of the rating
                 if user != uid!{
                     // if user is equal to the current id, then print the user's value
-                    self.ref?.child("eatups/eatup_id/users/user_id").setValue("0")
+                    self.ref?.child("eatups/\(self.eatupId!)/users/\(user)").setValue("0")
                     self.performSegue(withIdentifier: "ratingSegue", sender: nil)
 
                 }
