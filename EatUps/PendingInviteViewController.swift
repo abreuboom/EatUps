@@ -12,6 +12,7 @@ import FirebaseDatabase
 import SRCountdownTimer
 import ChameleonFramework
 
+
 class PendingInviteViewController: UIViewController, SRCountdownTimerDelegate {
 
     @IBOutlet weak var profileImage: UIImageView!
@@ -41,7 +42,9 @@ class PendingInviteViewController: UIViewController, SRCountdownTimerDelegate {
         }
 
         // Configure send invite user views
-        nameLabel.text = selectedUser?.name
+        if let name = selectedUser?.name {
+            self.nameLabel.text = User.firstName(name: name)
+        }
         if let url = selectedUser?.profilePhotoUrl {
             profileImage.af_setImage(withURL: url)
         }
@@ -62,7 +65,8 @@ class PendingInviteViewController: UIViewController, SRCountdownTimerDelegate {
         timer.trailLineColor = .clear
         timer.labelTextColor = .white
         timer.labelFont = UIFont.boldSystemFont(ofSize: 25)
-        timer.start(beginingValue: 60)
+        timer.start(beginingValue: 5)
+        timer.delegate = self
         
     }
 
@@ -74,14 +78,15 @@ class PendingInviteViewController: UIViewController, SRCountdownTimerDelegate {
         ref.child("eatups/\(eatupId)").removeValue()
         self.dismiss(animated: true, completion: nil)
     }
-
+    
+    
     func timerDidEnd() {
         APIManager.shared.checkResponse(selectedUser: selectedUser!, eatupId: eatupId!) { (success) in
             if success == true {
                 self.performSegue(withIdentifier: "pendingToFindSegue", sender: nil)
             }
             else {
-                    APIManager.shared.resetStatus(userID: (self.selectedUser?.id)!)
+                self.didTapCancel(self)
                 }
         }
     }
