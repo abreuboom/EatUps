@@ -8,17 +8,14 @@
 
 import UIKit
 import FirebaseDatabase
-import CoreLocation
 import Firebase
 
-class OrgSelectViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
+class OrgSelectViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var orgView: UITableView!
 
     var ref: DatabaseReference!
     var databaseHandle: DatabaseHandle!
-
-    var locationManager: CLLocationManager!
 
     var orgs: [String] = []
     var org_ids: [String] = []
@@ -46,48 +43,9 @@ class OrgSelectViewController: UIViewController, UITableViewDelegate, UITableVie
         orgView.delegate = self
         orgView.dataSource = self
 
-        // Request permissions for locations
-        locationManager = CLLocationManager()
-        getLocation()
+
 
     }
-
-    // MARK: Location manager methods
-    // Gets location of user
-    func getLocation() {
-        let status  = CLLocationManager.authorizationStatus()
-        if status == .notDetermined {
-            locationManager.requestWhenInUseAuthorization()
-            return
-        }
-        if status == .denied || status == .restricted {
-            let alert = UIAlertController(title: "Location Services Disabled", message: "Please enable Location Services in Settings", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alert.addAction(okAction)
-            present(alert, animated: true, completion: nil)
-            return
-        }
-        locationManager.delegate = self
-        locationManager.startUpdatingLocation()
-    }
-
-    // Location delegate methods
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let currentLocation = locations.last!
-        let locationString = EatUp.CLLocationtoString(currentLocation: currentLocation)
-        let user = Auth.auth().currentUser
-        // Stores location property in current user
-        if let user = user {
-            let id = user.uid
-            self.ref.child("users/\(id)/location").setValue(locationString)
-        }
-
-    }
-
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Error \(error)")
-    }
-
 
     // MARK: TableView methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
