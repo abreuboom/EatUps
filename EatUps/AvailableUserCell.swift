@@ -11,6 +11,7 @@ import YYKit
 
 class AvailableUserCell: UICollectionViewCell {
     
+    @IBOutlet weak var emojiLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var photoView: UIImageView!
     @IBOutlet weak var cardView: UIView!
