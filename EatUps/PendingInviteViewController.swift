@@ -81,14 +81,7 @@ class PendingInviteViewController: UIViewController, SRCountdownTimerDelegate {
     
     
     func timerDidEnd() {
-        APIManager.shared.checkResponse(selectedUser: selectedUser!, eatupId: eatupId!) { (success) in
-            if success == true {
-                self.performSegue(withIdentifier: "pendingToFindSegue", sender: nil)
-            }
-            else {
-                self.didTapCancel(self)
-                }
-        }
+        self.didTapCancel(self)
     }
 
     override func didReceiveMemoryWarning() {

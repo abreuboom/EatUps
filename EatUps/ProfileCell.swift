@@ -28,11 +28,7 @@ class ProfileCell: UITableViewCell {
         cardView.layer.cornerRadius = 25
         cardView.dropShadow()
         
-        editProfileButton.layer.cornerRadius = editProfileButton.frame.width/5
-        editProfileButton.layer.masksToBounds = true
-        
         photoView.setImageWith(User.current?.profilePhotoUrl, placeholder: #imageLiteral(resourceName: "gray_circle"), options: [.progressiveBlur, .setImageWithFadeAnimation], completion: nil)
-        User.getRoundProfilePics(photoView: photoView)
         
         nameLabel.text = User.current?.name
         
