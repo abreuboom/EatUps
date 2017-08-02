@@ -10,12 +10,24 @@ import UIKit
 import GoogleMaps
 import FirebaseDatabase
 
+extension String {
+        func image() -> UIImage? {
+            let size = CGSize(width: 30, height: 35)
+            UIGraphicsBeginImageContextWithOptions(size, false, 0);
+            UIColor.clear.set()
+            let rect = CGRect(origin: CGPoint(), size: size)
+            UIRectFill(CGRect(origin: CGPoint(), size: size))
+            (self as NSString).draw(in: rect, withAttributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 30)])
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return image
+        }
+    
+    }
+
+
 class MapViewController: UIViewController {
     
-    @IBAction func didTapBackButton(_ sender: Any) {
-        //self.performSegue(withIdentifier: "", sender: Any)
-        
-    }
     var org_id: String!
     var place: String!
     
@@ -24,7 +36,10 @@ class MapViewController: UIViewController {
     var places = [String]()
     var ref: DatabaseReference?
     
-    
+    @IBAction func didTapBackButton(_ sender: Any) {
+        //self.performSegue(withIdentifier: "", sender: Any)
+        
+    }
 
     override func loadView() {
         
