@@ -24,7 +24,7 @@ class PendingInviteViewController: UIViewController, SRCountdownTimerDelegate {
 
     var selectedUser: User?
 
-    var eatupId: String?
+    var eatup: EatUp?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +32,7 @@ class PendingInviteViewController: UIViewController, SRCountdownTimerDelegate {
         ref = Database.database().reference()
         self.view.backgroundColor = GradientColor(gradientStyle: .topToBottom, frame: self.view.frame, colors: [HexColor(hexString: "FE8F72"), HexColor(hexString: "FE3F67")])
         
-        APIManager.shared.checkResponse(selectedUser: selectedUser!, eatupId: eatupId!) { (success) in
+        APIManager.shared.checkResponse(selectedUser: selectedUser!, eatupId: (eatup?.id)!) { (success) in
             if success == true {
                 self.performSegue(withIdentifier: "pendingToFindSegue", sender: nil)
             }
@@ -75,7 +75,8 @@ class PendingInviteViewController: UIViewController, SRCountdownTimerDelegate {
     @IBAction func didTapCancel(_ sender: Any) {
         APIManager.shared.resetStatus(userID: (self.selectedUser?.id)!)
         APIManager.shared.resetStatus(userID: (User.current?.id)!)
-        ref.child("eatups/\(eatupId)").removeValue()
+        let id = eatup?.id
+        ref.child("eatups/\(id!)").removeValue()
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -94,7 +95,7 @@ class PendingInviteViewController: UIViewController, SRCountdownTimerDelegate {
             let navigationViewController = segue.destination as! UINavigationController
             let FindUpeeViewController = navigationViewController.viewControllers.first as! FindUpeeViewController
             FindUpeeViewController.selectedUser = selectedUser
-            FindUpeeViewController.eatupId = eatupId
+            FindUpeeViewController.eatup = eatup
         }
     }
 
