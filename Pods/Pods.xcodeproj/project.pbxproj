@@ -1784,7 +1784,6 @@
 		A5080A291E2FF2E391544BB2E20351CC /* GTMSessionFetcher-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GTMSessionFetcher-umbrella.h"; sourceTree = "<group>"; };
 		A5201BE372BE65AA61F7004C0065A337 /* AccessToken.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AccessToken.swift; path = Sources/Core/Common/AccessToken.swift; sourceTree = "<group>"; };
 		A537FD03E3EBAF6A22354B4C04730D2C /* FBSDKSendButton.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKSendButton.h; path = FBSDKShareKit/FBSDKShareKit/FBSDKSendButton.h; sourceTree = "<group>"; };
-		A55B75FE30EF0FEFB40A014CEDC197A2 /* GooglePlaces.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GooglePlaces.bundle; path = Frameworks/GooglePlaces.framework/Versions/A/Resources/GooglePlaces.bundle; sourceTree = "<group>"; };
 		A583A7823FF0C4E5D3D49798BC34CAF1 /* YYSpriteSheetImage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = YYSpriteSheetImage.m; path = YYKit/Image/YYSpriteSheetImage.m; sourceTree = "<group>"; };
 		A5EF5DC3656AF4D188D8974506146C7A /* Pods-EatUps-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-EatUps-acknowledgements.plist"; sourceTree = "<group>"; };
 		A607545869FD4A0FF2287F93E8D6F2E8 /* FBSDKTimeSpentData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKTimeSpentData.h; path = FBSDKCoreKit/FBSDKCoreKit/Internal/AppEvents/FBSDKTimeSpentData.h; sourceTree = "<group>"; };
@@ -1934,6 +1933,7 @@
 		CCB999FF5D2A58EC57E2C243DCD588D7 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = FBSDKLoginKit.framework; path = FBSDKLoginKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCC170C7DEF81B9AF4B16E25CE28EB83 /* YYReachability.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YYReachability.h; path = YYKit/Utility/YYReachability.h; sourceTree = "<group>"; };
 		CD19EB370DA3870699F3E8CD3E90EC97 /* FBSDKShareOpenGraphAction.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKShareOpenGraphAction.h; path = FBSDKShareKit/FBSDKShareKit/FBSDKShareOpenGraphAction.h; sourceTree = "<group>"; };
+		CDB1E3CB4BD8FED00E9700DBEDC34FDB /* GoogleMaps.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
 		CDC1274F5F5F529053A2B7580B77353A /* YYDispatchQueuePool.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = YYDispatchQueuePool.m; path = YYKit/Utility/YYDispatchQueuePool.m; sourceTree = "<group>"; };
 		CDC2DEFB75A38B875A1421E4CA3E97BE /* GraphRequestConnection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GraphRequestConnection.swift; path = Sources/Core/GraphRequest/GraphRequestConnection.swift; sourceTree = "<group>"; };
 		CEF7B9F368A5F5E79740AECA71FFA3B4 /* DZNEmptyDataSet-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "DZNEmptyDataSet-dummy.m"; sourceTree = "<group>"; };
@@ -1951,6 +1951,7 @@
 		D164D5E7C162CF70B56904E75E503D75 /* FBSDKAppGroupAddDialog.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSDKAppGroupAddDialog.m; path = FBSDKShareKit/FBSDKShareKit/FBSDKAppGroupAddDialog.m; sourceTree = "<group>"; };
 		D1B1EB8CDABC824CCFF6648AE5D6BA29 /* FBSDKCoreKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FBSDKCoreKit-umbrella.h"; sourceTree = "<group>"; };
 		D227F91DEC4C13BE47CB35B0AED29280 /* GPBCodedOutputStream_PackagePrivate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GPBCodedOutputStream_PackagePrivate.h; path = objectivec/GPBCodedOutputStream_PackagePrivate.h; sourceTree = "<group>"; };
+		D241D721223E15D03001E0F3FE45D449 /* GooglePlaces.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GooglePlaces.bundle; path = Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle; sourceTree = "<group>"; };
 		D25FDCE560ECA019257B36242FD7415D /* FBSDKTypeUtility.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSDKTypeUtility.m; path = FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKTypeUtility.m; sourceTree = "<group>"; };
 		D27B62A56FBECE1422E4AE7B983575B8 /* FBSDKCheckmarkIcon.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSDKCheckmarkIcon.m; path = FBSDKShareKit/FBSDKShareKit/Internal/FBSDKCheckmarkIcon.m; sourceTree = "<group>"; };
 		D2BC5C8F1D9B042806BD500EB3739739 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FBSDKCoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2115,7 +2116,6 @@
 		F9F12D432A4EC8CE7A08D086DF1773CF /* FBSDKShareKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FBSDKShareKit.xcconfig; sourceTree = "<group>"; };
 		FA6C05DDD667DDC3EA1EF6F14C44CA89 /* DateTools.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = DateTools.bundle; path = DateToolsSwift/DateTools/DateTools.bundle; sourceTree = "<group>"; };
 		FAB57C8B8E7711DD7B368F77AD2540BF /* SessionManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionManager.swift; path = Source/SessionManager.swift; sourceTree = "<group>"; };
-		FACAFCAC17430D3360FC3BB0DEB7A184 /* GoogleMaps.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = Maps/Frameworks/GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
 		FAEF2D2B87E332DA374CC6E4DDA30F09 /* AppEventsLogger.FlushBehavior.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppEventsLogger.FlushBehavior.swift; path = Sources/Core/AppEvents/AppEventsLogger.FlushBehavior.swift; sourceTree = "<group>"; };
 		FB30DA845D317145999E8A864BD230EF /* Date+Bundle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Date+Bundle.swift"; path = "DateToolsSwift/DateTools/Date+Bundle.swift"; sourceTree = "<group>"; };
 		FB35A9D29B7C041BFCC303B9844CA52C /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Alamofire.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -3131,6 +3131,14 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		59B909BF32CB4CD1B5045E6C2EE14559 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D241D721223E15D03001E0F3FE45D449 /* GooglePlaces.bundle */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		5A7C107760CBE3588E0DB489913FC195 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -3217,10 +3225,10 @@
 			name = "NSData+zlib";
 			sourceTree = "<group>";
 		};
-		6412905F4BD286CB25F59464C4AF5AB9 /* Resources */ = {
+		663BE411CF8F4A2D84A3C6CA1BF01317 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				FACAFCAC17430D3360FC3BB0DEB7A184 /* GoogleMaps.bundle */,
+				CDB1E3CB4BD8FED00E9700DBEDC34FDB /* GoogleMaps.bundle */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -3442,7 +3450,7 @@
 			isa = PBXGroup;
 			children = (
 				FA79C856EA6FE70E8B085943A5C5DF6A /* Frameworks */,
-				D1E855C8721428FA84D59778477D7E59 /* Resources */,
+				59B909BF32CB4CD1B5045E6C2EE14559 /* Resources */,
 			);
 			name = GooglePlaces;
 			path = GooglePlaces;
@@ -3902,7 +3910,7 @@
 			isa = PBXGroup;
 			children = (
 				8171B1DEF6D5FBCCDE37AEB8021622B1 /* Frameworks */,
-				6412905F4BD286CB25F59464C4AF5AB9 /* Resources */,
+				663BE411CF8F4A2D84A3C6CA1BF01317 /* Resources */,
 			);
 			name = Maps;
 			sourceTree = "<group>";
@@ -3986,14 +3994,6 @@
 			);
 			name = GoogleMaps;
 			path = GoogleMaps;
-			sourceTree = "<group>";
-		};
-		D1E855C8721428FA84D59778477D7E59 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				A55B75FE30EF0FEFB40A014CEDC197A2 /* GooglePlaces.bundle */,
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 		D58170865021A1BC8405B8214164E5BD /* decode */ = {
