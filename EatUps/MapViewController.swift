@@ -27,8 +27,15 @@ extension String {
 
 class MapViewController: UIViewController {
     
+    @IBOutlet weak var backToPlacesButton: UIButton!
+    
+    @IBAction func didTapBackToPlaces(_ sender: Any) {
+        self.performSegue(withIdentifier: "placesViewSegue", sender: nil)
+        
+    }
     var org_id: String!
     var place: String!
+    var emojis: [String] = []
     
     var latitudeCoor: Float = 0.0
     var longitudeCoor: Float = 0.0
@@ -50,9 +57,10 @@ class MapViewController: UIViewController {
             APIManager.shared.getPlaces(org_id: org_id!, completion: { (success: Bool, data, emojiData) in
                 if success == true {
                     self.places = data
+                    self.emojis = emojiData
                     
-                    for place in self.places {
-                        APIManager.shared.getPlaceLocation(place: place, completion: { (success: Bool, placeLocation) in
+                    for i in 0 ... self.places.count-1 {
+                        APIManager.shared.getPlaceLocation(place: self.places[i], completion: { (success: Bool, placeLocation) in
                             
                             if success == true {
                                 
@@ -61,7 +69,8 @@ class MapViewController: UIViewController {
                                 
                                 let marker = GMSMarker()
                                 marker.position = CLLocationCoordinate2D(latitude: CLLocationDegrees(self.latitudeCoor), longitude: CLLocationDegrees(self.longitudeCoor))
-                                marker.title = place
+                                marker.title = self.places[i]
+                                marker.icon = self.emojis[i].image()
                                 marker.snippet = "Facebook University"
                                 marker.map = mapView
                             }
@@ -78,7 +87,11 @@ class MapViewController: UIViewController {
                 }
             })
         }
-        
+ 
     }
     
+    override func viewDidLoad() {
+       // self.view.bringSubview(toFront: backToPlacesButton)
+    }
+
 }

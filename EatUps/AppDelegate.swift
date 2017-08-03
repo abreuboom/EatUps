@@ -9,12 +9,14 @@
 import UIKit
 import UserNotifications
 import Firebase
+import FirebaseInstanceID
+import FirebaseMessaging
 import FBSDKLoginKit
 import ChameleonFramework
 import GoogleMaps
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
     
     var window: UIWindow?
     
@@ -39,12 +41,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.rootViewController = loginVC
         }
 
-        //Chameleon.setGlobalThemeUsingPrimaryColor(HexColor(hexString: "FE3F67"), withSecondaryColor: ContrastColorOf(backgroundColor: HexColor(hexString: "FE3F67"), returnFlat: false),  andContentStyle: .contrast)
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
         UINavigationBar.appearance().backgroundColor = HexColor(hexString: "FE3F67")
         UIApplication.shared.statusBarStyle = .lightContent
         
-        let notificationTypes: UIUserNotificationType = [UIUserNotificationType.alert]
+        if #available(iOS 10.0, *) {
+            // For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.current().delegate = self
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: {_, _ in })
+            // For iOS 10 data message (sent via FCM
+            Messaging.messaging().delegate = self as MessagingDelegate
+        } else {
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+        
+        application.registerForRemoteNotifications()
+        
+        
         
         return true
     }
@@ -56,7 +74,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        print("Notification received")
+        // If you are receiving a notification message while your app is in the background,
+        // this callback will not be fired till the user taps on the notification launching the application.
+        // TODO: Handle data of notification
+        
+        // With swizzling disabled you must let Messaging know about the message, for Analytics
+        // Messaging.messaging().appDidReceiveMessage(userInfo)
+        
+        // Print message ID.
+        if let messageID = userInfo[gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
+        }
+        
+        // Print full message.
+        print(userInfo)
+        
+        completionHandler(UIBackgroundFetchResult.newData)
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        Messaging.messaging().setAPNSToken(deviceToken, type: .prod)
+    }
+    
+    /// This method will be called whenever FCM receives a new, default FCM token for your
+    /// Firebase project's Sender ID.
+    /// You can send this token to your application server to send notifications to this device.
+    func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
+        
+    }
+    
+    // The callback to handle data message received via FCM for devices running iOS 10 or above.
+    func application(received remoteMessage: MessagingRemoteMessage) {
+        print(remoteMessage.appData)
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
