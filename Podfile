@@ -20,6 +20,8 @@ target 'EatUps' do
   pod 'Firebase/Storage'
 
   # Other Pods
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
   pod 'KeychainAccess'
   pod 'Alamofire', '~> 4.4'
   pod 'AlamofireImage', '~> 3.1'

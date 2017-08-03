@@ -74,5 +74,10 @@
     <string>Photos will be used for sending pictures in conversations.</string>
     <key>NSLocationUsageDescription</key>
     <string>Allow location access to help us find people in your area.</string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>googlechromes</string>
+        <string>comgooglemaps</string>
+    </array>
 </dict>
 </plist>

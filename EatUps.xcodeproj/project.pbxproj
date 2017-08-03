@@ -282,6 +282,7 @@
 				D8A82FE61F154FC80053C1A1 /* LoginViewController.swift */,
 				208AF5741F1838BB003E76A8 /* OrgSelectViewController.swift */,
 				D8A82FEB1F1552A40053C1A1 /* SelectLocationViewController.swift */,
+				D8219A101F3298B700A087A2 /* MapViewController.swift */,
 				D8A82FED1F1553550053C1A1 /* UserFeedViewController.swift */,
 				D8A82FEF1F1554AF0053C1A1 /* PendingInviteViewController.swift */,
 				D8A82FF51F1575800053C1A1 /* RatingViewController.swift */,
@@ -289,7 +290,6 @@
 				0EC37D511F281B2700EA438C /* FindUpeeViewController.swift */,
 				208CA71E1F2E8E30000B1D2F /* ProfileViewController.swift */,
 				0E51E0481F2FDE4A004FC99C /* NavigationViewController.swift */,
-				D8219A101F3298B700A087A2 /* MapViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
