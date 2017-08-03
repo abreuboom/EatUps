@@ -235,9 +235,9 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="72q-8r-BZZ">
-                                <rect key="frame" x="164" y="540" width="46" height="34"/>
+                                <rect key="frame" x="154" y="540" width="67" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Map View"/>
                                 <connections>
                                     <action selector="didTapMapView:" destination="ldz-Cd-uAQ" eventType="touchUpInside" id="qgK-4M-faP"/>
                                 </connections>
