@@ -14,6 +14,7 @@
 		0E7F65991F26FBB6005BA42E /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F65981F26FBB6005BA42E /* ChatViewController.swift */; };
 		0EC37D521F281B2700EA438C /* FindUpeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC37D511F281B2700EA438C /* FindUpeeViewController.swift */; };
 		0ED57BB01F1D3CFC00AC1A64 /* AvailableUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED57BAF1F1D3CFC00AC1A64 /* AvailableUserCell.swift */; };
+		0EFEC39D1F328DCC00C88F58 /* ShareLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFEC39C1F328DCC00C88F58 /* ShareLocationViewController.swift */; };
 		0F94C76E144E1E4FD25B1F25 /* Pods_EatUps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73F38D920ADFD5A052C30A17 /* Pods_EatUps.framework */; };
 		200E364C1F2A7146003FA9C7 /* InviteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200E364B1F2A7146003FA9C7 /* InviteView.swift */; };
 		2016F28C1F1EB4AB00CA814C /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2016F28B1F1EB4AB00CA814C /* LocationCell.swift */; };
@@ -77,6 +78,7 @@
 		0E7F65981F26FBB6005BA42E /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		0EC37D511F281B2700EA438C /* FindUpeeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindUpeeViewController.swift; sourceTree = "<group>"; };
 		0ED57BAF1F1D3CFC00AC1A64 /* AvailableUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvailableUserCell.swift; sourceTree = "<group>"; };
+		0EFEC39C1F328DCC00C88F58 /* ShareLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareLocationViewController.swift; sourceTree = "<group>"; };
 		1312C3651A0BED44631D9496 /* Pods-EatUpsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EatUpsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EatUpsUITests/Pods-EatUpsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		200E364B1F2A7146003FA9C7 /* InviteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteView.swift; sourceTree = "<group>"; };
 		2016F28B1F1EB4AB00CA814C /* LocationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 				0EC37D511F281B2700EA438C /* FindUpeeViewController.swift */,
 				208CA71E1F2E8E30000B1D2F /* ProfileViewController.swift */,
 				0E51E0481F2FDE4A004FC99C /* NavigationViewController.swift */,
+				0EFEC39C1F328DCC00C88F58 /* ShareLocationViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -606,6 +609,7 @@
 				20E931991F16A66800C4A4A1 /* EatUp.swift in Sources */,
 				0E7F65931F26FB4B005BA42E /* Message.swift in Sources */,
 				D8A82FF61F1575800053C1A1 /* RatingViewController.swift in Sources */,
+				0EFEC39D1F328DCC00C88F58 /* ShareLocationViewController.swift in Sources */,
 				0EC37D521F281B2700EA438C /* FindUpeeViewController.swift in Sources */,
 				200E364C1F2A7146003FA9C7 /* InviteView.swift in Sources */,
 				D8A82FEE1F1553550053C1A1 /* UserFeedViewController.swift in Sources */,
