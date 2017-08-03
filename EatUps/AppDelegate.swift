@@ -13,6 +13,7 @@ import FirebaseInstanceID
 import FirebaseMessaging
 import FBSDKLoginKit
 import ChameleonFramework
+import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
@@ -23,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Override point for customization after application launch.
         FirebaseApp.configure()
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        GMSServices.provideAPIKey("AIzaSyAFgY7q8av7Rpy5Diiwmd5XqJvITVStDM4")
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         

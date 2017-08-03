@@ -16,7 +16,8 @@ class FindUpeeViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     
     var selectedUser: User?
-    var eatupId: String?
+    
+    var eatup: EatUp?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,8 +25,9 @@ class FindUpeeViewController: UIViewController {
         // Sets background colour of view
         self.view.backgroundColor = GradientColor(gradientStyle: .topToBottom, frame: self.view.frame, colors: [HexColor(hexString: "FE8F72"), HexColor(hexString: "FE3F67")])
         
+        
         if selectedUser == nil {
-            Database.database().reference().child("eatups").child(eatupId!).child("inviter").observe(.value, with: { (snapshot) in
+            Database.database().reference().child("eatups").child((eatup?.id!)!).child("inviter").observe(.value, with: { (snapshot) in
                     let inviter = snapshot.value as! String
                 APIManager.shared.getUser(uid: inviter) { (success, inviter) in
                     if success == true {
@@ -56,7 +58,7 @@ class FindUpeeViewController: UIViewController {
         performSegue(withIdentifier: "findToRatingSegue", sender: UIButton())
         // Deletes the EatUp conversation
         if let currentUserID = Auth.auth().currentUser?.uid {
-            Database.database().reference().child("eatups").child(eatupId!).observe(.value, with: { (snapshot) in
+            Database.database().reference().child("eatups").child((eatup?.id!)!).observe(.value, with: { (snapshot) in
                 if snapshot.hasChild("conversation") {
                     let eatupInfo = snapshot.value as! NSDictionary
                     let conversationKey = eatupInfo["conversation"] as! String
@@ -76,12 +78,18 @@ class FindUpeeViewController: UIViewController {
         if segue.identifier == "findToChatSegue" {
             let ChatViewController = segue.destination as! ChatViewController
             ChatViewController.selectedUser = selectedUser
-            ChatViewController.eatupId = eatupId
+            ChatViewController.eatupId = eatup?.id
+        }
+        else if segue.identifier == "findToLocationSegue" {
+            let ShareLocationViewController = segue.destination as! ShareLocationViewController
+            ShareLocationViewController.selectedUser = selectedUser
+            ShareLocationViewController.eatupPlace = eatup?.place
+            
         }
         else if segue.identifier == "findToRatingSegue" {
             let RatingViewController = segue.destination as! RatingViewController
             RatingViewController.selectedUser = selectedUser
-            RatingViewController.eatupId = eatupId
+            RatingViewController.eatupId = eatup?.id
         }
     }
     

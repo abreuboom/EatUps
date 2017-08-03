@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -234,6 +234,14 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="72q-8r-BZZ">
+                                <rect key="frame" x="164" y="286" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="didTapMapView:" destination="ldz-Cd-uAQ" eventType="touchUpInside" id="qgK-4M-faP"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ciI-ka-ywu">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                 <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
@@ -265,6 +273,7 @@
                         <outlet property="eatupAtView" destination="CfF-cC-WZA" id="vO6-eU-wwg"/>
                         <outlet property="locationsTableView" destination="RLN-yg-Jg8" id="QFw-Rh-MNZ"/>
                         <outlet property="searchBar" destination="XVv-Bk-ADJ" id="XRE-2z-1x1"/>
+                        <segue destination="eYc-FV-KOQ" kind="presentation" identifier="mapViewSegue" id="yhC-XW-dEV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LKa-go-P3h" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -950,6 +959,14 @@
                                     <segue destination="Sx2-x7-11q" kind="show" identifier="findToChatSegue" id="LUz-Md-ihZ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z6Z-QD-Dmg">
+                                <rect key="frame" x="158" y="444" width="59" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Location"/>
+                                <connections>
+                                    <segue destination="Hh3-R1-aMv" kind="show" identifier="findToLocationSegue" id="yBA-8s-DE1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -1085,7 +1102,7 @@
             <objects>
                 <navigationController storyboardIdentifier="selectLocationNavigation" automaticallyAdjustsScrollViewInsets="NO" id="BfX-7S-Xg9" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Ld7-2N-ljz">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="Ld7-2N-ljz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.9171485305" green="0.31313836569999998" blue="0.41574707630000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1360,14 +1377,50 @@
                 </view>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GWv-GW-cPY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3009" y="2659"/>
+            <point key="canvasLocation" x="3009" y="2731"/>
+        </scene>
+        <!--Share Location View Controller-->
+        <scene sceneID="YZa-oV-x2m">
+            <objects>
+                <viewController id="Hh3-R1-aMv" customClass="ShareLocationViewController" customModule="EatUps" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="09G-CN-C9r"/>
+                        <viewControllerLayoutGuide type="bottom" id="yuK-Wi-MIl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="B6w-9c-pgO">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DII-9V-Ihb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3929" y="2731"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="Wjp-b0-nwy">
+            <objects>
+                <viewController id="eYc-FV-KOQ" customClass="MapViewController" customModule="EatUps" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dWX-9g-3ET"/>
+                        <viewControllerLayoutGuide type="bottom" id="EeY-Ln-tpi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="IV1-pR-BOS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yg9-ki-7fg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1079" y="1772"/>
         </scene>
         <!--Navigation View Controller-->
         <scene sceneID="0H2-fo-zIA">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Z4f-0U-Ojy" customClass="NavigationViewController" customModule="EatUps" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="5PX-eG-Qj8">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="5PX-eG-Qj8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.99607843139999996" green="0.2470588235" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

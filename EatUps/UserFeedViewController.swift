@@ -39,6 +39,7 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     var place: String = ""
     var locationManager: CLLocationManager!
     var inviter: Bool = false
+    var currentEatup: EatUp?
     
     var isUserSelected: Bool = false
     
@@ -100,7 +101,7 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
                         if let eatupDictionary = snapshot.value as? [String: Any] {
                             let eatup = EatUp(dictionary: eatupDictionary)
                             eatup.id = snapshot.key
-                            
+                            self.currentEatup = eatup
                             self.animateInviteIn(eatup: eatup)
                         }
                     })
@@ -275,12 +276,12 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
             let selectedUser = availableUsers[selectedUserButton.tag]
             let pendingInviteViewController = segue.destination as! PendingInviteViewController
             pendingInviteViewController.selectedUser = selectedUser
-            pendingInviteViewController.eatupId = eatupId
+            pendingInviteViewController.eatup = currentEatup
         }
         else if segue.identifier == "feedToFindSegue" {
             let navigationViewController = segue.destination as! UINavigationController
             let findUpeeViewController = navigationViewController.viewControllers.first as! FindUpeeViewController
-            findUpeeViewController.eatupId = self.inviteView.eatup?.id
+            findUpeeViewController.eatup = currentEatup
         }
     }
     

@@ -1,6 +1,0 @@
-framework module Pods_EatUpsUITests {
-  umbrella header "Pods-EatUpsUITests-umbrella.h"
-
-  export *
-  module * { export * }
-}
