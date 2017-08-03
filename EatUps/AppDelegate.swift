@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 import Firebase
 import FBSDKLoginKit
 import ChameleonFramework
@@ -43,6 +44,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().backgroundColor = HexColor(hexString: "FE3F67")
         UIApplication.shared.statusBarStyle = .lightContent
         
+        let notificationTypes: UIUserNotificationType = [UIUserNotificationType.alert]
+        
         return true
     }
     
@@ -50,6 +53,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let handled = FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
         
         return handled
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        print("Notification received")
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
