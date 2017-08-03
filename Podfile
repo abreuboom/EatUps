@@ -18,8 +18,11 @@ target 'EatUps' do
   pod 'Firebase/Database'
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
+  pod 'Firebase/Messaging'
 
   # Other Pods
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
   pod 'KeychainAccess'
   pod 'Alamofire', '~> 4.4'
   pod 'AlamofireImage', '~> 3.1'

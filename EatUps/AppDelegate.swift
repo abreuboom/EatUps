@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import UserNotifications
 import Firebase
 import FBSDKLoginKit
 import ChameleonFramework
+import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        GMSServices.provideAPIKey("AIzaSyAFgY7q8av7Rpy5Diiwmd5XqJvITVStDM4")
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
@@ -41,6 +44,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().backgroundColor = HexColor(hexString: "FE3F67")
         UIApplication.shared.statusBarStyle = .lightContent
         
+        let notificationTypes: UIUserNotificationType = [UIUserNotificationType.alert]
+        
         return true
     }
     
@@ -48,6 +53,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let handled = FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
         
         return handled
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        print("Notification received")
     }
     
     func applicationWillResignActive(_ application: UIApplication) {

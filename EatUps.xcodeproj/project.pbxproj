@@ -45,6 +45,7 @@
 		20E968E01F23E16500237572 /* MADE Waffle Soft.otf in Resources */ = {isa = PBXBuildFile; fileRef = 20E968DD1F23E16500237572 /* MADE Waffle Soft.otf */; };
 		75A55747BDE7F64C8E34B403 /* Pods_EatUpsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3949A7A3F71F1417454C007A /* Pods_EatUpsTests.framework */; };
 		888AB7688257CE444F2A3225 /* Pods_EatUpsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A88B9A60B7A635EB5F03418 /* Pods_EatUpsUITests.framework */; };
+		D8219A111F3298B700A087A2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8219A101F3298B700A087A2 /* MapViewController.swift */; };
 		D8A82FE71F154FC80053C1A1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FE61F154FC80053C1A1 /* LoginViewController.swift */; };
 		D8A82FEC1F1552A40053C1A1 /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FEB1F1552A40053C1A1 /* SelectLocationViewController.swift */; };
 		D8A82FEE1F1553550053C1A1 /* UserFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FED1F1553550053C1A1 /* UserFeedViewController.swift */; };
@@ -114,6 +115,7 @@
 		A955751D6AE92A169F4EEEB7 /* Pods-EatUpsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EatUpsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EatUpsTests/Pods-EatUpsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BC478D15D68514DC49ED3C59 /* Pods-EatUps.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EatUps.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EatUps/Pods-EatUps.debug.xcconfig"; sourceTree = "<group>"; };
 		D58244FF12EA8391989E4695 /* Pods-EatUpsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EatUpsUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EatUpsUITests/Pods-EatUpsUITests.release.xcconfig"; sourceTree = "<group>"; };
+		D8219A101F3298B700A087A2 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		D8A82FE61F154FC80053C1A1 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D8A82FEB1F1552A40053C1A1 /* SelectLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectLocationViewController.swift; sourceTree = "<group>"; };
 		D8A82FED1F1553550053C1A1 /* UserFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserFeedViewController.swift; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 				D8A82FE61F154FC80053C1A1 /* LoginViewController.swift */,
 				208AF5741F1838BB003E76A8 /* OrgSelectViewController.swift */,
 				D8A82FEB1F1552A40053C1A1 /* SelectLocationViewController.swift */,
+				D8219A101F3298B700A087A2 /* MapViewController.swift */,
 				D8A82FED1F1553550053C1A1 /* UserFeedViewController.swift */,
 				D8A82FEF1F1554AF0053C1A1 /* PendingInviteViewController.swift */,
 				D8A82FF51F1575800053C1A1 /* RatingViewController.swift */,
@@ -378,6 +381,9 @@
 								enabled = 1;
 							};
 							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -615,6 +621,7 @@
 				2032ACC11F1548FA00A4015C /* ViewController.swift in Sources */,
 				0E7F65911F26FB2C005BA42E /* Helper Files.swift in Sources */,
 				D8A82FEC1F1552A40053C1A1 /* SelectLocationViewController.swift in Sources */,
+				D8219A111F3298B700A087A2 /* MapViewController.swift in Sources */,
 				208CA7221F2EA79E000B1D2F /* ProfileCell.swift in Sources */,
 				208CA7241F2EA7B1000B1D2F /* EatUpCell.swift in Sources */,
 				2032ACBF1F1548FA00A4015C /* AppDelegate.swift in Sources */,
@@ -703,9 +710,11 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: John Abreu (3CJT76PC4B)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: John Abreu (3CJT76PC4B)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 3CJT76PC4B;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -725,6 +734,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -759,9 +769,11 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: John Abreu (3CJT76PC4B)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: John Abreu (3CJT76PC4B)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 3CJT76PC4B;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -774,6 +786,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;

@@ -16,6 +16,9 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     
     var org_id = User.current?.org_id
     
+    @IBAction func didTapMapView(_ sender: Any) {
+        self.performSegue(withIdentifier: "mapViewSegue", sender: nil)
+    }
     @IBOutlet var eatupAtView: EatupAtView!
     @IBOutlet weak var eatupAtParent: UIView!
     @IBOutlet weak var locationsTableView: UITableView!
