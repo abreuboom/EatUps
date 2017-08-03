@@ -27,6 +27,12 @@ extension String {
 
 class MapViewController: UIViewController {
     
+    @IBOutlet weak var backToPlacesButton: UIButton!
+    
+    @IBAction func didTapBackToPlaces(_ sender: Any) {
+        self.performSegue(withIdentifier: "placesViewSegue", sender: nil)
+        
+    }
     var org_id: String!
     var place: String!
     
@@ -80,7 +86,11 @@ class MapViewController: UIViewController {
                 }
             })
         }
-        
+ 
     }
     
+    override func viewDidLoad() {
+       // self.view.bringSubview(toFront: backToPlacesButton)
+    }
+
 }
