@@ -11,7 +11,7 @@ import Firebase
 import ChameleonFramework
 
 protocol FindUpeeViewControllerDelegate: class {
-    func didActionBubble()
+    func didActionBubble(content: String?)
 }
 
 class FindUpeeViewController: UIViewController {
@@ -21,6 +21,8 @@ class FindUpeeViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var onWhereStand: UIButton!
+    @IBOutlet weak var onWhatSee: UIButton!
+    
     var selectedUser: User?
     
     var eatup: EatUp?
@@ -84,15 +86,18 @@ class FindUpeeViewController: UIViewController {
         self.performSegue(withIdentifier: "findToChatSegue", sender: UIButton())
     }
     
+    @IBAction func onWhatSee(_ sender: Any) {
+    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "findToChatSegue" {
             let ChatViewController = segue.destination as! ChatViewController
             ChatViewController.selectedUser = selectedUser
-            ChatViewController.eatupId = eatup?.id
+            ChatViewController.eatup = eatup
             if onWhereStand.isTouchInside == true {
                 self.delegate = ChatViewController
-                self.delegate?.didActionBubble()
+                self.delegate?.didActionBubble(content: "Where are you standing?")
             }
         }
         else if segue.identifier == "findToLocationSegue" {

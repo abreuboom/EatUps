@@ -169,11 +169,11 @@
                         <viewControllerLayoutGuide type="bottom" id="Noi-vy-8T4"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ZP0-bb-ioQ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="64" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RLN-yg-Jg8">
-                                <rect key="frame" x="0.0" y="80" width="375" height="587"/>
+                                <rect key="frame" x="0.0" y="60" width="375" height="543"/>
                                 <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" placeholder="Where would you like to eat?" id="XVv-Bk-ADJ">
@@ -243,7 +243,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ciI-ka-ywu">
-                                <rect key="frame" x="0.0" y="20" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                 <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="aT6-vS-aIs"/>
@@ -312,7 +312,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Z8E-ZJ-pLB"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="OnC-WZ-Pg5">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cJC-77-ZVD">
@@ -325,7 +325,7 @@
                                 <blurEffect style="light"/>
                             </visualEffectView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vKM-ow-wra" customClass="InviteView" customModule="EatUps" customModuleProvider="target">
-                                <rect key="frame" x="37" y="146" width="300" height="375"/>
+                                <rect key="frame" x="37" y="114" width="300" height="375"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="udj-Rw-F7N">
                                         <rect key="frame" x="8" y="152" width="284" height="24"/>
@@ -406,14 +406,14 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kPc-tQ-hm1">
-                                <rect key="frame" x="0.0" y="20" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                 <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="KDp-XC-JXK"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="waO-2c-jJ7">
-                                <rect key="frame" x="0.0" y="80" width="375" height="587"/>
+                                <rect key="frame" x="0.0" y="60" width="375" height="543"/>
                                 <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Fga-Lg-jZG">
                                     <size key="itemSize" width="177" height="253"/>
@@ -979,6 +979,9 @@
                                 <rect key="frame" x="227" y="352" width="123" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="What do you see?"/>
+                                <connections>
+                                    <action selector="onWhatSee:" destination="WXc-wC-v7g" eventType="touchUpInside" id="LA6-Sx-dNm"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -997,6 +1000,7 @@
                     <navigationItem key="navigationItem" id="4Al-bf-68V"/>
                     <connections>
                         <outlet property="nameLabel" destination="kIQ-9w-G5D" id="Xv6-hN-MEz"/>
+                        <outlet property="onWhatSee" destination="K0U-QO-pHD" id="0sS-Tx-GCN"/>
                         <outlet property="onWhereStand" destination="pph-qL-FZ0" id="34z-g7-Dqg"/>
                         <outlet property="profilePhotoView" destination="7kk-Zu-Rhg" id="xvi-Vd-eZX"/>
                         <segue destination="lZU-V8-fg5" kind="show" identifier="findToRatingSegue" id="MyQ-Lc-VHl"/>
@@ -1149,7 +1153,9 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="30" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="63g-z6-8fv">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="separatorColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="sectionIndexBackgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Sender" id="gnU-Te-31e" customClass="SenderCell" customModule="EatUps" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="30"/>
@@ -1183,12 +1189,18 @@
                                                         <constraint firstAttribute="height" constant="36" id="Rdg-ag-UxW"/>
                                                     </constraints>
                                                 </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O2X-cV-qsY">
+                                                    <rect key="frame" x="79" y="0.0" width="43" height="30"/>
+                                                    <state key="normal" title="action"/>
+                                                </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="O2X-cV-qsY" firstAttribute="centerY" secondItem="rhC-nl-zbk" secondAttribute="centerY" id="1qe-cO-2Ux"/>
                                                 <constraint firstItem="YOP-Bk-Too" firstAttribute="centerX" secondItem="rhC-nl-zbk" secondAttribute="centerX" id="2nX-kt-AKQ"/>
                                                 <constraint firstItem="rhC-nl-zbk" firstAttribute="top" secondItem="8zh-Cq-prz" secondAttribute="top" constant="6" id="4e6-WZ-VVx"/>
                                                 <constraint firstItem="YOP-Bk-Too" firstAttribute="height" secondItem="rhC-nl-zbk" secondAttribute="height" id="4pg-Vc-luW"/>
                                                 <constraint firstItem="YOP-Bk-Too" firstAttribute="width" secondItem="rhC-nl-zbk" secondAttribute="width" constant="10" id="5us-XE-Pmh"/>
+                                                <constraint firstItem="O2X-cV-qsY" firstAttribute="leading" secondItem="rhC-nl-zbk" secondAttribute="trailing" constant="8" id="7Z7-gv-Qi2"/>
                                                 <constraint firstAttribute="bottom" secondItem="7B4-p2-5eB" secondAttribute="bottom" constant="6" id="GXc-S3-mqB"/>
                                                 <constraint firstItem="YOP-Bk-Too" firstAttribute="bottom" secondItem="7B4-p2-5eB" secondAttribute="bottom" id="MRI-iF-eiL"/>
                                                 <constraint firstItem="YOP-Bk-Too" firstAttribute="centerY" secondItem="rhC-nl-zbk" secondAttribute="centerY" id="Z6b-5Y-f37"/>
@@ -1197,6 +1209,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="actionButton" destination="O2X-cV-qsY" id="P6f-bi-K7i"/>
                                             <outlet property="message" destination="rhC-nl-zbk" id="CFJ-m8-jVs"/>
                                             <outlet property="messageBackground" destination="YOP-Bk-Too" id="Xyh-wC-L3R"/>
                                             <outlet property="profilePic" destination="7B4-p2-5eB" id="srF-uO-pvL"/>
@@ -1211,7 +1224,7 @@
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="u8E-zI-QTu">
                                                     <rect key="frame" x="340" y="6" width="20" height="18"/>
-                                                    <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="lessThanOrEqual" constant="300" id="LW7-mp-Zhn"/>
                                                     </constraints>
@@ -1251,6 +1264,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
+                        <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Rge-Bg-uLv" firstAttribute="top" secondItem="63g-z6-8fv" secondAttribute="bottom" id="91C-bd-JkB"/>
                             <constraint firstItem="63g-z6-8fv" firstAttribute="top" secondItem="NKK-mD-R3t" secondAttribute="top" id="PBv-gF-Htz"/>
@@ -1264,6 +1278,7 @@
                         <outlet property="inputBar" destination="yrB-tg-7ie" id="SxF-dB-hSl"/>
                         <outlet property="inputTextField" destination="E3c-YN-FY1" id="eHm-LH-hM8"/>
                         <outlet property="tableView" destination="63g-z6-8fv" id="vTj-RX-L6l"/>
+                        <segue destination="Hh3-R1-aMv" kind="show" identifier="chatToLocationSegue" id="K12-z5-JqD"/>
                     </connections>
                 </viewController>
                 <view contentMode="scaleToFill" id="yrB-tg-7ie" userLabel="Input Bar">
@@ -1402,7 +1417,7 @@
                         <viewControllerLayoutGuide type="bottom" id="yuK-Wi-MIl"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="B6w-9c-pgO">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1420,7 +1435,7 @@
                         <viewControllerLayoutGuide type="bottom" id="EeY-Ln-tpi"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="IV1-pR-BOS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1527,8 +1542,9 @@
         <image name="send" width="32" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jjh-46-bM1"/>
-        <segue reference="F5U-Z6-dvR"/>
+        <segue reference="osm-nG-bDa"/>
         <segue reference="ijv-PM-fef"/>
+        <segue reference="jjh-46-bM1"/>
+        <segue reference="K12-z5-JqD"/>
     </inferredMetricsTieBreakers>
 </document>

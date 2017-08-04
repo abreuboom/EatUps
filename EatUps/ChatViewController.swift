@@ -1,3 +1,5 @@
+
+
 //  MIT License
 
 //  Copyright (c) 2017 Haik Aslanyan
@@ -48,7 +50,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     let imagePicker = UIImagePickerController()
     var currentUser = User.current
     var selectedUser: User?
-    var eatupId: String?
+    var eatup: EatUp?
     
     
     
@@ -68,7 +70,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //Downloads messages
     func fetchData() {
-        Message.downloadAllMessages(forUserID: (currentUser?.id!)!, eatUpID: eatupId!, completion: {[weak weakSelf = self] (message) in
+        Message.downloadAllMessages(forUserID: (currentUser?.id!)!, eatUpID: (eatup?.id)!, completion: {[weak weakSelf = self] (message) in
             weakSelf?.items.append(message)
             weakSelf?.items.sort{ $0.timestamp < $1.timestamp }
             DispatchQueue.main.async {
@@ -88,7 +90,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func composeMessage(type: MessageType, content: Any)  {
         let message = Message.init(type: type, content: content, owner: .sender, timestamp: Int(Date().timeIntervalSince1970))
-        Message.send(message: message, toID: (selectedUser?.id)!, eatUpID: eatupId!, completion: {(_) in
+        Message.send(message: message, toID: (selectedUser?.id)!, eatUpID: (eatup?.id)!, completion: {(_) in
         })
     } 
     
@@ -193,7 +195,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                         }
                     })
                 }
-            default: break
+            case .actionBubble:
+                cell.message.text = self.items[indexPath.row].content as! String
             }
             return cell
         case .sender:
@@ -217,7 +220,12 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                         }
                     })
                 }
-            default: break
+            case .actionBubble:
+                cell.message.text = self.items[indexPath.row].content as! String
+                cell.actionButton.isHidden = false
+                if cell.message.text == "Where are you standing?" {
+                    cell.actionButton.setTitle("🕺", for: .normal)
+                }
             }
             return cell
             }
@@ -231,6 +239,12 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                 let info = ["viewType" : ShowExtraView.preview, "pic": photo] as [String : Any]
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showExtraView"), object: nil, userInfo: info)
                 self.inputAccessoryView?.isHidden = true
+            }
+        case .actionBubble:
+            if let action = self.items[indexPath.row].content as? String {
+                if action == "Where are you standing?" {
+                    self.performSegue(withIdentifier: "chatToLocationSegue", sender: nil)
+                }
             }
             default: break
         }
@@ -251,8 +265,19 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         picker.dismiss(animated: true, completion: nil)
     }
     
-    func didActionBubble() {
-        composeMessage(type: .text, content: "Where are you standing?")
+    func didActionBubble(content: String?) {
+        if let content = content {
+            composeMessage(type: .actionBubble, content: content)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "chatToLocationSegue" {
+            let ShareLocationViewController = segue.destination as! ShareLocationViewController
+            ShareLocationViewController.selectedUser = selectedUser
+            ShareLocationViewController.eatupPlace = eatup?.place
+            
+        }
     }
     
     //MARK: ViewController lifecycle
