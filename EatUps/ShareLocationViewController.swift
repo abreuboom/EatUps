@@ -9,15 +9,14 @@
 import UIKit
 import CoreLocation
 import Firebase
+import GoogleMaps
 
 class ShareLocationViewController: UINavigationController, CLLocationManagerDelegate {
     
     var currentUser = User.current
     var selectedUser: User?
     var eatupPlace: String?
-    var placeLocation = CLLocation()
-    var yourLocation = CLLocation()
-    var myLocation = CLLocation()
+    var markersInfo = [String: CLLocationCoordinate2D]()
     
     var ref = Database.database().reference()
     var databaseHandle: DatabaseHandle!
@@ -26,24 +25,55 @@ class ShareLocationViewController: UINavigationController, CLLocationManagerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        markersSetUp { (success) in
+            if success == true {
+                
+                // Sets up the map view
+                let placeLocation = self.markersInfo[self.eatupPlace!]
+                let camera = GMSCameraPosition.camera(withLatitude: (placeLocation?.latitude)!, longitude: (placeLocation?.longitude)!, zoom: 15)
+                let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
+                self.view = mapView
+                
+                for (name, location) in self.markersInfo {
+                    let marker = GMSMarker()
+                    marker.position = location
+                    marker.title = name
+                    marker.snippet = "Facebook University"
+                    marker.map = mapView
+                }
+            }
+        }
+
+        
+    }
+    
+    // MARK: Loading information for markers
+    func markersSetUp(completion: @escaping(Bool) -> ()) {
         // Gets location of the eatUp place
         APIManager.shared.getPlaceLocation(place: eatupPlace!) { (success: Bool, placeLocation: CLLocation) in
             if success == true {
-                self.placeLocation = placeLocation
+                let placeLocation = placeLocation.coordinate
+                self.markersInfo[self.eatupPlace!] = placeLocation
             }
         }
         
         // Gets location of the other person
-        ref.child("users/\(selectedUser?.id)/location").observeSingleEvent(of: .value, with: { (snapshot) in
-            if let yourLocationString = snapshot.value as? String {
-                self.yourLocation = EatUp.stringToCLLocation(locationString: yourLocationString)
-            }
-        })
+        if let yourLocationString = selectedUser?.dictionary?["location"] {
+            let yourLocation = (EatUp.stringToCLLocation(locationString: yourLocationString as! String)).coordinate
+            self.markersInfo[User.firstName(name: (self.selectedUser?.name)!)] = yourLocation
+        }
+        
         
         // Gets own location
         locationManager = CLLocationManager()
         getLocation()
         
+        if markersInfo.count == 3 {
+            completion(true)
+        }
+        else {
+            completion(false)
+        }
     }
     
     // MARK: Location manager methods
@@ -74,7 +104,8 @@ class ShareLocationViewController: UINavigationController, CLLocationManagerDele
         if let user = user {
             let id = user.uid
             self.ref.child("users/\(id)/location").setValue(myLocationString)
-            myLocation = EatUp.stringToCLLocation(locationString: myLocationString)
+            let myLocation = (EatUp.stringToCLLocation(locationString: myLocationString)).coordinate
+            self.markersInfo[User.firstName(name: (self.currentUser?.name)!)] = myLocation
         }
         
     }

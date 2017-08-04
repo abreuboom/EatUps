@@ -26,7 +26,7 @@ import Firebase
 import AlamofireImage
 import Photos
 
-class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,  UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,  UINavigationControllerDelegate, UIImagePickerControllerDelegate, FindUpeeViewControllerDelegate {
     
     //MARK: Properties
     @IBOutlet var inputBar: UIView!
@@ -49,6 +49,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     var currentUser = User.current
     var selectedUser: User?
     var eatupId: String?
+    
     
     
     //MARK: Methods
@@ -192,6 +193,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                         }
                     })
                 }
+            default: break
             }
             return cell
         case .sender:
@@ -215,6 +217,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                         }
                     })
                 }
+            default: break
             }
             return cell
             }
@@ -246,6 +249,10 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.composeMessage(type: .photo, content: pickedImage)
         }
         picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func didActionBubble() {
+        composeMessage(type: .text, content: "Where are you standing?")
     }
     
     //MARK: ViewController lifecycle

@@ -42,9 +42,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
     var places = [String]()
     var ref: DatabaseReference?
     
-    
     override func loadView() {
-        
         
         latitudeCoor = 37.480364
         longitudeCoor = -122.155644

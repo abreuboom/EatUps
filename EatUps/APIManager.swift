@@ -230,33 +230,33 @@ class APIManager: SessionManager {
         }
     }
     
-//    func getUsersCount(places: [String], completion: @escaping (Bool, [Int]) -> ()) {
-//        var userCounts: [Int] = []
-//        for i in 0...places.count-1 {
-//            let place = places[i]
-//            var availableUsers: [User] = []
-//            let uid = User.current?.id ?? ""
-//            
-//            // Populating collection view with available users
-//            APIManager.shared.getAvailableUsers(place: place) { (success, users) in
-//                if success == true {
-//                    print(
-//                    for user in users {
-//                        // Does not add self and other users into user feed view
-//                        if (user.id == uid || availableUsers.contains(where: { (storedUser) -> Bool in
-//                            return storedUser.id == user.id
-//                        })) != true {
-//                            availableUsers.append(user)
-//                        }
-//                    }
-//                    userCounts.append(availableUsers.count)
-//                    if i == places.count-1 {
-//                        completion(true, userCounts)
-//                    }
-//                }
-//            }
-//        }
-//    }
+    //    func getUsersCount(places: [String], completion: @escaping (Bool, [Int]) -> ()) {
+    //        var userCounts: [Int] = []
+    //        for i in 0...places.count-1 {
+    //            let place = places[i]
+    //            var availableUsers: [User] = []
+    //            let uid = User.current?.id ?? ""
+    //
+    //            // Populating collection view with available users
+    //            APIManager.shared.getAvailableUsers(place: place) { (success, users) in
+    //                if success == true {
+    //                    print(
+    //                    for user in users {
+    //                        // Does not add self and other users into user feed view
+    //                        if (user.id == uid || availableUsers.contains(where: { (storedUser) -> Bool in
+    //                            return storedUser.id == user.id
+    //                        })) != true {
+    //                            availableUsers.append(user)
+    //                        }
+    //                    }
+    //                    userCounts.append(availableUsers.count)
+    //                    if i == places.count-1 {
+    //                        completion(true, userCounts)
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
     
     
     func containsUser(arr: [User], targetUser: User) -> Bool {
@@ -419,9 +419,7 @@ class APIManager: SessionManager {
                     eatup.id = snapshot.key
                     eatups.append(eatup)
                 }
-                if eatups.count == eatupIds.count {
-                    completion(true, eatups)
-                }
+                completion(true, eatups)
             })
         }
     }
