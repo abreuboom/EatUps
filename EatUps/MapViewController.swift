@@ -25,7 +25,7 @@ extension String {
     
 }
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, GMSMapViewDelegate {
     
     @IBOutlet weak var backToPlacesButton: UIButton!
     
@@ -40,16 +40,21 @@ class MapViewController: UIViewController {
     var latitudeCoor: Float = 0.0
     var longitudeCoor: Float = 0.0
     var places = [String]()
+    var marker = GMSMarker()
     var ref: DatabaseReference?
+    
+    
     
     override func loadView() {
         
-        latitudeCoor = 37.480364
-        longitudeCoor = -122.155644
-        let camera = GMSCameraPosition.camera(withLatitude: CLLocationDegrees(latitudeCoor), longitude: CLLocationDegrees(longitudeCoor), zoom: 15)
+        
+        
+        latitudeCoor = 37.482068
+        longitudeCoor = -122.150365
+        let camera = GMSCameraPosition.camera(withLatitude: CLLocationDegrees(latitudeCoor), longitude: CLLocationDegrees(longitudeCoor), zoom: 16)
         let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         view = mapView
-        
+        mapView.delegate = self
         ref = Database.database().reference()
         
         org_id = User.current?.org_id
@@ -68,10 +73,10 @@ class MapViewController: UIViewController {
                                 self.longitudeCoor = Float(placeLocation.coordinate.longitude)
                                 
                                 let marker = GMSMarker()
+                                marker.isTappable = true
                                 marker.position = CLLocationCoordinate2D(latitude: CLLocationDegrees(self.latitudeCoor), longitude: CLLocationDegrees(self.longitudeCoor))
                                 marker.title = self.places[i]
                                 marker.icon = self.emojis[i].image()
-                                marker.snippet = "Facebook University"
                                 marker.map = mapView
                             }
                                 
@@ -86,12 +91,28 @@ class MapViewController: UIViewController {
                     
                 }
             })
+            
         }
- 
+
+        
+        
     }
     
-    override func viewDidLoad() {
-       // self.view.bringSubview(toFront: backToPlacesButton)
+    @objc func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker){
+        print("it got this far")
+        performSegue(withIdentifier: "userFeedSegue", sender: marker)
+       // return true
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "userFeedSegue" {
+            let userFeedViewController = segue.destination as! UserFeedViewController
+            if let marker = sender as? GMSMarker{
+                let place = marker.title
+                userFeedViewController.place = place!
+            }
+        }
+    }
+    
 
 }
