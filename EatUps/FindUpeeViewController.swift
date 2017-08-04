@@ -99,6 +99,10 @@ class FindUpeeViewController: UIViewController {
                 self.delegate = ChatViewController
                 self.delegate?.didActionBubble(content: "Where are you standing?")
             }
+            else if onWhatSee.isTouchInside == true {
+                self.delegate = ChatViewController
+                self.delegate?.didActionBubble(content: "What do you see?")
+            }
         }
         else if segue.identifier == "findToLocationSegue" {
             let ShareLocationViewController = segue.destination as! ShareLocationViewController

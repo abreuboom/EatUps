@@ -226,6 +226,9 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                 if cell.message.text == "Where are you standing?" {
                     cell.actionButton.setTitle("🕺", for: .normal)
                 }
+                else if cell.message.text == "What do you see?" {
+                    cell.actionButton.setTitle("👀", for: .normal)
+                }
             }
             return cell
             }
@@ -244,6 +247,9 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             if let action = self.items[indexPath.row].content as? String {
                 if action == "Where are you standing?" {
                     self.performSegue(withIdentifier: "chatToLocationSegue", sender: nil)
+                }
+                else if action == "What do you see?" {
+                    
                 }
             }
             default: break
