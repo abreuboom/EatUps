@@ -104,6 +104,11 @@ class Message {
                 Message.uploadMessage(withValues: values, toID: toID, eatUpID: eatUpID, completion: { (status) in
                 completion(status)
                 })
+            case .actionBubble:
+                let values = ["type": "actionBubble", "content": message.content, "fromID": currentUserID, "toID": toID, "timestamp": message.timestamp]
+                Message.uploadMessage(withValues: values, toID: toID, eatUpID: eatUpID, completion: { (status) in
+                    completion(status)
+                })
             }
         }
     }

@@ -5,7 +5,6 @@
 //  Created by John Abreu on 7/11/17.
 //  Copyright © 2017 John Abreu. All rights reserved.
 //
-
 import UIKit
 import UserNotifications
 import Firebase
@@ -40,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
             self.window?.rootViewController = loginVC
         }
-
+        
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
         UINavigationBar.appearance().backgroundColor = HexColor(hexString: "FE3F67")
         UIApplication.shared.statusBarStyle = .lightContent
@@ -82,9 +81,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Messaging.messaging().appDidReceiveMessage(userInfo)
         
         // Print message ID.
-        if let messageID = userInfo[gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
-        }
+//        if let messageID = userInfo[gcmMessageIDKey] {
+//            print("Message ID: \(messageID)")
+//        }
         
         // Print full message.
         print(userInfo)
@@ -133,4 +132,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     
 }
-
