@@ -40,29 +40,21 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
     var latitudeCoor: Float = 0.0
     var longitudeCoor: Float = 0.0
     var places = [String]()
+    var marker = GMSMarker()
     var ref: DatabaseReference?
+    
+    
     
     override func loadView() {
         
-        latitudeCoor = 37.480364
-        longitudeCoor = -122.155644
+        
+        
+        latitudeCoor = 37.482068
+        longitudeCoor = -122.150365
         let camera = GMSCameraPosition.camera(withLatitude: CLLocationDegrees(latitudeCoor), longitude: CLLocationDegrees(longitudeCoor), zoom: 16)
         let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         view = mapView
-        
-         func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
-            let popoverContent = (self.storyboard?.instantiateViewController(withIdentifier: "userFeed"))! as UIViewController
-            let nav = UINavigationController(rootViewController: popoverContent)
-            nav.modalPresentationStyle = UIModalPresentationStyle.popover
-            let popover = nav.popoverPresentationController
-            //popoverContent.preferredContentSize = CGSizeMake(250,300)
-            popover!.delegate = self as? UIPopoverPresentationControllerDelegate
-            popover!.sourceView = self.view
-           // popover!.sourceRect = CGRectMake(100,100,0,0)
-            self.present(nav, animated: true, completion: nil)
-        }
-        
-        
+        mapView.delegate = self
         ref = Database.database().reference()
         
         org_id = User.current?.org_id
@@ -81,6 +73,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
                                 self.longitudeCoor = Float(placeLocation.coordinate.longitude)
                                 
                                 let marker = GMSMarker()
+                                marker.isTappable = true
                                 marker.position = CLLocationCoordinate2D(latitude: CLLocationDegrees(self.latitudeCoor), longitude: CLLocationDegrees(self.longitudeCoor))
                                 marker.title = self.places[i]
                                 marker.icon = self.emojis[i].image()
@@ -98,25 +91,28 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
                     
                 }
             })
-         //   mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker: GMSMarker!)
+            
         }
+
         
- 
+        
     }
     
-    override func viewDidLoad() {
-       // self.view.bringSubview(toFront: backToPlacesButton)
+    @objc func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker){
+        print("it got this far")
+        performSegue(withIdentifier: "userFeedSegue", sender: marker)
+       // return true
     }
     
-  /*  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "userFeedSegue" {
-            if let sender = sender as! GMSMarker{
+            let userFeedViewController = segue.destination as! UserFeedViewController
+            if let marker = sender as? GMSMarker{
                 let place = marker.title
-                let userFeedViewController = segue.destination as! UserFeedViewController
-                userFeedViewController.place = place
+                userFeedViewController.place = place!
             }
         }
     }
-     */
+    
 
 }
