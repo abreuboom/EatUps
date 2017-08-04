@@ -39,7 +39,8 @@ class RatingViewController: UIViewController {
                     // if user is equal to the current id, then print the user's value
                     self.ref?.child("eatups/\(self.eatupId!)/users/\(user)").setValue("0")
                     self.performSegue(withIdentifier: "ratingSegue", sender: nil)
-
+                }else{
+                    APIManager.shared.resetStatus(userID: uid!)
                 }
             }
         })
@@ -62,7 +63,8 @@ class RatingViewController: UIViewController {
                     // if user is equal to the current id, then print the user's value
                     self.ref?.child("eatups/\(self.eatupId!)/users/\(user)").setValue("1")
                     self.performSegue(withIdentifier: "ratingSegue", sender: nil)
-                    
+                }else{
+                    APIManager.shared.resetStatus(userID: uid!)
                 }
             }
         })
@@ -83,7 +85,8 @@ class RatingViewController: UIViewController {
                     // if user is equal to the current id, then print the user's value
                     self.ref?.child("eatups/\(self.eatupId!)/users/\(user)").setValue("-1")
                     self.performSegue(withIdentifier: "ratingSegue", sender: nil)
-                    
+                }else{
+                    APIManager.shared.resetStatus(userID: uid!)
                 }
             }
         })

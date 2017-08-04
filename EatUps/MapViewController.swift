@@ -25,7 +25,7 @@ extension String {
     
 }
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, GMSMapViewDelegate {
     
     @IBOutlet weak var backToPlacesButton: UIButton!
     
@@ -48,9 +48,22 @@ class MapViewController: UIViewController {
         
         latitudeCoor = 37.480364
         longitudeCoor = -122.155644
-        let camera = GMSCameraPosition.camera(withLatitude: CLLocationDegrees(latitudeCoor), longitude: CLLocationDegrees(longitudeCoor), zoom: 15)
+        let camera = GMSCameraPosition.camera(withLatitude: CLLocationDegrees(latitudeCoor), longitude: CLLocationDegrees(longitudeCoor), zoom: 16)
         let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         view = mapView
+        
+         func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
+            let popoverContent = (self.storyboard?.instantiateViewController(withIdentifier: "userFeed"))! as UIViewController
+            let nav = UINavigationController(rootViewController: popoverContent)
+            nav.modalPresentationStyle = UIModalPresentationStyle.popover
+            let popover = nav.popoverPresentationController
+            //popoverContent.preferredContentSize = CGSizeMake(250,300)
+            popover!.delegate = self as? UIPopoverPresentationControllerDelegate
+            popover!.sourceView = self.view
+           // popover!.sourceRect = CGRectMake(100,100,0,0)
+            self.present(nav, animated: true, completion: nil)
+        }
+        
         
         ref = Database.database().reference()
         
@@ -73,7 +86,6 @@ class MapViewController: UIViewController {
                                 marker.position = CLLocationCoordinate2D(latitude: CLLocationDegrees(self.latitudeCoor), longitude: CLLocationDegrees(self.longitudeCoor))
                                 marker.title = self.places[i]
                                 marker.icon = self.emojis[i].image()
-                                marker.snippet = "Facebook University"
                                 marker.map = mapView
                             }
                                 
@@ -88,12 +100,25 @@ class MapViewController: UIViewController {
                     
                 }
             })
+         //   mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker: GMSMarker!)
         }
+        
  
     }
     
     override func viewDidLoad() {
        // self.view.bringSubview(toFront: backToPlacesButton)
     }
+    
+  /*  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "userFeedSegue" {
+            if let sender = sender as! GMSMarker{
+                let place = marker.title
+                let userFeedViewController = segue.destination as! UserFeedViewController
+                userFeedViewController.place = place
+            }
+        }
+    }
+     */
 
 }
