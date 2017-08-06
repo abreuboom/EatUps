@@ -11,22 +11,6 @@ import CoreLocation
 import Firebase
 import GoogleMaps
 
-// MARK: For converting place emoji to image
-extension String {
-    func image() -> UIImage? {
-        let size = CGSize(width: 30, height: 35)
-        UIGraphicsBeginImageContextWithOptions(size, false, 0);
-        UIColor.clear.set()
-        let rect = CGRect(origin: CGPoint(), size: size)
-        UIRectFill(CGRect(origin: CGPoint(), size: size))
-        (self as NSString).draw(in: rect, withAttributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 30)])
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image
-    }
-    
-}
-
 class ShareLocationViewController: UINavigationController, CLLocationManagerDelegate {
     
     var currentUser = User.current
@@ -74,7 +58,7 @@ class ShareLocationViewController: UINavigationController, CLLocationManagerDele
                 let placeLocation = placeLocation.coordinate
                 self.ref.child("orgs/\(self.currentUser?.org_id)/emojis/\(self.eatupPlace)").observeSingleEvent(of: .value, with: { (snapshot) in
                     if let placeEmoji = snapshot.value as? String {
-                        let placeEmojiPic = placeEmoji.image()
+                        let placeEmojiPic = UIImage.init(emoji: placeEmoji, size: 30)
                         self.markersInfo[self.eatupPlace!] = [placeLocation, placeEmojiPic]
                     }
                 })
