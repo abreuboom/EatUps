@@ -47,6 +47,7 @@ class SenderCell: UITableViewCell {
         self.messageBackground.layer.cornerRadius = 15
         self.messageBackground.clipsToBounds = true
     }
+    
 }
 
 class ReceiverCell: UITableViewCell {

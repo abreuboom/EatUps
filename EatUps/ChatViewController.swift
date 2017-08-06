@@ -225,14 +225,31 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                 cell.actionButton.isHidden = false
                 if cell.message.text == "Where are you standing?" {
                     cell.actionButton.setTitle("🕺", for: .normal)
+                    cell.actionButton.addTarget(self, action: "onWhereStand", for: .touchUpInside)
                 }
                 else if cell.message.text == "What do you see?" {
                     cell.actionButton.setTitle("👀", for: .normal)
+                    cell.actionButton.addTarget(self, action: "onWhatSee", for: .touchUpInside)
                 }
+                
             }
             return cell
             }
         }
+    
+    // MARK: Action bubble action functions
+    func onWhereStand() {
+        self.performSegue(withIdentifier: "chatToLocationSegue", sender: nil)
+    }
+    
+    func onWhatSee() {
+        let status = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+        if (status == .authorized || status == .notDetermined) {
+            self.imagePicker.sourceType = .camera
+            self.imagePicker.allowsEditing = false
+            self.present(self.imagePicker, animated: true, completion: nil)
+        }
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.inputTextField.resignFirstResponder()
@@ -242,15 +259,6 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                 let info = ["viewType" : ShowExtraView.preview, "pic": photo] as [String : Any]
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showExtraView"), object: nil, userInfo: info)
                 self.inputAccessoryView?.isHidden = true
-            }
-        case .actionBubble:
-            if let action = self.items[indexPath.row].content as? String {
-                if action == "Where are you standing?" {
-                    self.performSegue(withIdentifier: "chatToLocationSegue", sender: nil)
-                }
-                else if action == "What do you see?" {
-                    
-                }
             }
             default: break
         }
