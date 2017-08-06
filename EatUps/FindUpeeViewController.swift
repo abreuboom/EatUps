@@ -87,6 +87,7 @@ class FindUpeeViewController: UIViewController {
     }
     
     @IBAction func onWhatSee(_ sender: Any) {
+        self.performSegue(withIdentifier: "findToChatSegue", sender: UIButton())
     }
     
     

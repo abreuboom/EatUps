@@ -11,12 +11,28 @@ import CoreLocation
 import Firebase
 import GoogleMaps
 
+// MARK: For converting place emoji to image
+extension String {
+    func image() -> UIImage? {
+        let size = CGSize(width: 30, height: 35)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0);
+        UIColor.clear.set()
+        let rect = CGRect(origin: CGPoint(), size: size)
+        UIRectFill(CGRect(origin: CGPoint(), size: size))
+        (self as NSString).draw(in: rect, withAttributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 30)])
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
+    
+}
+
 class ShareLocationViewController: UINavigationController, CLLocationManagerDelegate {
     
     var currentUser = User.current
     var selectedUser: User?
     var eatupPlace: String?
-    var markersInfo = [String: CLLocationCoordinate2D]()
+    var markersInfo = [String: Array<Any>]()
     
     var ref = Database.database().reference()
     var databaseHandle: DatabaseHandle!
@@ -29,15 +45,18 @@ class ShareLocationViewController: UINavigationController, CLLocationManagerDele
             if success == true {
                 
                 // Sets up the map view
-                let placeLocation = self.markersInfo[self.eatupPlace!]
+                let placeLocation = self.markersInfo[self.eatupPlace!] as? CLLocationCoordinate2D
                 let camera = GMSCameraPosition.camera(withLatitude: (placeLocation?.latitude)!, longitude: (placeLocation?.longitude)!, zoom: 15)
                 let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
                 self.view = mapView
                 
-                for (name, location) in self.markersInfo {
+                for (name, info) in self.markersInfo {
+                    let location = info[0]
+                    let pic = info[1]
                     let marker = GMSMarker()
-                    marker.position = location
+                    marker.position = location as! CLLocationCoordinate2D
                     marker.title = name
+                    marker.icon = pic as! UIImage 
                     marker.snippet = "Facebook University"
                     marker.map = mapView
                 }
@@ -53,14 +72,22 @@ class ShareLocationViewController: UINavigationController, CLLocationManagerDele
         APIManager.shared.getPlaceLocation(place: eatupPlace!) { (success: Bool, placeLocation: CLLocation) in
             if success == true {
                 let placeLocation = placeLocation.coordinate
-                self.markersInfo[self.eatupPlace!] = placeLocation
+                self.ref.child("orgs/\(self.currentUser?.org_id)/emojis/\(self.eatupPlace)").observeSingleEvent(of: .value, with: { (snapshot) in
+                    if let placeEmoji = snapshot.value as? String {
+                        let placeEmojiPic = placeEmoji.image()
+                        self.markersInfo[self.eatupPlace!] = [placeLocation, placeEmojiPic]
+                    }
+                })
+    
             }
         }
         
         // Gets location of the other person
         if let yourLocationString = selectedUser?.dictionary?["location"] {
             let yourLocation = (EatUp.stringToCLLocation(locationString: yourLocationString as! String)).coordinate
-            self.markersInfo[User.firstName(name: (self.selectedUser?.name)!)] = yourLocation
+            if let yourPic = selectedUser?.dictionary?["profilePhotoURL"] {
+                self.markersInfo[User.firstName(name: (self.selectedUser?.name)!)] = [yourLocation, yourPic]
+            }
         }
         
         
@@ -105,9 +132,10 @@ class ShareLocationViewController: UINavigationController, CLLocationManagerDele
             let id = user.uid
             self.ref.child("users/\(id)/location").setValue(myLocationString)
             let myLocation = (EatUp.stringToCLLocation(locationString: myLocationString)).coordinate
-            self.markersInfo[User.firstName(name: (self.currentUser?.name)!)] = myLocation
+            if let myPic = currentUser?.dictionary?["profilePhotoURL"] {
+                self.markersInfo[User.firstName(name: (self.currentUser?.name)!)] = [myLocation, myPic]
+            }
         }
-        
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

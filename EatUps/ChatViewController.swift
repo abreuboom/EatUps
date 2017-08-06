@@ -225,11 +225,11 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                 cell.actionButton.isHidden = false
                 if cell.message.text == "Where are you standing?" {
                     cell.actionButton.setTitle("🕺", for: .normal)
-                    cell.actionButton.addTarget(self, action: "onWhereStand", for: .touchUpInside)
+                    cell.actionButton.addTarget(self, action: #selector(ChatViewController.onWhereStand), for: .touchUpInside)
                 }
                 else if cell.message.text == "What do you see?" {
                     cell.actionButton.setTitle("👀", for: .normal)
-                    cell.actionButton.addTarget(self, action: "onWhatSee", for: .touchUpInside)
+                    cell.actionButton.addTarget(self, action: #selector(ChatViewController.onWhatSee), for: .touchUpInside)
                 }
                 
             }
