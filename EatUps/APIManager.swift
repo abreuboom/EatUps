@@ -336,7 +336,7 @@ class APIManager: SessionManager {
     }
     
     func checkForInvite(completion: @escaping (Bool, String) -> ()) {
-        let uid = User.current?.id
+        let uid = Auth.auth().currentUser?.uid
         databaseHandle = ref.child("users/\(uid!)/status").observe(.value, with: { (snapshot) in
             let data = snapshot.value as? String
             if data != "" && data != nil {

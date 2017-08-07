@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         FirebaseApp.configure()
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         GMSServices.provideAPIKey("AIzaSyAFgY7q8av7Rpy5Diiwmd5XqJvITVStDM4")
+        Database.database().isPersistenceEnabled = true
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
@@ -40,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
             self.window?.rootViewController = loginVC
         }
-
+        
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
         UINavigationBar.appearance().backgroundColor = HexColor(hexString: "FE3F67")
         UIApplication.shared.statusBarStyle = .lightContent
@@ -52,16 +53,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             UNUserNotificationCenter.current().requestAuthorization(
                 options: authOptions,
                 completionHandler: {_, _ in })
-            // For iOS 10 data message (sent via FCM
+            // For iOS 10 data message (sent via FCM)
             Messaging.messaging().delegate = self as MessagingDelegate
         } else {
             let settings: UIUserNotificationSettings =
                 UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             application.registerUserNotificationSettings(settings)
+            application.registerForRemoteNotifications()
         }
         
-        application.registerForRemoteNotifications()
+        APIManager.shared.checkForInvite { (success, eatupId) in
+            if success == true {
+                APIManager.shared.ref.child("eatups/\(eatupId)").observeSingleEvent(of: .value, with: { (snapshot) in
+                    if let eatupDictionary = snapshot.value as? [String: Any] {
+                        let eatup = EatUp(dictionary: eatupDictionary)
+                        eatup.id = snapshot.key
+                        let inviterId = eatup.inviter
+                        APIManager.shared.getUser(uid: inviterId, completion: { (success, inviter) in
+                            
+                            let content = UNMutableNotificationContent()
+                            content.title = "\(inviter.name!) wants to eatup with you at \(eatup.place)"
+                            content.subtitle = "Do you know?"
+                            content.body = "Do you really know?"
+                            content.badge = 1
+                            
+                            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+                            let request = UNNotificationRequest(identifier: "eatupInvite", content: content, trigger: trigger)
+                            
+                            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+                        })
+                    }
+                })
+            }
+        }
         
+        UIApplication.shared.applicationIconBadgeNumber = 0
         
         
         return true
@@ -76,13 +102,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         // If you are receiving a notification message while your app is in the background,
         // this callback will not be fired till the user taps on the notification launching the application.
-        // TODO: Handle data of notification
+        
+        print(userInfo)
+        let gcmMessageIDKey = userInfo["gcm_message_id"] as? String
         
         // With swizzling disabled you must let Messaging know about the message, for Analytics
         // Messaging.messaging().appDidReceiveMessage(userInfo)
         
         // Print message ID.
-        if let messageID = userInfo[gcmMessageIDKey] {
+        if let messageID = userInfo[gcmMessageIDKey!] {
             print("Message ID: \(messageID)")
         }
         

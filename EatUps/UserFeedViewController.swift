@@ -7,15 +7,15 @@
 //
 
 import UIKit
-import BouncyLayout
 import FirebaseDatabase
 import CoreLocation
 import DZNEmptyDataSet
 import Firebase
 import ChameleonFramework
 import EasyAnimation
+import UserNotifications
 
-class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, CLLocationManagerDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, CLLocationManagerDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, UNUserNotificationCenterDelegate {
     
     @IBOutlet weak var barButtonItem: UIBarButtonItem!
     
@@ -101,6 +101,28 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
                         if let eatupDictionary = snapshot.value as? [String: Any] {
                             let eatup = EatUp(dictionary: eatupDictionary)
                             eatup.id = snapshot.key
+                            let inviterId = eatup.inviter
+                            APIManager.shared.getUser(uid: inviterId, completion: { (success, inviter) in
+                                if success == true {
+                                    let acceptEatup = UNNotificationAction(identifier: "accept", title: "Accept EatUp!", options: UNNotificationActionOptions.foreground)
+                                    let declineEatup = UNNotificationAction(identifier: "decline", title: "Decline", options: UNNotificationActionOptions.foreground)
+                                    
+                                    let category = UNNotificationCategory(identifier: "eatupNotification", actions: [acceptEatup, declineEatup], intentIdentifiers: [], options: [])
+                                    UNUserNotificationCenter.current().setNotificationCategories([category])
+                                    
+                                    let content = UNMutableNotificationContent()
+                                    content.title = "\(inviter.name!) wants to eatup with you!"
+                                    content.subtitle = "Join them @\(eatup.place)"
+                                    content.body = "Eatup with \(inviter.name!) @\(eatup.place) now"
+                                    content.badge = 1
+                                    
+                                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+                                    let request = UNNotificationRequest(identifier: "eatupInvite", content: content, trigger: trigger)
+                                    
+                                    UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+                                }
+                            })
+                            
                             self.currentEatup = eatup
                             self.animateInviteIn(eatup: eatup)
                         }
@@ -121,6 +143,16 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         collectionView.alwaysBounceVertical = true
         collectionView.emptyDataSetSource = self
         collectionView.emptyDataSetDelegate = self
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        if response.actionIdentifier == "accept" || response.actionIdentifier == "eatupNotification" {
+            self.inviteView.acceptEatup(self)
+        }
+        else if response.actionIdentifier == "decline" {
+            self.inviteView.rejectEatup(self)
+        }
+        completionHandler()
     }
     
     func animateInviteIn(eatup: EatUp) {
@@ -169,10 +201,6 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         cell.user = availableUsers[indexPath.item]
         cell.cardView.tag = indexPath.item
         collectionView.allowsMultipleSelection = false
-        
-        //        let tapped:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(selectUpee(_:)))
-        //        tapped.numberOfTapsRequired = 1
-        //        cell.cardView.addGestureRecognizer(tapped)
         
         return cell
     }
