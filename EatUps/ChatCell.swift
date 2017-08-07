@@ -30,11 +30,14 @@ class SenderCell: UITableViewCell {
     @IBOutlet weak var profilePic: RoundedImageView!
     @IBOutlet weak var message: UITextView!
     @IBOutlet weak var messageBackground: UIImageView!
+    @IBOutlet weak var actionButton: UIButton!
+    
     
     func clearCellData()  {
         self.message.text = nil
         self.message.isHidden = false
         self.messageBackground.image = nil
+        self.actionButton.isHidden = true
     }
     
     override func awakeFromNib() {
@@ -44,12 +47,14 @@ class SenderCell: UITableViewCell {
         self.messageBackground.layer.cornerRadius = 15
         self.messageBackground.clipsToBounds = true
     }
+    
 }
 
 class ReceiverCell: UITableViewCell {
     
     @IBOutlet weak var message: UITextView!
     @IBOutlet weak var messageBackground: UIImageView!
+    
     
     func clearCellData()  {
         self.message.text = nil

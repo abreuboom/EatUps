@@ -96,6 +96,7 @@ class PendingInviteViewController: UIViewController, SRCountdownTimerDelegate {
             let FindUpeeViewController = navigationViewController.viewControllers.first as! FindUpeeViewController
             FindUpeeViewController.selectedUser = selectedUser
             FindUpeeViewController.eatup = eatup
+            timer.dismiss()
         }
     }
 
