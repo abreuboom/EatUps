@@ -33,6 +33,7 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     var emojis: [String] = []
     var userCountIndex: [Int] = []
     
+    
     //create an array to update as we filter through the locations to eat
     var filteredPlaces: [String] = []
     
@@ -76,6 +77,8 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
                 self.emojis = emojisData
                 self.filteredPlaces = self.places
                 self.locationsTableView.reloadData()
+                
+                
                 //                    APIManager.shared.getUsersCount(places: self.places, completion: { (success, userCounts) in
                 //                        if success == true {
                 //                            self.userCountIndex = userCounts
@@ -162,6 +165,7 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     // This method updates filteredData based on the text in the Search Box
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         // When there is no text, filteredData is the same as the original data. For each item, return true if the item should be included and false if the
+        
         filteredPlaces = searchText.isEmpty ? places : places.filter { (item: String) -> Bool in
             // If dataItem matches the searchText, return true to include it
             return item.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
@@ -172,7 +176,7 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     @IBAction func logout(_ sender: UIBarButtonItem) {
         APIManager.shared.logout()
     }
-    
+     
     // Sends local eatUp object to the user feed view controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "selectUpeeSegue" {
