@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.16"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -923,7 +922,7 @@
                         <viewControllerLayoutGuide type="bottom" id="biG-a9-TsC"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bP0-nJ-PkN">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="599"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7kk-Zu-Rhg">
@@ -953,7 +952,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XVC-b9-BKM">
-                                <rect key="frame" x="158" y="513" width="58" height="58"/>
+                                <rect key="frame" x="158" y="509" width="58" height="58"/>
                                 <state key="normal" image="Chat"/>
                                 <connections>
                                     <segue destination="Sx2-x7-11q" kind="show" identifier="findToChatSegue" id="LUz-Md-ihZ"/>
@@ -964,7 +963,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Location"/>
                                 <connections>
-                                    <segue destination="Hh3-R1-aMv" kind="show" identifier="findToLocationSegue" id="yBA-8s-DE1"/>
+                                    <segue destination="gZ6-UA-VY9" kind="show" identifier="mapSegue" id="joM-3L-Y4q"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4lz-yg-8A4">
@@ -989,13 +988,7 @@
                             <constraint firstItem="eN7-9Q-RNR" firstAttribute="top" secondItem="IpL-f9-TFv" secondAttribute="bottom" constant="8" id="nf6-AF-XZY"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="4Al-bf-68V">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="SRX-uc-Mpa">
-                            <connections>
-                                <segue destination="gZ6-UA-VY9" kind="show" identifier="mapSegue" id="5oj-l6-ahA"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="4Al-bf-68V"/>
                     <connections>
                         <outlet property="nameLabel" destination="kIQ-9w-G5D" id="Xv6-hN-MEz"/>
                         <outlet property="profilePhotoView" destination="7kk-Zu-Rhg" id="xvi-Vd-eZX"/>
@@ -1015,11 +1008,11 @@
                         <viewControllerLayoutGuide type="bottom" id="bHM-ja-8xW"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="29E-vj-1DT">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="599"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="64" translatesAutoresizingMaskIntoConstraints="NO" id="7p3-zy-Jme">
-                                <rect key="frame" x="97.5" y="513" width="180" height="58"/>
+                                <rect key="frame" x="97.5" y="509" width="180" height="58"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5J2-ji-82Y">
                                         <rect key="frame" x="0.0" y="0.0" width="58" height="58"/>
@@ -1070,7 +1063,7 @@
                                 <color key="highlightedColor" red="0.99019607843137258" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Would you eatup with them again?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3P3-eA-CMg">
-                                <rect key="frame" x="56" y="460.5" width="263" height="20.5"/>
+                                <rect key="frame" x="56" y="456.5" width="263" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -1144,11 +1137,11 @@
                         <viewControllerLayoutGuide type="bottom" id="Rge-Bg-uLv"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="NKK-mD-R3t">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="599"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="30" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="63g-z6-8fv">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="599"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Sender" id="gnU-Te-31e" customClass="SenderCell" customModule="EatUps" customModuleProvider="target">
@@ -1402,7 +1395,7 @@
                         <viewControllerLayoutGuide type="bottom" id="yuK-Wi-MIl"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="B6w-9c-pgO">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1414,13 +1407,13 @@
         <!--View Controller-->
         <scene sceneID="EGq-SV-NNO">
             <objects>
-                <viewController id="SxB-PX-Zjb" customClass="ARViewController" customModule="EatUps" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="SxB-PX-Zjb" customClass="ARViewController" customModule="EatUps" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vND-fR-KIv"/>
                         <viewControllerLayoutGuide type="bottom" id="YVJ-Hb-uNJ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="uth-qT-AwY">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="599"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1442,7 +1435,7 @@
                         <viewControllerLayoutGuide type="bottom" id="GZK-yj-HX1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="dDB-ax-bN7">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="599"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="tqh-tH-Prs">
