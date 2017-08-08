@@ -1,3 +1,5 @@
+
+
 //  MIT License
 
 //  Copyright (c) 2017 Haik Aslanyan
@@ -26,7 +28,7 @@ import Firebase
 import AlamofireImage
 import Photos
 
-class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,  UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,  UINavigationControllerDelegate, UIImagePickerControllerDelegate, FindUpeeViewControllerDelegate {
     
     //MARK: Properties
     @IBOutlet var inputBar: UIView!
@@ -48,7 +50,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     let imagePicker = UIImagePickerController()
     var currentUser = User.current
     var selectedUser: User?
-    var eatupId: String?
+    var eatup: EatUp?
+    
     
     
     //MARK: Methods
@@ -67,7 +70,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //Downloads messages
     func fetchData() {
-        Message.downloadAllMessages(forUserID: (currentUser?.id!)!, eatUpID: eatupId!, completion: {[weak weakSelf = self] (message) in
+        Message.downloadAllMessages(forUserID: (currentUser?.id!)!, eatUpID: (eatup?.id)!, completion: {[weak weakSelf = self] (message) in
             weakSelf?.items.append(message)
             weakSelf?.items.sort{ $0.timestamp < $1.timestamp }
             DispatchQueue.main.async {
@@ -87,7 +90,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func composeMessage(type: MessageType, content: Any)  {
         let message = Message.init(type: type, content: content, owner: .sender, timestamp: Int(Date().timeIntervalSince1970))
-        Message.send(message: message, toID: (selectedUser?.id)!, eatUpID: eatupId!, completion: {(_) in
+        Message.send(message: message, toID: (selectedUser?.id)!, eatUpID: (eatup?.id)!, completion: {(_) in
         })
     } 
     
@@ -192,6 +195,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                         }
                     })
                 }
+            case .actionBubble:
+                cell.message.text = self.items[indexPath.row].content as! String
             }
             return cell
         case .sender:
@@ -215,10 +220,36 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                         }
                     })
                 }
+            case .actionBubble:
+                cell.message.text = self.items[indexPath.row].content as! String
+                cell.actionButton.isHidden = false
+                if cell.message.text == "Where are you standing?" {
+                    cell.actionButton.setTitle("🕺", for: .normal)
+                    cell.actionButton.addTarget(self, action: #selector(ChatViewController.onWhereStand), for: .touchUpInside)
+                }
+                else if cell.message.text == "What do you see?" {
+                    cell.actionButton.setTitle("👀", for: .normal)
+                    cell.actionButton.addTarget(self, action: #selector(ChatViewController.onWhatSee), for: .touchUpInside)
+                }
+                
             }
             return cell
             }
         }
+    
+    // MARK: Action bubble action functions
+    func onWhereStand() {
+        self.performSegue(withIdentifier: "chatToLocationSegue", sender: nil)
+    }
+    
+    func onWhatSee() {
+        let status = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+        if (status == .authorized || status == .notDetermined) {
+            self.imagePicker.sourceType = .camera
+            self.imagePicker.allowsEditing = false
+            self.present(self.imagePicker, animated: true, completion: nil)
+        }
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.inputTextField.resignFirstResponder()
@@ -246,6 +277,21 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.composeMessage(type: .photo, content: pickedImage)
         }
         picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func didActionBubble(content: String?) {
+        if let content = content {
+            composeMessage(type: .actionBubble, content: content)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "chatToLocationSegue" {
+            let ShareLocationViewController = segue.destination as! ShareLocationViewController
+            ShareLocationViewController.selectedUser = selectedUser
+            ShareLocationViewController.eatupPlace = eatup?.place
+            
+        }
     }
     
     //MARK: ViewController lifecycle

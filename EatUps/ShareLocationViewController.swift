@@ -9,15 +9,14 @@
 import UIKit
 import CoreLocation
 import Firebase
+import GoogleMaps
 
 class ShareLocationViewController: UINavigationController, CLLocationManagerDelegate {
     
     var currentUser = User.current
     var selectedUser: User?
     var eatupPlace: String?
-    var placeLocation = CLLocation()
-    var yourLocation = CLLocation()
-    var myLocation = CLLocation()
+    var markersInfo = [String: Array<Any>]()
     
     var ref = Database.database().reference()
     var databaseHandle: DatabaseHandle!
@@ -26,24 +25,66 @@ class ShareLocationViewController: UINavigationController, CLLocationManagerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        markersSetUp { (success) in
+            if success == true {
+                
+                // Sets up the map view
+                let placeLocation = self.markersInfo[self.eatupPlace!] as? CLLocationCoordinate2D
+                let camera = GMSCameraPosition.camera(withLatitude: (placeLocation?.latitude)!, longitude: (placeLocation?.longitude)!, zoom: 15)
+                let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
+                self.view = mapView
+                
+                for (name, info) in self.markersInfo {
+                    let location = info[0]
+                    let pic = info[1]
+                    let marker = GMSMarker()
+                    marker.position = location as! CLLocationCoordinate2D
+                    marker.title = name
+                    marker.icon = pic as! UIImage 
+                    marker.snippet = "Facebook University"
+                    marker.map = mapView
+                }
+            }
+        }
+
+        
+    }
+    
+    // MARK: Loading information for markers
+    func markersSetUp(completion: @escaping(Bool) -> ()) {
         // Gets location of the eatUp place
         APIManager.shared.getPlaceLocation(place: eatupPlace!) { (success: Bool, placeLocation: CLLocation) in
             if success == true {
-                self.placeLocation = placeLocation
+                let placeLocation = placeLocation.coordinate
+                self.ref.child("orgs/\(self.currentUser?.org_id)/emojis/\(self.eatupPlace)").observeSingleEvent(of: .value, with: { (snapshot) in
+                    if let placeEmoji = snapshot.value as? String {
+                        let placeEmojiPic = UIImage.init(emoji: placeEmoji, size: 30)
+                        self.markersInfo[self.eatupPlace!] = [placeLocation, placeEmojiPic]
+                    }
+                })
+    
             }
         }
         
         // Gets location of the other person
-        ref.child("users/\(selectedUser?.id)/location").observeSingleEvent(of: .value, with: { (snapshot) in
-            if let yourLocationString = snapshot.value as? String {
-                self.yourLocation = EatUp.stringToCLLocation(locationString: yourLocationString)
+        if let yourLocationString = selectedUser?.dictionary?["location"] {
+            let yourLocation = (EatUp.stringToCLLocation(locationString: yourLocationString as! String)).coordinate
+            if let yourPic = selectedUser?.dictionary?["profilePhotoURL"] {
+                self.markersInfo[User.firstName(name: (self.selectedUser?.name)!)] = [yourLocation, yourPic]
             }
-        })
+        }
+        
         
         // Gets own location
         locationManager = CLLocationManager()
         getLocation()
         
+        if markersInfo.count == 3 {
+            completion(true)
+        }
+        else {
+            completion(false)
+        }
     }
     
     // MARK: Location manager methods
@@ -74,9 +115,11 @@ class ShareLocationViewController: UINavigationController, CLLocationManagerDele
         if let user = user {
             let id = user.uid
             self.ref.child("users/\(id)/location").setValue(myLocationString)
-            myLocation = EatUp.stringToCLLocation(locationString: myLocationString)
+            let myLocation = (EatUp.stringToCLLocation(locationString: myLocationString)).coordinate
+            if let myPic = currentUser?.dictionary?["profilePhotoURL"] {
+                self.markersInfo[User.firstName(name: (self.currentUser?.name)!)] = [myLocation, myPic]
+            }
         }
-        
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

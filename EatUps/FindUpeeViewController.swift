@@ -10,15 +10,23 @@ import UIKit
 import Firebase
 import ChameleonFramework
 
-class FindUpeeViewController: UIViewController {
+protocol FindUpeeViewControllerDelegate: class {
+    func didActionBubble(content: String?)
+}
 
+class FindUpeeViewController: UIViewController {
+    
+    weak var delegate: FindUpeeViewControllerDelegate?
     @IBOutlet weak var profilePhotoView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    
+    @IBOutlet weak var onWhereStand: UIButton!
+    @IBOutlet weak var onWhatSee: UIButton!
     
     var selectedUser: User?
     
     var eatup: EatUp?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,19 +36,19 @@ class FindUpeeViewController: UIViewController {
         
         if selectedUser == nil {
             Database.database().reference().child("eatups").child((eatup?.id!)!).child("inviter").observe(.value, with: { (snapshot) in
-                    let inviter = snapshot.value as! String
+                let inviter = snapshot.value as! String
                 APIManager.shared.getUser(uid: inviter) { (success, inviter) in
                     if success == true {
                         self.selectedUser = inviter
                         self.customizeView()
                     }
                 }
-                })
+            })
         }
         else {
             customizeView()
         }
-
+        
         // Do any additional setup after loading the view.
     }
     
@@ -64,7 +72,7 @@ class FindUpeeViewController: UIViewController {
                     let conversationKey = eatupInfo["conversation"] as! String
                     let ref = Database.database().reference().child("conversations")
                     ref.child(conversationKey).removeValue()
-            }
+                }
             })
         }
     }
@@ -74,11 +82,34 @@ class FindUpeeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func onWhereStand(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "findToChatSegue", sender: UIButton())
+    }
+    
+    @IBAction func onWhatSee(_ sender: Any) {
+        self.performSegue(withIdentifier: "findToChatSegue", sender: UIButton())
+    }
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "findToChatSegue" {
+<<<<<<< HEAD
             let chatViewController = segue.destination as! ChatViewController
             chatViewController.selectedUser = selectedUser
             chatViewController.eatupId = eatup?.id
+=======
+            let ChatViewController = segue.destination as! ChatViewController
+            ChatViewController.selectedUser = selectedUser
+            ChatViewController.eatup = eatup
+            if onWhereStand.isTouchInside == true {
+                self.delegate = ChatViewController
+                self.delegate?.didActionBubble(content: "Where are you standing?")
+            }
+            else if onWhatSee.isTouchInside == true {
+                self.delegate = ChatViewController
+                self.delegate?.didActionBubble(content: "What do you see?")
+            }
+>>>>>>> origin/master
         }
         else if segue.identifier == "findToLocationSegue" {
             let shareLocationViewController = segue.destination as! ShareLocationViewController
@@ -105,16 +136,16 @@ class FindUpeeViewController: UIViewController {
         }
     }
     
-
-
+    
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

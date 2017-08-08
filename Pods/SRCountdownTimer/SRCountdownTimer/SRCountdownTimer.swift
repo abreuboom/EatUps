@@ -183,7 +183,11 @@ public class SRCountdownTimer: UIView {
         self.currentCounterValue = 0
         delegate?.timerDidEnd?()
         timer?.invalidate()
-        
-        
     }
+    
+    public func dismiss() {
+        timer?.invalidate()
+    }
+    
+    
 }

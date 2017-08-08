@@ -52,6 +52,8 @@ class Message {
                             switch messageType {
                             case "photo":
                                 type = .photo
+                            case "actionBubble":
+                                type = .actionBubble
                             default: break
                             }
                             let content = receivedMessage["content"] as! String
@@ -78,7 +80,7 @@ class Message {
             URLSession.shared.dataTask(with: imageURL!, completionHandler: { (data, response, error) in
                 if error == nil {
                     self.image = UIImage.init(data: data!)
-                    completion(true, indexpathRow)
+                     completion(true, indexpathRow)
                 }
             }).resume()
         }
@@ -103,6 +105,11 @@ class Message {
                 let values = ["type": "text", "content": message.content, "fromID": currentUserID, "toID": toID, "timestamp": message.timestamp]
                 Message.uploadMessage(withValues: values, toID: toID, eatUpID: eatUpID, completion: { (status) in
                 completion(status)
+                })
+            case .actionBubble:
+                let values = ["type": "actionBubble", "content": message.content, "fromID": currentUserID, "toID": toID, "timestamp": message.timestamp]
+                Message.uploadMessage(withValues: values, toID: toID, eatUpID: eatUpID, completion: { (status) in
+                    completion(status)
                 })
             }
         }
