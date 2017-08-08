@@ -33,6 +33,14 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     var emojis: [String] = []
     var userCountIndex: [Int] = []
     
+    struct MyDataStruct
+    {
+        var place1: String = ""
+        var emoji1: String = ""
+    }
+    
+    var myData = [MyDataStruct]()
+    
     
     //create an array to update as we filter through the locations to eat
     var filteredPlaces: [String] = []
@@ -76,6 +84,9 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
                 self.places = placesData
                 self.emojis = emojisData
                 self.filteredPlaces = self.places
+                for i in 0...self.places.count{
+                    self.myData.append(MyDataStruct(place1: self.places[i], emoji1: self.emojis[i]))
+                }
                 self.locationsTableView.reloadData()
                 
                 
@@ -165,7 +176,6 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     // This method updates filteredData based on the text in the Search Box
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         // When there is no text, filteredData is the same as the original data. For each item, return true if the item should be included and false if the
-        
         filteredPlaces = searchText.isEmpty ? places : places.filter { (item: String) -> Bool in
             // If dataItem matches the searchText, return true to include it
             return item.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
