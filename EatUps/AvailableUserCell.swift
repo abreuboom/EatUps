@@ -21,7 +21,7 @@ class AvailableUserCell: UICollectionViewCell {
             cardView.layer.cornerRadius = 25
             cardView.dropShadow()
             
-            var firstName = User.firstName(name: user.name!)
+            let firstName = User.firstName(name: user.name!)
             
             nameLabel.text = firstName
             if let url = user.profilePhotoUrl {

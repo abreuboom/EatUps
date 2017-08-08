@@ -44,10 +44,12 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell", for: indexPath) as! ProfileCell
+            cell.cardView.dropShadow()
             return cell
         }
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "EatupCell", for: indexPath) as! EatUpCell
+            cell.cardView.dropShadow()
             if eatups.count != 0  {
                 cell.eatup = eatups[indexPath.row - 1]
             }

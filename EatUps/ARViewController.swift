@@ -17,58 +17,37 @@ class ARViewController: UIViewController {
     var sceneLocationView = SceneLocationView()
     
     var eatup: EatUp?
+    var userPhoto: UIImage?
+    var userId: String?
+    
+    override func viewWillAppear(_ animated: Bool) {
+        sceneLocationView.run()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        sceneLocationView.run()
-        view.addSubview(sceneLocationView)
+        APIManager.shared.getUserLocation(userId: userId!, completion: { (success, location) in
+            if success == true {
+                let lat = location.coordinate.latitude
+                let lon = location.coordinate.longitude
+                
+                //Create pin for the other user's location and place it in AR
+                let pinCoordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+                let pinLocation = CLLocation(coordinate: pinCoordinate, altitude: 236)
+                let pinImage = self.userPhoto?.af_imageRoundedIntoCircle()
+                let pinLocationNode = LocationAnnotationNode(location: pinLocation, image: pinImage!)
+                self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: pinLocationNode)
+                self.view.addSubview(self.sceneLocationView)
+            }
+        })
         
-        if eatup?.invitee == User.current?.id {
-            APIManager.shared.getUserLocation(userId: (eatup?.inviter)!, completion: { (success, location) in
-                if success == true {
-                    let lat = location.coordinate.latitude
-                    let lon = location.coordinate.longitude
-                    
-                    //Currently set to Canary Wharf
-                    let pinCoordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
-                    let pinLocation = CLLocation(coordinate: pinCoordinate, altitude: 236)
-                    APIManager.shared.getUser(uid: (self.eatup?.inviter)!, completion: { (getUserBool, user) in
-                        if getUserBool == true {
-                            if let  mediaUrl = user.profilePhotoUrl {
-                                request(mediaUrl, method: .get).responseImage(completionHandler: { (responseImage) in
-                                    guard let userImage = responseImage.result.value else {
-                                        // Handle error
-                                        return
-                                    }
-                                    
-                                    let pinImage = userImage.af_imageRoundedIntoCircle()
-                                    
-                                    let pinLocationNode = LocationAnnotationNode(location: pinLocation, image: pinImage)
-                                    self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: pinLocationNode)
-                                })
-                            }
-                        }
-                    })
-                    
-                }
-            })
-        }
-        else {
-            APIManager.shared.getUserLocation(userId: (eatup?.invitee)!, completion: { (success, location) in
-                if success == true {
-                    let lat = location.coordinate.latitude
-                    let lon = location.coordinate.longitude
-                    
-                    //Currently set to Canary Wharf
-                    let pinCoordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
-                    let pinLocation = CLLocation(coordinate: pinCoordinate, altitude: 236)
-                    let pinImage = UIImage(named: "pin")!
-                    let pinLocationNode = LocationAnnotationNode(location: pinLocation, image: pinImage)
-                    self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: pinLocationNode)
-                }
-            })
-        }
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        sceneLocationView.pause()
+        sceneLocationView.removeFromSuperview()
     }
     
     override func viewDidLayoutSubviews() {

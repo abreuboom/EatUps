@@ -10,8 +10,7 @@
 #endif
 #endif
 
-#import "PKHUD.h"
 
-FOUNDATION_EXPORT double PKHUDVersionNumber;
-FOUNDATION_EXPORT const unsigned char PKHUDVersionString[];
+FOUNDATION_EXPORT double DotsLoadingVersionNumber;
+FOUNDATION_EXPORT const unsigned char DotsLoadingVersionString[];
 

@@ -28,7 +28,6 @@ target 'EatUps' do
   pod 'AlamofireImage', '~> 3.1'
   pod 'BouncyLayout'
   pod 'DZNEmptyDataSet'
-  pod 'PKHUD', '~> 4.0'
   pod 'ChameleonFramework/Swift'
   pod 'SRCountdownTimer'
   pod 'EasyAnimation'

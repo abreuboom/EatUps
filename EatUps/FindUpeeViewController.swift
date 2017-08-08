@@ -95,6 +95,8 @@ class FindUpeeViewController: UIViewController {
             if #available(iOS 11.0, *) {
                 let arViewController = segue.destination as! ARViewController
                 arViewController.eatup = eatup
+                arViewController.userPhoto = profilePhotoView.image
+                arViewController.userId = selectedUser?.id
             }
         }
         else if segue.identifier == "mapSegue" {
