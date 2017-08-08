@@ -33,16 +33,7 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     var emojis: [String] = []
     var userCountIndex: [Int] = []
     
-    struct MyDataStruct
-    {
-        var place1: String = ""
-        var emoji1: String = ""
-    }
-    
-    var myData = [MyDataStruct]()
-    
-    
-    //create an array to update as we filter through the locations to eat
+       //create an array to update as we filter through the locations to eat
     var filteredPlaces: [String] = []
     
     override func viewDidLoad() {
@@ -84,9 +75,6 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
                 self.places = placesData
                 self.emojis = emojisData
                 self.filteredPlaces = self.places
-                for i in 0...self.places.count{
-                    self.myData.append(MyDataStruct(place1: self.places[i], emoji1: self.emojis[i]))
-                }
                 self.locationsTableView.reloadData()
                 
                 
