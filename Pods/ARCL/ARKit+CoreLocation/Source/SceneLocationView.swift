@@ -184,7 +184,7 @@ public class SceneLocationView: ARSCNView, ARSCNViewDelegate {
     }
     
     ///Adds a scene location estimate based on current time, camera position and location from location manager
-    fileprivate func addSceneLocationEstimate(location: CLLocation) {
+    internal func addSceneLocationEstimate(location: CLLocation) {
         if let position = currentScenePosition() {
             let sceneLocationEstimate = SceneLocationEstimate(location: location, position: position)
             self.sceneLocationEstimates.append(sceneLocationEstimate)
@@ -469,14 +469,13 @@ public class SceneLocationView: ARSCNView, ARSCNViewDelegate {
     }
     
     public func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
-        switch camera.trackingState {
-        case .limited(.insufficientFeatures):
+        if case ARCamera.TrackingState.limited(.insufficientFeatures) = camera.trackingState {
             print("camera did change tracking state: limited, insufficient features")
-        case .limited(.excessiveMotion):
+        } else if case ARCamera.TrackingState.limited(.excessiveMotion) = camera.trackingState {
             print("camera did change tracking state: limited, excessive motion")
-        case .normal:
+        } else if case ARCamera.TrackingState.normal = camera.trackingState {
             print("camera did change tracking state: normal")
-        case .notAvailable:
+        } else if case ARCamera.TrackingState.notAvailable = camera.trackingState {
             print("camera did change tracking state: not available")
         }
     }
@@ -485,7 +484,7 @@ public class SceneLocationView: ARSCNView, ARSCNViewDelegate {
 //MARK: LocationManager
 extension SceneLocationView: LocationManagerDelegate {
     func locationManagerDidUpdateLocation(_ locationManager: LocationManager, location: CLLocation) {
-        addSceneLocationEstimate(location: location)
+        self.addSceneLocationEstimate(location: location)
     }
     
     func locationManagerDidUpdateHeading(_ locationManager: LocationManager, heading: CLLocationDirection, accuracy: CLLocationAccuracy) {

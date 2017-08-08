@@ -76,20 +76,30 @@ class FindUpeeViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "findToChatSegue" {
-            let ChatViewController = segue.destination as! ChatViewController
-            ChatViewController.selectedUser = selectedUser
-            ChatViewController.eatupId = eatup?.id
+            let chatViewController = segue.destination as! ChatViewController
+            chatViewController.selectedUser = selectedUser
+            chatViewController.eatupId = eatup?.id
         }
         else if segue.identifier == "findToLocationSegue" {
-            let ShareLocationViewController = segue.destination as! ShareLocationViewController
-            ShareLocationViewController.selectedUser = selectedUser
-            ShareLocationViewController.eatupPlace = eatup?.place
+            let shareLocationViewController = segue.destination as! ShareLocationViewController
+            shareLocationViewController.selectedUser = selectedUser
+            shareLocationViewController.eatupPlace = eatup?.place
             
         }
         else if segue.identifier == "findToRatingSegue" {
-            let RatingViewController = segue.destination as! RatingViewController
-            RatingViewController.selectedUser = selectedUser
-            RatingViewController.eatupId = eatup?.id
+            let ratingViewController = segue.destination as! RatingViewController
+            ratingViewController.selectedUser = selectedUser
+            ratingViewController.eatupId = eatup?.id
+        }
+        else if segue.identifier == "findToARSegue" {
+            if #available(iOS 11.0, *) {
+                let arViewController = segue.destination as! ARViewController
+                arViewController.eatup = eatup
+            }
+        }
+        else if segue.identifier == "mapSegue" {
+            let mapViewController = segue.destination as! ViewController
+            mapViewController.eatup = eatup
         }
     }
     

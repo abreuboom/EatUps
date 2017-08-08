@@ -230,34 +230,16 @@ class APIManager: SessionManager {
         }
     }
     
-    //    func getUsersCount(places: [String], completion: @escaping (Bool, [Int]) -> ()) {
-    //        var userCounts: [Int] = []
-    //        for i in 0...places.count-1 {
-    //            let place = places[i]
-    //            var availableUsers: [User] = []
-    //            let uid = User.current?.id ?? ""
-    //
-    //            // Populating collection view with available users
-    //            APIManager.shared.getAvailableUsers(place: place) { (success, users) in
-    //                if success == true {
-    //                    print(
-    //                    for user in users {
-    //                        // Does not add self and other users into user feed view
-    //                        if (user.id == uid || availableUsers.contains(where: { (storedUser) -> Bool in
-    //                            return storedUser.id == user.id
-    //                        })) != true {
-    //                            availableUsers.append(user)
-    //                        }
-    //                    }
-    //                    userCounts.append(availableUsers.count)
-    //                    if i == places.count-1 {
-    //                        completion(true, userCounts)
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
-    
+    func getUserLocation(userId: String, completion: @escaping (Bool, CLLocation) -> ()) {
+        ref.child("users/\(userId)/location").observeSingleEvent(of: .value, with: { (snapshot) in
+            if let data = snapshot.value as? String {
+                let location = EatUp.stringToCLLocation(locationString: data)
+                if location != nil {
+                    completion(true, location)
+                }
+            }
+        })
+    }
     
     func containsUser(arr: [User], targetUser: User) -> Bool {
         for user in arr {
