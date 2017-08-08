@@ -1057,11 +1057,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="30" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="63g-z6-8fv">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ohw-8d-stc" userLabel="Eatup At Parent">
+                                <rect key="frame" x="0.0" y="64" width="375" height="60"/>
                                 <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="separatorColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="sectionIndexBackgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="dIR-rF-GRR"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="30" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="63g-z6-8fv">
+                                <rect key="frame" x="0.0" y="124" width="375" height="543"/>
+                                <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="0.034380351027397262" colorSpace="calibratedRGB"/>
+                                <color key="separatorColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="0.0" colorSpace="calibratedRGB"/>
+                                <color key="sectionIndexBackgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Sender" id="gnU-Te-31e" customClass="SenderCell" customModule="EatUps" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="30"/>
@@ -1100,6 +1107,7 @@
                                                     <state key="normal" title="action"/>
                                                 </button>
                                             </subviews>
+                                            <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="0.0" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstItem="O2X-cV-qsY" firstAttribute="centerY" secondItem="rhC-nl-zbk" secondAttribute="centerY" id="1qe-cO-2Ux"/>
                                                 <constraint firstItem="YOP-Bk-Too" firstAttribute="centerX" secondItem="rhC-nl-zbk" secondAttribute="centerX" id="2nX-kt-AKQ"/>
@@ -1114,6 +1122,7 @@
                                                 <constraint firstItem="YOP-Bk-Too" firstAttribute="leading" secondItem="7B4-p2-5eB" secondAttribute="trailing" constant="10" id="gA2-Vi-mpH"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="0.0" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="actionButton" destination="O2X-cV-qsY" id="P6f-bi-K7i"/>
                                             <outlet property="message" destination="rhC-nl-zbk" id="CFJ-m8-jVs"/>
@@ -1147,6 +1156,7 @@
                                                     <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
                                                 </textView>
                                             </subviews>
+                                            <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="0.0" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstItem="u8E-zI-QTu" firstAttribute="height" secondItem="YH4-WE-7tJ" secondAttribute="height" id="85K-uS-tfM"/>
                                                 <constraint firstItem="u8E-zI-QTu" firstAttribute="centerY" secondItem="YH4-WE-7tJ" secondAttribute="centerY" id="CkX-5f-qOs"/>
@@ -1157,6 +1167,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="u8E-zI-QTu" secondAttribute="trailing" constant="15" id="t58-Qc-7AB"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="0.0" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="message" destination="YH4-WE-7tJ" id="6cg-Ir-inT"/>
                                             <outlet property="messageBackground" destination="u8E-zI-QTu" id="FEr-xZ-UTw"/>
@@ -1173,9 +1184,12 @@
                         <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Rge-Bg-uLv" firstAttribute="top" secondItem="63g-z6-8fv" secondAttribute="bottom" id="91C-bd-JkB"/>
-                            <constraint firstItem="63g-z6-8fv" firstAttribute="top" secondItem="NKK-mD-R3t" secondAttribute="top" id="PBv-gF-Htz"/>
+                            <constraint firstAttribute="trailing" secondItem="Ohw-8d-stc" secondAttribute="trailing" id="SQa-2E-FbU"/>
                             <constraint firstAttribute="trailing" secondItem="63g-z6-8fv" secondAttribute="trailing" id="a4p-xt-09S"/>
+                            <constraint firstItem="Ohw-8d-stc" firstAttribute="leading" secondItem="NKK-mD-R3t" secondAttribute="leading" id="ah1-dX-Gx1"/>
                             <constraint firstItem="63g-z6-8fv" firstAttribute="leading" secondItem="NKK-mD-R3t" secondAttribute="leading" id="ht7-Cu-Kce"/>
+                            <constraint firstItem="63g-z6-8fv" firstAttribute="top" secondItem="Ohw-8d-stc" secondAttribute="bottom" id="hzN-zH-D2I"/>
+                            <constraint firstItem="Ohw-8d-stc" firstAttribute="top" secondItem="GlD-YP-yH6" secondAttribute="bottom" id="yDI-ED-dfr"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="MYp-3b-cfK">
@@ -1188,6 +1202,8 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="bottomConstraint" destination="mlL-Lp-p8d" id="lnV-wO-cke"/>
+                        <outlet property="eatupAtParent" destination="Ohw-8d-stc" id="CVk-bD-ZS1"/>
+                        <outlet property="eatupAtView" destination="GMs-eh-evW" id="SJ1-KX-ayf"/>
                         <outlet property="inputBar" destination="yrB-tg-7ie" id="SxF-dB-hSl"/>
                         <outlet property="inputTextField" destination="E3c-YN-FY1" id="eHm-LH-hM8"/>
                         <outlet property="tableView" destination="63g-z6-8fv" id="vTj-RX-L6l"/>
@@ -1318,8 +1334,32 @@
                     </constraints>
                 </view>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GWv-GW-cPY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view autoresizesSubviews="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" id="GMs-eh-evW" customClass="EatupAtView" customModule="EatUps" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="101" height="37.5"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" placeholderIntrinsicWidth="69" placeholderIntrinsicHeight="21" text="EatUp @" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d5O-Za-Zv5" customClass="ActiveLabel" customModule="ActiveLabel">
+                            <rect key="frame" x="15.5" y="8" width="69" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="69" id="oR7-dm-L3X"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="d5O-Za-Zv5" firstAttribute="top" secondItem="GMs-eh-evW" secondAttribute="top" constant="8" id="M9g-vR-4Il"/>
+                        <constraint firstItem="d5O-Za-Zv5" firstAttribute="centerX" secondItem="GMs-eh-evW" secondAttribute="centerX" id="Mvy-vf-As0"/>
+                        <constraint firstAttribute="bottom" secondItem="d5O-Za-Zv5" secondAttribute="bottom" constant="8" id="abO-H7-Na6"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="eatupAtLabel" destination="d5O-Za-Zv5" id="OPt-hV-8j7"/>
+                    </connections>
+                </view>
             </objects>
-            <point key="canvasLocation" x="2217" y="2995"/>
+            <point key="canvasLocation" x="2216.8000000000002" y="2994.1529235382313"/>
         </scene>
         <!--Share Location View Controller-->
         <scene sceneID="YZa-oV-x2m">
@@ -1463,7 +1503,7 @@
         <image name="send" width="32" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fQv-Qi-FeE"/>
+        <segue reference="jjh-46-bM1"/>
         <segue reference="VeH-e4-WFE"/>
         <segue reference="F5U-Z6-dvR"/>
         <segue reference="wDl-C8-pxc"/>

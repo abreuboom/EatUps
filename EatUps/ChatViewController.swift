@@ -27,6 +27,7 @@ import UIKit
 import Firebase
 import AlamofireImage
 import Photos
+import ChameleonFramework
 
 class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,  UINavigationControllerDelegate, UIImagePickerControllerDelegate{
     
@@ -52,17 +53,36 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     var selectedUser: User?
     var eatup: EatUp?
     
+    @IBOutlet weak var eatupAtParent: UIView!
+    @IBOutlet var eatupAtView: EatupAtView!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        eatupAtView.layer.cornerRadius = eatupAtView.frame.width/5
+        eatupAtView.dropShadow()
+        eatupAtView.center = eatupAtParent.center
+        
+        eatupAtView.place = eatup?.place
+        let size = eatupAtView.eatupAtLabel.sizeThatFits(self.view.bounds.size)
+        eatupAtView.eatupAtLabel.frame.size = size
+        eatupAtView.frame = CGRect.init(x: eatupAtParent.center.x - (eatupAtView.eatupAtLabel.bounds.size.width + 32)/2, y: eatupAtParent.center.y - eatupAtView.bounds.size.height/2, width: eatupAtView.eatupAtLabel.bounds.size.width + 32, height: eatupAtView.bounds.size.height)
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        eatupAtView.reset()
+        eatupAtView.removeFromSuperview()
+    }
     
     
     //MARK: Methods
     func customization() {
+        eatupAtParent.addSubview(eatupAtView)
         self.imagePicker.delegate = self
         self.tableView.estimatedRowHeight = self.barHeight
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.contentInset.bottom = self.barHeight
         self.tableView.scrollIndicatorInsets.bottom = self.barHeight
-        self.navigationItem.title = User.firstName(name: (self.selectedUser?.name)!)
-        self.navigationItem.setHidesBackButton(true, animated: false)
+        self.navigationController?.isNavigationBarHidden = true
         let icon = UIImage.init(named: "Done Button")?.withRenderingMode(.alwaysOriginal)
         let doneButton = UIBarButtonItem.init(image: icon!, style: .plain, target: self, action: #selector(doneButtonAction))
         self.navigationItem.rightBarButtonItem = doneButton
@@ -106,7 +126,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                 self.inputBar.layoutIfNeeded()
             }
         default:
-            self.bottomConstraint.constant = -50
+            self.bottomConstraint.constant = 50
             UIView.animate(withDuration: 0.3) {
                 self.inputBar.layoutIfNeeded()
             }
