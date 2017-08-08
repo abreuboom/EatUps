@@ -28,7 +28,7 @@ import Firebase
 import AlamofireImage
 import Photos
 
-class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,  UINavigationControllerDelegate, UIImagePickerControllerDelegate, FindUpeeViewControllerDelegate {
+class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,  UINavigationControllerDelegate, UIImagePickerControllerDelegate{
     
     //MARK: Properties
     @IBOutlet var inputBar: UIView!
@@ -63,14 +63,18 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView.scrollIndicatorInsets.bottom = self.barHeight
         self.navigationItem.title = User.firstName(name: (self.selectedUser?.name)!)
         self.navigationItem.setHidesBackButton(true, animated: false)
-        let icon = UIImage.init(named: "back")?.withRenderingMode(.alwaysOriginal)
-        let backButton = UIBarButtonItem.init(image: icon!, style: .plain, target: self, action: #selector(self.dismissSelf))
-        self.navigationItem.leftBarButtonItem = backButton
+        let icon = UIImage.init(named: "Done Button")?.withRenderingMode(.alwaysOriginal)
+        let doneButton = UIBarButtonItem.init(image: icon!, style: .plain, target: self, action: #selector(doneButtonAction))
+        self.navigationItem.rightBarButtonItem = doneButton
+    }
+    
+    func doneButtonAction () {
+        self.performSegue(withIdentifier: "chatToRatingSegue", sender: nil)
     }
     
     //Downloads messages
     func fetchData() {
-        Message.downloadAllMessages(forUserID: (currentUser?.id!)!, eatUpID: (eatup?.id)!, completion: {[weak weakSelf = self] (message) in
+        Message.downloadAllMessages(forUserID: (currentUser?.id)!, eatUpID: (eatup?.id)!, completion: {[weak weakSelf = self] (message) in
             weakSelf?.items.append(message)
             weakSelf?.items.sort{ $0.timestamp < $1.timestamp }
             DispatchQueue.main.async {
@@ -146,6 +150,15 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
     }
+    
+    @IBAction func askedWhereStand(_ sender: Any) {
+        didActionBubble(content: "Where are you standing?")
+    }
+    
+    @IBAction func askedWhatSee(_ sender: Any) {
+        didActionBubble(content: "What do you see?")
+    }
+    
     
     //MARK: NotificationCenter handlers
     func showKeyboard(notification: Notification) {
@@ -240,6 +253,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     // MARK: Action bubble action functions
     func onWhereStand() {
         self.performSegue(withIdentifier: "chatToLocationSegue", sender: nil)
+        composeMessage(type: .text, content: "Here's my location!")
     }
     
     func onWhatSee() {
@@ -290,7 +304,11 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             let ShareLocationViewController = segue.destination as! ShareLocationViewController
             ShareLocationViewController.selectedUser = selectedUser
             ShareLocationViewController.eatupPlace = eatup?.place
-            
+        }
+        else if segue.identifier == "chatToRatingSegue" {
+            let RatingViewController = segue.destination as! RatingViewController
+            RatingViewController.selectedUser = selectedUser
+            RatingViewController.eatupId = eatup?.id
         }
     }
     

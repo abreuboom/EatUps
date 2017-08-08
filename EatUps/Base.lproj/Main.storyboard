@@ -169,11 +169,11 @@
                         <viewControllerLayoutGuide type="bottom" id="Noi-vy-8T4"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ZP0-bb-ioQ">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="64" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RLN-yg-Jg8">
-                                <rect key="frame" x="0.0" y="60" width="375" height="543"/>
+                                <rect key="frame" x="0.0" y="80" width="375" height="587"/>
                                 <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" placeholder="Where would you like to eat?" id="XVv-Bk-ADJ">
@@ -235,7 +235,7 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="ciI-ka-ywu">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="60"/>
                                 <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="aT6-vS-aIs"/>
@@ -314,7 +314,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Z8E-ZJ-pLB"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="OnC-WZ-Pg5">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cJC-77-ZVD">
@@ -327,7 +327,7 @@
                                 <blurEffect style="light"/>
                             </visualEffectView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vKM-ow-wra" customClass="InviteView" customModule="EatUps" customModuleProvider="target">
-                                <rect key="frame" x="37" y="114" width="300" height="375"/>
+                                <rect key="frame" x="37" y="146" width="300" height="375"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="udj-Rw-F7N">
                                         <rect key="frame" x="8" y="152" width="284" height="24"/>
@@ -408,14 +408,14 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kPc-tQ-hm1">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="60"/>
                                 <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="KDp-XC-JXK"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="waO-2c-jJ7">
-                                <rect key="frame" x="0.0" y="60" width="375" height="543"/>
+                                <rect key="frame" x="0.0" y="80" width="375" height="587"/>
                                 <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Fga-Lg-jZG">
                                     <size key="itemSize" width="177" height="253"/>
@@ -529,7 +529,7 @@
                         <outlet property="eatupAtView" destination="UKy-hw-gOR" id="z47-y1-AB9"/>
                         <outlet property="inviteView" destination="vKM-ow-wra" id="IL6-7b-0Wa"/>
                         <segue destination="imY-7b-tui" kind="presentation" identifier="requestEatUpSegue" id="7Mk-zF-BLH"/>
-                        <segue destination="Z4f-0U-Ojy" kind="presentation" identifier="feedToFindSegue" id="fQv-Qi-FeE"/>
+                        <segue destination="Z4f-0U-Ojy" kind="presentation" identifier="feedToChatSegue" id="fQv-Qi-FeE"/>
                         <segue destination="ylc-1g-d3e" kind="show" identifier="profileSegue" id="lPp-3e-8ZK"/>
                     </connections>
                 </viewController>
@@ -909,108 +909,12 @@
                         <outlet property="nameLabel" destination="qWl-FA-WHQ" id="VmI-Wu-nFU"/>
                         <outlet property="profileImage" destination="Fm9-Xe-M5U" id="Qo4-sb-Bj1"/>
                         <outlet property="timer" destination="IYQ-QL-D0k" id="djf-gJ-LEh"/>
-                        <segue destination="Z4f-0U-Ojy" kind="show" identifier="pendingToFindSegue" id="jjh-46-bM1"/>
+                        <segue destination="Z4f-0U-Ojy" kind="show" identifier="pendingToChatSegue" id="jjh-46-bM1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sj8-wB-A9y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3008.8000000000002" y="929.68515742128943"/>
-        </scene>
-        <!--Find Upee View Controller-->
-        <scene sceneID="gJM-eO-c8w">
-            <objects>
-                <viewController id="WXc-wC-v7g" customClass="FindUpeeViewController" customModule="EatUps" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="IpL-f9-TFv"/>
-                        <viewControllerLayoutGuide type="bottom" id="biG-a9-TsC"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="bP0-nJ-PkN">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7kk-Zu-Rhg">
-                                <rect key="frame" x="123.5" y="120" width="128" height="128"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="7kk-Zu-Rhg" secondAttribute="height" multiplier="1:1" id="7xM-hj-k9K"/>
-                                    <constraint firstAttribute="width" constant="128" id="VZ8-62-K6z"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find name!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kIQ-9w-G5D">
-                                <rect key="frame" x="8" y="264" width="359" height="24"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                <color key="textColor" red="0.99019607843137258" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eN7-9Q-RNR">
-                                <rect key="frame" x="303" y="8" width="64" height="28"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="64" id="8cg-mV-4sz"/>
-                                    <constraint firstAttribute="width" secondItem="eN7-9Q-RNR" secondAttribute="height" multiplier="23:10" id="ZcZ-Xs-XUG"/>
-                                </constraints>
-                                <state key="normal" image="Done Button">
-                                    <color key="titleColor" red="0.99019607843137258" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="didFinishEatUp:" destination="WXc-wC-v7g" eventType="touchUpInside" id="5VD-fb-YVq"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XVC-b9-BKM">
-                                <rect key="frame" x="158" y="513" width="58" height="58"/>
-                                <state key="normal" image="Chat"/>
-                                <connections>
-                                    <segue destination="Sx2-x7-11q" kind="show" identifier="findToChatSegue" id="LUz-Md-ihZ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z6Z-QD-Dmg">
-                                <rect key="frame" x="158" y="444" width="59" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Location"/>
-                                <connections>
-                                    <segue destination="Hh3-R1-aMv" kind="show" identifier="findToLocationSegue" id="yBA-8s-DE1"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pph-qL-FZ0">
-                                <rect key="frame" x="16" y="352" width="170" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Where are you standing?"/>
-                                <connections>
-                                    <action selector="onWhereStand:" destination="WXc-wC-v7g" eventType="touchUpInside" id="Kpk-RM-bak"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K0U-QO-pHD">
-                                <rect key="frame" x="227" y="352" width="123" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="What do you see?"/>
-                                <connections>
-                                    <action selector="onWhatSee:" destination="WXc-wC-v7g" eventType="touchUpInside" id="LA6-Sx-dNm"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="biG-a9-TsC" firstAttribute="top" secondItem="XVC-b9-BKM" secondAttribute="bottom" constant="32" id="8wj-2d-MxH"/>
-                            <constraint firstItem="7kk-Zu-Rhg" firstAttribute="centerX" secondItem="bP0-nJ-PkN" secondAttribute="centerX" id="9vG-iN-ll0"/>
-                            <constraint firstAttribute="trailing" secondItem="eN7-9Q-RNR" secondAttribute="trailing" constant="8" id="BWa-2t-ww6"/>
-                            <constraint firstItem="7kk-Zu-Rhg" firstAttribute="top" secondItem="IpL-f9-TFv" secondAttribute="bottom" constant="120" id="C3O-59-qQm"/>
-                            <constraint firstItem="kIQ-9w-G5D" firstAttribute="leading" secondItem="bP0-nJ-PkN" secondAttribute="leading" constant="8" id="FJW-hX-Mcf"/>
-                            <constraint firstItem="XVC-b9-BKM" firstAttribute="centerX" secondItem="bP0-nJ-PkN" secondAttribute="centerX" id="WMZ-oG-CWW"/>
-                            <constraint firstAttribute="trailing" secondItem="kIQ-9w-G5D" secondAttribute="trailing" constant="8" id="a6f-g7-HGX"/>
-                            <constraint firstItem="kIQ-9w-G5D" firstAttribute="top" secondItem="7kk-Zu-Rhg" secondAttribute="bottom" constant="16" id="frg-RG-kGg"/>
-                            <constraint firstItem="eN7-9Q-RNR" firstAttribute="top" secondItem="IpL-f9-TFv" secondAttribute="bottom" constant="8" id="nf6-AF-XZY"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="4Al-bf-68V"/>
-                    <connections>
-                        <outlet property="nameLabel" destination="kIQ-9w-G5D" id="Xv6-hN-MEz"/>
-                        <outlet property="onWhatSee" destination="K0U-QO-pHD" id="0sS-Tx-GCN"/>
-                        <outlet property="onWhereStand" destination="pph-qL-FZ0" id="34z-g7-Dqg"/>
-                        <outlet property="profilePhotoView" destination="7kk-Zu-Rhg" id="xvi-Vd-eZX"/>
-                        <segue destination="lZU-V8-fg5" kind="show" identifier="findToRatingSegue" id="MyQ-Lc-VHl"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xVU-NK-2F3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3008.8000000000002" y="1950.6746626686659"/>
         </scene>
         <!--Rating View Controller-->
         <scene sceneID="SkZ-ns-b8S">
@@ -1021,11 +925,11 @@
                         <viewControllerLayoutGuide type="bottom" id="bHM-ja-8xW"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="29E-vj-1DT">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="64" translatesAutoresizingMaskIntoConstraints="NO" id="7p3-zy-Jme">
-                                <rect key="frame" x="97.5" y="513" width="180" height="58"/>
+                                <rect key="frame" x="97.5" y="577" width="180" height="58"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5J2-ji-82Y">
                                         <rect key="frame" x="0.0" y="0.0" width="58" height="58"/>
@@ -1050,14 +954,14 @@
                                 </subviews>
                             </stackView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XOh-dk-lHy">
-                                <rect key="frame" x="123.5" y="120" width="128" height="128"/>
+                                <rect key="frame" x="123.5" y="184" width="128" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="128" id="Arg-Y3-Cvl"/>
                                     <constraint firstAttribute="width" secondItem="XOh-dk-lHy" secondAttribute="height" multiplier="1:1" id="Nhl-B3-If4"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oMx-9B-fdc">
-                                <rect key="frame" x="303" y="8" width="64" height="28"/>
+                                <rect key="frame" x="303" y="72" width="64" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="64" id="EJx-W2-aGG"/>
                                     <constraint firstAttribute="width" secondItem="oMx-9B-fdc" secondAttribute="height" multiplier="23:10" id="osZ-ld-fne"/>
@@ -1070,19 +974,19 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xNj-Iz-H5n">
-                                <rect key="frame" x="8" y="264" width="359" height="24"/>
+                                <rect key="frame" x="8" y="328" width="359" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <color key="textColor" red="0.99019607843137258" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="highlightedColor" red="0.99019607843137258" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Would you eatup with them again?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3P3-eA-CMg">
-                                <rect key="frame" x="56" y="460.5" width="263" height="20.5"/>
+                                <rect key="frame" x="56" y="524.5" width="263" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How was your EatUp with" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="atD-to-JSu">
-                                <rect key="frame" x="8" y="64" width="359" height="20.5"/>
+                                <rect key="frame" x="8" y="128" width="359" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -1122,7 +1026,7 @@
             <objects>
                 <navigationController storyboardIdentifier="selectLocationNavigation" automaticallyAdjustsScrollViewInsets="NO" id="BfX-7S-Xg9" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Ld7-2N-ljz">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="Ld7-2N-ljz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.9171485305" green="0.31313836569999998" blue="0.41574707630000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1274,6 +1178,13 @@
                             <constraint firstItem="63g-z6-8fv" firstAttribute="leading" secondItem="NKK-mD-R3t" secondAttribute="leading" id="ht7-Cu-Kce"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="MYp-3b-cfK">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="oQ2-eY-Yxv">
+                            <connections>
+                                <segue destination="lZU-V8-fg5" kind="show" identifier="chatToRatingSegue" id="GY4-xb-RTv"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="bottomConstraint" destination="mlL-Lp-p8d" id="lnV-wO-cke"/>
@@ -1408,7 +1319,7 @@
                 </view>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GWv-GW-cPY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3009" y="2731"/>
+            <point key="canvasLocation" x="2217" y="2995"/>
         </scene>
         <!--Share Location View Controller-->
         <scene sceneID="YZa-oV-x2m">
@@ -1446,7 +1357,7 @@
                         <viewControllerLayoutGuide type="bottom" id="EeY-Ln-tpi"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="IV1-pR-BOS">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1457,14 +1368,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yg9-ki-7fg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1077.5999999999999" y="1771.6641679160421"/>
+            <point key="canvasLocation" x="950" y="2063"/>
         </scene>
         <!--Navigation View Controller-->
         <scene sceneID="0H2-fo-zIA">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Z4f-0U-Ojy" customClass="NavigationViewController" customModule="EatUps" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="5PX-eG-Qj8">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="5PX-eG-Qj8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.99607843139999996" green="0.2470588235" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1476,7 +1387,7 @@
                         <outlet property="previewImageView" destination="EbK-YE-iDI" id="18N-XB-3Gn"/>
                         <outlet property="previewView" destination="Pb6-wi-WHu" id="bjH-au-92N"/>
                         <outlet property="scrollView" destination="hnt-Ir-7A9" id="Map-gL-f4h"/>
-                        <segue destination="WXc-wC-v7g" kind="relationship" relationship="rootViewController" id="T9R-bG-Zwx"/>
+                        <segue destination="Sx2-x7-11q" kind="relationship" relationship="rootViewController" id="bgI-pX-8Gl"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TK3-PL-aJS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1534,14 +1445,12 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2025" y="1951"/>
+            <point key="canvasLocation" x="2218" y="1936"/>
         </scene>
     </scenes>
     <resources>
         <image name="Accept" width="58" height="58"/>
         <image name="Cancel" width="58" height="58"/>
-        <image name="Chat" width="58" height="58"/>
-        <image name="Done Button" width="138" height="60"/>
         <image name="EatUp Button" width="138" height="60"/>
         <image name="Reject" width="58" height="58"/>
         <image name="Skip" width="138" height="60"/>
@@ -1554,10 +1463,9 @@
         <image name="send" width="32" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TgL-QR-q1S"/>
-        <segue reference="osm-nG-bDa"/>
-        <segue reference="wDl-C8-pxc"/>
         <segue reference="fQv-Qi-FeE"/>
-        <segue reference="K12-z5-JqD"/>
+        <segue reference="VeH-e4-WFE"/>
+        <segue reference="F5U-Z6-dvR"/>
+        <segue reference="wDl-C8-pxc"/>
     </inferredMetricsTieBreakers>
 </document>

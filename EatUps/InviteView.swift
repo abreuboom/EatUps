@@ -28,7 +28,14 @@ class InviteView: UIView {
         let eatupId = eatup?.id ?? ""
         APIManager.shared.handleInvite(eatupId: eatupId, response: true, completion: { (success) in
             if success == true {
-                self.parent?.performSegue(withIdentifier: "feedToFindSegue", sender: nil)
+                if self.parent?.selectedUser == nil {
+                    APIManager.shared.setSelectedUserInFeed(currentEatup: (self.parent?.currentEatup!)!) {(success, inviter) in
+                        if success == true {
+                            self.parent?.selectedUser = inviter
+                            self.parent?.performSegue(withIdentifier: "feedToChatSegue", sender: nil)
+                        }
+                    }
+                }
             }
         })
     }
