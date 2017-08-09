@@ -57,9 +57,11 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     var selectedUser: User?
     var eatup: EatUp?
     let actionBubbles = ["📷", "🌁", "👀 What do you see?", "🕺 Where are you standing?"]
+//    let actionBubblesSizes = [(, "🌁", "👀 What do you see?", "🕺 Where are you standing?"]
     
     @IBOutlet weak var eatupAtParent: UIView!
     @IBOutlet var eatupAtView: EatupAtView!
+
     
     override func viewWillAppear(_ animated: Bool) {
         eatupAtView.layer.cornerRadius = eatupAtView.frame.width/5
@@ -85,16 +87,13 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         eatupAtParent.addSubview(eatupAtView)
         collectionView.delegate = self
         collectionView.dataSource = self
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .horizontal
-        collectionView.setCollectionViewLayout(flowLayout, animated: true)
+        
         self.imagePicker.delegate = self
         self.tableView.estimatedRowHeight = self.barHeight
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.contentInset.bottom = self.barHeight
         self.tableView.scrollIndicatorInsets.bottom = self.barHeight
         self.navigationController?.isNavigationBarHidden = true
-        doneButton.setImage(UIImage(named: "Done Button"), for: .normal)
         doneButton.setTarget(self, action: #selector(doneButtonAction), for: .touchUpInside)
     }
     
@@ -132,24 +131,29 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "actionBubbleCell", for: indexPath) as! ActionBubbleCell
         let buttonTitle = actionBubbles[indexPath.item]
         if buttonTitle == "📷" {
-            cell.actionBubbleButton.setBackgroundImage(UIImage(named: "Camera") , for: .normal)
+            cell.actionBubbleButton.setImage(UIImage(named: "Camera") , for: .normal)
             cell.actionBubbleButton.addTarget(self, action: #selector(selectCamera(_:)), for: .touchUpInside)
         }
         else if buttonTitle == "🌁" {
-            cell.actionBubbleButton.setBackgroundImage(UIImage(named: "Photos") , for: .normal)
+            cell.actionBubbleButton.setImage(UIImage(named: "Photos") , for: .normal)
             cell.actionBubbleButton.addTarget(self, action: #selector(selectGallery(_:)), for: .touchUpInside)
         }
         else if buttonTitle == "👀 What do you see?" {
-            cell.actionBubbleButton.setBackgroundImage(UIImage(named: "What See") , for: .normal)
+            cell.actionBubbleButton.setImage(UIImage(named: "see") , for: .normal)
             cell.actionBubbleButton.addTarget(self, action: #selector(askedWhatSee), for: .touchUpInside)
         }
         else if buttonTitle == "🕺 Where are you standing?" {
-            cell.actionBubbleButton.setBackgroundImage(UIImage(named: "Where stand") , for: .normal)
+            cell.actionBubbleButton.setImage(UIImage(named: "stand") , for: .normal)
             cell.actionBubbleButton.addTarget(self, action: #selector(askedWhereStand), for: .touchUpInside)
         }
         cell.actionBubbleButton.sizeToFit()
+    
         
         return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        return CGSize(width: 100, height: 50)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -250,6 +254,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             case .actionBubble:
                 cell.message.text = self.items[indexPath.row].content as! String
             case .actionResponse:
+                cell.actionButton.setTitle("🕺", for: .normal)
+                cell.actionButton.isHidden = false
                 cell.message.text = self.items[indexPath.row].content as! String
                 if cell.message.text == "Here's my location!" {
                     cell.actionButton.addTarget(self, action: #selector(onSendLocation), for: .touchUpInside)
@@ -289,6 +295,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                     cell.actionButton.addTarget(self, action: #selector(onWhatSee), for: .touchUpInside)
                 }
             case .actionResponse:
+                cell.actionButton.setTitle("🕺", for: .normal)
+                cell.actionButton.isHidden = false
                 cell.message.text = self.items[indexPath.row].content as! String
                 if cell.message.text == "Here's my location!" {
                     cell.actionButton.addTarget(self, action: #selector(onSendLocation), for: .touchUpInside)
@@ -313,7 +321,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func onSendLocation () {
-        self.performSegue(withIdentifier: "chatToLocationSegue", sender: nil)
+        self.performSegue(withIdentifier: "chatToMapSegue", sender: nil)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

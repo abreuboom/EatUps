@@ -38,6 +38,7 @@ class SenderCell: UITableViewCell {
         self.message.isHidden = false
         self.messageBackground.image = nil
         self.actionButton.isHidden = true
+        self.actionButton.removeAllTargets()
     }
     
     override func awakeFromNib() {
@@ -62,6 +63,7 @@ class ReceiverCell: UITableViewCell {
         self.message.isHidden = false
         self.messageBackground.image = nil
         self.actionButton.isHidden = true
+        self.actionButton.removeAllTargets()
     }
     
     override func awakeFromNib() {
