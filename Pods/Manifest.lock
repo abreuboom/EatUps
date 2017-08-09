@@ -3,6 +3,7 @@ PODS:
   - Alamofire (4.5.0)
   - AlamofireImage (3.2.0):
     - Alamofire (~> 4.1)
+  - ARCL (1.0)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
@@ -112,6 +113,7 @@ DEPENDENCIES:
   - ActiveLabel
   - Alamofire (~> 4.4)
   - AlamofireImage (~> 3.1)
+  - ARCL
   - BouncyLayout
   - ChameleonFramework/Swift
   - DateToolsSwift
@@ -139,6 +141,7 @@ SPEC CHECKSUMS:
   ActiveLabel: 68625f22775f51c31bb691ca8de20f1e5a3bc825
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
   AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
+  ARCL: 029b600f759b177e6a4a3d4c7cf2f11f4b9b291c
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   BouncyLayout: f91c6504437a61acd733404f55f75bd8154f5840
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
@@ -170,6 +173,6 @@ SPEC CHECKSUMS:
   SRCountdownTimer: 187458addb1e88cae62eb5aa57f48d7888f8c18c
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: 116eceb48a294a3726f13262243ebbf068a7943c
+PODFILE CHECKSUM: b83483ecde273304e847bf77836848996dc46fc7
 
 COCOAPODS: 1.2.1

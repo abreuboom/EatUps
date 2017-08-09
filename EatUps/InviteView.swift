@@ -24,7 +24,7 @@ class InviteView: UIView {
     var eatup: EatUp?
     var parent: UserFeedViewController?
 
-    @IBAction func acceptEatup(_ sender: UIButton) {
+    @IBAction func acceptEatup(_ sender: Any) {
         let eatupId = eatup?.id ?? ""
         APIManager.shared.handleInvite(eatupId: eatupId, response: true, completion: { (success) in
             if success == true {
@@ -40,7 +40,7 @@ class InviteView: UIView {
         })
     }
     
-    @IBAction func rejectEatup(_ sender: UIButton) {
+    @IBAction func rejectEatup(_ sender: Any) {
         let eatupId = eatup?.id ?? ""
         APIManager.shared.handleInvite(eatupId: eatupId, response: false, completion: { (success) in
             if success == true {
