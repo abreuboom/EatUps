@@ -230,34 +230,6 @@ class APIManager: SessionManager {
         }
     }
     
-    //    func getUsersCount(places: [String], completion: @escaping (Bool, [Int]) -> ()) {
-    //        var userCounts: [Int] = []
-    //        for i in 0...places.count-1 {
-    //            let place = places[i]
-    //            var availableUsers: [User] = []
-    //            let uid = User.current?.id ?? ""
-    //
-    //            // Populating collection view with available users
-    //            APIManager.shared.getAvailableUsers(place: place) { (success, users) in
-    //                if success == true {
-    //                    print(
-    //                    for user in users {
-    //                        // Does not add self and other users into user feed view
-    //                        if (user.id == uid || availableUsers.contains(where: { (storedUser) -> Bool in
-    //                            return storedUser.id == user.id
-    //                        })) != true {
-    //                            availableUsers.append(user)
-    //                        }
-    //                    }
-    //                    userCounts.append(availableUsers.count)
-    //                    if i == places.count-1 {
-    //                        completion(true, userCounts)
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
-    
     
     func containsUser(arr: [User], targetUser: User) -> Bool {
         for user in arr {
@@ -371,6 +343,18 @@ class APIManager: SessionManager {
                 })
             }
         }
+    }
+    
+    // Sets the selected user from an invite in the UserFeedVC
+    func setSelectedUserInFeed(currentEatup: EatUp, completion: @escaping (Bool, User) -> ()) {
+        ref.child("eatups").child((currentEatup.id!)).child("inviter").observeSingleEvent(of: .value, with: { (snapshot) in
+                let inviter = snapshot.value as! String
+                APIManager.shared.getUser(uid: inviter) { (success, inviter) in
+                    if success == true {
+                        completion(true, inviter)
+                    }
+                }
+            })
     }
     
     func setUpDatabaseHandleRating() {

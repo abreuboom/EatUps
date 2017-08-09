@@ -34,7 +34,7 @@ class PendingInviteViewController: UIViewController, SRCountdownTimerDelegate {
         
         APIManager.shared.checkResponse(selectedUser: selectedUser!, eatupId: (eatup?.id)!) { (success) in
             if success == true {
-                self.performSegue(withIdentifier: "pendingToFindSegue", sender: nil)
+                self.performSegue(withIdentifier: "pendingToChatSegue", sender: nil)
             }
             else {
                 self.dismiss(animated: true, completion: nil)
@@ -91,11 +91,11 @@ class PendingInviteViewController: UIViewController, SRCountdownTimerDelegate {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "pendingToFindSegue" {
+        if segue.identifier == "pendingToChatSegue" {
             let navigationViewController = segue.destination as! UINavigationController
-            let FindUpeeViewController = navigationViewController.viewControllers.first as! FindUpeeViewController
-            FindUpeeViewController.selectedUser = selectedUser
-            FindUpeeViewController.eatup = eatup
+            let chatViewController = navigationViewController.viewControllers.first as! ChatViewController
+            chatViewController.selectedUser = selectedUser
+            chatViewController.eatup = eatup
             timer.dismiss()
         }
     }

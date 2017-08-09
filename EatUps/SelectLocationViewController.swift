@@ -81,15 +81,6 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
                 self.emojis = emojisData
                 self.filteredPlaces = self.places
                 self.locationsTableView.reloadData()
-                
-                
-                //                    APIManager.shared.getUsersCount(places: self.places, completion: { (success, userCounts) in
-                //                        if success == true {
-                //                            self.userCountIndex = userCounts
-                //                            print(self.userCountIndex)
-                //                            self.locationsTableView.reloadData()
-                //                        }
-                //                    })
             }
             else {
                 print("getPlaces() failed")
@@ -163,8 +154,6 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredPlaces.count
     }
-    
-    // MARK: TODO: Create eatUp object when place is selected with place(org and location) and current user information
     
     // This method updates filteredData based on the text in the Search Box
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
