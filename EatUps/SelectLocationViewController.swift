@@ -13,6 +13,7 @@ import ChameleonFramework
 import CoreLocation
 import FirebaseDatabase
 import Firebase
+import PKHUD
 
 class SelectLocationViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate {
     
@@ -32,11 +33,12 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     var emojis: [String] = []
     var userCountIndex: [Int] = []
     
-    //create an array to update as we filter through the locations to eat
+       //create an array to update as we filter through the locations to eat
     var filteredPlaces: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
         getPlaces()
         
@@ -57,14 +59,18 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
         // Request permissions for locations
         locationManager = CLLocationManager()
         getLocation()
-        
+        HUD.flash(.labeledProgress(title: "", subtitle: ""), delay: 0.0)
+
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         self.locationsTableView.setContentOffset(CGPoint.init(x: 0, y: searchBar.frame.size.height) , animated: true)
         if org_id != "" {
             getPlaces()
         }
+
         addProfileButton()
     }
     
@@ -181,7 +187,7 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     func toProfile() {
         self.performSegue(withIdentifier: "profileSegue", sender: nil)
     }
-    
+     
     // Sends local eatUp object to the user feed view controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "selectUpeeSegue" {

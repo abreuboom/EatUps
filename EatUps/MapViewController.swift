@@ -42,7 +42,8 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
     var places = [String]()
     var marker = GMSMarker()
     var ref: DatabaseReference?
-    
+    var locationManager: CLLocationManager!
+
     
     
     override func loadView() {
