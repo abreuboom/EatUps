@@ -54,6 +54,8 @@ class Message {
                                 type = .photo
                             case "actionBubble":
                                 type = .actionBubble
+                            case "actionResponse" :
+                                type = .actionResponse
                             default: break
                             }
                             let content = receivedMessage["content"] as! String
@@ -108,6 +110,11 @@ class Message {
                 })
             case .actionBubble:
                 let values = ["type": "actionBubble", "content": message.content, "fromID": currentUserID, "toID": toID, "timestamp": message.timestamp]
+                Message.uploadMessage(withValues: values, toID: toID, eatUpID: eatUpID, completion: { (status) in
+                    completion(status)
+                })
+            case .actionResponse:
+                let values = ["type": "actionResponse", "content": message.content, "fromID": currentUserID, "toID": toID, "timestamp": message.timestamp]
                 Message.uploadMessage(withValues: values, toID: toID, eatUpID: eatUpID, completion: { (status) in
                     completion(status)
                 })

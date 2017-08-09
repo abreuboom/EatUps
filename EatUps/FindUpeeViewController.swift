@@ -15,25 +15,25 @@ protocol FindUpeeViewControllerDelegate: class {
 }
 
 class FindUpeeViewController: UIViewController {
-    
+
     weak var delegate: FindUpeeViewControllerDelegate?
     @IBOutlet weak var profilePhotoView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    
+
     @IBOutlet weak var onWhereStand: UIButton!
     @IBOutlet weak var onWhatSee: UIButton!
-    
+
     var selectedUser: User?
-    
+
     var eatup: EatUp?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Sets background colour of view
         self.view.backgroundColor = GradientColor(gradientStyle: .topToBottom, frame: self.view.frame, colors: [HexColor(hexString: "FE8F72"), HexColor(hexString: "FE3F67")])
-        
-        
+
+
         if selectedUser == nil {
             Database.database().reference().child("eatups").child((eatup?.id!)!).child("inviter").observe(.value, with: { (snapshot) in
                 let inviter = snapshot.value as! String
@@ -48,10 +48,10 @@ class FindUpeeViewController: UIViewController {
         else {
             customizeView()
         }
-        
+
         // Do any additional setup after loading the view.
     }
-    
+
     func customizeView() {
         if let photoURL = selectedUser?.profilePhotoUrl {
             self.profilePhotoView.af_setImage(withURL: photoURL)
@@ -61,7 +61,7 @@ class FindUpeeViewController: UIViewController {
             self.nameLabel.text = "Find \(User.firstName(name: name))!"
         }
     }
-    
+
     @IBAction func didFinishEatUp(_ sender: Any) {
         performSegue(withIdentifier: "findToRatingSegue", sender: UIButton())
         // Deletes the EatUp conversation
@@ -76,21 +76,21 @@ class FindUpeeViewController: UIViewController {
             })
         }
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     @IBAction func onWhereStand(_ sender: UIButton) {
         self.performSegue(withIdentifier: "findToChatSegue", sender: UIButton())
     }
-    
+
     @IBAction func onWhatSee(_ sender: Any) {
         self.performSegue(withIdentifier: "findToChatSegue", sender: UIButton())
     }
-    
-    
+
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "findToChatSegue" {
             let chatViewController = segue.destination as! ChatViewController
@@ -109,7 +109,7 @@ class FindUpeeViewController: UIViewController {
             let shareLocationViewController = segue.destination as! ShareLocationViewController
             shareLocationViewController.selectedUser = selectedUser
             shareLocationViewController.eatupPlace = eatup?.place
-            
+
         }
         else if segue.identifier == "findToRatingSegue" {
             let ratingViewController = segue.destination as! RatingViewController
@@ -129,17 +129,17 @@ class FindUpeeViewController: UIViewController {
             mapViewController.eatup = eatup
         }
     }
-    
-    
-    
+
+
+
     /*
      // MARK: - Navigation
-     
+
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
      }
      */
-    
+
 }

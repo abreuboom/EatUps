@@ -361,6 +361,7 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         self.performSegue(withIdentifier: "profileSegue", sender: nil)
     }
     
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "requestEatUpSegue" {
             let selectedUserButton = sender as! UIButton
@@ -369,10 +370,11 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
             pendingInviteViewController.selectedUser = selectedUser
             pendingInviteViewController.eatup = currentEatup
         }
-        else if segue.identifier == "feedToFindSegue" {
+        else if segue.identifier == "feedToChatSegue" {
             let navigationViewController = segue.destination as! UINavigationController
-            let findUpeeViewController = navigationViewController.viewControllers.first as! FindUpeeViewController
-            findUpeeViewController.eatup = currentEatup
+            let chatViewController = navigationViewController.viewControllers.first as! ChatViewController
+            chatViewController.selectedUser = self.selectedUser
+            chatViewController.eatup = currentEatup
         }
     }
     
