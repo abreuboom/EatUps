@@ -26,12 +26,14 @@
 		2032ACC91F1548FA00A4015C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2032ACC71F1548FA00A4015C /* LaunchScreen.storyboard */; };
 		2032ACD41F1548FA00A4015C /* EatUpsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2032ACD31F1548FA00A4015C /* EatUpsTests.swift */; };
 		2032ACDF1F1548FA00A4015C /* EatUpsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2032ACDE1F1548FA00A4015C /* EatUpsUITests.swift */; };
+		2070008B1F3B770C00E96488 /* UserCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2070008A1F3B770C00E96488 /* UserCollectionViewController.swift */; };
 		208AF5751F1838BB003E76A8 /* OrgSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208AF5741F1838BB003E76A8 /* OrgSelectViewController.swift */; };
 		208AF5771F183BC3003E76A8 /* OrgCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208AF5761F183BC3003E76A8 /* OrgCell.swift */; };
 		208CA71F1F2E8E30000B1D2F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208CA71E1F2E8E30000B1D2F /* ProfileViewController.swift */; };
 		208CA7221F2EA79E000B1D2F /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208CA7211F2EA79E000B1D2F /* ProfileCell.swift */; };
 		208CA7241F2EA7B1000B1D2F /* EatUpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208CA7231F2EA7B1000B1D2F /* EatUpCell.swift */; };
 		20B887021F2B9EE8006B6571 /* EatupAtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B887011F2B9EE8006B6571 /* EatupAtView.swift */; };
+		20CB38491F3AC175005973D2 /* PeekViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CB38481F3AC175005973D2 /* PeekViewController.swift */; };
 		20E9318D1F16A3F100C4A4A1 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E9318C1F16A3F100C4A4A1 /* APIManager.swift */; };
 		20E931911F16A4F900C4A4A1 /* Org.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E931901F16A4F900C4A4A1 /* Org.swift */; };
 		20E931931F16A56600C4A4A1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E931921F16A56600C4A4A1 /* User.swift */; };
@@ -97,12 +99,14 @@
 		2032ACDA1F1548FA00A4015C /* EatUpsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EatUpsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2032ACDE1F1548FA00A4015C /* EatUpsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EatUpsUITests.swift; sourceTree = "<group>"; };
 		2032ACE01F1548FA00A4015C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2070008A1F3B770C00E96488 /* UserCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionViewController.swift; sourceTree = "<group>"; };
 		208AF5741F1838BB003E76A8 /* OrgSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgSelectViewController.swift; sourceTree = "<group>"; };
 		208AF5761F183BC3003E76A8 /* OrgCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgCell.swift; sourceTree = "<group>"; };
 		208CA71E1F2E8E30000B1D2F /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		208CA7211F2EA79E000B1D2F /* ProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		208CA7231F2EA7B1000B1D2F /* EatUpCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EatUpCell.swift; sourceTree = "<group>"; };
 		20B887011F2B9EE8006B6571 /* EatupAtView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EatupAtView.swift; sourceTree = "<group>"; };
+		20CB38481F3AC175005973D2 /* PeekViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeekViewController.swift; sourceTree = "<group>"; };
 		20CE19381F198AFA008494F1 /* EatUps.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EatUps.entitlements; sourceTree = "<group>"; };
 		20E9318C1F16A3F100C4A4A1 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		20E931901F16A4F900C4A4A1 /* Org.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Org.swift; sourceTree = "<group>"; };
@@ -221,6 +225,7 @@
 			children = (
 				200E364B1F2A7146003FA9C7 /* InviteView.swift */,
 				20B887011F2B9EE8006B6571 /* EatupAtView.swift */,
+				2070008A1F3B770C00E96488 /* UserCollectionViewController.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -296,6 +301,7 @@
 				0E51E0481F2FDE4A004FC99C /* NavigationViewController.swift */,
 				0EFEC39C1F328DCC00C88F58 /* ShareLocationViewController.swift */,
 				202A4B351F393B100088BB29 /* ARViewController.swift */,
+				20CB38481F3AC175005973D2 /* PeekViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -606,12 +612,14 @@
 				0E7F65991F26FBB6005BA42E /* ChatViewController.swift in Sources */,
 				20E9318D1F16A3F100C4A4A1 /* APIManager.swift in Sources */,
 				D8A82FE71F154FC80053C1A1 /* LoginViewController.swift in Sources */,
+				2070008B1F3B770C00E96488 /* UserCollectionViewController.swift in Sources */,
 				20B887021F2B9EE8006B6571 /* EatupAtView.swift in Sources */,
 				2016F28C1F1EB4AB00CA814C /* LocationCell.swift in Sources */,
 				0ED57BB01F1D3CFC00AC1A64 /* AvailableUserCell.swift in Sources */,
 				202A4B361F393B100088BB29 /* ARViewController.swift in Sources */,
 				20E931991F16A66800C4A4A1 /* EatUp.swift in Sources */,
 				0E7F65931F26FB4B005BA42E /* Message.swift in Sources */,
+				20CB38491F3AC175005973D2 /* PeekViewController.swift in Sources */,
 				D8A82FF61F1575800053C1A1 /* RatingViewController.swift in Sources */,
 				0EFEC39D1F328DCC00C88F58 /* ShareLocationViewController.swift in Sources */,
 				0EC37D521F281B2700EA438C /* FindUpeeViewController.swift in Sources */,

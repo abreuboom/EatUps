@@ -93,23 +93,17 @@ class FindUpeeViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "findToChatSegue" {
-<<<<<<< HEAD
             let chatViewController = segue.destination as! ChatViewController
             chatViewController.selectedUser = selectedUser
-            chatViewController.eatupId = eatup?.id
-=======
-            let ChatViewController = segue.destination as! ChatViewController
-            ChatViewController.selectedUser = selectedUser
-            ChatViewController.eatup = eatup
+            chatViewController.eatup = eatup
             if onWhereStand.isTouchInside == true {
-                self.delegate = ChatViewController
+                self.delegate = chatViewController
                 self.delegate?.didActionBubble(content: "Where are you standing?")
             }
             else if onWhatSee.isTouchInside == true {
-                self.delegate = ChatViewController
+                self.delegate = chatViewController
                 self.delegate?.didActionBubble(content: "What do you see?")
             }
->>>>>>> origin/master
         }
         else if segue.identifier == "findToLocationSegue" {
             let shareLocationViewController = segue.destination as! ShareLocationViewController

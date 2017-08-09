@@ -35,6 +35,7 @@ target 'EatUps' do
   pod 'YYKit'
   pod 'DateToolsSwift'
   pod 'ARCL'
+  pod 'PKHUD', '~> 4.0'
 
   target 'EatUpsTests' do
     inherit! :search_paths

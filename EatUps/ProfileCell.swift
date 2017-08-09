@@ -18,8 +18,9 @@ class ProfileCell: UITableViewCell {
     
     @IBOutlet weak var editProfileButton: UIButton!
     @IBOutlet weak var eatupCount: UILabel!
-    @IBOutlet weak var invitedCount: UILabel!
-    @IBOutlet weak var inviterCount: UILabel!
+    @IBOutlet weak var friendsCount: UILabel!
+    
+    var parent: ProfileViewController?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,7 +40,11 @@ class ProfileCell: UITableViewCell {
             }
         }
     }
-
+    
+    @IBAction func editProfile(_ sender: RoundedButton) {
+//        self.parent
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

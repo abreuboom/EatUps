@@ -15,7 +15,6 @@ PODS:
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
   - DateToolsSwift (2.0.3)
-  - DotsLoading (1.0.0)
   - DZNEmptyDataSet (1.8.1)
   - EasyAnimation (2.0.1)
   - FacebookCore (0.2.0):
@@ -103,6 +102,7 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - PKHUD (4.2.3)
   - Protobuf (3.3.0)
   - SRCountdownTimer (1.0.1)
   - YYKit (1.0.9):
@@ -117,7 +117,6 @@ DEPENDENCIES:
   - BouncyLayout
   - ChameleonFramework/Swift
   - DateToolsSwift
-  - DotsLoading
   - DZNEmptyDataSet
   - EasyAnimation
   - FacebookCore (~> 0.2)
@@ -134,6 +133,7 @@ DEPENDENCIES:
   - GoogleMaps
   - GooglePlaces
   - KeychainAccess
+  - PKHUD (~> 4.0)
   - SRCountdownTimer
   - YYKit
 
@@ -146,7 +146,6 @@ SPEC CHECKSUMS:
   BouncyLayout: f91c6504437a61acd733404f55f75bd8154f5840
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   DateToolsSwift: bf69bf9056d9e53c5c03f06e51f219b9b8b02f9e
-  DotsLoading: 1721e46a85d2424e5febbe705fb9e8b23cfea2db
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   EasyAnimation: 0bc71a385be3fc0239e487fb8f0dde626e6c7466
   FacebookCore: 2cb3f0fbff218e9d3119cec84bae983b232412de
@@ -169,10 +168,11 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
   KeychainAccess: a986406022dfc7c634c691ad3bec670cc6a32002
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  PKHUD: c7692163a09875cbf15827dc581df3c5cf7f1015
   Protobuf: d582fecf68201eac3d79ed61369ef45734394b9c
   SRCountdownTimer: 187458addb1e88cae62eb5aa57f48d7888f8c18c
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: 24557b6475307c25a6f2cf82260a508b3ca64e48
+PODFILE CHECKSUM: b83483ecde273304e847bf77836848996dc46fc7
 
 COCOAPODS: 1.2.1

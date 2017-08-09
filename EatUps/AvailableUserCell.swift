@@ -27,6 +27,17 @@ class AvailableUserCell: UICollectionViewCell {
             if let url = user.profilePhotoUrl {
                 photoView.setImageWith(url, placeholder: #imageLiteral(resourceName: "gray_circle"), options: [.progressiveBlur, .setImageWithFadeAnimation], completion: nil)
             }
+            
+            APIManager.shared.checkForInvite { (success, status) in
+                if success == true {
+                    if status == "online" {
+                        self.emojiLabel.text = self.emojiLabel.text! + " 🚨"
+                    }
+                    else {
+                        self.emojiLabel.text = self.emojiLabel.text!
+                    }
+                }
+            }
         }
     }
     

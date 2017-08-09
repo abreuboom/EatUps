@@ -45,6 +45,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell", for: indexPath) as! ProfileCell
             cell.cardView.dropShadow()
+            cell.friendsCount.text = "\(APIManager.shared.getUniqueFriends(eatups: eatups, uid: (User.current?.id)!).count)"
+            cell.eatupCount.text = "\(eatups.count)"
             return cell
         }
         else {
@@ -67,14 +69,13 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     
-    /*
-     // MARK: - Navigation
+    
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
+        let cell = sender as! EatUpCell
+        let chatVC = segue.destination as! ChatViewController
+        chatVC.eatup = cell.eatup
      }
-     */
     
 }

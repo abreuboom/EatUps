@@ -91,12 +91,10 @@ class APIManager: SessionManager {
                 print("error in graph request:", error)
                 completion(false)
             case .success(let graphResponse):
-                if let responseDictionary = graphResponse.dictionaryValue{
+                if let responseDictionary = graphResponse.dictionaryValue {
                     let facebookId = responseDictionary["id"] as? String
                     let name = responseDictionary["name"] as? String
                     let email = responseDictionary["email"] as? String
-                    let photoURLString = "https://graph.facebook.com/" + facebookId! + "/picture?width=500"
-                    let photoURL = URL(string: photoURLString)
                     let imageURL = ((responseDictionary["picture"] as? [String: Any])?["data"] as? [String: Any])?["url"] as? String
                     
                     self.ref.child("users/\(id)").setValue(["id": facebookId, "name": name, "email": email, "org_id": "", "profilePhotoURL": imageURL, "status": ""])
@@ -413,5 +411,46 @@ class APIManager: SessionManager {
                 org.id = snapshot.key
             }
         })
+    }
+    
+    func getMutualFriends(id: String, completion: @escaping (Bool, [String: Any]) -> ()) {
+        GraphRequest(graphPath: "/me", parameters: ["fields": "context.fields(mutual_friends)"]).start { (response, result) in
+            switch result {
+            case .failed(let error):
+                print(error)
+                completion(false, [:])
+            case .success(let graphResponse):
+                if let responseDictionary = graphResponse.dictionaryValue {
+                    if let contextDictionary = responseDictionary["context"] as? [String: Any] {
+                        if let mutualDictionary = contextDictionary["mutual_friends"] as? [String: Any] {
+                            let data = mutualDictionary["data"] as! [[String: Any]]
+                            var mutualFriends: [String: String] = [:]
+                            for friend in data {
+                                let id = friend["id"] as? String
+                                mutualFriends[id!] = friend["name"] as! String
+                            }
+                            completion(true, mutualFriends)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func getUniqueFriends(eatups: [EatUp], uid: String) -> [String] {
+        var friends:[String] = []
+        for eatup in eatups {
+            if eatup.inviter == uid {
+                if friends.contains(eatup.invitee) == false {
+                    friends.append(eatup.invitee)
+                }
+            }
+            else if eatup.invitee == uid {
+                if friends.contains(eatup.inviter) == false {
+                    friends.append(eatup.inviter)
+                }
+            }
+        }
+        return friends
     }
 }
