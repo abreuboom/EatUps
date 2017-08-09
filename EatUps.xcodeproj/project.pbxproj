@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0E51E0491F2FDE4A004FC99C /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E51E0481F2FDE4A004FC99C /* NavigationViewController.swift */; };
+		0E69C33D1F3AC685004016EE /* ActionBubbleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E69C33C1F3AC685004016EE /* ActionBubbleCell.swift */; };
 		0E7F65911F26FB2C005BA42E /* Helper Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F65901F26FB2C005BA42E /* Helper Files.swift */; };
 		0E7F65931F26FB4B005BA42E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F65921F26FB4B005BA42E /* Message.swift */; };
 		0E7F65971F26FB91005BA42E /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F65961F26FB91005BA42E /* ChatCell.swift */; };
@@ -71,6 +72,7 @@
 
 /* Begin PBXFileReference section */
 		0E51E0481F2FDE4A004FC99C /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
+		0E69C33C1F3AC685004016EE /* ActionBubbleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionBubbleCell.swift; sourceTree = "<group>"; };
 		0E7F65901F26FB2C005BA42E /* Helper Files.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Helper Files.swift"; sourceTree = "<group>"; };
 		0E7F65921F26FB4B005BA42E /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		0E7F65961F26FB91005BA42E /* ChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 				0E7F65961F26FB91005BA42E /* ChatCell.swift */,
 				208CA7211F2EA79E000B1D2F /* ProfileCell.swift */,
 				208CA7231F2EA7B1000B1D2F /* EatUpCell.swift */,
+				0E69C33C1F3AC685004016EE /* ActionBubbleCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -598,6 +601,7 @@
 				208AF5771F183BC3003E76A8 /* OrgCell.swift in Sources */,
 				20E931911F16A4F900C4A4A1 /* Org.swift in Sources */,
 				0E7F65991F26FBB6005BA42E /* ChatViewController.swift in Sources */,
+				0E69C33D1F3AC685004016EE /* ActionBubbleCell.swift in Sources */,
 				20E9318D1F16A3F100C4A4A1 /* APIManager.swift in Sources */,
 				D8A82FE71F154FC80053C1A1 /* LoginViewController.swift in Sources */,
 				20B887021F2B9EE8006B6571 /* EatupAtView.swift in Sources */,

@@ -29,13 +29,17 @@ import AlamofireImage
 import Photos
 import ChameleonFramework
 
-class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,  UINavigationControllerDelegate, UIImagePickerControllerDelegate{
+class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate,  UINavigationControllerDelegate, UIImagePickerControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
     
     //MARK: Properties
     @IBOutlet var inputBar: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var inputTextField: UITextField!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var keyboardLine: UIView!
+    
+    @IBOutlet weak var collectionView: UICollectionView!
     override var inputAccessoryView: UIView? {
         get {
             self.inputBar.frame.size.height = self.barHeight
@@ -47,11 +51,12 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         return true
     }
     var items = [Message]()
-    let barHeight: CGFloat = 50
+    let barHeight: CGFloat = 110
     let imagePicker = UIImagePickerController()
     var currentUser = User.current
     var selectedUser: User?
     var eatup: EatUp?
+    let actionBubbles = ["📷", "🌁", "👀 What do you see?", "🕺 Where are you standing?"]
     
     @IBOutlet weak var eatupAtParent: UIView!
     @IBOutlet var eatupAtView: EatupAtView!
@@ -64,7 +69,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         eatupAtView.place = eatup?.place
         let size = eatupAtView.eatupAtLabel.sizeThatFits(self.view.bounds.size)
         eatupAtView.eatupAtLabel.frame.size = size
-        eatupAtView.frame = CGRect.init(x: eatupAtParent.center.x - (eatupAtView.eatupAtLabel.bounds.size.width + 32)/2, y: eatupAtParent.center.y - eatupAtView.bounds.size.height/2, width: eatupAtView.eatupAtLabel.bounds.size.width + 32, height: eatupAtView.bounds.size.height)
+        eatupAtView.frame = CGRect.init(x: eatupAtParent.center.x - (eatupAtView.eatupAtLabel.bounds.size.width + 32)/2, y: eatupAtParent.center.y - eatupAtView.bounds.size.height/2 - 60, width: eatupAtView.eatupAtLabel.bounds.size.width + 32, height: eatupAtView.bounds.size.height)
+        eatupAtParent.bringSubview(toFront: eatupAtView)
         
     }
     
@@ -77,15 +83,19 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     //MARK: Methods
     func customization() {
         eatupAtParent.addSubview(eatupAtView)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        collectionView.setCollectionViewLayout(flowLayout, animated: true)
         self.imagePicker.delegate = self
         self.tableView.estimatedRowHeight = self.barHeight
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.contentInset.bottom = self.barHeight
         self.tableView.scrollIndicatorInsets.bottom = self.barHeight
         self.navigationController?.isNavigationBarHidden = true
-        let icon = UIImage.init(named: "Done Button")?.withRenderingMode(.alwaysOriginal)
-        let doneButton = UIBarButtonItem.init(image: icon!, style: .plain, target: self, action: #selector(doneButtonAction))
-        self.navigationItem.rightBarButtonItem = doneButton
+        doneButton.setImage(UIImage(named: "Done Button"), for: .normal)
+        doneButton.setTarget(self, action: #selector(doneButtonAction), for: .touchUpInside)
     }
     
     func doneButtonAction () {
@@ -116,29 +126,38 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         let message = Message.init(type: type, content: content, owner: .sender, timestamp: Int(Date().timeIntervalSince1970))
         Message.send(message: message, toID: (selectedUser?.id)!, eatUpID: (eatup?.id)!, completion: {(_) in
         })
-    } 
+    }
     
-    func animateExtraButtons(toHide: Bool)  {
-        switch toHide {
-        case true:
-            self.bottomConstraint.constant = 0
-            UIView.animate(withDuration: 0.3) {
-                self.inputBar.layoutIfNeeded()
-            }
-        default:
-            self.bottomConstraint.constant = 50
-            UIView.animate(withDuration: 0.3) {
-                self.inputBar.layoutIfNeeded()
-            }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "actionBubbleCell", for: indexPath) as! ActionBubbleCell
+        let buttonTitle = actionBubbles[indexPath.item]
+        if buttonTitle == "📷" {
+            cell.actionBubbleButton.setBackgroundImage(UIImage(named: "Camera") , for: .normal)
+            cell.actionBubbleButton.addTarget(self, action: #selector(selectCamera(_:)), for: .touchUpInside)
         }
+        else if buttonTitle == "🌁" {
+            cell.actionBubbleButton.setBackgroundImage(UIImage(named: "Photos") , for: .normal)
+            cell.actionBubbleButton.addTarget(self, action: #selector(selectGallery(_:)), for: .touchUpInside)
+        }
+        else if buttonTitle == "👀 What do you see?" {
+            cell.actionBubbleButton.setBackgroundImage(UIImage(named: "What See") , for: .normal)
+            cell.actionBubbleButton.addTarget(self, action: #selector(askedWhatSee), for: .touchUpInside)
+        }
+        else if buttonTitle == "🕺 Where are you standing?" {
+            cell.actionBubbleButton.setBackgroundImage(UIImage(named: "Where stand") , for: .normal)
+            cell.actionBubbleButton.addTarget(self, action: #selector(askedWhereStand), for: .touchUpInside)
+        }
+        cell.actionBubbleButton.sizeToFit()
+        
+        return cell
     }
     
-    @IBAction func showMessage(_ sender: Any) {
-        self.animateExtraButtons(toHide: true)
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return actionBubbles.count
     }
     
-    @IBAction func selectGallery(_ sender: Any) {
-        self.animateExtraButtons(toHide: true)
+    func selectGallery(_ sender: Any) {
+        collectionView.isHidden = true
         let status = PHPhotoLibrary.authorizationStatus()
         if (status == .authorized || status == .notDetermined) {
             self.imagePicker.sourceType = .savedPhotosAlbum;
@@ -147,8 +166,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
-    @IBAction func selectCamera(_ sender: Any) {
-        self.animateExtraButtons(toHide: true)
+    func selectCamera(_ sender: UIButton) {
+        collectionView.isHidden = true
         let status = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
         if (status == .authorized || status == .notDetermined) {
             self.imagePicker.sourceType = .camera
@@ -158,9 +177,17 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func showOptions(_ sender: Any) {
-        self.animateExtraButtons(toHide: false)
+        if collectionView.isHidden == false {
+            collectionView.isHidden = true
+            keyboardLine.frame = keyboardLine.frame.offsetBy( dx: 0, dy: 50 )
+        }
+        else if collectionView.isHidden == true {
+            collectionView.isHidden = false
+            keyboardLine.frame = keyboardLine.frame.offsetBy( dx: 0, dy: -50 )
+        }
     }
 
+    
     
     @IBAction func sendMessage(_ sender: Any) {
         if let text = self.inputTextField.text {
@@ -169,14 +196,6 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                 self.inputTextField.text = ""
             }
         }
-    }
-    
-    @IBAction func askedWhereStand(_ sender: Any) {
-        didActionBubble(content: "Where are you standing?")
-    }
-    
-    @IBAction func askedWhatSee(_ sender: Any) {
-        didActionBubble(content: "What do you see?")
     }
     
     
@@ -230,6 +249,11 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                 }
             case .actionBubble:
                 cell.message.text = self.items[indexPath.row].content as! String
+            case .actionResponse:
+                cell.message.text = self.items[indexPath.row].content as! String
+                if cell.message.text == "Here's my location!" {
+                    cell.actionButton.addTarget(self, action: #selector(onSendLocation), for: .touchUpInside)
+                }
             }
             return cell
         case .sender:
@@ -258,22 +282,25 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                 cell.actionButton.isHidden = false
                 if cell.message.text == "Where are you standing?" {
                     cell.actionButton.setTitle("🕺", for: .normal)
-                    cell.actionButton.addTarget(self, action: #selector(ChatViewController.onWhereStand), for: .touchUpInside)
+                    cell.actionButton.addTarget(self, action: #selector(onWhereStand), for: .touchUpInside)
                 }
                 else if cell.message.text == "What do you see?" {
                     cell.actionButton.setTitle("👀", for: .normal)
-                    cell.actionButton.addTarget(self, action: #selector(ChatViewController.onWhatSee), for: .touchUpInside)
+                    cell.actionButton.addTarget(self, action: #selector(onWhatSee), for: .touchUpInside)
                 }
-                
+            case .actionResponse:
+                cell.message.text = self.items[indexPath.row].content as! String
+                if cell.message.text == "Here's my location!" {
+                    cell.actionButton.addTarget(self, action: #selector(onSendLocation), for: .touchUpInside)
+                }
             }
             return cell
-            }
         }
+    }
     
-    // MARK: Action bubble action functions
+    // MARK: Action bubble response functions
     func onWhereStand() {
-        self.performSegue(withIdentifier: "chatToLocationSegue", sender: nil)
-        composeMessage(type: .text, content: "Here's my location!")
+        composeMessage(type: .actionResponse, content: "Here's my location!")
     }
     
     func onWhatSee() {
@@ -283,6 +310,10 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.imagePicker.allowsEditing = false
             self.present(self.imagePicker, animated: true, completion: nil)
         }
+    }
+    
+    func onSendLocation () {
+        self.performSegue(withIdentifier: "chatToLocationSegue", sender: nil)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -318,6 +349,15 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             composeMessage(type: .actionBubble, content: content)
         }
     }
+    
+    func askedWhatSee() {
+        didActionBubble(content: "What do you see?")
+    }
+    
+    func askedWhereStand() {
+        didActionBubble(content: "Where are you standing?")
+    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "chatToLocationSegue" {
