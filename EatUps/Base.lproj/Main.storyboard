@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13168.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-=======
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
->>>>>>> b93c3dd44c7820656c9ae383e7a4368a9ba0add1
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -967,113 +963,6 @@
             </objects>
             <point key="canvasLocation" x="3008.8000000000002" y="929.68515742128943"/>
         </scene>
-<<<<<<< HEAD
-        <!--Find Upee View Controller-->
-        <scene sceneID="gJM-eO-c8w">
-            <objects>
-                <viewController id="WXc-wC-v7g" customClass="FindUpeeViewController" customModule="EatUps" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="IpL-f9-TFv"/>
-                        <viewControllerLayoutGuide type="bottom" id="biG-a9-TsC"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="bP0-nJ-PkN">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7kk-Zu-Rhg">
-                                <rect key="frame" x="123.5" y="120" width="128" height="128"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="7kk-Zu-Rhg" secondAttribute="height" multiplier="1:1" id="7xM-hj-k9K"/>
-                                    <constraint firstAttribute="width" constant="128" id="VZ8-62-K6z"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find name!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kIQ-9w-G5D">
-                                <rect key="frame" x="8" y="264" width="359" height="24"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                <color key="textColor" red="0.99019607843137258" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eN7-9Q-RNR">
-                                <rect key="frame" x="303" y="8" width="64" height="28"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="64" id="8cg-mV-4sz"/>
-                                    <constraint firstAttribute="width" secondItem="eN7-9Q-RNR" secondAttribute="height" multiplier="23:10" id="ZcZ-Xs-XUG"/>
-                                </constraints>
-                                <state key="normal" image="Done Button">
-                                    <color key="titleColor" red="0.99019607843137258" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="didFinishEatUp:" destination="WXc-wC-v7g" eventType="touchUpInside" id="5VD-fb-YVq"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XVC-b9-BKM">
-                                <rect key="frame" x="158" y="513" width="58" height="58"/>
-                                <state key="normal" image="Chat"/>
-                                <connections>
-                                    <segue destination="Sx2-x7-11q" kind="show" identifier="findToChatSegue" id="LUz-Md-ihZ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z6Z-QD-Dmg">
-                                <rect key="frame" x="158" y="444" width="59" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Location"/>
-                                <connections>
-                                    <segue destination="gZ6-UA-VY9" kind="show" identifier="mapSegue" id="joM-3L-Y4q"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4lz-yg-8A4">
-                                <rect key="frame" x="164" y="389" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="AR"/>
-                                <connections>
-                                    <segue destination="SxB-PX-Zjb" kind="show" identifier="findToARSegue" id="1EX-H5-HX9"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pph-qL-FZ0">
-                                <rect key="frame" x="16" y="352" width="170" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Where are you standing?"/>
-                                <connections>
-                                    <action selector="onWhereStand:" destination="WXc-wC-v7g" eventType="touchUpInside" id="Kpk-RM-bak"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K0U-QO-pHD">
-                                <rect key="frame" x="227" y="352" width="123" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="What do you see?"/>
-                                <connections>
-                                    <action selector="onWhatSee:" destination="WXc-wC-v7g" eventType="touchUpInside" id="LA6-Sx-dNm"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="biG-a9-TsC" firstAttribute="top" secondItem="XVC-b9-BKM" secondAttribute="bottom" constant="32" id="8wj-2d-MxH"/>
-                            <constraint firstItem="7kk-Zu-Rhg" firstAttribute="centerX" secondItem="bP0-nJ-PkN" secondAttribute="centerX" id="9vG-iN-ll0"/>
-                            <constraint firstAttribute="trailing" secondItem="eN7-9Q-RNR" secondAttribute="trailing" constant="8" id="BWa-2t-ww6"/>
-                            <constraint firstItem="7kk-Zu-Rhg" firstAttribute="top" secondItem="IpL-f9-TFv" secondAttribute="bottom" constant="120" id="C3O-59-qQm"/>
-                            <constraint firstItem="kIQ-9w-G5D" firstAttribute="leading" secondItem="bP0-nJ-PkN" secondAttribute="leading" constant="8" id="FJW-hX-Mcf"/>
-                            <constraint firstItem="XVC-b9-BKM" firstAttribute="centerX" secondItem="bP0-nJ-PkN" secondAttribute="centerX" id="WMZ-oG-CWW"/>
-                            <constraint firstAttribute="trailing" secondItem="kIQ-9w-G5D" secondAttribute="trailing" constant="8" id="a6f-g7-HGX"/>
-                            <constraint firstItem="kIQ-9w-G5D" firstAttribute="top" secondItem="7kk-Zu-Rhg" secondAttribute="bottom" constant="16" id="frg-RG-kGg"/>
-                            <constraint firstItem="eN7-9Q-RNR" firstAttribute="top" secondItem="IpL-f9-TFv" secondAttribute="bottom" constant="8" id="nf6-AF-XZY"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="4Al-bf-68V"/>
-                    <connections>
-                        <outlet property="nameLabel" destination="kIQ-9w-G5D" id="Xv6-hN-MEz"/>
-                        <outlet property="onWhatSee" destination="K0U-QO-pHD" id="0sS-Tx-GCN"/>
-                        <outlet property="onWhereStand" destination="pph-qL-FZ0" id="34z-g7-Dqg"/>
-                        <outlet property="profilePhotoView" destination="7kk-Zu-Rhg" id="xvi-Vd-eZX"/>
-                        <segue destination="lZU-V8-fg5" kind="show" identifier="findToRatingSegue" id="MyQ-Lc-VHl"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xVU-NK-2F3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3008.8000000000002" y="1950.6746626686659"/>
-        </scene>
-=======
->>>>>>> b93c3dd44c7820656c9ae383e7a4368a9ba0add1
         <!--Rating View Controller-->
         <scene sceneID="SkZ-ns-b8S">
             <objects>
@@ -1083,11 +972,7 @@
                         <viewControllerLayoutGuide type="bottom" id="bHM-ja-8xW"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="29E-vj-1DT">
-<<<<<<< HEAD
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
-=======
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
->>>>>>> b93c3dd44c7820656c9ae383e7a4368a9ba0add1
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="64" translatesAutoresizingMaskIntoConstraints="NO" id="7p3-zy-Jme">
@@ -1227,15 +1112,11 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="30" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="63g-z6-8fv">
-<<<<<<< HEAD
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-=======
+
                                 <rect key="frame" x="0.0" y="124" width="375" height="499"/>
                                 <color key="backgroundColor" red="0.99607843139999996" green="0.2470588235" blue="0.4039215686" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <color key="separatorColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="0.0" colorSpace="calibratedRGB"/>
->>>>>>> b93c3dd44c7820656c9ae383e7a4368a9ba0add1
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Sender" id="gnU-Te-31e" customClass="SenderCell" customModule="EatUps" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="30"/>
