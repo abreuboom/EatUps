@@ -44,6 +44,10 @@ class User {
     var org_id: String?
     var profilePhotoUrl: URL?
     var id: String?
+    var mutualFriends: [String: Any]?
+    var isOnline: Bool?
+    var favoritePlace: String?
+    var about: String?
     
     init(dictionary: [String: Any]) {
         self.dictionary = dictionary

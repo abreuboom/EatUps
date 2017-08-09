@@ -7,17 +7,17 @@
 //
 
 import UIKit
-import BouncyLayout
+import Alamofire
+import AlamofireImage
 import FirebaseDatabase
 import CoreLocation
 import DZNEmptyDataSet
 import Firebase
 import ChameleonFramework
 import EasyAnimation
+import UserNotifications
 
-class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, CLLocationManagerDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
-    
-    @IBOutlet weak var barButtonItem: UIBarButtonItem!
+class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, CLLocationManagerDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, UNUserNotificationCenterDelegate, UIViewControllerPreviewingDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var eatUpButton: UIButton!
@@ -44,6 +44,10 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
     var isUserSelected: Bool = false
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.tintColor = .white
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "MADE Waffle Soft", size: 18)!]
+        
         eatupAtView.layer.cornerRadius = eatupAtView.frame.width/5
         eatupAtView.dropShadow()
         eatupAtView.center = eatupAtParent.center
@@ -53,6 +57,25 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         eatupAtView.eatupAtLabel.frame.size = size
         eatupAtView.frame = CGRect.init(x: eatupAtParent.center.x - (eatupAtView.eatupAtLabel.bounds.size.width + 32)/2, y: eatupAtParent.center.y - eatupAtView.bounds.size.height/2, width: eatupAtView.eatupAtLabel.bounds.size.width + 32, height: eatupAtView.bounds.size.height)
         
+        addProfileButton()
+    }
+    
+    func addProfileButton() {
+        Alamofire.request((User.current?.profilePhotoUrl)!).responseImage(imageScale: 0.5, inflateResponseImage: false) { (response) in
+            if let profilePhoto = response.value {
+                let roundedPhoto = profilePhoto.af_imageRoundedIntoCircle()
+                let profileButton = UIButton(type: .system)
+                profileButton.addTarget(self, action: #selector(self.toProfile), for: .touchUpInside)
+                profileButton.setImage(roundedPhoto.withRenderingMode(UIImageRenderingMode.alwaysOriginal), for: .normal)
+                profileButton.frame = CGRect(x: 0, y: 0, width: 34, height: 34)
+                let widthConstraint = profileButton.widthAnchor.constraint(equalToConstant: 32)
+                let heightConstraint = profileButton.heightAnchor.constraint(equalToConstant: 32)
+                heightConstraint.isActive = true
+                widthConstraint.isActive = true
+                let barButtonItem = UIBarButtonItem(customView: profileButton)
+                self.navigationItem.setRightBarButtonItems([barButtonItem], animated: true)
+            }
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -102,12 +125,38 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
                         if let eatupDictionary = snapshot.value as? [String: Any] {
                             let eatup = EatUp(dictionary: eatupDictionary)
                             eatup.id = snapshot.key
+                            let inviterId = eatup.inviter
+                            APIManager.shared.getUser(uid: inviterId, completion: { (success, inviter) in
+                                if success == true {
+                                    let acceptEatup = UNNotificationAction(identifier: "accept", title: "Accept EatUp!", options: UNNotificationActionOptions.foreground)
+                                    let declineEatup = UNNotificationAction(identifier: "decline", title: "Decline", options: UNNotificationActionOptions.foreground)
+                                    
+                                    let category = UNNotificationCategory(identifier: "eatupNotification", actions: [acceptEatup, declineEatup], intentIdentifiers: [], options: [])
+                                    UNUserNotificationCenter.current().setNotificationCategories([category])
+                                    
+                                    let content = UNMutableNotificationContent()
+                                    content.title = "\(inviter.name!) wants to eatup with you!"
+                                    content.subtitle = "Join them @\(eatup.place)"
+                                    content.body = "Eatup with \(inviter.name!) @\(eatup.place) now"
+                                    content.badge = 1
+                                    
+                                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+                                    let request = UNNotificationRequest(identifier: "eatupInvite", content: content, trigger: trigger)
+                                    
+                                    UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+                                }
+                            })
+                            
                             self.currentEatup = eatup
                             self.animateInviteIn(eatup: eatup)
                         }
                     })
                 }
             }
+        }
+        
+        if( traitCollection.forceTouchCapability == .available) {
+            registerForPreviewing(with: self, sourceView: collectionView)
         }
         
         // Styling eatUp button
@@ -122,6 +171,52 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         collectionView.alwaysBounceVertical = true
         collectionView.emptyDataSetSource = self
         collectionView.emptyDataSetDelegate = self
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        if response.actionIdentifier == "accept" || response.actionIdentifier == "eatupNotification" {
+            self.inviteView.acceptEatup(self)
+        }
+        else if response.actionIdentifier == "decline" {
+            self.inviteView.rejectEatup(self)
+        }
+        completionHandler()
+    }
+    
+    func peek() {
+        
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        let indexPath = collectionView.indexPathForItem(at: location)
+        let cell = collectionView.cellForItem(at: indexPath!) as? AvailableUserCell
+        
+        guard let peekVC = storyboard?.instantiateViewController(withIdentifier: "peekViewController") as? PeekViewController else { return nil }
+        if peekVC != nil {
+            peekVC.nameLabel.text = cell?.user.name
+            peekVC.aboutLabel.text = cell?.user.about ?? ""
+            peekVC.favPlaceLabel.text = "😍 \(cell?.user.favoritePlace ?? "")"
+            peekVC.user = cell?.user
+            
+            if let image = cell?.photoView.image {
+                peekVC.photoView.image = image
+            }
+            else {
+                peekVC.photoView.image = #imageLiteral(resourceName: "gray_circle")
+            }
+            
+            
+            previewingContext.sourceRect = (cell?.frame)!
+            
+            return peekVC
+        }
+        else {
+            return nil
+        }
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        //
     }
     
     func animateInviteIn(eatup: EatUp) {
@@ -170,10 +265,6 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         cell.user = availableUsers[indexPath.item]
         cell.cardView.tag = indexPath.item
         collectionView.allowsMultipleSelection = false
-        
-        //        let tapped:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(selectUpee(_:)))
-        //        tapped.numberOfTapsRequired = 1
-        //        cell.cardView.addGestureRecognizer(tapped)
         
         return cell
     }
@@ -267,7 +358,7 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
         }
     }
     
-    @IBAction func profileButton(_ sender: UIBarButtonItem) {
+    func toProfile() {
         self.performSegue(withIdentifier: "profileSegue", sender: nil)
     }
     

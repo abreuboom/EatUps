@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 import ChameleonFramework
 import CoreLocation
 import FirebaseDatabase
@@ -17,9 +19,6 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     
     var org_id = User.current?.org_id
     
-    @IBAction func didTapMapView(_ sender: Any) {
-        self.performSegue(withIdentifier: "mapViewSegue", sender: nil)
-    }
     @IBOutlet var eatupAtView: EatupAtView!
     @IBOutlet weak var eatupAtParent: UIView!
     @IBOutlet weak var locationsTableView: UITableView!
@@ -71,7 +70,26 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
         if org_id != "" {
             getPlaces()
         }
-        
+
+        addProfileButton()
+    }
+    
+    func addProfileButton() {
+        Alamofire.request((User.current?.profilePhotoUrl)!).responseImage(imageScale: 0.5, inflateResponseImage: false) { (response) in
+            if let profilePhoto = response.value {
+                let roundedPhoto = profilePhoto.af_imageRoundedIntoCircle()
+                let profileButton = UIButton(type: .system)
+                profileButton.addTarget(self, action: #selector(self.toProfile), for: .touchUpInside)
+                profileButton.setImage(roundedPhoto.withRenderingMode(UIImageRenderingMode.alwaysOriginal), for: .normal)
+                profileButton.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
+                let barButtonItem = UIBarButtonItem(customView: profileButton)
+                let widthConstraint = profileButton.widthAnchor.constraint(equalToConstant: 32)
+                let heightConstraint = profileButton.heightAnchor.constraint(equalToConstant: 32)
+                heightConstraint.isActive = true
+                widthConstraint.isActive = true
+                self.navigationItem.setRightBarButtonItems([barButtonItem], animated: true)
+            }
+        }
     }
     
     func getPlaces() {
@@ -87,8 +105,6 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
             }
         })
     }
-    
-    
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -146,7 +162,6 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath) as! LocationCell
         let placeString = "\(emojis[indexPath.row])  \(filteredPlaces[indexPath.row])"
         cell.nameLabel.text =  placeString
-//        cell.usersCountLabel?.text = "\(userCountIndex[indexPath.row]) nearby"
         
         return cell
     }
@@ -165,8 +180,12 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
         locationsTableView.reloadData()
     }
     
-    @IBAction func logout(_ sender: UIBarButtonItem) {
-        APIManager.shared.logout()
+    @IBAction func openMapView(_ sender: UIBarButtonItem) {
+        self.performSegue(withIdentifier: "mapViewSegue", sender: nil)
+    }
+    
+    func toProfile() {
+        self.performSegue(withIdentifier: "profileSegue", sender: nil)
     }
      
     // Sends local eatUp object to the user feed view controller

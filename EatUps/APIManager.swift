@@ -17,22 +17,22 @@ import FacebookLogin
 
 class APIManager: SessionManager {
     static var shared: APIManager = APIManager()
-    
+
     var users: [User] = []
     var placeLocation = CLLocation()
-    
+
     var ref = Database.database().reference()
     var databaseHandle: DatabaseHandle!
     let loginManager = LoginManager()
     // MARK: TODO: Add App Keys
-    
+
     // MARK: Facebook API methods
-    
+
     func login(completion: @escaping (Bool) -> ()) {
         let accessToken = AccessToken.current
         guard let accessTokenString = accessToken?.authenticationToken else { return }
         let credentials = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
-        
+
         Auth.auth().signIn(with: credentials) { (user, error) in
             if error != nil {
                 print(error?.localizedDescription as Any)
@@ -47,7 +47,7 @@ class APIManager: SessionManager {
                         print("Welcome back \(User.current?.name ?? "")")
                         UserDefaults.standard.setValue(Auth.auth().currentUser?.uid, forKey: "uid")
                         completion(true)
-                        
+
                     }
                     else {
                         completion(false)
@@ -56,7 +56,7 @@ class APIManager: SessionManager {
             }
         }
     }
-    
+
     func populateUserInfo(uid: String, completion: @escaping (Bool) -> ()) {
         ref.child("users/\(uid)").observeSingleEvent(of: .value, with: { (snapshot) in
             if snapshot.hasChild("name") {
@@ -83,7 +83,7 @@ class APIManager: SessionManager {
             }
         })
     }
-    
+
     private func graphRequest(id: String, completion: @escaping (_ success: Bool) -> ()) {
         GraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email, picture.width(500)"]).start { (response, result) in
             switch result {
@@ -91,21 +91,19 @@ class APIManager: SessionManager {
                 print("error in graph request:", error)
                 completion(false)
             case .success(let graphResponse):
-                if let responseDictionary = graphResponse.dictionaryValue{
+                if let responseDictionary = graphResponse.dictionaryValue {
                     let facebookId = responseDictionary["id"] as? String
                     let name = responseDictionary["name"] as? String
                     let email = responseDictionary["email"] as? String
-                    let photoURLString = "https://graph.facebook.com/" + facebookId! + "/picture?width=500"
-                    let photoURL = URL(string: photoURLString)
                     let imageURL = ((responseDictionary["picture"] as? [String: Any])?["data"] as? [String: Any])?["url"] as? String
-                    
+
                     self.ref.child("users/\(id)").setValue(["id": facebookId, "name": name, "email": email, "org_id": "", "profilePhotoURL": imageURL, "status": ""])
                     completion(true)
                 }
             }
         }
     }
-    
+
     func logout() {
         loginManager.logOut()
         let firebaseAuth = Auth.auth()
@@ -115,18 +113,18 @@ class APIManager: SessionManager {
             print ("Error signing out: %@", signOutError)
         }
         User.current = nil
-        
+
         UserDefaults.standard.removeObject(forKey: "uid")
-        
+
         NotificationCenter.default.post(name: NSNotification.Name("didLogout"), object: nil)
-        
+
     }
-    
+
     func setOrgId(org_name: String, completion: @escaping (_ success: Bool) -> ()) {
         let uid = Auth.auth().currentUser?.uid ?? ""
         databaseHandle = ref.child("orgs").observe(.value, with: { (snapshot) in
             let data = snapshot.value as! [String: Any]
-            
+
             for (id, info) in data {
                 let dictionary = info as! [String: Any]
                 let name = dictionary["name"] as! String
@@ -136,10 +134,10 @@ class APIManager: SessionManager {
                 }
             }
         })
-        
-        
+
+
     }
-    
+
     // set up the Select Location database handle
     func getPlaces(org_id: String, completion: @escaping (_ success: Bool, [String], [String]) -> ()) {
         var places: [String] = []
@@ -165,11 +163,11 @@ class APIManager: SessionManager {
                         }
                     }
                 })
-                
+
             }
         })
     }
-    
+
     func getPlaceLocation(place: String, completion: @escaping(Bool, CLLocation) -> ()) {
         if let org_id = User.current?.org_id {
             ref.child("orgs/\(org_id)/places/\(place)").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -185,12 +183,12 @@ class APIManager: SessionManager {
                 else {
                     completion(true, self.placeLocation)
                 }
-                
+
             })
         }
-        
+
     }
-    
+
     // Gets users in a set radius around the EatUp location
     func getAvailableUsers(place: String, completion: @escaping (Bool, [User]) -> ()) {
         getPlaceLocation(place: place) { (successBool, placeLocation) in
@@ -199,9 +197,9 @@ class APIManager: SessionManager {
                 // Gets location information of each user
                 self.databaseHandle = self.ref.child("users").observe(.value, with: { (snapshot) in
                     let data = snapshot.value as? NSDictionary
-                    
+
                     for (user, info) in data! {
-                        
+
                         let userDictionary = info as! NSDictionary
                         // Converts user's location string into CLLocation
                         if let userLocationString = userDictionary["location"] as? String {
@@ -221,7 +219,7 @@ class APIManager: SessionManager {
                             }
                             else {
                                 completion(true, self.users)
-                                
+
                             }
                         }
                     }
@@ -229,8 +227,18 @@ class APIManager: SessionManager {
             }
         }
     }
-    
-    
+
+    func getUserLocation(userId: String, completion: @escaping (Bool, CLLocation) -> ()) {
+        ref.child("users/\(userId)/location").observeSingleEvent(of: .value, with: { (snapshot) in
+            if let data = snapshot.value as? String {
+                let location = EatUp.stringToCLLocation(locationString: data)
+                if location != nil {
+                    completion(true, location)
+                }
+            }
+        })
+    }
+
     func containsUser(arr: [User], targetUser: User) -> Bool {
         for user in arr {
             if user.id == targetUser.id {
@@ -239,7 +247,7 @@ class APIManager: SessionManager {
         }
         return false
     }
-    
+
     // Returns User object from a given user id
     func getUser(uid: String, completion: @escaping (Bool, User) -> ()) {
         ref.child("users/\(uid)").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -250,18 +258,18 @@ class APIManager: SessionManager {
             }
         })
     }
-    
+
     // MARK: EatUp request handling methods
     // Called when user sends another user an invite
     func requestEatUp(toUserID: String, place: String, completion: @escaping (Bool, String) -> ()) {
         let id = User.current?.id ?? ""
-        
+
         let eatup = self.ref.child("eatups").childByAutoId()
         let timeStamp = Int(Date().timeIntervalSince1970)
         eatup.setValue(["place": place, "org_id": User.current?.org_id ?? "", "time": timeStamp, "inviter": id, "invitee": "none"])
         eatup.child("users/\(id)").setValue("")
         eatup.child("users/\(toUserID)").setValue("")
-        
+
         ref.child("users/\(id)/status").setValue(eatup.key)
         ref.child("users/\(toUserID)/status").setValue(eatup.key, withCompletionBlock: { (error, databaseRef) in
             if let error = error {
@@ -272,7 +280,7 @@ class APIManager: SessionManager {
             }
         })
     }
-    
+
     func checkResponse(selectedUser: User, eatupId: String, completion: @escaping (Bool) -> ()) {
         let uid = User.current?.id ?? ""
         databaseHandle = ref.child("eatups/\(eatupId)/invitee").observe(.value, with: { (snapshot) in
@@ -299,16 +307,16 @@ class APIManager: SessionManager {
                 completion(false)
             }
         })
-        
+
     }
-    
+
     // Called when user resets status
     func resetStatus(userID: String) {
         ref.child("users/\(userID)/status").setValue("")
     }
-    
+
     func checkForInvite(completion: @escaping (Bool, String) -> ()) {
-        let uid = User.current?.id
+        let uid = Auth.auth().currentUser?.uid
         databaseHandle = ref.child("users/\(uid!)/status").observe(.value, with: { (snapshot) in
             let data = snapshot.value as? String
             if data != "" && data != nil {
@@ -316,7 +324,7 @@ class APIManager: SessionManager {
             }
         })
     }
-    
+
     // Checks if current user has been invited to an eatup and handles their response
     func handleInvite(eatupId: String, response: Bool, completion: @escaping (Bool) -> ()) {
         if let uid = User.current?.id {
@@ -327,7 +335,7 @@ class APIManager: SessionManager {
                     self.ref.child("eatups/\(eatupId)/invitee").setValue(uid, withCompletionBlock: { (error, databaseRef) in
                         completion(true)
                     })
-                    
+
                 })
             }
             else {
@@ -344,7 +352,7 @@ class APIManager: SessionManager {
             }
         }
     }
-    
+
     // Sets the selected user from an invite in the UserFeedVC
     func setSelectedUserInFeed(currentEatup: EatUp, completion: @escaping (Bool, User) -> ()) {
         ref.child("eatups").child((currentEatup.id!)).child("inviter").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -356,21 +364,21 @@ class APIManager: SessionManager {
                 }
             })
     }
-    
+
     func setUpDatabaseHandleRating() {
         //        self.ref.child("users/(user.uid)/username").setValue(username)
         databaseHandle = ref.child("eatups/eatup_id/users").observe(.value, with: { (snapshot) in
-            
+
             let child = snapshot.value as? [String: Any]
-            
+
             for (user, rating) in child! {
-                
+
                 // set user to be the key of the current user
-                
+
                 let currentUserId = User.current?.id
-                
+
                 //if user is not equal to the current id, then set the value of the rating
-                
+
                 if currentUserId != user {
                     // if user is equal to the current id, then print the user's value
                     self.ref.child("eatups/eatup_id/users").child("user_id").setValue("-1")
@@ -378,10 +386,10 @@ class APIManager: SessionManager {
                     print(child)
                 }
             }
-            
+
         })
     }
-    
+
     func getUserEatupIds(completion: @escaping (Bool, [String]) -> ()) {
         let uid = User.current?.id
         var eatups: [String] = []
@@ -393,7 +401,7 @@ class APIManager: SessionManager {
             completion(true, eatups)
         })
     }
-    
+
     func getEatups(eatupIds: [String], completion: @escaping (Bool, [EatUp]) -> ()) {
         var eatups: [EatUp] = []
         for id in eatupIds {
@@ -407,7 +415,7 @@ class APIManager: SessionManager {
             })
         }
     }
-    
+
     func getOrg(orgId: String, completion: @escaping (Bool, Org) -> ()) {
         ref.child("orgs/\(orgId)").observeSingleEvent(of: .value, with: { (snapshot) in
             if let data = snapshot.value as? [String: Any] {
@@ -415,5 +423,46 @@ class APIManager: SessionManager {
                 org.id = snapshot.key
             }
         })
+    }
+
+    func getMutualFriends(id: String, completion: @escaping (Bool, [String: Any]) -> ()) {
+        GraphRequest(graphPath: "/me", parameters: ["fields": "context.fields(mutual_friends)"]).start { (response, result) in
+            switch result {
+            case .failed(let error):
+                print(error)
+                completion(false, [:])
+            case .success(let graphResponse):
+                if let responseDictionary = graphResponse.dictionaryValue {
+                    if let contextDictionary = responseDictionary["context"] as? [String: Any] {
+                        if let mutualDictionary = contextDictionary["mutual_friends"] as? [String: Any] {
+                            let data = mutualDictionary["data"] as! [[String: Any]]
+                            var mutualFriends: [String: String] = [:]
+                            for friend in data {
+                                let id = friend["id"] as? String
+                                mutualFriends[id!] = friend["name"] as! String
+                            }
+                            completion(true, mutualFriends)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    func getUniqueFriends(eatups: [EatUp], uid: String) -> [String] {
+        var friends:[String] = []
+        for eatup in eatups {
+            if eatup.inviter == uid {
+                if friends.contains(eatup.invitee) == false {
+                    friends.append(eatup.invitee)
+                }
+            }
+            else if eatup.invitee == uid {
+                if friends.contains(eatup.inviter) == false {
+                    friends.append(eatup.inviter)
+                }
+            }
+        }
+        return friends
     }
 }
