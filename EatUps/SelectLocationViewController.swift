@@ -11,6 +11,7 @@ import ChameleonFramework
 import CoreLocation
 import FirebaseDatabase
 import Firebase
+import PKHUD
 
 class SelectLocationViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate {
     
@@ -38,6 +39,7 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
         getPlaces()
         
@@ -58,15 +60,18 @@ class SelectLocationViewController: UIViewController, UITableViewDataSource, UIS
         // Request permissions for locations
         locationManager = CLLocationManager()
         getLocation()
-        
+        HUD.flash(.labeledProgress(title: "", subtitle: ""), delay: 0.0)
+
     
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         self.locationsTableView.setContentOffset(CGPoint.init(x: 0, y: searchBar.frame.size.height) , animated: true)
         if org_id != "" {
             getPlaces()
         }
+        
     }
     
     func getPlaces() {
