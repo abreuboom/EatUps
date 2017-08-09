@@ -91,6 +91,7 @@ class UserFeedViewController: UIViewController, UICollectionViewDataSource, UICo
                     }
                 }
                 self.collectionView.reloadData()
+                
             }
         }
         

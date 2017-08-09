@@ -46,6 +46,7 @@
 		75A55747BDE7F64C8E34B403 /* Pods_EatUpsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3949A7A3F71F1417454C007A /* Pods_EatUpsTests.framework */; };
 		888AB7688257CE444F2A3225 /* Pods_EatUpsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A88B9A60B7A635EB5F03418 /* Pods_EatUpsUITests.framework */; };
 		D8219A111F3298B700A087A2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8219A101F3298B700A087A2 /* MapViewController.swift */; };
+		D88191051F3A563400F7F09D /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88191041F3A563400F7F09D /* CloudKit.framework */; };
 		D8A82FE71F154FC80053C1A1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FE61F154FC80053C1A1 /* LoginViewController.swift */; };
 		D8A82FEC1F1552A40053C1A1 /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FEB1F1552A40053C1A1 /* SelectLocationViewController.swift */; };
 		D8A82FEE1F1553550053C1A1 /* UserFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A82FED1F1553550053C1A1 /* UserFeedViewController.swift */; };
@@ -116,6 +117,7 @@
 		BC478D15D68514DC49ED3C59 /* Pods-EatUps.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EatUps.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EatUps/Pods-EatUps.debug.xcconfig"; sourceTree = "<group>"; };
 		D58244FF12EA8391989E4695 /* Pods-EatUpsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EatUpsUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EatUpsUITests/Pods-EatUpsUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D8219A101F3298B700A087A2 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		D88191041F3A563400F7F09D /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		D8A82FE61F154FC80053C1A1 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D8A82FEB1F1552A40053C1A1 /* SelectLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectLocationViewController.swift; sourceTree = "<group>"; };
 		D8A82FED1F1553550053C1A1 /* UserFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserFeedViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F94C76E144E1E4FD25B1F25 /* Pods_EatUps.framework in Frameworks */,
+				D88191051F3A563400F7F09D /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +274,7 @@
 		BEC8669FB1BE6704A30C3DC8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D88191041F3A563400F7F09D /* CloudKit.framework */,
 				73F38D920ADFD5A052C30A17 /* Pods_EatUps.framework */,
 				3949A7A3F71F1417454C007A /* Pods_EatUpsTests.framework */,
 				2A88B9A60B7A635EB5F03418 /* Pods_EatUpsUITests.framework */,
@@ -384,6 +388,9 @@
 								enabled = 1;
 							};
 							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
 								enabled = 1;
 							};
 						};

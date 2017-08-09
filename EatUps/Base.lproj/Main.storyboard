@@ -163,7 +163,7 @@
         <!--Places-->
         <scene sceneID="DOy-ny-4Iq">
             <objects>
-                <viewController id="ldz-Cd-uAQ" customClass="SelectLocationViewController" customModule="EatUps" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="ldz-Cd-uAQ" customClass="SelectLocationViewController" customModule="EatUps" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yYk-Z8-c9u"/>
                         <viewControllerLayoutGuide type="bottom" id="Noi-vy-8T4"/>
@@ -172,6 +172,15 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <visualEffectView opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZNR-Nw-K5S">
+                                <rect key="frame" x="67" y="237" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="Rqy-f4-pGH">
+                                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="dark"/>
+                            </visualEffectView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="64" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RLN-yg-Jg8">
                                 <rect key="frame" x="0.0" y="60" width="375" height="543"/>
                                 <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
@@ -314,7 +323,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Z8E-ZJ-pLB"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="OnC-WZ-Pg5">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cJC-77-ZVD">
@@ -327,7 +336,7 @@
                                 <blurEffect style="light"/>
                             </visualEffectView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vKM-ow-wra" customClass="InviteView" customModule="EatUps" customModuleProvider="target">
-                                <rect key="frame" x="37" y="114" width="300" height="375"/>
+                                <rect key="frame" x="37" y="146" width="300" height="375"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="udj-Rw-F7N">
                                         <rect key="frame" x="8" y="152" width="284" height="24"/>
@@ -408,14 +417,14 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kPc-tQ-hm1">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="60"/>
                                 <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="KDp-XC-JXK"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="waO-2c-jJ7">
-                                <rect key="frame" x="0.0" y="60" width="375" height="543"/>
+                                <rect key="frame" x="0.0" y="80" width="375" height="587"/>
                                 <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Fga-Lg-jZG">
                                     <size key="itemSize" width="177" height="253"/>
@@ -1545,10 +1554,10 @@
         <image name="send" width="32" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VeH-e4-WFE"/>
-        <segue reference="osm-nG-bDa"/>
-        <segue reference="wDl-C8-pxc"/>
         <segue reference="fQv-Qi-FeE"/>
+        <segue reference="VeH-e4-WFE"/>
+        <segue reference="F5U-Z6-dvR"/>
         <segue reference="K12-z5-JqD"/>
+        <segue reference="wDl-C8-pxc"/>
     </inferredMetricsTieBreakers>
 </document>
