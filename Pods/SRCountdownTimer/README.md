@@ -9,7 +9,7 @@ Installation
 ---
 The most preferable way to use this library is cocoapods. Add the following line to your `Podfile`:
 ```sh
-pod `SRCountdownTimer`
+pod 'SRCountdownTimer'
 ```
 and run `pod install` in your terminal.
 
@@ -27,6 +27,7 @@ public var trailLineColor: UIColor = UIColor.lightGray.withAlphaComponent(0.5)
 
 public var isLabelHidden: Bool = false
 public var labelFont: UIFont?
+public var labelTextColor: UIColor?
 public var timerFinishingText: String?
 ```
 The last(timerFinishingText) means the text that will be shown after timer expires. If nil - it'll show the current counter value(0).
