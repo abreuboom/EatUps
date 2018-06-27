@@ -1,4 +1,4 @@
-## signAR - _ASL Translator and Learning Tool_
+## EatUps - _Location based meetup app for finding someone to eat with 🍽_
 
 # Inspiration
 Coming fresh into college, we found it difficult to match up our schedules with our friends. We also were eager to meet new people but sitting next to a random stranger can be very intimidating. That's why we created EatUps: an app thats you to find people in your area so you can meetup and eat!
